@@ -1,0 +1,40 @@
+# Third-party code — pinned by commit hash in PROVENANCE.md, not versioned here
+vendor/
+
+# Virtual environments
+env/
+.venv/
+venv/
+.conda/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Phase 0 data: raw readouts, copied stimuli, checkpoints
+phase0/data/
+
+# Model weight / dataset caches
+*.pt
+*.safetensors
+*.bin
+*.gguf
+*.ckpt
+.cache/
+huggingface/
+hf_cache/
+
+# Large binary artifacts
+*.parquet
+*.npy
+*.npz
+*.tar
+*.tar.gz
+*.zip
+
+# OS noise
+.DS_Store

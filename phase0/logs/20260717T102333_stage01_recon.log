@@ -1,0 +1,43 @@
+# Stage 0.1 recon log — 2026-07-17T10:23:33.838854
+
+$ pwd
+[rc=0]
+/Users/admin/Downloads/workspace-program
+
+$ uname -a
+[rc=0]
+Darwin Admins-iMac.local 25.5.0 Darwin Kernel Version 25.5.0: Tue Jun  9 22:26:46 PDT 2026; root:xnu-12377.121.10~1/RELEASE_ARM64_T8103 arm64
+
+$ nvidia-smi
+[rc=127]
+/bin/sh: nvidia-smi: command not found
+
+$ nvcc --version
+[rc=127]
+/bin/sh: nvcc: command not found
+
+$ sysctl -n machdep.cpu.brand_string
+[rc=0]
+Apple M1
+
+$ sysctl -n hw.memsize
+[rc=0]
+17179869184
+
+$ python3 --version
+[rc=0]
+Python 3.9.6
+
+$ uv --version
+[rc=0]
+uv 0.10.7 (08ab1a344 2026-02-27)
+
+$ git -C vendor/jacobian-lens log -1 --format=%H%n%ci%n%s
+[rc=0]
+581d398613e5602a5af361e1c34d3a92ea82ba8e
+2026-07-02 09:07:51 +0000
+Initial release
+
+$ python3 -c "import torch;print(torch.__version__, torch.cuda.is_available(), torch.backends.mps.is_available())"
+[rc=0]
+2.8.0 False True
