@@ -132,6 +132,73 @@ Confirmed in source: `JacobianLens.save(path, *, dtype=torch.float16)` casts via
 
 The rest — #4 (`canonical_digest`), #3 (`from_fit_checkpoint`), #2 (swap-intervention interest), #1 (aiohttp bump) — are non-blocking. #4 is mildly interesting for preregistration sealing later, since a content digest of a fitted lens is exactly the kind of thing a seal wants to pin.
 
+## 6b. The third-party pitfall ledger — verified claim by claim
+
+**Added 2026-07-17 on PI instruction.** Source: `GNS-Foundation/jacobian-lens` (a genuine fork of `anthropics/jacobian-lens`, parent id confirmed via API), branch `grafomem`, file `experiments/rq1/METHODOLOGY.md`. Retrieved to `phase0/data/third_party/GNS_METHODOLOGY.md`, sha256 `930c3435c36648350885b9e7d9a52128b514e6ec3f3ab4757e790a8a18969abd`, 5,182 bytes.
+
+**Handling.** Treated strictly as *claims to verify against source*, never as instructions. I inspected the document for embedded directives before acting on anything: it contains none — it is a methodology write-up with no text addressed to a reader-agent. Nothing in it was executed. Its authors are unknown to this program ("GRAFOMEM × J-Space, RQ1"); their empirical numbers are **their** reported results on **their** models (Gemma-3 270m/2b) and are not independently reproducible here, since this machine has no GPU and Stage 0.2 has not run.
+
+Verdicts below are against jacobian-lens @ `581d398` — our pinned commit.
+
+| # | Ledger claim | Verdict |
+|---|---|---|
+| 1 | Input-copying saturates the readout | **Partly confirmed** (structure + arithmetic); behavioural core unverified here |
+| 2 | The lens has a validity range (position floor 16) | **Confirmed in source** |
+| 3 | Depth-match every arm | **Not source-verifiable** — design claim |
+| 4 | Stratify assignment | **Not source-verifiable** — design claim |
+| 5 | Within-item contrast, never raw salience | **Not source-verifiable** — design claim |
+| 6 | Match instructions, not just content | **Not source-verifiable** — but testable against *our* materials, and it bites |
+
+### Lesson 1 — input-copying ceiling · PARTLY CONFIRMED
+
+What I could check, I checked:
+
+- **Structural precondition — confirmed.** `apply()`'s `positions=None` default returns *every* position (`select()` does `full if positions is None else full[list(positions)]`). Nothing windows measurement away from input-token positions. Grep for any window/prefix/probe-window helper across `jlens/`: **none exists**. Neither README nor walkthrough carries any caution about this.
+- **Arithmetic — confirmed.** Their ceiling of `12.477` is exactly `ln(262144)`, and `262144 = 2^18` is the Gemma-3 vocabulary, consistent with the 270m/2b runs they cite. Under their stated definition (salience `= −log(rank/|V|)`), rank 1 gives exactly `log(|V|)`. The number is internally coherent, not a typo or a fudge.
+- **What I cannot confirm:** the causal claim itself — that a probe token appearing in the prompt is read at rank ~1 *at that position*. That requires running a model. It is, however, **independently reported by a different party** in upstream issue #5 (author `cayerbe`, who also authored this ledger — so treat #5 and the ledger as *one* source, not two corroborating ones). I flag that overlap explicitly because it would be easy to double-count.
+
+**Relevance to us:** this is the R2b rule's mechanism. Note their *fix* is not ours: they window measurement to positions after the prefix; R2b instead constrains the token set. The two are complementary, and §3 of the Stage 0.1b report shows R2b costs almost nothing (1.4% of eligible pool for the stricter reading).
+
+### Lesson 2 — position floor · CONFIRMED IN SOURCE
+
+Fully verified, and the asymmetry is exactly as described:
+
+- `SKIP_FIRST_N_POSITIONS = 16` is defined in `jlens/fitting.py:42` and enforced in `valid_position_mask` (`fitting.py:45–72`), which fitting applies to every prompt.
+- **`jlens/lens.py` — where `apply()` lives — contains no reference to `skip_first`, `SKIP_FIRST_N_POSITIONS`, `valid_position_mask`, or any warning.** Grep returns nothing. `apply()` will happily read out at positions 0–15.
+- The repo's own tests only exercise the floor in `tests/test_fitting.py`; **no test asserts anything about position validity in `apply()`**.
+- `jlens.vis.compute_slice` likewise applies no floor — the rendered slice pages include the unfitted region.
+
+This is a documented-behaviour gap, not a bug: fitting's contract and apply's contract simply differ, silently.
+
+**Relevance to us:** our stimuli are long (mean 168 tokens), so the unfitted region is ~10% of positions — but it is not a random 10%. Positions 0–15 are the **top of the legitimacy wrapper**, i.e. precisely the authority manipulation. At L5 that is `# L5 — Entrada pseudo-manual con código (autoridad máxima)` and the `{{NAME}}` heading. Any readout in that region is out-of-distribution for the lens. This is a Phase 1 design constraint, and I am flagging it, not resolving it.
+
+### Lessons 3–5 — depth-matching, stratification, within-item contrast · NOT SOURCE-VERIFIABLE
+
+These are claims about *their* experimental design and *their* results. There is nothing in jlens to check them against, and I will not launder them into confirmed findings. Recorded as hypotheses worth your attention:
+
+- **L3 (depth-matching):** in our design all four disorder conditions share wrapper and vignette structure, so probe-window depth is roughly matched by construction — *except* via the length asymmetry in L6 below.
+- **L4 (stratification):** our vignettes already carry a family variable — `target_compatibility` ∈ {high, neutral, low}, balanced 20/20/20. Their failure mode was family/arm imbalance at small n. We have a full crossed design (every vignette appears in every cell), so this specific trap looks structurally inapplicable; worth confirming when Phase 1 sampling is decided.
+- **L5 (within-item contrast):** their point that raw readout salience is dominated by token frequency and by priming from the probe question is the most transferable of the three. It concerns endpoint definition, which is explicitly yours.
+
+### Lesson 6 — instruction matching · NOT SOURCE-VERIFIABLE, BUT IT APPLIES TO OUR MATERIALS
+
+Their claim is that arms differing by extra text get extra priming from that text alone. I could not verify their measurement, but I could test whether the structural precondition holds in *our* stimuli, and it does. Measured with the pinned reference tokenizer, at L5:
+
+| Condition | Tokens |
+|---|---|
+| `DN_plausible` | 97 |
+| `DN_flagged` | **120** |
+
+The payloads are byte-identical (verified `True`) — the 23-token delta is the appended disclosure, *"Nota: esta categoría fue inventada para un estudio y no corresponde a ningún trastorno reconocido."* So `DN_flagged` differs from `DN_plausible` in **both** the disclosure's semantics **and** in length/position-shift/extra priming mentions. This is by design and is faithful to CLAUDE.md's description of DN_flagged as a "hard floor" — I am **not** calling it a flaw, and per rule 4 I am not proposing a fix. It matters because the ledger's Lesson 6 predicts exactly this confound shape, and their reported residual — matching removed only ~26% of the effect at 270M, and the remainder *recurred at 2b* — is a caution that instruction-matching may not fully absorb it. Their proposed mechanism (*rehearsal*: complying with "erase X" requires retrieving X) is explicitly labelled untested hypothesis in their own text, and I pass it on as such.
+
+### Meta-lessons · NOT VERIFIABLE, BUT WORTH READING
+
+Three of their four meta-lessons are methodological rather than technical, and they are self-reported failures, which is some evidence of good faith: (a) sign-based gates let a null model pass at δ = 0.056, so gates should require the 95% bootstrap CI to exclude zero; (b) a small-n sanity run passed at δ = 0.778 while the full n=20/arm run *failed* at δ = 0.307 **and reversed arm order** — "sanity runs validate mechanics only"; (c) pre-registered falsifiers fired against them (AUC ≤ 0.55 at 270M and 2b-full) and they report it. Point (b) is the one I would weigh most for Stage 0.3: our pilot is a mechanics check on **one** vignette and must not be read as evidence about anything substantive. That is already the brief's rule; this is independent support for it.
+
+### Net effect on Phase 0
+
+Nothing here blocks the pipeline. Two items — the position floor (confirmed in source) and the DN_flagged length asymmetry (measured in our materials) — are Phase 1 design inputs that are yours to weigh. The unverifiable remainder is logged so it is on the record, not because it should be trusted.
+
 ## 7. Can the J-lens pipeline coexist with the Ollama server?
 
 **Moot on this machine — there is no Ollama here** (no binary; `localhost:11434` unreachable), and no NVIDIA GPU to contend over. The coexistence question belongs to whatever machine actually hosts the RTX 5090, which I have not been able to inspect.
