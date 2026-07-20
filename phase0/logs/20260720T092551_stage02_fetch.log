@@ -1,0 +1,22 @@
+[1/4] snapshot_download model Qwen/Qwen2.5-7B-Instruct@a09a3545 ...
+Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\EDITOR\Desktop\workspace-program\.venv\Lib\site-packages\huggingface_hub\file_download.py:139: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\EDITOR\Desktop\workspace-program\phase0\data\hf_cache\models--Qwen--Qwen2.5-7B-Instruct. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+Fetching 14 files:   7%|7         | 1/14 [00:00<00:02,  4.57it/s]Fetching 14 files:  14%|#4        | 2/14 [00:00<00:02,  5.05it/s]Fetching 14 files:  50%|#####     | 7/14 [02:29<02:49, 24.18s/it]Fetching 14 files: 100%|##########| 14/14 [02:29<00:00, 10.70s/it]
+      -> C:\Users\EDITOR\Desktop\workspace-program\phase0\data\hf_cache\models--Qwen--Qwen2.5-7B-Instruct\snapshots\a09a35458c702b33eeacc393d103063234e8bc28
+[2/4] snapshot_download lens neuronpedia/jacobian-lens@16a01f30 (allow qwen2.5-7b-it/**) ...
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]C:\Users\EDITOR\Desktop\workspace-program\.venv\Lib\site-packages\huggingface_hub\file_download.py:139: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\EDITOR\Desktop\workspace-program\phase0\data\hf_cache\models--neuronpedia--jacobian-lens. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+Fetching 3 files:  33%|###3      | 1/3 [00:00<00:01,  1.59it/s]Fetching 3 files:  67%|######6   | 2/3 [00:12<00:07,  7.34s/it]Fetching 3 files: 100%|##########| 3/3 [00:12<00:00,  4.22s/it]
+      -> C:\Users\EDITOR\Desktop\workspace-program\phase0\data\hf_cache\models--neuronpedia--jacobian-lens\snapshots\16a01f309fcec900fdcec3f4cd5b64f3d00e4d5a
+[3/4] sha256 (model shards + lens files) ...
+[4/4] issue-#6 torch.isfinite() guard on lens (CPU, map_location=cpu) ...
+      tensors scanned: 27; non-finite tensors: 0; ISFINITE=PASS
+
+MANIFEST -> C:\Users\EDITOR\Desktop\workspace-program\phase0\data\stage02_fetch_manifest.json
+model footprint : 15.24 GB
+lens  footprint : 693.67 MB
+lens .pt sha256 : 3b3ab44cd67c2ad1f26e9f66eb269db31289b6328585b0459a47e6d3814cba29
+ISFINITE guard  : PASS

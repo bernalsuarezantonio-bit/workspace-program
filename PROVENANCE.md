@@ -224,7 +224,16 @@ Note for the record: the ledger's author (`cayerbe`) also authored upstream issu
 **Recorded:** 2026-07-20 (local `+0100`), machine `[host]`
 **Report:** `phase0/reports/stage02_validation.md`
 **Log:** `phase0/logs/20260720T092551_stage02_env.log`
-**Status:** Environment verified; **venv build, model/lens download, lens load, and reproduction NOT done** — blocked on two PI inputs (VRAM window + substrate choice). No STOP POINT 2 yet.
+**Status:** Environment verified; **VRAM-free work complete** — cu128 venv built, Tier 1 CPU tests pass, model + lens downloaded and hash-verified, lens `isfinite` guard PASS (CPU). **Still pending:** GPU load + Tier 2 reproduction, which need the PI's VRAM window. No STOP POINT 2 yet.
+
+### PI decisions (2026-07-20)
+
+| Decision | Value |
+|---|---|
+| Substrate | **Windows-native** (per delegate recommendation). WSL retained as documented fallback only. |
+| VRAM window | **PI coordinates it personally** with the colleague running `mistral-sim`. Delegate must **not** download, unload, or request unloading `mistral-sim` — it is a colleague's run. |
+| Interim scope | Proceed with all non-VRAM work now: build venv, run Tier 1, download model+lens to disk with sha256. GPU load / isfinite-on-device / Tier 2 wait for the PI's window. |
+| Possible chaining | If the window is wide, PI may authorize chaining Stage 0.3 in the same session (vignette to be designated then). |
 
 ### Hardware actually present (matches the Phase 0 brief this time)
 
@@ -251,8 +260,66 @@ Note for the record: the ledger's author (`cayerbe`) also authored upstream issu
 ### cu128 wheel availability & substrate verdict
 
 - cu128 PyTorch wheels for **cp312 win_amd64 confirmed available**: torch 2.7.0, 2.7.1, 2.8.0, 2.9.0, 2.9.1, 2.10.0, 2.11.0 (from `download.pytorch.org/whl/cu128/torch/`).
-- **Recommendation: Windows-native** (apply-only workload → no fitting/autograd/Triton; cu128-win wheels exist; Ollama already native on Windows so VRAM coordination stays on one OS). WSL = fallback only, requires installing a distro. **PI decision pending.**
-- `torch` is unconstrained in upstream `pyproject`; committed `uv.lock` was resolved on arm64-macOS, so its torch pin does **not** carry cu128-win wheels. torch to be installed from the cu128 index on this host; **exact resolved torch version to be pinned here at venv-build time.**
+- **Verdict: Windows-native** (PI-confirmed 2026-07-20). Apply-only workload → no fitting/autograd/Triton; cu128-win wheels exist; Ollama already native on Windows so VRAM coordination stays on one OS. WSL = documented fallback only.
+- `torch` is unconstrained in upstream `pyproject`; committed `uv.lock` resolved **torch 2.12.0**, which on Windows ships **only as cu130** (no cu128 wheel; verified against the cu128/cu129/cu130 indices). To honor the PI's **cu128** pin, the newest cu128-win/cp312 wheel — **torch 2.11.0+cu128** — was installed (one minor below upstream's 2.12.0). Matching upstream 2.12.0 exactly would require the cu130 line (driver UMD 13.3 supports it); flagged to the PI, decision to stay on cu128 unless changed.
+
+### Environment / venv (built 2026-07-20)
+
+| Item | Value |
+|---|---|
+| venv | `.venv/` (uv 0.11.7), Python **3.12.10**, gitignored |
+| Install command (torch) | `uv pip install "torch==2.11.0+cu128" --index-url https://download.pytorch.org/whl/cu128` |
+| Then | `uv pip install -e "vendor/jacobian-lens[dev]"` (torch already satisfied, untouched) |
+| **torch** | **2.11.0+cu128** — `torch.version.cuda == 12.8` (metadata-verified; live `cuda.is_available()` deferred to VRAM window to avoid touching the GPU) |
+| transformers | 5.14.1 |
+| tokenizers | 0.22.2 |
+| huggingface-hub | 1.24.0 |
+| safetensors | 0.8.0 |
+| numpy | 2.5.1 |
+| datasets | 5.0.0 (dev extra; not on apply path) |
+| pytest | 9.1.1 |
+| Full freeze | `phase0/logs/20260720T092551_stage02_pip_freeze.txt` |
+
+### Tier 1 — CPU mechanics validation (no VRAM)
+
+`pytest` against the vendored repo's own suite (CPU-only `TinyDecoder`, `tests/tiny.py`), run with `CUDA_VISIBLE_DEVICES=""` to guarantee no GPU touch: **32 passed in 3.47s**. Exercises the real `jacobian_for_prompt` / `ActivationRecorder` / `compute_slice` / rank / vis / hf-layout code paths. Confirms the library operates on this Windows-native cu128 install. (Not the brief's qualitative success criterion — that is Tier 2.)
+
+### Model + lens downloaded to disk (no VRAM)
+
+Fetched via `huggingface_hub.snapshot_download` at pinned revisions into a **gitignored** project-local cache `phase0/data/hf_cache/`. Fetch+verify script: `phase0/scripts/stage02_fetch_and_verify.py`; log `phase0/logs/20260720T092551_stage02_fetch.log`; manifest `phase0/data/stage02_fetch_manifest.json` (gitignored).
+
+| Item | Value |
+|---|---|
+| Model | `Qwen/Qwen2.5-7B-Instruct` @ `a09a35458c702b33eeacc393d103063234e8bc28` — 14 files, **15.24 GB** |
+| Model snapshot path | `phase0/data/hf_cache/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a3545…/` |
+| Lens repo | `neuronpedia/jacobian-lens` @ `16a01f309fcec900fdcec3f4cd5b64f3d00e4d5a` (tag `qwen-n1000`), `allow_patterns=["qwen2.5-7b-it/**"]` — 3 files, **693.67 MB** |
+| Lens `.pt` path | `…/snapshots/16a01f3…/qwen2.5-7b-it/jlens/Salesforce-wikitext/Qwen2.5-7B-Instruct_jacobian_lens.pt` |
+
+**sha256 (lens files):**
+
+```
+3b3ab44cd67c2ad1f26e9f66eb269db31289b6328585b0459a47e6d3814cba29  Qwen2.5-7B-Instruct_jacobian_lens.pt
+f5ca3ab65694ccf589b3abc1bf9300fa227531de6cf8172b2941a9af1bb50826  Qwen2.5-7B-Instruct_convergence.csv
+2efd98e3925ceaeb3314ab397fe4a463e61c69027f1a8fc61f7e52acec35ee92  config.yaml
+```
+
+**sha256 (model weights + configs):**
+
+```
+a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7  model-00001-of-00004.safetensors
+f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185  model-00002-of-00004.safetensors
+8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5  model-00003-of-00004.safetensors
+1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd  model-00004-of-00004.safetensors
+7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c  config.json
+3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f  generation_config.json
+5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583  tokenizer_config.json
+```
+
+(Full per-file manifest incl. remaining model files in `stage02_fetch_manifest.json`.)
+
+### issue-#6 standing guard — `torch.isfinite()` on the lens · **PASS**
+
+Ran **CPU-side** (`torch.load(..., map_location="cpu")`, `CUDA_VISIBLE_DEVICES=""` — no VRAM) immediately after download. **27 tensors scanned, 0 non-finite → PASS.** The downloaded lens is not corrupted (no float16 `inf` overflow). The guard will be re-affirmed when the tensors are moved to the GPU at Tier 2.
 
 ### VRAM coexistence (Ollama) — BLOCKING
 

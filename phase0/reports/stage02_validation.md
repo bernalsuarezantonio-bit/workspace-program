@@ -3,22 +3,24 @@
 **Date:** 2026-07-20
 **Machine:** `[host]` — Windows 11 Pro 10.0.26200, RTX 5090 (the designated GPU host)
 **Author:** Claude Code (Phase 0 delegate)
-**Status:** ⛔ **BLOCKED mid-stage — awaiting two PI inputs before the heavy half.** Not STOP POINT 2 yet.
-**Log:** `phase0/logs/20260720T092551_stage02_env.log`
+**Status:** 🟡 **VRAM-free half complete; one gate remains.** Substrate confirmed (Windows-native); venv built; Tier 1 CPU tests pass; model + lens downloaded, hash-verified, `isfinite` guard PASS. **Only Tier 2 (GPU load + documented-readout reproduction) is left — it waits on the PI's VRAM window.** Not STOP POINT 2 yet.
+**Log:** `phase0/logs/20260720T092551_stage02_env.log`, `…_stage02_fetch.log`, `…_stage02_pip_freeze.txt`
 **jacobian-lens commit (re-vendored here):** `581d398613e5602a5af361e1c34d3a92ea82ba8e` ("Initial release") ✓ matches pin
 
-Nothing was loaded into VRAM. No model or lens was downloaded. No venv was built. The only writes were a **gitignored** clone of `jacobian-lens` at the pinned commit and this report/log/PROVENANCE. I stopped exactly where the brief tells me to: *"Environment first, before downloading anything heavy"* and *"wait for the PI to confirm the [VRAM] window before loading anything."* Both conditions are live.
+**PI decisions applied (2026-07-20):** substrate = **Windows-native** (WSL = documented fallback); the **VRAM window is coordinated by the PI personally** with the colleague running `mistral-sim` — I must **not** download, unload, or request unloading `mistral-sim`, and I have not. All work below stayed strictly off the GPU (every Python call ran with `CUDA_VISIBLE_DEVICES=""`).
 
 ---
 
-## 0. Headline — the hardware premise now holds, but two gates block the heavy half
+## 0. Headline — pipeline stands up on this host; only the GPU reproduction is left
 
-Unlike the Stage 0.1 iMac, **this is the real GPU host**: RTX 5090, driver present, CUDA-capable, cu128 wheels available. The pipeline can run here. But I cannot complete the validation right now because of two things, **both of which the brief reserves for you**:
+This is the real GPU host (RTX 5090, driver 610.47, CUDA UMD 13.3, cu128 wheels present). On PI go-ahead I completed everything that does not touch VRAM, and it is all green:
 
-1. **VRAM is contended and pinned.** `ollama ps` shows `mistral-sim:latest` (24 GB) pinned `UNTIL: Forever`, and the card is at **93 % util, 570 W, 74 °C, ~2.9 GB free of 32.6 GB**. The J-lens 7B in fp16 needs ~15 GB. It will not co-reside with a Forever-pinned 24 GB model. The brief: *"if any model is loaded/pinned, report it and wait for the PI to confirm the window before loading anything."* → **Reported; waiting.**
-2. **Substrate decision (Windows-native vs WSL) is yours.** The brief: *"Report your recommendation with reasons; the PI decides if it means extra setup."* My recommendation is below. Building the venv and downloading ~15 GB commits to a substrate, so I'm holding until you confirm.
+- **Windows-native cu128 venv** built (Python 3.12.10, torch 2.11.0+cu128 / CUDA 12.8, transformers 5.14.1).
+- **Tier 1 CPU mechanics: 32/32 tests pass** against the repo's own `TinyDecoder` suite — the library's real code paths work here.
+- **Model (15.24 GB) + lens (693.67 MB)** downloaded at pinned revisions, every file sha256'd into PROVENANCE.
+- **issue-#6 `isfinite` guard: PASS** (27 tensors, 0 non-finite), run CPU-side right after download.
 
-Everything in §§1–3 is done and green. §§4–6 are the blocked remainder, with the exact unblock conditions spelled out.
+The one remaining gate is the brief's actual success criterion — **Tier 2**, the documented qualitative readout (the "nose" / currency examples) on the 7B + lens — which needs ~15 GB of VRAM. `mistral-sim` (24 GB) is pinned `Forever` and the card was at 93 % util when checked, so ~15 GB is not available. **You coordinate that window; I wait.** §§1–3 record the completed work; §§4–5 the remainder.
 
 ---
 
@@ -36,7 +38,8 @@ Everything in §§1–3 is done and green. §§4–6 are the blocked remainder, 
 | uv | 0.11.7 (windows-msvc) |
 | git | 2.53.0.windows.3 |
 | Disk (C:) | 154 GB free of 931 GB — enough for model + lens + venv |
-| `torch.cuda.is_available()` in pinned cu128 venv | **Not yet tested** — this requires building the venv, which is gated on the substrate decision (§2, §4) |
+| torch build | **2.11.0+cu128**, `torch.version.cuda == 12.8` — metadata-verified in the venv |
+| `torch.cuda.is_available()` (live device probe) | **Deliberately deferred to the VRAM window** — the call initializes a CUDA context (reserves VRAM), so running it now would touch the colleague's GPU. Build correctness is confirmed via metadata instead; the live `True` check is the first thing I run when the window opens. |
 
 ### cu128 wheels natively available for this Python? — **Yes.**
 
@@ -80,38 +83,70 @@ On-disk Ollama models (context): `qwen2.5:32b` (19 GB) — the family the behavi
 
 ---
 
-## 3. Safe prep already done (decision-independent, no VRAM)
+## 3. Completed VRAM-free work
 
-- **Re-vendored `jacobian-lens`** into `vendor/` (gitignored) and checked out the pinned commit `581d398…` — verified HEAD + subject match PROVENANCE.
-- **Inspected the repo** to pin down exactly what "reproduce one example" means here (§4). `pyproject` deps: `torch, huggingface_hub, transformers>=5.5, numpy` (dev: `pytest, ruff, datasets`).
-- **Portability note for the build:** `torch` is unconstrained in `pyproject`, and the committed `uv.lock` was resolved on the **iMac (arm64-macOS)** — its torch pin will not carry cu128-win wheels. On this host torch must be installed from the **cu128 index**; the exact resolved version will be pinned into PROVENANCE at venv-build time. The recon's noted `.cuda()` hard-coding in the walkthrough is fine here (this *is* CUDA) — no MPS port needed.
+### 3a. venv (Windows-native, pinned cu128)
 
----
+Python **3.12.10**; `torch==2.11.0+cu128` from the cu128 index; then `jlens` editable + deps/dev extras. Key pins (full freeze in `…_stage02_pip_freeze.txt`):
 
-## 4. Pipeline validation — the reproduction, staged (BLOCKED)
+| torch | transformers | tokenizers | huggingface-hub | safetensors | numpy | datasets | pytest |
+|---|---|---|---|---|---|---|---|
+| 2.11.0+cu128 (cuda 12.8) | 5.14.1 | 0.22.2 | 1.24.0 | 0.8.0 | 2.5.1 | 5.0.0 | 9.1.1 |
 
-I identified a two-tier reproduction. This matters because Tier 1 needs no GPU at all, so it can validate the library's mechanics even while VRAM is contended — but it does **not** by itself satisfy the brief's success criterion.
+**torch pin note (touches your cu128 decision):** upstream `uv.lock` resolved **torch 2.12.0**, which on Windows exists **only as cu130** (no cu128 wheel — checked cu128/cu129/cu130 indices). I installed **2.11.0+cu128** (newest in the cu128 line) to honor your recorded cu128 pin. Matching 2.12.0 exactly means moving to the cu130 line (your driver supports it). Staying on cu128 unless you say otherwise.
 
-| Tier | What | VRAM | Satisfies brief's success criterion? |
+### 3b. Tier 1 — CPU mechanics validation · **PASS**
+
+`pytest` against the vendored repo's own suite (CPU-only `TinyDecoder`, `tests/tiny.py`), run with `CUDA_VISIBLE_DEVICES=""`: **32 passed in 3.47 s**. Exercises the real `jacobian_for_prompt` / `ActivationRecorder` / `compute_slice` / rank / vis / hf-layout paths. Confirms the library runs on this install. *(Not the brief's qualitative criterion — see Tier 2.)*
+
+### 3c. Model + lens on disk · hash-verified
+
+`huggingface_hub.snapshot_download` at pinned revisions → gitignored `phase0/data/hf_cache/`. Script `phase0/scripts/stage02_fetch_and_verify.py`; manifest `phase0/data/stage02_fetch_manifest.json`.
+
+| Artifact | Revision | Files | Footprint |
 |---|---|---|---|
-| **1** | `pytest` against the **CPU-only `TinyDecoder`** (`tests/tiny.py`) — exercises the real `jacobian_for_prompt` / `ActivationRecorder` / `compute_slice` code paths | none (CPU) | **No** — asserts numeric properties (late-layer `diag(J)≈1`), not the documented *qualitative* readouts |
-| **2** | The **documented demo**: `examples.py` `multihop` currency prompt *"…the country shaped like a boot is"* → expect euro/lira at position −2; and/or the ascii-face **"nose"** readout at mid layers | ~15 GB (7B + lens) | **Yes** — this is *"readouts qualitatively match the documented expected output"* |
+| `Qwen/Qwen2.5-7B-Instruct` | `a09a3545…` | 14 | **15.24 GB** |
+| `neuronpedia/jacobian-lens` (`qwen2.5-7b-it/**`) | `16a01f3…` (tag `qwen-n1000`) | 3 | **693.67 MB** |
 
-Neither has been run. Tier 1 needs a venv (gated on §2 substrate). Tier 2 needs a venv **and** a VRAM window. The standing **`torch.isfinite()` guard** on the lens (PROVENANCE / upstream issue #6) will run immediately after lens load, before any use, as part of Tier 2 — abort-and-report on failure.
+lens `.pt` sha256 `3b3ab44c…cba29`; all model-shard and sidecar sha256 recorded in PROVENANCE.
 
----
+### 3d. issue-#6 `isfinite` guard · **PASS**
 
-## 5. What unblocks the rest (precise)
+Run **CPU-side** immediately after download (`torch.load(map_location="cpu")`, GPU hidden): **27 tensors, 0 non-finite**. The downloaded lens has no float16 `inf` overflow. Re-affirmed on-device at Tier 2.
 
-Give me these two and I finish Stage 0.2 to STOP POINT 2 without further questions:
-
-1. **Substrate:** confirm **Windows-native** (my recommendation) or direct me to WSL (I'll install a distro first).
-2. **VRAM window:** confirm a window where `mistral-sim` is unloaded/unpinned, or authorize me to request its unload — *or* tell me Tier 1 (CPU mechanics check) alone is acceptable to run **now** while the GPU stays busy, deferring Tier 2 to a later window.
-
-On go-ahead I will, in order: build the pinned cu128 venv (`uv`, Python 3.12) and record versions + `torch.cuda.is_available()`; download `Qwen/Qwen2.5-7B-Instruct @ a09a3545` and the lens `neuronpedia/jacobian-lens @ qwen-n1000 / 16a01f3`, recording paths + disk footprint + the lens file's sha256; run the `isfinite` guard; reproduce Tier 1 and Tier 2; then fill in §§1 (`cuda.is_available`), 4, and the VRAM/time footprint here, update PROVENANCE, commit + push, and **stop at STOP POINT 2**.
+*(Also: `jacobian-lens` re-vendored at pinned `581d398…`, HEAD verified; walkthrough's `.cuda()` is fine here — this is CUDA, no MPS port needed.)*
 
 ---
 
-## 6. What I did NOT do (per brief)
+## 4. Pipeline validation — the reproduction, staged
 
-No heavy download; no venv/torch install (a torch install *is* "heavy" — deferred behind the environment verdict per the brief's sequencing); nothing loaded into VRAM (mistral-sim pinned); no token sets proposed or touched (rule 4); no reification-gradient originals accessed (rule 3); no vignette read (that is Stage 0.3). The clone is gitignored and re-creatable, committing me to nothing.
+Two-tier reproduction. Tier 1 is **done** (CPU); Tier 2 is the brief's actual success criterion and is the only thing waiting on the VRAM window.
+
+| Tier | What | VRAM | Status |
+|---|---|---|---|
+| **1** | `pytest` vs **CPU-only `TinyDecoder`** — real `jacobian_for_prompt` / `ActivationRecorder` / `compute_slice` paths | none | ✅ **32/32 pass** (mechanics; not the documented qualitative readouts) |
+| **2** | **Documented demo** from `examples.py`: `multihop` currency *"…the country shaped like a boot is"* → expect euro/lira at position −2; and/or ascii-face **"nose"** at mid layers | ~15 GB (7B + lens) | ⏸ **waits on VRAM window** — this is *"readouts qualitatively match the documented expected output"* |
+
+Lens integrity for Tier 2 is already de-risked: the issue-#6 `isfinite` guard passed CPU-side (§3d) and will be re-affirmed once tensors are on the GPU.
+
+---
+
+## 5. What's left, and what unblocks it
+
+**One gate:** a VRAM window with ~15 GB free (you coordinate it with the `mistral-sim` owner). When you confirm, I will, in order:
+
+1. `torch.cuda.is_available()` live check (expect `True`) — the deferred device probe.
+2. Load `Qwen/Qwen2.5-7B-Instruct` (fp16) + the pre-fitted lens onto the GPU.
+3. Re-affirm the `isfinite` guard on-device.
+4. **Tier 2:** run the documented demo(s), confirm readouts qualitatively match (the "nose" / currency outputs), and record VRAM peak + runtime here.
+5. Update PROVENANCE, commit + push, **stop at STOP POINT 2**.
+
+If the window is wide and you authorize it, I can chain **Stage 0.3** in the same session once you designate the vignette and its source path.
+
+I will **not** touch `mistral-sim` or the GPU before your window — nothing here has, and nothing will until then.
+
+---
+
+## 6. What I did NOT do (per brief / PI constraint)
+
+Nothing loaded into VRAM; the GPU was never touched (every Python call ran `CUDA_VISIBLE_DEVICES=""`); `mistral-sim` was never downloaded, unloaded, or asked to unload; no live `cuda.is_available()` probe (deferred — it would allocate a context); no token sets proposed or touched (rule 4); no reification-gradient originals accessed (rule 3); no vignette read (that is Stage 0.3). All downloaded weights live under gitignored `phase0/data/`.
