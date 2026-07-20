@@ -1,0 +1,26 @@
+[2026-07-20T12:10:03Z] cuda: True NVIDIA GeForce RTX 5090
+[2026-07-20T12:10:03Z] device free at start: 32.50 GB / 34.19 GB
+[2026-07-20T12:10:11Z] loaded; lens JacobianLens(d_model=3584, n_prompts=485, source_layers=[0..26] (27 layers))
+[2026-07-20T12:10:11Z] seed  1: gen_tok=200 rows=8344 5.24MB gen=6.1s read=1.8s peak=15.63GB free_before=17.1GB
+[2026-07-20T12:10:19Z] seed  2: gen_tok=200 rows=8344 5.24MB gen=5.1s read=1.8s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:10:26Z] seed  3: gen_tok=200 rows=8344 5.24MB gen=5.0s read=1.4s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:10:32Z] seed  4: gen_tok=200 rows=8344 5.24MB gen=4.4s read=1.5s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:10:38Z] seed  5: gen_tok=200 rows=8344 5.24MB gen=4.5s read=1.4s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:10:44Z] seed  6: gen_tok=200 rows=8344 5.24MB gen=4.5s read=1.5s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:10:50Z] seed  7: gen_tok=200 rows=8344 5.25MB gen=4.5s read=1.5s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:10:57Z] seed  8: gen_tok=200 rows=8344 5.24MB gen=4.4s read=1.6s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:03Z] seed  9: gen_tok=200 rows=8344 5.23MB gen=4.4s read=1.5s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:08Z] seed 10: gen_tok=200 rows=8344 5.24MB gen=4.4s read=1.4s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:14Z] seed 11: gen_tok=200 rows=8344 5.24MB gen=4.3s read=1.5s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:20Z] seed 12: gen_tok=200 rows=8344 5.24MB gen=4.4s read=1.5s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:26Z] seed 13: gen_tok=200 rows=8344 5.24MB gen=4.3s read=1.5s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:32Z] seed 14: gen_tok=200 rows=8344 5.25MB gen=4.2s read=1.4s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:38Z] seed 15: gen_tok=200 rows=8344 5.24MB gen=4.3s read=1.4s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:43Z] seed 16: gen_tok=200 rows=8344 5.23MB gen=4.2s read=1.4s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:49Z] seed 17: gen_tok=200 rows=8344 5.24MB gen=4.3s read=1.4s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:11:55Z] seed 18: gen_tok=200 rows=8344 5.23MB gen=4.3s read=1.5s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:12:01Z] seed 19: gen_tok=200 rows=8344 5.24MB gen=4.2s read=1.3s peak=15.63GB free_before=16.5GB
+[2026-07-20T12:12:06Z] seed 20: gen_tok=200 rows=8344 5.24MB gen=4.3s read=1.4s peak=15.63GB free_before=16.5GB
+
+[2026-07-20T12:12:12Z] DONE reps=20/20 total_disk=104.8MB paused=False
+-> C:\Users\EDITOR\Desktop\workspace-program\phase0\data\pilot_readouts\nightly_summary.json

@@ -439,3 +439,21 @@ Feasibility only — **no interpretation, no diagnostic-token counting, no compa
 1. Concept sets realized in **English** (R1 as written) vs a **Spanish** corpus → R2 echo-exclusion fires on almost nothing. Notably **B1 = 0 echoes**, so its documented "(per R2)" echo-stratum mechanism does not fire (B1 still barred from confirmatory by design intent). F's `real` excluded (Spanish "real" in corpus, per R5); `study`/`experiment` survive (disclosure is Spanish); A's `clinical` excluded.
 2. **English-only realization vs Spanish generation** is a set-content question reserved for the PI; flagged pre-data for possible amendment (the pilot generated in Spanish). Not decided by delegate.
 3. R2 substring-strict exact against the inventory; R3 folded-substring-vs-raw-corpus residual not computable here (raw corpus gitignored/iMac-only) — expected null for English sets vs Spanish corpus.
+
+---
+
+## Nightly technical calibration (post-seal, 2026-07-20 12:10–12:12 UTC)
+
+**Technical variance only — no conditions, no token sets, no counting, no content comparison.** Report: `phase0/reports/stage03_nightly_stability.md`; script `phase0/scripts/stage03_nightly_calibration.py`; log `…_stage03_nightly.log`; dumps (gitignored) `phase0/data/pilot_readouts/nightly/v12_rep01..20.json` + `nightly_summary.json`.
+
+v12 + the pilot instruction, **20 reps, seeds 1–20, temperature 0.7**, `max_new_tokens=200`, dumped like the pilot (positions marked prompt/generation). **20/20 completed, no pause, no VRAM contention** (device-free ~16.5 GB throughout; `mistral-sim` did not reappear).
+
+| metric | value |
+|---|---|
+| rows/rep | 8,344 (constant) |
+| size/rep | 5.24 MB (std 0.006); **total 104.8 MB** |
+| generation | mean 4.50 s (rep 1 warm-up 6.12 s) |
+| readout extract | mean 1.48 s |
+| VRAM peak | 15.63 GB (constant) |
+
+Structural note: all 20 reps hit the 200-token cap (no early EOS) → volume is cap-determined; validates dump format/scaling, not the generation-length distribution (flagged for prereg storage decision). No OOM/NaN/dump/encoding errors. **Seal integrity preserved: this run created no condition-bearing data.**
