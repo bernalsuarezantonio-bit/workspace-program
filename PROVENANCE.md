@@ -457,3 +457,29 @@ v12 + the pilot instruction, **20 reps, seeds 1–20, temperature 0.7**, `max_ne
 | VRAM peak | 15.63 GB (constant) |
 
 Structural note: all 20 reps hit the 200-token cap (no early EOS) → volume is cap-determined; validates dump format/scaling, not the generation-length distribution (flagged for prereg storage decision). No OOM/NaN/dump/encoding errors. **Seal integrity preserved: this run created no condition-bearing data.**
+
+---
+
+## Seal amendment A1 — bilingual realization (pre-data) — 2026-07-20
+
+**Amends `phase1_token_sets_SEALED.md`** per its own amendment rule (dated, appended, pre-data). Every concept in every set (A–F) now realized **bilingually EN+ES**; EN unchanged from A0; ES = PI-signed list (2026-07-20). Added to R1: per-token language tag; R3 folding identical; loadings reported per-language + aggregated (aggregation open to prereg). Justification (independent of results): the A0 **mechanical** screening — no condition data — showed English-only sets made R2 barely fire (B1 echo=0 vs its echo-stratum design) and could under-capture Spanish generation.
+
+**Screening:** `phase0/scripts/phase1_seal_screening_A1.py` (deterministic, tokenizer-only); appendix composed by `phase0/scripts/phase1_compose_A1_appendix.py` (run as a file); result `phase0/data/phase1_seal_screening_A1.json` (gitignored). Committed: `seal-amendment: A1 bilingual realization (pre-data)`.
+
+| sha256 | of |
+|---|---|
+| `3689ac85d4e61500357881569de0cf1feeb74c43d5712c17d25baa1d8539634f` | pre-A1 (A0-final, unchanged) |
+| `9530aceb8a982a2af931c4e513abb0bd3b2d5a62f6329bdcdec70394f2778f73` | **post-A1 sealed file** (LF, pinned via .gitattributes) |
+
+**Per-set survivors / echo / drops (by language):**
+
+| set | EN surv | ES surv | EN+ES surv | ES echo | ES drops (multi-token R1 / PI) |
+|---|---|---|---|---|---|
+| A | 17 | 2 (` paciente`,` tratamiento`) | 0 | 0 | 11 concepts |
+| B1 | 18 | 2 (` memoria`,` pasado`) | 0 | **3** (`vida`,` vida`,` historia`) | 5 (incl. self=PI) |
+| B2 | 6 | 1 (` atención`) | 0 | 0 | 2 |
+| C | 10 | **0** | 0 | 0 | 8 (entire ES anchor lexicon) |
+| D | 9 | 0 | 0 | 0 | 6 |
+| F | 9 | 0 | 2 (`experimental`) | 1 (` estudio`) | 3 |
+
+**A1 mechanical finding (factual, pre-data, PI to weigh):** Qwen2.5 tokenizes most Spanish clinical/anchor terms as multi-token → dropped per R1. ES operative tokens = common single-token subset (via leading-space forms). **Targeted goals met:** B1 recovers a Spanish echo stratum (`vida`/`historia` now excluded — resolving A0's B1 echo=0) and F's `estudio` is now echo-excluded. **Set C's Spanish lexicon drops entirely (0 ES tokens)** → C stays EN-only in practice; amendable pre-data (explicit EN-only C, or a future A2) if the PI wishes. R1 notes: illness/disease→enfermedad+dolencia collision benign (unit = set); self ES dropped (PI); weekend/commute ES multi-token drops accepted.

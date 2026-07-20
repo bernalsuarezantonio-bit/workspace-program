@@ -213,3 +213,140 @@ These are deterministic observations from executing the sealed rules; no set mem
    - **A:** `clinical`/` clinical` excluded (string present in the corpus per the inventory).
 2. **English-only realization vs Spanish generation (SET-CONTENT question, reserved for PI).** The Stage 0.3 pilot generated in Spanish. English-only token sets may under-capture Spanish-language workspace loadings. Whether to realize concepts in Spanish, English, or bilingually is a **PI set-content decision**, flagged **pre-data** so it can be amended before any condition-bearing data exists (per this document's amendment rule). **Not decided here.**
 3. **Folded-substring residual.** R2 substring-strict is exact and complete against the Stage 0.1b inventory; R3 folded matching is applied against the inventory's token/piece set plus the verbatim instruction text, **not** a re-folded raw corpus (raw corpus `phase0/data/stimuli_src/` is gitignored / iMac-only, absent on this host). Expected null for these English-dominant sets vs a Spanish corpus; flagged for optional closure against the corpus.
+
+---
+
+# SEAL AMENDMENT A1 — Bilingual realization (dated 2026-07-20, pre-data)
+
+**Amends the seal per its own rule** ("amendments only as dated, appended justifications — never silent edits"; "no changes once any condition-bearing readout exists"). No condition-bearing readout exists at A1 time (only Stage 0.2 calibration + Stage 0.3 v12 pilot + the 20-rep technical calibration — no conditions/sets/counting). The problem was revealed by the mechanical A0 screening, not by any condition data.
+
+**Change:** every concept in every set (A–F) is now realized **bilingually (EN + ES)**. English realizations are **unchanged** from A0. Spanish realizations are the PI-signed list (2026-07-20). Added to R1: each operative token carries a **language tag**; R3 folding applies identically to both languages; loadings will be reported **per-language and aggregated** (aggregation itself remains open to the Phase 1 prereg).
+
+**PI-signed ES adjudications (2026-07-20):** (1) condition -> condición+afección; (2) illness/disease -> enfermedad+dolencia (collision benign — unit of measure is the SET, not the EN-ES pair; R1 note); (3) self -> **no ES realization** (drop recorded; "yo" = high-frequency pronoun noise, clean forms multi-token); (4) memory -> memoria+recuerdo; (5) story -> historia+relato; (6) focus -> concentración+concentrado/-a; (7) detached -> desconexión/desconectado/-a + distanciamiento/distanciado/-a; (8) numb -> embotado/embotamiento+insensible; (9) weather -> clima; (10) weekend/commute drops accepted per R1; (11) fabricated -> fabricado/-a (overlap w/ invented benign). Rest as proposed.
+
+**Exclusion reference (R2):** unchanged — Stage 0.1b inventory (present_tokens ∪ present_tokens_substring ∪ instruction tokens).
+
+## A1 mechanical finding (factual, for PI — not a decision)
+
+The Qwen2.5-7B tokenizer (English/Chinese-weighted) renders **most Spanish concept realizations multi-token**, so they are **dropped and recorded per R1** (e.g. trastorno->3 tok, síntoma->3, terapia->2, síndrome, irreal->2, sueño->3, disociación, clima->2, rutina->2, vecino->2). Spanish **operative** tokens are therefore the common-word subset that is single-token (usually via the leading-space form): e.g. ` paciente`, ` tratamiento`, ` memoria`, ` pasado`, ` atención`, `experimental`. **The amendment nonetheless achieves its targeted goals:** B1 now has a real **echo stratum** in Spanish — `vida`/` vida`/` historia` are excluded by R2 (resolving A0's B1 echo=0 contradiction) — and F's ` estudio` is now correctly echo-excluded (it survived in A0). **Set C (DPDR anchor):** its Spanish lexicon is entirely multi-token -> **0 ES operative tokens**; Set C remains English-only in practice. Pre-data mechanical observation; amendable pre-data (e.g. accept EN-only C explicitly, or a future A2 with alternative Spanish forms). Not decided by delegate.
+
+## A_generic_nosological  ·  _core confirmatory_
+survivors {'EN': 17, 'ES': 2, 'EN+ES': 0} · echo {'EN': 2, 'ES': 0, 'EN+ES': 0} · drops: disorder[ES], diagnosis/diagnostic[ES], syndrome[ES], condition[ES], pathology/pathological[ES], symptom[ES], clinical[ES], illness[ES], disease[ES], therapy[ES], chronic[ES]
+
+| concept | id | piece | lang | folded | status |
+|---|---|---|---|---|---|
+| disorder | 19267 | ` disorder` | EN | ` disorder` | SURVIVES |
+| diagnosis/diagnostic | 22982 | ` diagnosis` | EN | ` diagnosis` | SURVIVES |
+| diagnosis/diagnostic | 15089 | ` diagnostic` | EN | ` diagnostic` | SURVIVES |
+| syndrome | 27339 | ` syndrome` | EN | ` syndrome` | SURVIVES |
+| condition | 9056 | `condition` | EN | `condition` | SURVIVES |
+| condition | 2971 | ` condition` | EN | ` condition` | SURVIVES |
+| pathology/pathological | 75941 | ` pathology` | EN | ` pathology` | SURVIVES |
+| pathology/pathological | 88861 | ` pathological` | EN | ` pathological` | SURVIVES |
+| symptom | 48548 | ` symptom` | EN | ` symptom` | SURVIVES |
+| clinical | 90799 | `clinical` | EN | `clinical` | ECHO_excluded |
+| clinical | 14490 | ` clinical` | EN | ` clinical` | ECHO_excluded |
+| illness | 17125 | ` illness` | EN | ` illness` | SURVIVES |
+| disease | 8457 | ` disease` | EN | ` disease` | SURVIVES |
+| patient | 22722 | `patient` | EN | `patient` | SURVIVES |
+| patient | 8720 | ` patient` | EN | ` patient` | SURVIVES |
+| patient | 72412 | ` paciente` | ES | ` paciente` | SURVIVES |
+| treatment | 6380 | ` treatment` | EN | ` treatment` | SURVIVES |
+| treatment | 88645 | ` tratamiento` | ES | ` tratamiento` | SURVIVES |
+| therapy | 45655 | `therapy` | EN | `therapy` | SURVIVES |
+| therapy | 15069 | ` therapy` | EN | ` therapy` | SURVIVES |
+| chronic | 20601 | ` chronic` | EN | ` chronic` | SURVIVES |
+
+## B1_seed_gloss  ·  _echo stratum only, never confirmatory_
+survivors {'EN': 18, 'ES': 2, 'EN+ES': 0} · echo {'EN': 0, 'ES': 3, 'EN+ES': 0} · drops: narrative[ES], coherence/coherent[ES], self[ES], identity[ES], emotional/emotion[ES]
+
+| concept | id | piece | lang | folded | status |
+|---|---|---|---|---|---|
+| narrative | 19221 | ` narrative` | EN | ` narrative` | SURVIVES |
+| coherence/coherent | 77825 | ` coherence` | EN | ` coherence` | SURVIVES |
+| coherence/coherent | 55787 | ` coherent` | EN | ` coherent` | SURVIVES |
+| self | 721 | `self` | EN | `self` | SURVIVES |
+| self | 656 | ` self` | EN | ` self` | SURVIVES |
+| memory | 17269 | `memory` | EN | `memory` | SURVIVES |
+| memory | 4938 | ` memory` | EN | ` memory` | SURVIVES |
+| memory | 71327 | ` memoria` | ES | ` memoria` | SURVIVES |
+| identity | 16912 | `identity` | EN | `identity` | SURVIVES |
+| identity | 9569 | ` identity` | EN | ` identity` | SURVIVES |
+| past | 52420 | `past` | EN | `past` | SURVIVES |
+| past | 3267 | ` past` | EN | ` past` | SURVIVES |
+| past | 57416 | ` pasado` | ES | ` pasado` | SURVIVES |
+| life | 14450 | `life` | EN | `life` | SURVIVES |
+| life | 2272 | ` life` | EN | ` life` | SURVIVES |
+| life | 75500 | `vida` | ES | `vida` | ECHO_excluded |
+| life | 24949 | ` vida` | ES | ` vida` | ECHO_excluded |
+| emotional/emotion | 14269 | ` emotional` | EN | ` emotional` | SURVIVES |
+| emotional/emotion | 73353 | `emotion` | EN | `emotion` | SURVIVES |
+| emotional/emotion | 19772 | ` emotion` | EN | ` emotion` | SURVIVES |
+| story | 26485 | `story` | EN | `story` | SURVIVES |
+| story | 3364 | ` story` | EN | ` story` | SURVIVES |
+| story | 50322 | ` historia` | ES | ` historia` | ECHO_excluded |
+
+## B2_name_etymology  ·  _own stratum, reported separately_
+survivors {'EN': 6, 'ES': 1, 'EN+ES': 0} · echo {'EN': 0, 'ES': 0, 'EN+ES': 0} · drops: focus[ES], distraction/distracted[ES]
+
+| concept | id | piece | lang | folded | status |
+|---|---|---|---|---|---|
+| attention/attentional | 53103 | `attention` | EN | `attention` | SURVIVES |
+| attention/attentional | 6529 | ` attention` | EN | ` attention` | SURVIVES |
+| attention/attentional | 80541 | ` atención` | ES | ` atencion` | SURVIVES |
+| focus | 17414 | `focus` | EN | `focus` | SURVIVES |
+| focus | 5244 | ` focus` | EN | ` focus` | SURVIVES |
+| distraction/distracted | 53616 | ` distraction` | EN | ` distraction` | SURVIVES |
+| distraction/distracted | 48704 | ` distracted` | EN | ` distracted` | SURVIVES |
+
+## C_real_anchor_DPDR  ·  _positive control (single-token neighbors, per R1)_
+survivors {'EN': 10, 'ES': 0, 'EN+ES': 0} · echo {'EN': 0, 'ES': 0, 'EN+ES': 0} · drops: unreal[ES], detached/detachment[ES], dream[ES], fog/foggy[ES], distant[ES], numb[ES], observer[ES], dissociation/dissociative[EN], dissociation/dissociative[ES]
+
+| concept | id | piece | lang | folded | status |
+|---|---|---|---|---|---|
+| unreal | 49104 | ` unreal` | EN | ` unreal` | SURVIVES |
+| detached/detachment | 43917 | ` detached` | EN | ` detached` | SURVIVES |
+| detached/detachment | 99077 | ` detachment` | EN | ` detachment` | SURVIVES |
+| dream | 56191 | `dream` | EN | `dream` | SURVIVES |
+| dream | 7904 | ` dream` | EN | ` dream` | SURVIVES |
+| fog/foggy | 30249 | ` fog` | EN | ` fog` | SURVIVES |
+| distant | 28727 | ` distant` | EN | ` distant` | SURVIVES |
+| numb | 56271 | ` numb` | EN | ` numb` | SURVIVES |
+| observer | 30730 | `observer` | EN | `observer` | SURVIVES |
+| observer | 22067 | ` observer` | EN | ` observer` | SURVIVES |
+
+## D_negative_control  ·  _floor_
+survivors {'EN': 9, 'ES': 0, 'EN+ES': 0} · echo {'EN': 0, 'ES': 0, 'EN+ES': 0} · drops: hobby[ES], routine[ES], weekend[ES], neighbor[ES], weather[ES], commute[ES]
+
+| concept | id | piece | lang | folded | status |
+|---|---|---|---|---|---|
+| hobby | 31528 | ` hobby` | EN | ` hobby` | SURVIVES |
+| routine | 52980 | `routine` | EN | `routine` | SURVIVES |
+| routine | 14021 | ` routine` | EN | ` routine` | SURVIVES |
+| weekend | 9001 | ` weekend` | EN | ` weekend` | SURVIVES |
+| neighbor | 36469 | `neighbor` | EN | `neighbor` | SURVIVES |
+| neighbor | 9565 | ` neighbor` | EN | ` neighbor` | SURVIVES |
+| weather | 15206 | `weather` | EN | `weather` | SURVIVES |
+| weather | 9104 | ` weather` | EN | ` weather` | SURVIVES |
+| commute | 58163 | ` commute` | EN | ` commute` | SURVIVES |
+
+## F_disclosure_fictional  ·  _flagged contrast (scope-restricted per R5)_
+survivors {'EN': 9, 'ES': 0, 'EN+ES': 2} · echo {'EN': 0, 'ES': 1, 'EN+ES': 2} · drops: fiction/fictional/fictitious[ES], invented[ES], fabricated[ES]
+
+| concept | id | piece | lang | folded | status |
+|---|---|---|---|---|---|
+| fiction/fictional/fictitious | 57062 | `fiction` | EN | `fiction` | SURVIVES |
+| fiction/fictional/fictitious | 16989 | ` fiction` | EN | ` fiction` | SURVIVES |
+| fiction/fictional/fictitious | 43582 | ` fictional` | EN | ` fictional` | SURVIVES |
+| invented | 35492 | ` invented` | EN | ` invented` | SURVIVES |
+| study | 54965 | `study` | EN | `study` | SURVIVES |
+| study | 3920 | ` study` | EN | ` study` | SURVIVES |
+| study | 78936 | ` estudio` | ES | ` estudio` | ECHO_excluded |
+| experiment/experimental | 59429 | `experiment` | EN | `experiment` | SURVIVES |
+| experiment/experimental | 9342 | ` experiment` | EN | ` experiment` | SURVIVES |
+| experiment/experimental | 86703 | `experimental` | EN+ES | `experimental` | SURVIVES |
+| experiment/experimental | 22000 | ` experimental` | EN+ES | ` experimental` | SURVIVES |
+| fabricated | 69454 | ` fabricated` | EN | ` fabricated` | SURVIVES |
+| real | 7951 | `real` | EN+ES | `real` | ECHO_excluded |
+| real | 1931 | ` real` | EN+ES | ` real` | ECHO_excluded |
+
