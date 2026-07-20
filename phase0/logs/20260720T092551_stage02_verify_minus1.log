@@ -1,0 +1,36 @@
+torch.cuda.is_available(): True
+lens: JacobianLens(d_model=3584, n_prompts=485, source_layers=[0..26] (27 layers))
+single-token currency candidates: {' euro': 17672, ' Euro': 19461, ' euros': 32488, 'Euro': 97427, '€': 15056, ' €': 12984, ' EUR': 37088, ' lire': 77451, '欧元': 103408, ' евро': 143125}
+apply 0.79s ; seq_len=22 ; read pos = -1
+
+L 0: [' .\n', ' .\r\n', ' .', ' .\n\n', ' ).\n', ' ?\n', ' ', ' ..\n', ' :\n', ' ，']   [best currency: euro r=31365]
+L 1: [' .\n', '於', ' :\n', ' ).\n', " ''", ' ?\n', ' ;\n', ' ;', ' .', ' )\n']   [best currency: lire r=27754]
+L 2: [' .\n', '...\n', '.\n', ' \n', ' ?\n', '…\n', '..\n', ' ...\n', '...\\', '?\n']   [best currency: lire r=11845]
+L 3: [' .\n', '...\n', ' \n', ' ...\n', ' ..\n', '..\n', '.\n', '…\n', ' ?\n', '...\\']   [best currency: euros r=8791]
+L 4: [' .\n', ' .\r\n', ' ，', '...\\', ' ).\n', ' ?\n', ' ：', '...\n', '…\n', ' !\n']   [best currency: euros r=7406]
+L 5: [' .\n', ' .\r\n', ' ).\n', ' .\n\n', '呸', '网友评论', '�', '/.\n', '开奖结果', '.\r\n']   [best currency: euros r=1308]
+L 6: [' .\n', '.\n', '..\n', '.\\', '.\r\n', '…\n', ' ).\n', ' .\r\n', '...\\', '。\\']   [best currency: euros r=546]
+L 7: ['.\r\n', ' .\r\n', '。\r\n', 'stdarg', '   ', '...\r\n', ' ...\r\n', '网友评论', 'قاء', ' .\n']   [best currency: euros r=1683]
+L 8: ['.\r\n', 'stdarg', ' \r\n', ' .\r\n', '<|endoftext|>', ' \r\n\r\n', '.\r\n\r\n', '。\r\n', '   ', ',module']   [best currency: euros r=107]
+L 9: [' \r\n', ' \r\n\r\n', '  \r\n', '.\r\n', '…', ' \n', '…\n', '   \r\n', '...\r\n', '…"']   [best currency: € r=118]
+L10: [' \r\n', ' \n', '…\n', '.\r\n', '.\n', ' .\n', '".\n', ' \r\n\r\n', ' .\r\n', ' ']   [best currency: € r=99]
+L11: ['？\n', '：\n', '.\r\n', '…\n', ',module', 'stdarg', 'InvalidOperationException', '。\r\n', '().\n', '。\n']   [best currency: 欧元 r=47]
+L12: ['.\r\n', '：\n', '？\n', ' \r\n', ':\r\n', '。\r\n', '?\r\n', 'InvalidOperationException', ').\r\n', '():\r\n']   [best currency: euros r=84]
+L13: ['stdarg', '：\n', '。\r\n', '？\n', ".'<", '".$_', '.\r\n', '():\r\n', ':\r\n', '）\r\n']   [best currency: 欧元 r=52]
+L14: ['：\n', 'stdarg', '.*\n', '？\n', ' \r\n', '。\r\n', '_currency', '.\r\n', ".'<", ".'.$"]   [best currency: 欧元 r=49]
+L15: ['。\r\n', ".'<", 'вший', 'stdarg', ".'.$", ".'/'.$", 'iets', '_currency', 'ายน', 'mbH']   [best currency: 欧元 r=32]
+L16: ['".\n', '.*\n', '}.\n', '.\r\n', '/.\n', '().\n', ').\n', ').\r\n', '.”\n', '。\r\n']   [best currency: 欧元 r=136]
+L17: ['ายน', 'stdarg', ' leider', ' Beste', 'вший', ' Straßen', ' прожива', ":'.$", '。\r\n', ' Länder']   [best currency: 欧元 r=62]
+L18: [":'.$", 'ายน', "','');\n", 'вший', '.*\n', 'stdarg', ".'.$", ' leider', '},\r\n\r\n', '勠']   [best currency: 欧元 r=116]
+L19: ['勠', 'ายน', '的带领', 'stdarg', ":'.$", ' näch', 'stdbool', '_currency', '[".', '".$_']   [best currency: 欧元 r=232]
+L20: ['stdarg', '勠', '叫做', '的带领', ' näch', 'stdbool', '部副', '},\r\n\r\n', '名叫', '鲷']   [best currency: 欧元 r=225]
+L21: ['currency', ' Currency', '勠', 'stdarg', 'GBP', '货币', ' currency', '_currency', 'coins', 'Currency']   [best currency: euros r=14]
+L22: ['勠', 'stdarg', '叫做', ' Currency', '欧元', '货币', '.Currency', 'EUR', 'currency', '$LANG']   [best currency: 欧元 r=4]   <== currency '欧元' @ rank 4
+L23: [' currency', '人民币', ' Currency', '货币', 'currency', '勠', ' currencies', ' Dollar', '.Currency', '_currency']   [best currency: 欧元 r=10]
+L24: ['欧元', '人民币', ' euros', ' Euros', ' currency', 'EUR', ' euro', 'currency', '美元', 'Euro']   [best currency: 欧元 r=0]   <== currency '欧元' @ rank 0
+L25: [' Euros', '欧元', ' Euro', ' euros', ' euro', 'Euro', 'EUR', ' EURO', ' Italian', ' EUR']   [best currency: 欧元 r=1]   <== currency '欧元' @ rank 1
+L26: [' euros', ' Euros', '欧元', ' Euro', ' euro', 'Euro', 'EUR', ' Italian', ' the', ' €']   [best currency: euros r=0]   <== currency 'euros' @ rank 0
+
+=== currency in top-10: layers [(22, '欧元', 4), (24, '欧元', 0), (25, '欧元', 1), (26, 'euros', 0)] ===
+VERDICT: GREEN
+-> C:\Users\EDITOR\Desktop\workspace-program\phase0\data\stage02_verify_minus1.json

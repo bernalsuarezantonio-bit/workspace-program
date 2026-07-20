@@ -224,7 +224,19 @@ Note for the record: the ledger's author (`cayerbe`) also authored upstream issu
 **Recorded:** 2026-07-20 (local `+0100`), machine `[host]`
 **Report:** `phase0/reports/stage02_validation.md`
 **Log:** `phase0/logs/20260720T092551_stage02_env.log`
-**Status:** Environment + VRAM-free work complete. GPU Tier 2 **executed** (window opened 2026-07-20 after PI ran `ollama stop mistral-sim`). Pipeline is fully functional, but the **two specific documented tokens (euro/lira, nose) did NOT reproduce as-run** → per PI rule 5 this is treated as NOT-a-clean-match: recorded, committed, **STOP for cold diagnosis; Stage 0.3 NOT started.**
+**Status:** **Stage 0.2 GREEN** (2026-07-20). Pipeline verified end-to-end; the pre-registered closing check (currency at position −1) reproduces the documented currency readout. Chained into Stage 0.3.
+
+**Cold-diagnosis close (PI, 2026-07-20):** the Tier 2 −2 "miss" was a criterion-calibration error, not a pipeline fault — −2 reads the *country* hop, −1 reads the *currency answer*. ascii-face **withdrawn** from the criterion (belongs to `Qwen3.5-4B`; confounded by input-copying). **Pitfall #5 / Pitfall 1 (input-copying) now has a THIRD, in-house confirmation** on our own model (`qwen2.5-7b-it`, the `^` position) — distinct from issue #5 + the GNS ledger (which are one source).
+
+### Tier 2 closing verification — currency at position −1 · GREEN
+
+Single pre-registered attempt (criterion fixed before running). Script `phase0/scripts/stage02_verify_pos_minus1.py`; log `…_verify_minus1.log`; readouts `phase0/data/stage02_verify_minus1.json`. Currency (euro) in the late-layer top-k, several at rank 0–1:
+
+```
+L22: 欧元 r=4    L24: 欧元 r=0    L25: 欧元 r=1    L26: euros r=0
+```
+
+Euro variants euro/euros/Euro/Euros/EUR/EURO/欧元/€ present; model gives *euro* (Italy's modern currency), correct. Success criterion (currency token in top-k of a mid-to-late layer band) satisfied → Stage 0.2 declared GREEN.
 
 ### Tier 2 — GPU reproduction (2026-07-20)
 

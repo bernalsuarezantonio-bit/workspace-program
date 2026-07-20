@@ -3,7 +3,7 @@
 **Date:** 2026-07-20
 **Machine:** `[host]` — Windows 11 Pro 10.0.26200, RTX 5090 (the designated GPU host)
 **Author:** Claude Code (Phase 0 delegate)
-**Status:** 🟠 **STOP POINT 2 — Tier 2 executed; pipeline functional but documented tokens NOT reproduced as-run.** Per PI rule 5 (not-a-clean-match → record, commit, STOP, diagnose cold): **Stage 0.3 NOT started.** Substrate = Windows-native; venv built; Tier 1 CPU 32/32; model+lens hash-verified; `isfinite` PASS (CPU **and** on-device); GPU load + apply work; but euro/lira and "nose" did not appear (details §4).
+**Status:** 🟢 **STOP POINT 2 — Stage 0.2 GREEN.** Pipeline verified end-to-end; the pre-registered closing check (currency at position −1, §4c) reproduces the documented currency readout. Substrate = Windows-native; venv built; Tier 1 CPU 32/32; model+lens hash-verified; `isfinite` PASS (CPU **and** on-device); GPU load+apply work; currency (euro) surfaces at rank 0–1 in the late-layer band. ascii-face check **withdrawn** with justification (different model + input-copying; §4b). Proceeding to Stage 0.3.
 **Log:** `phase0/logs/20260720T092551_stage02_{env,fetch,tier2}.log`, `…_pip_freeze.txt`
 **jacobian-lens commit (re-vendored here):** `581d398613e5602a5af361e1c34d3a92ea82ba8e` ("Initial release") ✓ matches pin
 
@@ -154,23 +154,30 @@ L15: [' ^', ' ^\n', '        ', '     ', ' ^^', ...]
 'nose' first appears at layer: None
 ```
 
-**Verdict.** Pipeline verified functional end-to-end (load → `J_l` transport → readout; non-degenerate; surfaces an unstated latent entity, "Italy"). **But the two specific documented tokens — euro/lira and "nose" — did not appear as-run.** Against the PI's stated criterion, that is **not a clean match.**
+**Initial verdict (superseded by §4c).** At −2 the pipeline is functional and non-degenerate but the *specific* documented tokens (euro/lira, "nose") were absent. Cold diagnosis (PI, 2026-07-20) closed this as a **criterion-calibration miss**: −2 reads the *country* hop, not the *currency answer* (final position); and the ascii-face example belongs to a **different model** (`Qwen3.5-4B`) and is confounded by input-copying.
 
-**Candidate explanations — to diagnose COLD, not fixed live (rule 5):**
-1. The currency answer likely reads out at the **final position**, not −2; −2 held the *country* hop (its next token is ` is`). I did **not** re-run at −1 — that would be improvising.
-2. The README "nose" slice is rendered with the walkthrough's **`Qwen3.5-4B`**, not `qwen2.5-7b-it`, and the `^` position is confounded by **input-copying**, so "nose" may be unrecoverable there on this model without a different read strategy.
+**ascii-face — WITHDRAWN from the success criterion** (PI, documented): it is `Qwen3.5-4B`-specific and its `^`-position readout is input-copying (issue #5 Pitfall 1). This is the **third independent confirmation** of Pitfall 1 in this program (after upstream issue #5's report and the GNS ledger — themselves one source — now an in-house observation on our own model). Recorded as such; not a criterion for Stage 0.2.
+
+### 4c. Closing verification — currency at position −1 · **GREEN** (single pre-registered attempt)
+
+Criterion fixed **before** running (PI): read the currency prompt at position −1 (final), all fitted layers; **success = a currency token (euro/lira/€ or an obvious morphological/multilingual variant) in the top-k of some mid-to-late layer band.** Script `phase0/scripts/stage02_verify_pos_minus1.py`; log `…_stage02_verify_minus1.log`; readouts `phase0/data/stage02_verify_minus1.json`. One run, no tuning, no retry.
+
+Result — currency dominates the late-layer band (rank 0 = argmax):
+
+```
+L22:  欧元 @ rank 4   top: ['勠','stdarg','叫做',' Currency','欧元','货币','.Currency','EUR','currency','$LANG']
+L24:  欧元 @ rank 0   top: ['欧元','人民币',' euros',' Euros',' currency','EUR',' euro','currency','美元','Euro']
+L25:  欧元 @ rank 1   top: [' Euros','欧元',' Euro',' euros',' euro','Euro','EUR',' EURO',' Italian',' EUR']
+L26:  euros @ rank 0  top: [' euros',' Euros','欧元',' Euro',' euro','Euro','EUR',' Italian',' the',' €']
+```
+
+Euro appears in every obvious form (`euro/euros/Euro/Euros/EUR/EURO/欧元/€`), several at rank 0–1 — the same multilingual pattern as Italy/意大利. **Criterion satisfied → Stage 0.2 GREEN.** (Note: the model surfaces *euro*, Italy's actual modern currency, not the historical *lira* — a correct answer, not a miss.)
 
 ---
 
-## 5. Decision point — STOP POINT 2 (cold)
+## 5. STOP POINT 2 — Stage 0.2 GREEN
 
-Per **PI rule 5** (Tier 2 not a clean match → *record everything, commit/push, STOP — no live debugging, no improvising; diagnose cold*):
-
-- Everything recorded (PROVENANCE, this report, `…_tier2.log`, gitignored `stage02_tier2_readouts.json`).
-- **Committed + pushed.**
-- **Stage 0.3 NOT started** — rule 6's "continue into Stage 0.3" is gated on a Tier 2 match, which we do not have.
-
-**The open question for your cold diagnosis is narrow:** is this just position/model calibration (re-read the currency at −1; treat ascii "nose" as `Qwen3.5-4B`-specific and input-copying-confounded) — in which case the pipeline is sound and we simply pick a cleaner Tier 2 check — or do you want a different documented example verified before Stage 0.2 is declared green? Your call; I have not touched it further.
+The pipeline is verified end-to-end on this host: environment, pinned cu128 venv, Tier 1 CPU mechanics (32/32), hash-verified model+lens, `isfinite` PASS (CPU and on-device), GPU load/transport/readout functional, and the documented currency readout reproduced at the correct position (§4c). Recorded, committed, pushed. Per the PI's green branch, **proceeding directly into Stage 0.3** (vignette v12).
 
 ### Ollama coexistence (observed)
 
