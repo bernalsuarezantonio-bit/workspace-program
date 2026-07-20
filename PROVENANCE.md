@@ -199,3 +199,20 @@ None. The inventory script is deterministic — no randomness, no sampling; outp
 | Verdicts | Recorded in `phase0/reports/stage01_recon.md` §6b |
 
 Note for the record: the ledger's author (`cayerbe`) also authored upstream issue #5. The ledger and issue #5 are **one source, not two independent corroborations**.
+
+---
+
+## Remote / move (2026-07-17)
+
+| Item | Value |
+|---|---|
+| Remote | `github.com/bernalsuarezantonio-bit/workspace-program` (private, PI-created) |
+| Access | SSH **deploy key** (repo-scoped, write), ed25519, generated locally on `Admins-iMac.local` |
+| Public key fingerprint | `SHA256:IYQ4mlx4ZkgzB5SuAySx+Pq4kHmQ1JeffEXk29baSsY` |
+| Private key | `~/.ssh/workspace_program_ed25519` (local only, never transmitted, not in repo) |
+| SSH config alias | `github-workspace-program` → github.com, `IdentitiesOnly yes` (isolated from other GitHub creds) |
+| Auth verified | `Hi bernalsuarezantonio-bit/workspace-program! You've successfully authenticated` |
+| Pushed commit | `bbeb77a30c07d20f599d0a16cb2eab8cecbee147` (local == remote main, verified) |
+| Leak check | Pushed tree contains only 9 tracked files; `vendor/`, `.venv/`, `phase0/data/`, weights, `.DS_Store` all confirmed absent |
+
+**On the 5090 machine:** clone with a fresh deploy key generated *there* (do not copy this private key across machines). Then re-vendor `jacobian-lens` at commit `581d398613e5602a5af361e1c34d3a92ea82ba8e` and proceed to Stage 0.2 with the model/lens pins above.
