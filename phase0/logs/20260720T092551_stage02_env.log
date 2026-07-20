@@ -1,0 +1,86 @@
+Stage 0.2 — environment recon + safe prep (GPU host)
+Machine: [host], Windows 11 Pro 10.0.26200
+Operator: Claude Code (Phase 0 delegate)
+Session start (local): 2026-07-20T09:16 +0100
+Recon block timestamp (UTC): 20260720T082551Z  (local 2026-07-20T09:25:51+0100)
+
+NOTE: nothing was loaded into VRAM; no model/lens downloaded; no venv built.
+Only read-only environment probes + a gitignored clone of jacobian-lens were performed.
+
+=== session discipline ===
+$ git pull --ff-only        -> Already up to date.
+HEAD        = 17ccefdcd00e838c31719568d7b2f4f147833ec7
+origin/main = 17ccefdcd00e838c31719568d7b2f4f147833ec7   (match)
+Read: PROVENANCE.md, phase0/reports/stage01_recon.md (incl. §6b ledger),
+      phase0/reports/stimulus_token_inventory.md, .gitignore.
+
+=== OS / kernel ===
+$ uname -a
+MINGW64_NT-10.0-26200 [host] 3.6.6-1cdd4371.x86_64 2026-01-15 22:20 UTC x86_64 Msys
+Host OS: Windows 11 Pro 10.0.26200 (per harness env).
+
+=== GPU / driver (nvidia-smi) ===
+NVIDIA-SMI 610.47 | KMD 610.47 | CUDA UMD Version: 13.3
+GPU 0: NVIDIA GeForce RTX 5090, WDDM, On
+  Temp 74C, Perf P0, Pwr 570W / 600W, GPU-Util 93%
+  Memory-Usage: 29616MiB / 32607MiB   (~2.9 GB free)
+Processes on GPU incl.: PID 6204  C  ...ollama\lib\ollama\llama-server.exe
+$ nvcc --version -> command not found  (no CUDA toolkit; expected — cu128 wheels bundle runtime)
+
+=== Ollama (VRAM coordination) ===
+$ ollama ps
+NAME                 ID            SIZE   PROCESSOR   CONTEXT   UNTIL
+mistral-sim:latest   99daa9f77b01  24 GB  100% GPU    8192      Forever
+$ ollama list  (models on disk):
+  mistral-sim:latest 15GB, mistral-small3.2:24b 15GB, phi4:14b 9.1GB,
+  gemma2:27b 15GB, qwen2.5:32b 19GB, nomic-embed-text 274MB,
+  llama3.3:70b 42GB, mistral-small3.1:24b 15GB
+=> A 24 GB model is PINNED (UNTIL=Forever) and GPU is at 93% util. ~2.9 GB free.
+   J-lens 7B fp16 needs ~15 GB. CANNOT coexist right now. Awaiting PI VRAM window.
+
+=== Python / tooling ===
+python (Programs\Python\Python312\python.exe) = 3.12.10  (native Windows, >=3.10 OK)
+py launcher default = 3.14.4  (too new; will NOT use)
+uv 0.11.7 (x86_64-pc-windows-msvc)
+git 2.53.0.windows.3
+
+=== WSL ===
+$ wsl -l -v
+* docker-desktop   Running   2     (ONLY distro — Docker backend; no general Linux distro)
+=> Using WSL for the pipeline would require installing a distro first (extra setup).
+
+=== disk ===
+C: 931G total, 154G free (84% used). Sufficient for model (~15GB) + lens + venv.
+
+=== cu128 PyTorch wheel availability (native, cp312 win_amd64) ===
+$ curl -s https://download.pytorch.org/whl/cu128/torch/ | grep cp312-cp312-win_amd64
+  torch 2.7.0, 2.7.1, 2.8.0, 2.9.0, 2.9.1, 2.10.0, 2.11.0  (+cu128, cp312, win_amd64)
+=> cu128 wheels ARE natively available for this Python on Windows. Native path viable.
+   (Linux cp312 cu128 wheels also exist — canonical torch platform — one curl re-probe
+    returned empty due to a pagination/curl artifact in MSYS; not a real absence.)
+
+=== vendored jacobian-lens (gitignored) ===
+$ git clone https://github.com/anthropics/jacobian-lens vendor/jacobian-lens
+$ git checkout 581d398613e5602a5af361e1c34d3a92ea82ba8e
+HEAD now: 581d398613e5602a5af361e1c34d3a92ea82ba8e   subject: Initial release  (matches pin)
+Layout: jlens/, tests/, data/, walkthrough.ipynb, pyproject.toml, uv.lock (559 KB)
+pyproject deps: torch, huggingface_hub, transformers>=5.5, numpy; dev: pytest, ruff, datasets
+  torch is UNCONSTRAINED in pyproject; upstream uv.lock resolved torch for the
+  iMac (arm64-macOS), so its torch pin will NOT carry cu128-win wheels — torch must
+  be installed from the cu128 index on this host; exact version to be pinned at build.
+
+=== reproduction targets identified (for step 5, pending) ===
+Tier 1 (CPU, no VRAM): tests/ run the CPU-only TinyDecoder (tests/tiny.py) end-to-end
+  through jacobian_for_prompt / ActivationRecorder / compute_slice. Runnable without GPU.
+  Asserts numeric props (late-layer diag(J)~=1), NOT the documented qualitative readouts.
+Tier 2 (GPU, ~15GB): README/examples.py demos — e.g. multihop currency
+  "Fact: ... the country shaped like a boot is" (expect euro/lira at -2), and the
+  ascii-face "nose" readout. THIS is the brief's success criterion ("readouts
+  qualitatively match documented expected output"). Needs 7B + pre-fitted lens on GPU.
+  BLOCKED on VRAM window + substrate decision.
+
+=== STOP ===
+Stage 0.2 halted before any heavy download / venv build / VRAM load, per brief:
+  "Environment first, before downloading anything heavy" + "wait for the PI to
+  confirm the [VRAM] window before loading anything."
+Awaiting PI: (1) substrate (Windows-native [recommended] vs WSL), (2) VRAM window.

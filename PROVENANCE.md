@@ -216,3 +216,63 @@ Note for the record: the ledger's author (`cayerbe`) also authored upstream issu
 | Leak check | Pushed tree contains only 9 tracked files; `vendor/`, `.venv/`, `phase0/data/`, weights, `.DS_Store` all confirmed absent |
 
 **On the 5090 machine:** clone with a fresh deploy key generated *there* (do not copy this private key across machines). Then re-vendor `jacobian-lens` at commit `581d398613e5602a5af361e1c34d3a92ea82ba8e` and proceed to Stage 0.2 with the model/lens pins above.
+
+---
+
+## Stage 0.2 — Environment check (GPU host) — PARTIAL / BLOCKED
+
+**Recorded:** 2026-07-20 (local `+0100`), machine `[host]`
+**Report:** `phase0/reports/stage02_validation.md`
+**Log:** `phase0/logs/20260720T092551_stage02_env.log`
+**Status:** Environment verified; **venv build, model/lens download, lens load, and reproduction NOT done** — blocked on two PI inputs (VRAM window + substrate choice). No STOP POINT 2 yet.
+
+### Hardware actually present (matches the Phase 0 brief this time)
+
+| Item | Value |
+|---|---|
+| Machine | `[host]`, Windows 11 Pro 10.0.26200 |
+| GPU | **NVIDIA GeForce RTX 5090**, WDDM |
+| Total VRAM | 32,607 MiB (~32 GB) |
+| NVIDIA driver | **610.47**; `nvidia-smi` works |
+| CUDA UMD (driver) | **13.3** (≥ 12.8 floor; forward-compatible with cu128 runtime) |
+| CUDA toolkit (`nvcc`) | Not installed (expected; cu128 wheels bundle runtime) |
+| Free disk (C:) | 154 GB of 931 GB |
+
+### Software present
+
+| Item | Value |
+|---|---|
+| Native Python | **3.12.10** (`…\Programs\Python\Python312`) — satisfies `>=3.10` |
+| `py` launcher default | 3.14.4 (too new; not used) |
+| uv | 0.11.7 (windows-msvc) |
+| git | 2.53.0.windows.3 |
+| WSL | present but **only distro is `docker-desktop`** (Docker backend); no general Linux distro |
+
+### cu128 wheel availability & substrate verdict
+
+- cu128 PyTorch wheels for **cp312 win_amd64 confirmed available**: torch 2.7.0, 2.7.1, 2.8.0, 2.9.0, 2.9.1, 2.10.0, 2.11.0 (from `download.pytorch.org/whl/cu128/torch/`).
+- **Recommendation: Windows-native** (apply-only workload → no fitting/autograd/Triton; cu128-win wheels exist; Ollama already native on Windows so VRAM coordination stays on one OS). WSL = fallback only, requires installing a distro. **PI decision pending.**
+- `torch` is unconstrained in upstream `pyproject`; committed `uv.lock` was resolved on arm64-macOS, so its torch pin does **not** carry cu128-win wheels. torch to be installed from the cu128 index on this host; **exact resolved torch version to be pinned here at venv-build time.**
+
+### VRAM coexistence (Ollama) — BLOCKING
+
+| Item | Value |
+|---|---|
+| `ollama ps` | `mistral-sim:latest`, 24 GB, 100% GPU, ctx 8192, **UNTIL = Forever (pinned)** |
+| GPU state at check | 93% util, 570 W / 600 W, 74 °C, **~2.9 GB free** |
+| J-lens 7B fp16 need | ~15 GB → **cannot coexist now**; awaiting PI VRAM window |
+| Ollama models on disk (context) | incl. `qwen2.5:32b` (19 GB, the behavioural-study family), `llama3.3:70b`, `gemma2:27b`, `mistral-small3.x:24b`, `phi4:14b`, `nomic-embed-text` |
+
+### Vendored code
+
+`jacobian-lens` re-vendored to `vendor/jacobian-lens` (gitignored), checked out `581d398613e5602a5af361e1c34d3a92ea82ba8e` — HEAD + subject ("Initial release") verified against pin.
+
+### Reproduction plan (pending)
+
+- **Tier 1 (CPU, no VRAM):** `pytest` vs `tests/tiny.py` `TinyDecoder` — mechanics only, not the documented qualitative readouts.
+- **Tier 2 (GPU, ~15 GB):** `examples.py` `multihop` currency prompt (expect euro/lira at −2) / ascii-face "nose" — this is the brief's success criterion. Blocked on VRAM + substrate.
+- Standing `torch.isfinite()` lens guard (issue #6) to run immediately after lens load, before use — part of Tier 2.
+
+### Seeds
+
+None used at this stage — no model run, no stochastic operation. (Downstream demo generation determinism to be recorded when Tier 2 runs.)
