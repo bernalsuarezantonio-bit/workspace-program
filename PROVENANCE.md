@@ -382,3 +382,40 @@ Ran **CPU-side** (`torch.load(..., map_location="cpu")`, `CUDA_VISIBLE_DEVICES="
 ### Seeds
 
 None used at this stage — no model run, no stochastic operation. (Downstream demo generation determinism to be recorded when Tier 2 runs.)
+
+---
+
+## Stage 0.3 — Feasibility pilot (vignette v12) — COMPLETE (STOP POINT 3)
+
+**Recorded:** 2026-07-20, `[host]` (RTX 5090)
+**Report:** `phase0/reports/stage03_pilot.md` · **Script:** `phase0/scripts/stage03_pilot.py` · **Log:** `phase0/logs/20260720T092551_stage03_pilot.log`
+
+### Stimulus (copied read-only per rule 3)
+
+| Item | Value |
+|---|---|
+| Vignette | **v12** → `phase0/data/stimuli_pilot/v12.txt` (gitignored), sha256 `32c78f5f0e185dc9d36785b7cf827c08a4f6fd4ec6eceec7f82eac21c1919d0e`, 185 chars |
+| Origin (verbatim, per PI) | "provided by PI in chat, copied verbatim from reification-gradient `materials/vignettes.yaml` (post-1b set of 60), id v12, target_compatibility: high" |
+| Note | reification-gradient repo is **NOT present** on this machine; text supplied by PI directly. Only the `text` field copied (no metadata). Provenance sidecar: `phase0/data/stimuli_pilot/v12_provenance.json`. |
+
+### Run
+
+| Item | Value |
+|---|---|
+| Instruction (exact) | `Read the following case and reason about what might be going on with this person.` |
+| Prompt | Qwen chat template, user = instruction + `\n\n` + vignette, `add_generation_prompt=True` |
+| Decoding | greedy (`do_sample=False`), deterministic; **seed 0**; `max_new_tokens=200` |
+| Positions | prompt 98 / generation 200 / total **298** |
+| Readout coverage | all 27 fitted layers × all positions + model final-layer output row; per-cell top-k=10 (token + weight) |
+| Dump | `phase0/data/pilot_readouts/v12_readouts.json` (gitignored) — **8,344 rows, 5.25 MB**; schema block + `v12_meta.json` sidecar. Rows mark absolute position, prompt-vs-generation segment, and `ood_unfitted_pos` (<16, issue #5 Pitfall 2). |
+| Runtime | generation 4.7 s + readout 1.6 s ≈ **6.3 s / vignette** (+ ~6 s one-time model load) |
+| VRAM peak | **15.63 GB** |
+| Extraction end-to-end | **Yes.** Readouts non-degenerate (unique top-1 per 298 positions: L2 90 … L26 202). |
+
+Feasibility only — **no interpretation, no diagnostic-token counting, no comparisons** (rule 4/5/6 of the Stage 0.3 spec). Phase 1 design/preregistration out of scope.
+
+### Ollama coexistence during Stage 0.3
+
+`mistral-sim` (24 GB, `keep_alive=Forever`) **auto-reloaded on its own** mid-session (colleague confirmed they launched nothing; a residual process/health-check re-pins it). Recorded as a scheduling hazard for any batch design. Windows for GPU work were coordinated by the PI (`ollama stop mistral-sim` from their terminal).
+
+**END OF PHASE 0.**
