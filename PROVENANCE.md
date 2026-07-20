@@ -419,3 +419,23 @@ Feasibility only — **no interpretation, no diagnostic-token counting, no compa
 `mistral-sim` (24 GB, `keep_alive=Forever`) **auto-reloaded on its own** mid-session (colleague confirmed they launched nothing; a residual process/health-check re-pins it). Recorded as a scheduling hazard for any batch design. Windows for GPU work were coordinated by the PI (`ollama stop mistral-sim` from their terminal).
 
 **END OF PHASE 0.**
+
+---
+
+## Seal — Phase 1 token sets (pre-data) — 2026-07-20
+
+**Artifact:** `phase1_token_sets_SEALED.md` (repo root).
+**Seal date (PI approval):** 2026-07-17. **Git external mark (immutable timestamp):** commit/push 2026-07-20.
+**Pre-data guarantee:** no J-lens readout of any study vignette under any experimental condition exists at seal time. Only readouts in existence: Stage 0.2 calibration + Stage 0.3 v12 pilot(s) — no conditions, no token sets, no counting. The seal locks rules R1–R5 and concept sets A/B/C/D/F; aggregation/normalization/hypotheses remain open to the Phase 1 prereg.
+
+| sha256 | of |
+|---|---|
+| `89ba3ea8c443caa38301f94e4bd4610e59abfa8835f7d316c0ecf5f344b80b79` | base approved text (pre-appendix) |
+| `3689ac85d4e61500357881569de0cf1feeb74c43d5712c17d25baa1d8539634f` | **final sealed file** (incl. operative-lists appendix + delegate flags) |
+
+**Operative lists — mechanical R1–R3 execution** (`phase0/scripts/phase1_seal_screening.py`, deterministic, tokenizer-only; rule execution, not decision). Screened the sealed concept sets against the Stage 0.1b inventory (`present_tokens` 927 ∪ `present_tokens_substring` 3076 ∪ 16 instruction tokens). Survivors/echo-excluded/dropped per set: **A 17/2/0 · B1 18/0/0 · B2 6/0/0 · C 10/0/1 · D 9/0/0 · F 11/2/0** (C drop = `dissociation/dissociative`, multi-token-only per R1). Full tables in the sealed doc's appendix; JSON `phase0/data/phase1_seal_screening.json` (gitignored).
+
+**Delegate flags appended to the seal (mechanical findings, PI to weigh pre-data, NOT decisions):**
+1. Concept sets realized in **English** (R1 as written) vs a **Spanish** corpus → R2 echo-exclusion fires on almost nothing. Notably **B1 = 0 echoes**, so its documented "(per R2)" echo-stratum mechanism does not fire (B1 still barred from confirmatory by design intent). F's `real` excluded (Spanish "real" in corpus, per R5); `study`/`experiment` survive (disclosure is Spanish); A's `clinical` excluded.
+2. **English-only realization vs Spanish generation** is a set-content question reserved for the PI; flagged pre-data for possible amendment (the pilot generated in Spanish). Not decided by delegate.
+3. R2 substring-strict exact against the inventory; R3 folded-substring-vs-raw-corpus residual not computable here (raw corpus gitignored/iMac-only) — expected null for English sets vs Spanish corpus.
