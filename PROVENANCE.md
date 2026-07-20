@@ -224,7 +224,34 @@ Note for the record: the ledger's author (`cayerbe`) also authored upstream issu
 **Recorded:** 2026-07-20 (local `+0100`), machine `[host]`
 **Report:** `phase0/reports/stage02_validation.md`
 **Log:** `phase0/logs/20260720T092551_stage02_env.log`
-**Status:** Environment verified; **VRAM-free work complete** — cu128 venv built, Tier 1 CPU tests pass, model + lens downloaded and hash-verified, lens `isfinite` guard PASS (CPU). **Still pending:** GPU load + Tier 2 reproduction, which need the PI's VRAM window. No STOP POINT 2 yet.
+**Status:** Environment + VRAM-free work complete. GPU Tier 2 **executed** (window opened 2026-07-20 after PI ran `ollama stop mistral-sim`). Pipeline is fully functional, but the **two specific documented tokens (euro/lira, nose) did NOT reproduce as-run** → per PI rule 5 this is treated as NOT-a-clean-match: recorded, committed, **STOP for cold diagnosis; Stage 0.3 NOT started.**
+
+### Tier 2 — GPU reproduction (2026-07-20)
+
+**Script:** `phase0/scripts/stage02_tier2.py` · **Log:** `phase0/logs/20260720T092551_stage02_tier2.log` · **Readouts (gitignored):** `phase0/data/stage02_tier2_readouts.json`
+
+| Item | Value |
+|---|---|
+| `torch.cuda.is_available()` (live) | **True** — device `NVIDIA GeForce RTX 5090` |
+| Model load (local cache → GPU, fp16) | **5.6 s** |
+| Lens | `JacobianLens(d_model=3584, n_prompts=485, source_layers=[0..26], 27 layers)` |
+| On-device `isfinite` guard | **PASS** (0 non-finite J) |
+| `apply()` runtime (currency, seq_len 22) | **0.36 s** |
+| **VRAM peak** (`torch.max_memory_allocated`) | **15.42 GB** |
+
+**Encoding note:** first run crashed on a Windows `cp1252` console codec while *printing* a non-cp1252 vocab token (measurement had completed). Fixed by forcing UTF-8 stdout in the script (reporting-only; does not touch the measurement) and re-ran deterministically.
+
+**Result vs documented outputs:**
+- **Currency multi-hop**, `positions=[-2]`: lens reads out **`Italy` / `意大利` / `Italian` at layers 17–21** (the unstated boot→Italy hop) — a correct, non-degenerate latent readout, but **euro/lira is absent** at that position. Model final-logit top-1 at −2 is ` is`.
+- **ascii-face**, readout at the `^` (nose) position 28: dominated by `^`-variants and whitespace — **input-copying** (issue #5 Pitfall 1). **"nose" absent** at all 27 layers.
+
+**Verdict:** pipeline verified functional end-to-end (load → transport → readout, non-degenerate, surfaces an unstated latent entity), **but the specific documented tokens euro/lira and nose were not reproduced as-run.** Candidate explanations to diagnose **cold** (not fixed live per rule 5): (a) currency answer likely reads at the final position, not −2 (−2 held the country hop); (b) the README "nose" slice is from the walkthrough's `Qwen3.5-4B`, not `qwen2.5-7b-it`, and the `^` position is confounded by input-copying. **Stage 0.3 not started.**
+
+### Ollama coexistence (observed)
+
+The 24 GB `mistral-sim` was pinned `UNTIL: Forever` and did **not** free on run-completion; it required an explicit `ollama stop mistral-sim` (run by the PI from their own terminal — the harness classifier denied the delegate running it, and it is a colleague's run). J-lens 7B peak **15.42 GB** + resident weights coexist fine with ~4 GB of desktop apps inside 32 GB, but **cannot** coexist with a 24 GB Ollama model — the two are mutually exclusive on this card, so a window must be coordinated.
+
+### (superseded) earlier status line
 
 ### PI decisions (2026-07-20)
 

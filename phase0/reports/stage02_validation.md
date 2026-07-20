@@ -3,8 +3,8 @@
 **Date:** 2026-07-20
 **Machine:** `[host]` — Windows 11 Pro 10.0.26200, RTX 5090 (the designated GPU host)
 **Author:** Claude Code (Phase 0 delegate)
-**Status:** 🟡 **VRAM-free half complete; one gate remains.** Substrate confirmed (Windows-native); venv built; Tier 1 CPU tests pass; model + lens downloaded, hash-verified, `isfinite` guard PASS. **Only Tier 2 (GPU load + documented-readout reproduction) is left — it waits on the PI's VRAM window.** Not STOP POINT 2 yet.
-**Log:** `phase0/logs/20260720T092551_stage02_env.log`, `…_stage02_fetch.log`, `…_stage02_pip_freeze.txt`
+**Status:** 🟠 **STOP POINT 2 — Tier 2 executed; pipeline functional but documented tokens NOT reproduced as-run.** Per PI rule 5 (not-a-clean-match → record, commit, STOP, diagnose cold): **Stage 0.3 NOT started.** Substrate = Windows-native; venv built; Tier 1 CPU 32/32; model+lens hash-verified; `isfinite` PASS (CPU **and** on-device); GPU load + apply work; but euro/lira and "nose" did not appear (details §4).
+**Log:** `phase0/logs/20260720T092551_stage02_{env,fetch,tier2}.log`, `…_pip_freeze.txt`
 **jacobian-lens commit (re-vendored here):** `581d398613e5602a5af361e1c34d3a92ea82ba8e` ("Initial release") ✓ matches pin
 
 **PI decisions applied (2026-07-20):** substrate = **Windows-native** (WSL = documented fallback); the **VRAM window is coordinated by the PI personally** with the colleague running `mistral-sim` — I must **not** download, unload, or request unloading `mistral-sim`, and I have not. All work below stayed strictly off the GPU (every Python call ran with `CUDA_VISIBLE_DEVICES=""`).
@@ -118,35 +118,66 @@ Run **CPU-side** immediately after download (`torch.load(map_location="cpu")`, G
 
 ---
 
-## 4. Pipeline validation — the reproduction, staged
+## 4. Pipeline validation — the reproduction
 
-Two-tier reproduction. Tier 1 is **done** (CPU); Tier 2 is the brief's actual success criterion and is the only thing waiting on the VRAM window.
+| Tier | What | Status |
+|---|---|---|
+| **1** | `pytest` vs **CPU-only `TinyDecoder`** — real `jacobian_for_prompt` / `ActivationRecorder` / `compute_slice` paths | ✅ **32/32 pass** (CPU mechanics) |
+| **2** | **Documented demo**: currency multi-hop (expect euro/lira) + ascii-face (expect "nose") on the 7B + lens | ⚠️ **executed; documented tokens NOT reproduced as-run** (below) |
 
-| Tier | What | VRAM | Status |
-|---|---|---|---|
-| **1** | `pytest` vs **CPU-only `TinyDecoder`** — real `jacobian_for_prompt` / `ActivationRecorder` / `compute_slice` paths | none | ✅ **32/32 pass** (mechanics; not the documented qualitative readouts) |
-| **2** | **Documented demo** from `examples.py`: `multihop` currency *"…the country shaped like a boot is"* → expect euro/lira at position −2; and/or ascii-face **"nose"** at mid layers | ~15 GB (7B + lens) | ⏸ **waits on VRAM window** — this is *"readouts qualitatively match the documented expected output"* |
+### 4a. Tier 2 execution (GPU) — footprint
 
-Lens integrity for Tier 2 is already de-risked: the issue-#6 `isfinite` guard passed CPU-side (§3d) and will be re-affirmed once tensors are on the GPU.
+Window opened after the PI ran `ollama stop mistral-sim` (the 24 GB model was pinned `Forever` and did not free on its own; the delegate was blocked by the harness from stopping it and never touched it). Then, clean:
+
+| live `cuda.is_available()` | model load | on-device `isfinite` | `apply()` (currency) | **VRAM peak** |
+|---|---|---|---|---|
+| **True** (RTX 5090) | 5.6 s | **PASS** | 0.36 s | **15.42 GB** |
+
+*(First run crashed on a Windows `cp1252` console codec while printing a non-cp1252 vocab token — the measurement had already completed. I forced UTF-8 stdout, a reporting-only fix that does not touch the measurement, and re-ran deterministically.)*
+
+### 4b. Tier 2 result vs documented outputs — **not a clean match**
+
+**Currency multi-hop, `positions=[-2]`.** The lens surfaces the boot→**Italy** hop that is nowhere in the prompt — a correct, non-degenerate latent readout — but the *currency* (euro/lira) is absent at that position:
+
+```
+L17: ['——', 'Italy', 'SEO', ... , '意大利', ...]
+L19: ['Italy', ' Italy', '意大利', 'Italian', ... , ' Italia']
+L21: ['Italy', ' Italy', '意大利', ' näch', 'Italian', ...]
+model final-logits top-1 @ -2:  ' is'
+```
+
+**ascii-face, readout at the `^` (nose) position 28.** Dominated by `^`-variants and whitespace — **textbook input-copying** (issue #5 Pitfall 1: a token present in the prompt is read at ~rank 1 at its own position). No "nose" at any of the 27 layers:
+
+```
+L 8: [' ^', ' ^^', ' ^\n', '^', " '^", ' (^', ' *', '^^']
+L15: [' ^', ' ^\n', '        ', '     ', ' ^^', ...]
+'nose' first appears at layer: None
+```
+
+**Verdict.** Pipeline verified functional end-to-end (load → `J_l` transport → readout; non-degenerate; surfaces an unstated latent entity, "Italy"). **But the two specific documented tokens — euro/lira and "nose" — did not appear as-run.** Against the PI's stated criterion, that is **not a clean match.**
+
+**Candidate explanations — to diagnose COLD, not fixed live (rule 5):**
+1. The currency answer likely reads out at the **final position**, not −2; −2 held the *country* hop (its next token is ` is`). I did **not** re-run at −1 — that would be improvising.
+2. The README "nose" slice is rendered with the walkthrough's **`Qwen3.5-4B`**, not `qwen2.5-7b-it`, and the `^` position is confounded by **input-copying**, so "nose" may be unrecoverable there on this model without a different read strategy.
 
 ---
 
-## 5. What's left, and what unblocks it
+## 5. Decision point — STOP POINT 2 (cold)
 
-**One gate:** a VRAM window with ~15 GB free (you coordinate it with the `mistral-sim` owner). When you confirm, I will, in order:
+Per **PI rule 5** (Tier 2 not a clean match → *record everything, commit/push, STOP — no live debugging, no improvising; diagnose cold*):
 
-1. `torch.cuda.is_available()` live check (expect `True`) — the deferred device probe.
-2. Load `Qwen/Qwen2.5-7B-Instruct` (fp16) + the pre-fitted lens onto the GPU.
-3. Re-affirm the `isfinite` guard on-device.
-4. **Tier 2:** run the documented demo(s), confirm readouts qualitatively match (the "nose" / currency outputs), and record VRAM peak + runtime here.
-5. Update PROVENANCE, commit + push, **stop at STOP POINT 2**.
+- Everything recorded (PROVENANCE, this report, `…_tier2.log`, gitignored `stage02_tier2_readouts.json`).
+- **Committed + pushed.**
+- **Stage 0.3 NOT started** — rule 6's "continue into Stage 0.3" is gated on a Tier 2 match, which we do not have.
 
-If the window is wide and you authorize it, I can chain **Stage 0.3** in the same session once you designate the vignette and its source path.
+**The open question for your cold diagnosis is narrow:** is this just position/model calibration (re-read the currency at −1; treat ascii "nose" as `Qwen3.5-4B`-specific and input-copying-confounded) — in which case the pipeline is sound and we simply pick a cleaner Tier 2 check — or do you want a different documented example verified before Stage 0.2 is declared green? Your call; I have not touched it further.
 
-I will **not** touch `mistral-sim` or the GPU before your window — nothing here has, and nothing will until then.
+### Ollama coexistence (observed)
+
+`mistral-sim` (24 GB, pinned `Forever`) and the J-lens 7B (peak 15.42 GB) are **mutually exclusive** on this 32 GB card — a window must be coordinated, and a `Forever`-pinned model must be explicitly `ollama stop`-ped (it does not free on run-completion). If `ollama ps` shows a model loading mid-session, GPU work pauses at the next safe point per your standing rule.
 
 ---
 
 ## 6. What I did NOT do (per brief / PI constraint)
 
-Nothing loaded into VRAM; the GPU was never touched (every Python call ran `CUDA_VISIBLE_DEVICES=""`); `mistral-sim` was never downloaded, unloaded, or asked to unload; no live `cuda.is_available()` probe (deferred — it would allocate a context); no token sets proposed or touched (rule 4); no reification-gradient originals accessed (rule 3); no vignette read (that is Stage 0.3). All downloaded weights live under gitignored `phase0/data/`.
+Did not chase euro/lira by re-reading at −1, or otherwise tune positions/prompts/model to force a match (rule 5 — no improvising); did not start Stage 0.3 (gated on a Tier 2 match); did not stop/unload `mistral-sim` myself (harness-blocked, and it is a colleague's run — the PI stopped it); no token sets proposed or touched (rule 4); no reification-gradient originals accessed (rule 3); no vignette read (Stage 0.3). All weights/readouts live under gitignored `phase0/data/`. The only GPU work was the Tier 2 reproduction itself, after the PI opened the window.
