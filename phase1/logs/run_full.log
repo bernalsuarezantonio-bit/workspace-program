@@ -1,0 +1,46 @@
+[full] trials=800 (cells=4 vignettes=20 reps=10) master_seed=20260721
+[full] already done=0  todo=800
+cuda: NVIDIA GeForce RTX 5090
+lens: JacobianLens(d_model=3584, n_prompts=485, source_layers=[0..26] (27 layers))  lens_pt_sha OK
+resolved generation: {'do_sample': True, 'temperature': 0.7, 'top_p': 0.8, 'top_k': 20, 'max_new_tokens': 200, 'repetition_penalty': 1.05, 'pad_token_id': 151643}
+[full] 20/800 C1_DN_plausible_L1__v39__rep10 P=291 G=200 rows=13748 5.2s vram=15.9GB elapsed=2.8m
+[full] 40/800 C2_incoherent_L4__v34__rep10 P=270 G=200 rows=13160 4.5s vram=15.9GB elapsed=5.4m
+[full] 60/800 C2_incoherent_L1__v11__rep02 P=308 G=200 rows=14224 4.3s vram=15.9GB elapsed=7.7m
+[full] 80/800 C1_DN_flagged_L1__v35__rep05 P=340 G=200 rows=15120 4.3s vram=15.9GB elapsed=10.1m
+[full] 100/800 C1_DN_plausible_L1__v12__rep07 P=305 G=200 rows=14140 4.2s vram=15.9GB elapsed=12.5m
+[full] 120/800 C1_DN_flagged_L1__v15__rep03 P=339 G=200 rows=15092 4.2s vram=15.9GB elapsed=14.9m
+[full] 140/800 C2_incoherent_L4__v11__rep09 P=274 G=200 rows=13272 4.3s vram=15.9GB elapsed=17.3m
+[full] 160/800 C2_incoherent_L1__v31__rep05 P=306 G=200 rows=14168 4.3s vram=15.9GB elapsed=19.8m
+[full] 180/800 C1_DN_flagged_L1__v34__rep04 P=338 G=200 rows=15064 4.2s vram=15.9GB elapsed=22.2m
+[full] 200/800 C1_DN_flagged_L1__v36__rep01 P=331 G=200 rows=14868 4.3s vram=15.9GB elapsed=24.7m
+[full] 220/800 C2_incoherent_L1__v10__rep03 P=306 G=200 rows=14168 4.3s vram=15.9GB elapsed=27.1m
+[full] 240/800 C1_DN_plausible_L1__v01__rep04 P=292 G=200 rows=13776 4.3s vram=15.9GB elapsed=29.5m
+[full] 260/800 C2_incoherent_L4__v11__rep04 P=274 G=200 rows=13272 4.3s vram=15.9GB elapsed=31.9m
+[full] 280/800 C1_DN_plausible_L1__v35__rep05 P=294 G=200 rows=13832 4.3s vram=15.9GB elapsed=34.3m
+[full] 300/800 C1_DN_flagged_L1__v15__rep02 P=339 G=200 rows=15092 4.3s vram=15.9GB elapsed=36.7m
+[full] 320/800 C2_incoherent_L1__v14__rep10 P=308 G=200 rows=14224 4.3s vram=15.9GB elapsed=39.1m
+[full] 340/800 C2_incoherent_L1__v09__rep06 P=309 G=200 rows=14252 4.2s vram=15.9GB elapsed=41.6m
+[full] 360/800 C1_DN_plausible_L1__v32__rep07 P=292 G=200 rows=13776 4.3s vram=15.9GB elapsed=44.1m
+[full] 380/800 C1_DN_plausible_L1__v07__rep10 P=299 G=200 rows=13972 4.2s vram=15.9GB elapsed=46.6m
+[full] 400/800 C1_DN_flagged_L1__v02__rep06 P=337 G=200 rows=15036 4.3s vram=15.9GB elapsed=49.0m
+[full] 420/800 C1_DN_flagged_L1__v38__rep01 P=340 G=200 rows=15120 4.3s vram=15.9GB elapsed=51.4m
+[full] 440/800 C2_incoherent_L4__v35__rep02 P=272 G=200 rows=13216 4.2s vram=15.9GB elapsed=53.9m
+[full] 460/800 C2_incoherent_L1__v32__rep02 P=304 G=200 rows=14112 4.2s vram=15.9GB elapsed=56.3m
+[full] 480/800 C2_incoherent_L1__v37__rep02 P=303 G=200 rows=14084 4.3s vram=15.9GB elapsed=58.7m
+[full] 500/800 C2_incoherent_L1__v01__rep04 P=304 G=200 rows=14112 4.2s vram=15.9GB elapsed=61.2m
+[full] 520/800 C2_incoherent_L1__v07__rep04 P=311 G=200 rows=14308 4.3s vram=15.9GB elapsed=63.6m
+[full] 540/800 C2_incoherent_L4__v32__rep10 P=270 G=200 rows=13160 4.3s vram=15.9GB elapsed=66.1m
+[full] 560/800 C1_DN_flagged_L1__v12__rep01 P=351 G=200 rows=15428 4.3s vram=15.9GB elapsed=68.6m
+[full] 580/800 C1_DN_plausible_L1__v11__rep05 P=296 G=200 rows=13888 4.3s vram=15.9GB elapsed=71.2m
+[full] 600/800 C1_DN_flagged_L1__v15__rep01 P=339 G=200 rows=15092 4.3s vram=15.9GB elapsed=73.8m
+[full] 620/800 C2_incoherent_L4__v36__rep08 P=263 G=200 rows=12964 4.3s vram=15.9GB elapsed=76.3m
+[full] 640/800 C2_incoherent_L1__v02__rep07 P=303 G=200 rows=14084 4.3s vram=15.9GB elapsed=78.8m
+[full] 660/800 C1_DN_plausible_L1__v32__rep01 P=292 G=200 rows=13776 4.3s vram=15.9GB elapsed=81.3m
+[full] 680/800 C2_incoherent_L1__v13__rep01 P=309 G=200 rows=14252 4.2s vram=15.9GB elapsed=83.7m
+[full] 700/800 C2_incoherent_L4__v07__rep05 P=277 G=200 rows=13356 4.3s vram=15.9GB elapsed=86.2m
+[full] 720/800 C1_DN_flagged_L1__v15__rep06 P=339 G=200 rows=15092 4.3s vram=15.9GB elapsed=88.7m
+[full] 740/800 C1_DN_flagged_L1__v32__rep05 P=338 G=200 rows=15064 4.3s vram=15.9GB elapsed=91.3m
+[full] 760/800 C1_DN_flagged_L1__v40__rep03 P=341 G=200 rows=15148 4.3s vram=15.9GB elapsed=93.8m
+[full] 780/800 C2_incoherent_L1__v02__rep08 P=303 G=200 rows=14084 4.3s vram=15.9GB elapsed=96.3m
+[full] 800/800 C2_incoherent_L1__v07__rep08 P=311 G=200 rows=14308 4.3s vram=15.9GB elapsed=98.8m
+[full] DONE new_runs=800 total_elapsed=98.8m manifest=phase1\data\run_manifest_full.jsonl

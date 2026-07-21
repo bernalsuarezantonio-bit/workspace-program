@@ -580,3 +580,29 @@ C2_incoherent_L1    a7a599dc50c05505…  ( 995 chars)
 - **C2 differs only by the wrapper** (identical instruction+CASO tail; `seeded(L4) ≠ seeded(L1)`) ✓.
 
 **Blocker CLEARED.** Stimuli are now byte-identical to the sealed R2 corpus source. No condition-bearing readout created; seal integrity intact. **STOP — staged for PI review + tag** (delegate does not tag). New tracked changes: `phase1/materials_canonical/**`, `.gitattributes`, `phase1/scripts/build_phase1_materials.py`, `PROVENANCE.md`, `PREREG_PHASE1.md`.
+
+---
+
+## Stage P1 — Confirmatory J-lens runs + judge (data generation) — 2026-07-21
+
+**Recorded:** 2026-07-21, `[host]` (RTX 5090). This is the **data commit** the Phase 1 analysis runs against. **No analysis here** — no loadings, no aggregation, no counting beyond mechanical completeness. Numbers below are integrity counts only.
+
+**Freeze→data chain:** tag `prereg-phase1-v1` → commit `109166a` → `PREREG_PHASE1.md` sha256 `bedbcc78f9dc261ffd789dc55097bbd9c997c4db9d3e63077489623ae05f55d5`. Harness at `d508662`. Materials byte-exact from `phase1/materials_canonical/` (canonical fidelity GREEN).
+
+**Instrument (harness `d508662`):** `phase1/scripts/run_confirmatory.py` (generation + readout dump), `judge_diagnosis.py` (gemma2:27b v1 blinded rubric), `verify_completeness.py`. Prompt assembly byte-faithful to reification-gradient `src/run_experiment.py @ ee23c07` (`wrap()`/`build_prompt()`), signed Spanish instruction.
+
+| Item | Value |
+|---|---|
+| Cells | 4 confirmatory: `C1_DN_flagged_L1`, `C1_DN_plausible_L1`, `C2_incoherent_L4`, `C2_incoherent_L1` |
+| Design | 4 cells × 20 `high` vignettes × 10 reps = **800 runs** (each cell 200; 20×10 verified) |
+| Model | `Qwen/Qwen2.5-7B-Instruct@a09a3545` (fp16) |
+| Lens | `neuronpedia/jacobian-lens@16a01f3` `qwen2.5-7b-it`; `.pt` sha256 `3b3ab44c…` re-verified == Stage 0.2 pin (issue-#6 isfinite lens) |
+| Readouts | top-k=10, all 27 fitted layers × all positions + model_output row; prompt/generation marked; first-16 `ood_unfitted_pos` flagged (issue-#5 Pitfall 2) |
+| Generation | `do_sample=True, temperature=0.7, top_p=0.8, top_k=20, repetition_penalty=1.05, max_new_tokens=200` (Qwen defaults at temp 0.7; prereg §Generation: temp 0.7 / sampling / num_predict 200). Per-run seed recorded (`SEED_BASE=700000+canonical_index`); execution order shuffled with `master_seed=20260721` |
+| Judge | `gemma2:27b` (Ollama, temp 0, seed 0, `format=json`), v1 blinded rubric (`materials_canonical/scoring/judge_prompt.md` `e67e8e63…`), category name aliased to "LA CATEGORÍA" in payload + response; 6 sealed keys |
+
+**Mechanical completeness (`completeness_report.json`, COMPLETE=true):** 800 runs, **0 duplicate trial_ids**, **0 runs with problems** (every readout's sha256 re-verified == manifest; top-k weights finite; prompt+generation positions present). Judge: 800 judged, **1 parse error** (in `C2_incoherent_L1`, both attempts failed → excluded + counted per prereg §6b; C2 does not condition on diagnosis). Single consistent lens `.pt` sha + model digest across all 800.
+
+**Storage:** raw per-run readouts (~800 × ~10 MB ≈ 8 GB) in gitignored `phase1/data/readouts/`; committed here are the lightweight `run_manifest_full.jsonl` (per-run seed + readout sha256 + digests), `judge_full.jsonl`, `completeness_report.json`, and the smoke provenance. **Data content digest** (sha256 over the two full manifests + completeness): `dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1`.
+
+**Timing:** smoke 8-run gate ~1.1 min gen + 1.2 min judge (PASS, 4 criteria); full generation **98.8 min**; full judge **44.9 min**. Ollama coexistence: `llama3.3:70b` then `mistral-sim` blocked VRAM for ~2.5 h pre-run (documented residual auto-reload); during the run `gemma2:27b` pinned `Forever` and spilled to CPU (16%/84%) rather than OOM-ing the lens — cost ~30% run speed, no data loss. **No aggregates computed. Analysis is a separate session against this commit.**

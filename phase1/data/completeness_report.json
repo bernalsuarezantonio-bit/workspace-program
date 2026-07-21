@@ -1,0 +1,61 @@
+{
+  "expected": {
+    "cells": 4,
+    "vignettes": 20,
+    "reps": 10,
+    "total": 800
+  },
+  "problems": [],
+  "per_cell": {
+    "C1_DN_flagged_L1": {
+      "n_runs": 200,
+      "n_judged": 200,
+      "n_judge_errors": 0,
+      "n_diagnosis_1": 200,
+      "n_diagnosis_0": 0,
+      "vignettes": 20,
+      "reps": 10
+    },
+    "C1_DN_plausible_L1": {
+      "n_runs": 200,
+      "n_judged": 200,
+      "n_judge_errors": 0,
+      "n_diagnosis_1": 200,
+      "n_diagnosis_0": 0,
+      "vignettes": 20,
+      "reps": 10
+    },
+    "C2_incoherent_L4": {
+      "n_runs": 200,
+      "n_judged": 200,
+      "n_judge_errors": 0,
+      "n_diagnosis_1": 192,
+      "n_diagnosis_0": 8,
+      "vignettes": 20,
+      "reps": 10
+    },
+    "C2_incoherent_L1": {
+      "n_runs": 200,
+      "n_judged": 200,
+      "n_judge_errors": 1,
+      "n_diagnosis_1": 56,
+      "n_diagnosis_0": 143,
+      "vignettes": 20,
+      "reps": 10
+    }
+  },
+  "judge": {
+    "n_judged": 800,
+    "n_parse_errors": 1
+  },
+  "n_runs": 800,
+  "n_duplicate_ids": 0,
+  "runs_with_problems": 0,
+  "lens_pt_sha256": [
+    "3b3ab44cd67c2ad1f26e9f66eb269db31289b6328585b0459a47e6d3814cba29"
+  ],
+  "model_digest": [
+    "Qwen/Qwen2.5-7B-Instruct@a09a3545"
+  ],
+  "COMPLETE": true
+}
