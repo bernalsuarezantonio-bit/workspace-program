@@ -515,3 +515,17 @@ Note content: (1) C's ES drop is R1 on a real substrate property (Qwen single-to
 Power at δ=0.5: C1 two-sided R=5→0.86; C2 one-sided R=5→0.92. **Pre-fixed rule → R=5** (~1.2 h GPU). **Caveat (flagged for freeze):** only 1 calibration vignette → vignette×cell interaction unestimated → R is a FLOOR; budget fits R=10 (~1.9 h) / R=15 (~2.6 h); delegate recommends R=10, PI decides.
 
 **Auxiliary diagnostic (registered in C-note, pre-data):** Set A load is ~99.7 % English (EN 0.1066 vs ES 0.0003) even on Spanish-generation v12 — consistent with the C-note prediction (EN realization under Spanish context). Measurement characterization, not a confirmatory result. No condition-bearing data created.
+
+### Phase 1 materials (PI-provided, read-only) + byte-fidelity gate — 2026-07-20
+
+**Decision:** R = 10 (PI, conservative deviation over rule R=5; vignette×cell variance unestimated in mono-vignette calibration). **N = 4 × 20 × 10 = 800 runs (~1.9 h).** Recorded in `PREREG_PHASE1.md` §4.
+
+Materials provided by PI, read-only from **reification-gradient @ `ee23c07288a31eb19545c944e0662bd6a2d9d915`**, saved to gitignored `phase1/materials/` with sidecars. Builder/verifier: `phase1/scripts/build_phase1_materials.py`; manifest `phase1/materials/phase1_materials_manifest.json` (gitignored).
+
+- **20 `high` vignettes** (v01,v02,v07,v09–v15,v31–v40) — source `vignettes.yaml` sha256 `59f37915…`; per-file sha256 in the sidecar; `target_compatibility` → metadata only, removed from stimulus. **v12 reproduces the sealed pilot sha256 `32c78f5f…` ✓.**
+- **Conditions** (`disorders.yaml` sha256 `91d0ccb7…`): DN_plausible / DN_flagged (= plausible payload + " " + disclosure) / incoherent; `wrap()` rule recorded.
+- **Task instruction:** the behavioral `build_prompt()` instruction (SIGNED decision); English Stage 0.3 instruction RETIRED.
+
+**Byte-identity verification (`build_phase1_materials.py`):**
+- **Between cells — VERIFIED ✓.** C1 differs only by the disclosure (appears in both payload positions per whole-file substitution — faithful, Stage 0.1b-confirmed); C2 differs only by the wrapper. Cell sha256 (v12): flagged×L1 `41748108…`, plausible×L1 `bf58c55e…`, incoherent×L4 `685521ca…`, incoherent×L1 `0ab62edc…`.
+- **⚠ Against source (sealed R2 corpus) — MISMATCH / BLOCKER.** Chat-pasted wrappers do NOT reproduce source sha256: L1 mine `46ca4e38…`(no-nl)/`11301399…`(nl) vs source `1f9bb56c…`; L4 mine `7c541488…`/`95b473d9…` vs source `1100ec4f…`. Paste is not byte-faithful. **P1/P2 are BLOCKED until materials are transferred byte-exact (saved sha256 == source sha256).** The sealed R2 operative lists were computed on the original bytes; running on divergent bytes would break the seal's echo guarantee. Awaiting byte-exact transfer (e.g. base64).

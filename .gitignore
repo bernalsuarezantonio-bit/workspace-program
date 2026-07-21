@@ -38,3 +38,6 @@ hf_cache/
 
 # OS noise
 .DS_Store
+
+# Phase 1 materials: read-only reification-gradient copies (provenance in PROVENANCE.md)
+phase1/materials/

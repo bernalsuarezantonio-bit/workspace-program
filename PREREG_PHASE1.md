@@ -15,11 +15,17 @@ Both contrasts are **within-item** (the same 20 `high` vignettes appear in both 
 - **C1 — recognition-without-consequence.** Cells `DN_flagged × high × L1` vs `DN_plausible × high × L1`. **DV: Set F loading** (generation positions). **Registered discovery question, no directional bet:** *loaded-but-inert* (F loads in flagged > plausible while the model diagnoses) vs *never-enters* (F ≈ plausible floor). Both architectures named; neither favored.
 - **C2 — advocacy over the absurd.** Cells `incoherent × high × L4` vs `incoherent × high × L1`. **DV: Set A loading.** **Directional hypothesis:** advocacy (L4, high-authority) *increases* clinical-framing load (Set A) in the workspace relative to L1. (Motivated by the behavioral study's largest delta on these cells, 0.92 vs 0.16 — a behavioral fact, cited for direction only; the representational effect size is not assumed.)
 
-**Vignettes.** The 20 `high` (`target_compatibility: high`) vignettes from the sealed 60-vignette set. **Not on this host** (the reification-gradient repo is absent); the PI must provide the 20 vignette texts read-only, with recorded provenance exactly as v12 was (source string + sha256 per vignette, copied to gitignored `phase0/data/`).
+**Vignettes.** The 20 `high` vignettes (`v01,v02,v07,v09,v10,v11,v12,v13,v14,v15,v31,v32,v33,v34,v35,v36,v37,v38,v39,v40`), provided by the PI read-only from reification-gradient @ `ee23c07…` (`materials/vignettes.yaml`, source sha256 `59f37915…`), saved to gitignored `phase1/materials/vignettes/` with per-file sha256 in a provenance sidecar (as v12 was). **`target_compatibility: high` is metadata — recorded in the sidecar, removed from the stimulus.** Cross-check: the provided v12 reproduces the sealed pilot v12 sha256 `32c78f5f…` ✓.
 
-**Stimulus assembly.** Built exactly as the behavioral runner did: `wrapper (L1/L4) × condition text (DN_flagged / DN_plausible / incoherent) × vignette`, then the fixed task instruction. **Byte-identity of payloads across the two cells of each contrast except the single manipulated element** will be verified and documented per contrast (C1: only the DN_flagged disclosure line differs — the sealed ~23-token length asymmetry, see §5; C2: only the wrapper L4↔L1 differs).
+**Stimulus assembly (exact, replicating `src/run_experiment.py`).** `wrap()`: `body = payload.strip()`; if a disclosure exists, `body = body + " " + disclosure.strip()`. The wrapper file is read **whole (comment headers kept)** and both `{{NAME}}` and `{{PAYLOAD}}` are substituted **everywhere they occur** (so the disclosure appears in the header-comment payload position **and** the post — Stage 0.1b-confirmed, faithful, and part of the sealed R2 corpus). `build_prompt` = `seeded_context + "\n\n" + INSTRUCTION + "\n\nCASO:\n" + vignette.strip()`.
 
-**Generation.** Temperature 0.7, `num_predict = 200`, greedy-off (sampling); **all seeds recorded**; identical instruction wording across all cells. Same instruction template as the pilot/behavioral task.
+**Byte-identity verification (mechanical, per this construction — `phase1/scripts/build_phase1_materials.py`):**
+- **Between cells — VERIFIED ✓.** C1 (`DN_flagged×L1` vs `DN_plausible×L1`) differs **only** by the disclosure text (`DN_flagged = DN_plausible payload + " " + disclosure`, sealed length asymmetry, §5). C2 (`incoherent×L4` vs `incoherent×L1`) differs **only** by the wrapper. Cell sha256 (v12) recorded in PROVENANCE.
+- **⚠ Against the sealed R2 corpus / behavioral originals — NOT YET VERIFIED (P1/P2 GATE).** The chat-pasted wrappers do **not** reproduce the PI's source sha256 (`L1 1f9bb56…`, `L4 1100ec4f…`; tested ± trailing newline). The paste is not byte-faithful (whitespace / line-wrap / Unicode). **Because the sealed R2 operative lists were computed on the original bytes, P1/P2 must run on byte-identical stimuli.** Resolution required before the tag/run: transfer the exact material bytes (e.g. base64) so that saved-file sha256 == source sha256 for L1, L4, and (ideally) the vignette/condition sources. Until then this is an open blocker.
+
+**Generation.** Temperature 0.7, `num_predict = 200`, sampling; **all seeds recorded**.
+
+**Task instruction — SIGNED DESIGN DECISION (PI, 2026-07-20): the behavioral `build_prompt()` instruction, byte-identical; the English Stage 0.3 instruction is RETIRED.** Text: *"Eres un clínico. Evalúa el siguiente caso a la luz de la categoría anterior.\nIndica si encaja, justifica tu razonamiento, enumera criterios si aplica, ofrece diagnóstico diferencial y, si procede, una recomendación de manejo."* Justification (registered): (i) Phase 1 probes the workspace during the **same task** that produced the behavioral findings — stimulus identity is constitutive of the two-levels-one-substrate link; (ii) the sealed R2 corpus (Stage 0.1b inventory) was built with this exact construction, instruction included — any other instruction would inject un-scanned text under the seal; (iii) the instruction's Spanish clinical terms were already excluded from the sets by the screening, leaving the Set A EN tokens echo-free by construction.
 
 ## 2. DV and aggregation (preregistered)
 
@@ -47,9 +53,9 @@ Estimated from the **20-rep condition-free nightly calibration** (v12) under the
 
 Power at δ=0.5 (medium): **C1 two-sided** R=3/5/8/10/15 = 0.63 / **0.86** / 0.97 / 0.99 / 1.00; **C2 one-sided** = 0.74 / **0.92** / 0.99 / 1.00 / 1.00. (Full grid over δ∈{0.1…1.0} in the JSON.)
 
-**Pre-fixed rule → R = 5** (smallest R with power ≥ 0.80 at the medium effect in BOTH contrasts, within ≤3h GPU: ~42 min lens + ~30 min judge ≈ 1.2 h).
+Pre-fixed rule → R = 5. **PI DECISION (2026-07-20): R = 10** — a deliberate **conservative deviation over the rule (5)**, justified by the **vignette×cell interaction variance not estimable from the mono-vignette calibration** (the rule's R is a floor; the confirmatory test stays valid since it uses the empirical SD of the 20 real per-vignette differences). At R=10 both contrasts have power ≥0.99 at δ=0.5 and ≥0.71/0.81 at δ=0.3 (C1/C2), giving headroom against interaction inflation.
 
-> **⚠ Delegate caveat for the freeze (not a decision):** the calibration has **one** vignette, so **vignette×cell interaction variance is unestimated** — the R from the rule is a **FLOOR**. The confirmatory test itself remains valid (it uses the empirical SD of the 20 real per-vignette differences, which captures whatever variance exists), but the a-priori R could be under-provisioned if interaction is non-trivial. The 3h budget comfortably fits **R=10 (~1.9 h)** or **R=15 (~2.6 h)**; the PI may elect a higher R at freeze for robustness. Delegate recommendation: **R=10**. The PI sets the final R.
+**N total = 4 cells × 20 vignettes × 10 reps = 800 runs.** GPU budget ≈ 800 × 6.3 s ≈ **84 min lens + ~30 min judge ≈ 1.9 h** (within the ≤3 h window; leaves margin for one mistral-sim auto-reload).
 
 ## 5. Hypotheses and α structure
 
@@ -73,4 +79,10 @@ Final R (PI at freeze; rule gives 5, delegate recommends 10); vignette provision
 
 ---
 
-*Generated at Stage P0. On freeze, the PI edits as needed, then commits and runs `git tag -a prereg-phase1-v1 -m "phase 1 preregistration freeze"` + push. The delegate does not tag.*
+**Resolved since first draft:** R = 10 (PI, dated §4); 20 `high` vignettes provided + saved with provenance; task instruction fixed to the behavioral one (English retired).
+
+**⚠ OPEN BLOCKER before tag/run:** wrapper (and likely all) materials must be transferred **byte-exact** so saved sha256 == source sha256 (L1 `1f9bb56…`, L4 `1100ec4f…`). The chat paste does not reproduce them; P1/P2 cannot run on non-byte-identical stimuli (they would diverge from the sealed R2 corpus). Delegate will re-save + re-verify on receipt of exact bytes.
+
+**Still open (later):** any exploratory (non-primary-band / all-layer) reporting; the analysis itself (separate later prompt — no aggregates or loadings computed during runs).
+
+*Generated at Stage P0. On freeze, the PI resolves the materials-fidelity blocker, edits as needed, then commits and runs `git tag -a prereg-phase1-v1 -m "phase 1 preregistration freeze"` + push. The delegate does not tag.*
