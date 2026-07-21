@@ -498,3 +498,20 @@ Structural note: all 20 reps hit the 200-token cap (no early EOS) → volume is 
 Note content: (1) C's ES drop is R1 on a real substrate property (Qwen single-token vocab poor in clinical Spanish); chasing "surviving" synonyms would invert concept→realization. (2) Registered prediction: given the documented cross-lingual phenomenon (workspace paper + our Tier 2 Italy/意大利, euros/欧元), the workspace is expected to realize anchor concepts in **EN tokens even under Spanish stimulus/generation**; A1 per-language breakdown in A/B1/B2 is the auxiliary ES-load diagnostic. (3) Residual under-capture covered by the sealed asymmetric-informativeness rule: a null in C is non-conclusive like any null.
 
 **Instrument CLOSED.** Seal chain: A0 `3689ac85` → A1 `9530aceb` → C-note `cfce4742`. Next session (outside this prompt): Phase 1 contrast design + preregistration. No condition-bearing data exists; seal integrity intact throughout.
+
+---
+
+## Phase 1 — Stage P0: power analysis + preregistration draft (NO GPU) — 2026-07-20
+
+**Draft, not frozen.** `PREREG_PHASE1.md` (repo root) produced at Stage P0; the PI reviews/edits then personally `git tag -a prereg-phase1-v1` (delegate does not tag). Stages P1/P2 gated on that tag + `PREREG_PHASE1.md` presence. Power script `phase0/scripts/phase1_p0_power.py`; result `phase0/data/phase1_p0_power.json` (gitignored).
+
+**Power from real condition-free variance** (20-rep nightly v12, under the preregistered band-17–26 generation-only mean-of-summed-operative-weights aggregation; RNG seed 0; Monte-Carlo, α=0.025, n=20 paired vignettes):
+
+| Set | mean | sd (rep) | CV | lang split |
+|---|---|---|---|---|
+| A | 0.1069 | 0.0698 | 0.65 | **EN 0.1066 / ES 0.0003** |
+| F | 0.0233 | 0.0182 | 0.78 | near-floor (no disclosure in v12) |
+
+Power at δ=0.5: C1 two-sided R=5→0.86; C2 one-sided R=5→0.92. **Pre-fixed rule → R=5** (~1.2 h GPU). **Caveat (flagged for freeze):** only 1 calibration vignette → vignette×cell interaction unestimated → R is a FLOOR; budget fits R=10 (~1.9 h) / R=15 (~2.6 h); delegate recommends R=10, PI decides.
+
+**Auxiliary diagnostic (registered in C-note, pre-data):** Set A load is ~99.7 % English (EN 0.1066 vs ES 0.0003) even on Spanish-generation v12 — consistent with the C-note prediction (EN realization under Spanish context). Measurement characterization, not a confirmatory result. No condition-bearing data created.
