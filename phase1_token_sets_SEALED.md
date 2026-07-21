@@ -350,3 +350,16 @@ survivors {'EN': 9, 'ES': 0, 'EN+ES': 2} · echo {'EN': 0, 'ES': 1, 'EN+ES': 2} 
 | real | 7951 | `real` | EN+ES | `real` | ECHO_excluded |
 | real | 1931 | ` real` | EN+ES | ` real` | ECHO_excluded |
 
+---
+
+# SEAL NOTE C-EN — Set C accepted English-only (dated 2026-07-20, pre-data)
+
+Records the PI's decision (2026-07-20) to accept **Set C operating English-only**, following the A1 mechanical finding that the Spanish DPDR-anchor lexicon is entirely multi-token under Qwen2.5 and drops per R1. This note documents an **acceptance and a registered prediction**; it changes **no** set content and **no** rule. **No A2 is issued.** No condition-bearing readout exists at note time.
+
+1. **Justification.** C's Spanish-lexicon drop is R1 behaving correctly on a real property of the substrate: Qwen2.5's single-token vocabulary is poor in clinical Spanish. Hunting alternative Spanish synonyms chosen because they "survive" R1 would **invert the concept->realization direction that R1 exists to protect** (realization follows from the tokenizer; it is never selected to hit a target). Accepting the drop keeps R1 intact.
+
+2. **Registered prediction (turns the acceptance into a testable bet).** Given the documented cross-lingual phenomenon — the workspace paper, and our own Stage 0.2 Tier 2 (`Italy`/`意大利`, `euros`/`欧元` read out for Spanish/Italian-referent content) — we predict the workspace will realize the anchor concepts in **English tokens even under Spanish stimulus and Spanish generation**. Set C (EN-only) is therefore expected to load on anchor-compatible material regardless of the surface language. **Auxiliary diagnostic:** the A1 per-language breakdown in the sets that do have ES operative tokens (A, B1, B2) indexes how much Spanish-token load exists in general — a low ES load there corroborates the English-realization expectation; a substantial ES load there would qualify it. If the intermediate layers load English despite Spanish context, that is the paper's cross-lingual finding replicated in this domain; if they load Spanish, it is a qualification of the paper. Either is a registered outcome, not a forking path.
+
+3. **Residual risk covered by a sealed rule.** Any under-capture from C being EN-only is covered by the already-sealed **asymmetric-informativeness rule (R5)**: a null in C is non-conclusive, like every null; only positive loadings inform. EN-only C therefore cannot produce a misleading false negative — it can only fail to detect, which the sealed rule already declares non-conclusive.
+
+**Instrument status: CLOSED.** No further set/rule changes this session. Next: Phase 1 contrast design and preregistration (outside this prompt).

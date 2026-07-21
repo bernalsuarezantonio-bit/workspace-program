@@ -483,3 +483,18 @@ Structural note: all 20 reps hit the 200-token cap (no early EOS) → volume is 
 | F | 9 | 0 | 2 (`experimental`) | 1 (` estudio`) | 3 |
 
 **A1 mechanical finding (factual, pre-data, PI to weigh):** Qwen2.5 tokenizes most Spanish clinical/anchor terms as multi-token → dropped per R1. ES operative tokens = common single-token subset (via leading-space forms). **Targeted goals met:** B1 recovers a Spanish echo stratum (`vida`/`historia` now excluded — resolving A0's B1 echo=0) and F's `estudio` is now echo-excluded. **Set C's Spanish lexicon drops entirely (0 ES tokens)** → C stays EN-only in practice; amendable pre-data (explicit EN-only C, or a future A2) if the PI wishes. R1 notes: illness/disease→enfermedad+dolencia collision benign (unit = set); self ES dropped (PI); weekend/commute ES multi-token drops accepted.
+
+---
+
+## Seal note C-EN — Set C accepted English-only (pre-data) — 2026-07-20
+
+**PI decision (2026-07-20):** Set C accepted **English-only, explicitly, no A2.** Dated note appended to `phase1_token_sets_SEALED.md` (documents acceptance + a registered prediction; changes no set content or rule). Composer: `phase0/scripts/phase1_compose_C_note.py` (run as a file). Commit `seal-note: Set C accepted EN-only (pre-data)`.
+
+| sha256 | of |
+|---|---|
+| `9530aceb8a982a2af931c4e513abb0bd3b2d5a62f6329bdcdec70394f2778f73` | pre-note (A1 state, unchanged) |
+| `cfce47427c24eeaf90bdc420191f35a7d54771de06bc5ecc6104c643e62a058f` | **post-note sealed file** (LF, .gitattributes-pinned) |
+
+Note content: (1) C's ES drop is R1 on a real substrate property (Qwen single-token vocab poor in clinical Spanish); chasing "surviving" synonyms would invert concept→realization. (2) Registered prediction: given the documented cross-lingual phenomenon (workspace paper + our Tier 2 Italy/意大利, euros/欧元), the workspace is expected to realize anchor concepts in **EN tokens even under Spanish stimulus/generation**; A1 per-language breakdown in A/B1/B2 is the auxiliary ES-load diagnostic. (3) Residual under-capture covered by the sealed asymmetric-informativeness rule: a null in C is non-conclusive like any null.
+
+**Instrument CLOSED.** Seal chain: A0 `3689ac85` → A1 `9530aceb` → C-note `cfce4742`. Next session (outside this prompt): Phase 1 contrast design + preregistration. No condition-bearing data exists; seal integrity intact throughout.
