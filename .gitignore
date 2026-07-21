@@ -41,3 +41,8 @@ hf_cache/
 
 # Phase 1 materials: read-only reification-gradient copies (provenance in PROVENANCE.md)
 phase1/materials/
+
+# Phase 1 raw readouts: heavy per-run J-lens dumps (regenerable). The lightweight
+# run/judge manifests + completeness_report under phase1/data/ ARE tracked (data commit).
+phase1/data/readouts/
+phase1/data/readouts_smoke/
