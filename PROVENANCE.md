@@ -529,3 +529,54 @@ Materials provided by PI, read-only from **reification-gradient @ `ee23c07288a31
 **Byte-identity verification (`build_phase1_materials.py`):**
 - **Between cells — VERIFIED ✓.** C1 differs only by the disclosure (appears in both payload positions per whole-file substitution — faithful, Stage 0.1b-confirmed); C2 differs only by the wrapper. Cell sha256 (v12): flagged×L1 `41748108…`, plausible×L1 `bf58c55e…`, incoherent×L4 `685521ca…`, incoherent×L1 `0ab62edc…`.
 - **⚠ Against source (sealed R2 corpus) — MISMATCH / BLOCKER.** Chat-pasted wrappers do NOT reproduce source sha256: L1 mine `46ca4e38…`(no-nl)/`11301399…`(nl) vs source `1f9bb56c…`; L4 mine `7c541488…`/`95b473d9…` vs source `1100ec4f…`. Paste is not byte-faithful. **P1/P2 are BLOCKED until materials are transferred byte-exact (saved sha256 == source sha256).** The sealed R2 operative lists were computed on the original bytes; running on divergent bytes would break the seal's echo guarantee. Awaiting byte-exact transfer (e.g. base64).
+
+---
+
+## Architecture change — single-machine canonical materials + byte-fidelity RESOLVED — 2026-07-21
+
+**Recorded:** 2026-07-21, `[host]` (RTX 5090). **Supersedes the 2026-07-20 byte-fidelity BLOCKER above.** PI decision: eliminate the two-machine dependency — the reification-gradient materials now live **in-repo, tracked, byte-exact**, so no second machine ever supplies them.
+
+### Read-only reference clone (hard rule: no writes, no push against it)
+
+| Item | Value |
+|---|---|
+| Repo | `github.com/bernalsuarezantonio-bit/reification-gradient` (private) |
+| Clone path | `C:\Users\EDITOR\Desktop\reification-gradient` — **sibling of** workspace-program, **outside** it |
+| Access | **new** repo-scoped SSH **deploy key**, ed25519, generated on this host; **read-only** (write access NOT granted on GitHub). `id_ed25519_reification_ro`; SSH alias `github-reification`; fingerprint `SHA256:kLGVcbo8IUPBFIa4BHpCGjehphX6kiy29CfYOkqY70M`. (The existing `id_ed25519_lab5090` is bound to workspace-program only — GitHub forbids reusing a deploy key across repos.) |
+| Discipline | Operative read-only: only `git clone`/`fetch`/`cat-file`/`rev-parse` and file reads were ever run against this clone. No commit, no write, no push. |
+
+### Verification (all GREEN before any copy)
+
+| Check | Expected | Observed | |
+|---|---|---|---|
+| `HEAD` | contains `ee23c07` | `ee23c07288a31eb19545c944e0662bd6a2d9d915` | ✓ |
+| tag `prereg-v1` (annotated) | resolves to `4b2464f` | tag obj `1e67b02e…` → `^{commit}` `4b2464fd3c016a9cd21c4d8e450cbe4fd8d057dd` | ✓ |
+| `L1_forum.md` sha256 | `1f9bb56c…` | `1f9bb56c…` (git blob, LF) | ✓ |
+| `L4_preprint.md` sha256 | `1100ec4f…` | `1100ec4f…` | ✓ |
+| `vignettes.yaml` sha256 | `59f37915…` | `59f37915…` | ✓ |
+| `disorders.yaml` sha256 | `91d0ccb7…` | `91d0ccb7…` | ✓ |
+
+**Line-ending note (critical).** The clone's `core.autocrlf=true` rewrites the *working tree* to CRLF on checkout, so working-tree sha256 differ. The sealed hashes are on **LF bytes** (iMac origin). All hashing/copying used the **committed git-blob bytes** (`git cat-file blob HEAD:…`), which are LF and match exactly.
+
+### Canonical copy (tracked) + regeneration
+
+- Four LF blobs copied to **tracked** `phase1/materials_canonical/` (`vignettes.yaml`, `disorders.yaml`, `legitimacy/L1_forum.md`, `legitimacy/L4_preprint.md`). Pinned `-text` in `.gitattributes` (`phase1/materials_canonical/** -text`) so autocrlf never renormalizes them; **staged-blob content re-verified** = source sha on both repos (workspace-program is also `autocrlf=true`).
+- `phase1/scripts/build_phase1_materials.py` rewritten **canonical-driven**: reads only the tracked YAMLs + wrapper files, mirrors the runner's `load()`/`wrap()`/`build_prompt()` verbatim (`src/run_experiment.py @ ee23c07`; wrappers read raw incl. trailing newline; vignette `text` folded scalar `.strip()`ed). Regenerates the 20 `high` vignettes + condition texts + wrapper working-copies into gitignored `phase1/materials/`. Manifest `STATUS: GREEN`.
+
+### 4-cell verifier (v12) — re-run, GREEN
+
+Byte-faithful cell sha256 (supersede the 2026-07-20 BLOCKER-era values, which were computed on non-faithful paste):
+
+```
+C1_DN_flagged_L1    6d5c87fb29805ce1…  (1211 chars)
+C1_DN_plausible_L1  84cb31ea09633853…  (1013 chars)
+C2_incoherent_L4    cc80e1dc4f9d3719…  (1016 chars)
+C2_incoherent_L1    a7a599dc50c05505…  ( 995 chars)
+```
+
+- **Canonical fidelity:** all 4 tracked files MATCH source sha256.
+- **v12** regenerated from YAML reproduces sealed pilot `32c78f5f…` ✓.
+- **C1 differs only by the disclosure** (`{{PAYLOAD}}` occurs **2×** in L1 — both substituted; `DN_flagged = DN_plausible payload + " " + disclosure`) ✓.
+- **C2 differs only by the wrapper** (identical instruction+CASO tail; `seeded(L4) ≠ seeded(L1)`) ✓.
+
+**Blocker CLEARED.** Stimuli are now byte-identical to the sealed R2 corpus source. No condition-bearing readout created; seal integrity intact. **STOP — staged for PI review + tag** (delegate does not tag). New tracked changes: `phase1/materials_canonical/**`, `.gitattributes`, `phase1/scripts/build_phase1_materials.py`, `PROVENANCE.md`, `PREREG_PHASE1.md`.

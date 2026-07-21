@@ -1,1 +1,6 @@
 phase1_token_sets_SEALED.md text eol=lf
+
+# Canonical Phase 1 materials copied byte-exact from reification-gradient @ ee23c07.
+# Treated as binary (-text) so autocrlf never renormalizes them: their sha256 are
+# the sealed R2 source hashes and MUST stay byte-identical on every platform.
+phase1/materials_canonical/** -text
