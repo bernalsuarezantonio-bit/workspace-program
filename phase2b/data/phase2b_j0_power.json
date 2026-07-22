@@ -1,0 +1,1007 @@
+{
+  "gate0": {
+    "recomputed": "dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1",
+    "expected": "dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1",
+    "match": true
+  },
+  "source_data_commit": "a715ce4",
+  "cell": "C1_DN_flagged_L1",
+  "dv1_diagnosis": {
+    "k_vignettes": 20,
+    "n_total": 200,
+    "rate": 1.0,
+    "n0": 10.0,
+    "icc_raw": NaN,
+    "icc": 0.99,
+    "per_vignette_rates": {
+      "v11": 1.0,
+      "v13": 1.0,
+      "v36": 1.0,
+      "v31": 1.0,
+      "v10": 1.0,
+      "v07": 1.0,
+      "v39": 1.0,
+      "v38": 1.0,
+      "v33": 1.0,
+      "v02": 1.0,
+      "v09": 1.0,
+      "v35": 1.0,
+      "v15": 1.0,
+      "v14": 1.0,
+      "v40": 1.0,
+      "v01": 1.0,
+      "v12": 1.0,
+      "v37": 1.0,
+      "v34": 1.0,
+      "v32": 1.0
+    }
+  },
+  "dv2_mention": {
+    "k_vignettes": 20,
+    "n_total": 200,
+    "rate": 0.46,
+    "n0": 10.0,
+    "icc_raw": -0.015471167369901572,
+    "icc": 0.0,
+    "per_vignette_rates": {
+      "v01": 0.4,
+      "v02": 0.3,
+      "v07": 0.7,
+      "v09": 0.5,
+      "v10": 0.4,
+      "v11": 0.6,
+      "v12": 0.6,
+      "v13": 0.5,
+      "v14": 0.5,
+      "v15": 0.6,
+      "v31": 0.3,
+      "v32": 0.6,
+      "v33": 0.5,
+      "v34": 0.3,
+      "v35": 0.3,
+      "v36": 0.3,
+      "v37": 0.5,
+      "v38": 0.7,
+      "v39": 0.2,
+      "v40": 0.4
+    }
+  },
+  "mention_regex": "inventad|estudio|no reconocid|fictici",
+  "estimator": "paired by vignette, B1_full - B0_none, one-sided; primary = sign-flip permutation, secondary = paired t (df=19)",
+  "alpha_per_dv": 0.025,
+  "n_vignettes": 20,
+  "n_sims": 20000,
+  "seed": 20260722,
+  "grid": [
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.05,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.0004,
+      "power_paired_t": 0.01785
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.05,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.00045,
+      "power_paired_t": 0.0178
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.05,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.0007,
+      "power_paired_t": 0.01925
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.05,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.00065,
+      "power_paired_t": 0.0182
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.1,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.01615,
+      "power_paired_t": 0.1376
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.1,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.0148,
+      "power_paired_t": 0.1364
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.1,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.01575,
+      "power_paired_t": 0.14035
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.1,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.01615,
+      "power_paired_t": 0.13355
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.15,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.0771,
+      "power_paired_t": 0.3539
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.15,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.0816,
+      "power_paired_t": 0.35525
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.15,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.07735,
+      "power_paired_t": 0.34805
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.15,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.0836,
+      "power_paired_t": 0.3507
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.2,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.2203,
+      "power_paired_t": 0.5794
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.2,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.22005,
+      "power_paired_t": 0.5802
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.2,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.2189,
+      "power_paired_t": 0.58205
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.9975,
+      "drop": 0.2,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.21975,
+      "power_paired_t": 0.5836
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.05,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.0012,
+      "power_paired_t": 0.0241
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.05,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.00075,
+      "power_paired_t": 0.0249
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.05,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.00115,
+      "power_paired_t": 0.0241
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.05,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.00065,
+      "power_paired_t": 0.02555
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.1,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.01755,
+      "power_paired_t": 0.1377
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.1,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.0188,
+      "power_paired_t": 0.14345
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.1,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.01845,
+      "power_paired_t": 0.1487
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.1,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.018,
+      "power_paired_t": 0.1413
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.15,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.08355,
+      "power_paired_t": 0.3389
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.15,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.0854,
+      "power_paired_t": 0.34115
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.15,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.08715,
+      "power_paired_t": 0.3442
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.15,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.0851,
+      "power_paired_t": 0.33625
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.2,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.21585,
+      "power_paired_t": 0.54985
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.2,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.2219,
+      "power_paired_t": 0.5519
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.2,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.2215,
+      "power_paired_t": 0.55095
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "drop": 0.2,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.2241,
+      "power_paired_t": 0.54415
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.05,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.0031,
+      "power_paired_t": 0.03695
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.05,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.0026,
+      "power_paired_t": 0.04
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.05,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.00245,
+      "power_paired_t": 0.03925
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.05,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.0035,
+      "power_paired_t": 0.0434
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.1,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.02525,
+      "power_paired_t": 0.14815
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.1,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.02555,
+      "power_paired_t": 0.1502
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.1,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.0262,
+      "power_paired_t": 0.15085
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.1,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.02655,
+      "power_paired_t": 0.15555
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.15,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.0967,
+      "power_paired_t": 0.31425
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.15,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.096,
+      "power_paired_t": 0.3112
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.15,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.0943,
+      "power_paired_t": 0.3099
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.15,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.0961,
+      "power_paired_t": 0.31485
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.2,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.2163,
+      "power_paired_t": 0.47795
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.2,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.2232,
+      "power_paired_t": 0.4819
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.2,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.2154,
+      "power_paired_t": 0.47725
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.97,
+      "drop": 0.2,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.22945,
+      "power_paired_t": 0.48035
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 5,
+      "icc": 0.0,
+      "power_permutation": 0.24335,
+      "power_paired_t": 0.27995
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 7,
+      "icc": 0.0,
+      "power_permutation": 0.3332,
+      "power_paired_t": 0.37445
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 10,
+      "icc": 0.0,
+      "power_permutation": 0.46775,
+      "power_paired_t": 0.49775
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 12,
+      "icc": 0.0,
+      "power_permutation": 0.54235,
+      "power_paired_t": 0.56845
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 5,
+      "icc": 0.0,
+      "power_permutation": 0.50855,
+      "power_paired_t": 0.5555
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 7,
+      "icc": 0.0,
+      "power_permutation": 0.65495,
+      "power_paired_t": 0.6959
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 10,
+      "icc": 0.0,
+      "power_permutation": 0.81605,
+      "power_paired_t": 0.837
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 12,
+      "icc": 0.0,
+      "power_permutation": 0.8814,
+      "power_paired_t": 0.8947
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 5,
+      "icc": 0.0,
+      "power_permutation": 0.7765,
+      "power_paired_t": 0.81275
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 7,
+      "icc": 0.0,
+      "power_permutation": 0.89765,
+      "power_paired_t": 0.9188
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 10,
+      "icc": 0.0,
+      "power_permutation": 0.97475,
+      "power_paired_t": 0.97945
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 12,
+      "icc": 0.0,
+      "power_permutation": 0.99,
+      "power_paired_t": 0.99155
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 5,
+      "icc": 0.0,
+      "power_permutation": 0.99245,
+      "power_paired_t": 0.99455
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 7,
+      "icc": 0.0,
+      "power_permutation": 0.99925,
+      "power_paired_t": 0.99965
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 10,
+      "icc": 0.0,
+      "power_permutation": 1.0,
+      "power_paired_t": 1.0
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 12,
+      "icc": 0.0,
+      "power_permutation": 1.0,
+      "power_paired_t": 1.0
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 5,
+      "icc": 0.05,
+      "power_permutation": 0.2183,
+      "power_paired_t": 0.24825
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 7,
+      "icc": 0.05,
+      "power_permutation": 0.2635,
+      "power_paired_t": 0.29545
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 10,
+      "icc": 0.05,
+      "power_permutation": 0.338,
+      "power_paired_t": 0.36055
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 12,
+      "icc": 0.05,
+      "power_permutation": 0.38275,
+      "power_paired_t": 0.4015
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 5,
+      "icc": 0.05,
+      "power_permutation": 0.4429,
+      "power_paired_t": 0.4858
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 7,
+      "icc": 0.05,
+      "power_permutation": 0.5438,
+      "power_paired_t": 0.58355
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 10,
+      "icc": 0.05,
+      "power_permutation": 0.66715,
+      "power_paired_t": 0.69035
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 12,
+      "icc": 0.05,
+      "power_permutation": 0.71605,
+      "power_paired_t": 0.73525
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 5,
+      "icc": 0.05,
+      "power_permutation": 0.7022,
+      "power_paired_t": 0.7399
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 7,
+      "icc": 0.05,
+      "power_permutation": 0.80845,
+      "power_paired_t": 0.83465
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 10,
+      "icc": 0.05,
+      "power_permutation": 0.9018,
+      "power_paired_t": 0.9115
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 12,
+      "icc": 0.05,
+      "power_permutation": 0.9283,
+      "power_paired_t": 0.9372
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 5,
+      "icc": 0.05,
+      "power_permutation": 0.9785,
+      "power_paired_t": 0.98465
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 7,
+      "icc": 0.05,
+      "power_permutation": 0.995,
+      "power_paired_t": 0.99655
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 10,
+      "icc": 0.05,
+      "power_permutation": 0.99955,
+      "power_paired_t": 0.9997
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 12,
+      "icc": 0.05,
+      "power_permutation": 0.99985,
+      "power_paired_t": 0.9999
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 5,
+      "icc": 0.15,
+      "power_permutation": 0.17115,
+      "power_paired_t": 0.19475
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 7,
+      "icc": 0.15,
+      "power_permutation": 0.1987,
+      "power_paired_t": 0.2213
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 10,
+      "icc": 0.15,
+      "power_permutation": 0.22905,
+      "power_paired_t": 0.2433
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.1,
+      "reps": 12,
+      "icc": 0.15,
+      "power_permutation": 0.2483,
+      "power_paired_t": 0.26125
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 5,
+      "icc": 0.15,
+      "power_permutation": 0.3513,
+      "power_paired_t": 0.38675
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 7,
+      "icc": 0.15,
+      "power_permutation": 0.40585,
+      "power_paired_t": 0.43335
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 10,
+      "icc": 0.15,
+      "power_permutation": 0.4649,
+      "power_paired_t": 0.484
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.15,
+      "reps": 12,
+      "icc": 0.15,
+      "power_permutation": 0.49405,
+      "power_paired_t": 0.51165
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 5,
+      "icc": 0.15,
+      "power_permutation": 0.57775,
+      "power_paired_t": 0.61475
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 7,
+      "icc": 0.15,
+      "power_permutation": 0.6584,
+      "power_paired_t": 0.6872
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 10,
+      "icc": 0.15,
+      "power_permutation": 0.7299,
+      "power_paired_t": 0.74605
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.2,
+      "reps": 12,
+      "icc": 0.15,
+      "power_permutation": 0.75155,
+      "power_paired_t": 0.7652
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 5,
+      "icc": 0.15,
+      "power_permutation": 0.93435,
+      "power_paired_t": 0.9471
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 7,
+      "icc": 0.15,
+      "power_permutation": 0.9655,
+      "power_paired_t": 0.9725
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 10,
+      "icc": 0.15,
+      "power_permutation": 0.98195,
+      "power_paired_t": 0.9843
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "drop": 0.3,
+      "reps": 12,
+      "icc": 0.15,
+      "power_permutation": 0.9877,
+      "power_paired_t": 0.98985
+    }
+  ],
+  "type_i": [
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "reps": 5,
+      "icc": 0.99,
+      "power_permutation": 0.0,
+      "power_paired_t": 0.0
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "reps": 7,
+      "icc": 0.99,
+      "power_permutation": 0.0,
+      "power_paired_t": 0.0
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "reps": 10,
+      "icc": 0.99,
+      "power_permutation": 0.0,
+      "power_paired_t": 0.0
+    },
+    {
+      "dv": "diagnosis",
+      "p0": 0.99,
+      "reps": 12,
+      "icc": 0.99,
+      "power_permutation": 0.0,
+      "power_paired_t": 0.0
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "reps": 5,
+      "icc": 0.0,
+      "power_permutation": 0.019,
+      "power_paired_t": 0.025875
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "reps": 7,
+      "icc": 0.0,
+      "power_permutation": 0.019375,
+      "power_paired_t": 0.024625
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "reps": 10,
+      "icc": 0.0,
+      "power_permutation": 0.01875,
+      "power_paired_t": 0.0215
+    },
+    {
+      "dv": "mention",
+      "p0": 0.46,
+      "reps": 12,
+      "icc": 0.0,
+      "power_permutation": 0.018875,
+      "power_paired_t": 0.02225
+    }
+  ]
+}

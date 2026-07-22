@@ -53,3 +53,10 @@ phase1/data/readouts_smoke/
 phase2/data/readouts/
 phase2/data/readouts_smoke/
 phase2/data/pilot_readouts/
+
+# Phase 2b raw readouts + transient run logs. Feasibility JSONs, manifests,
+# judge, mention flags and completeness reports ARE tracked.
+phase2b/data/readouts/
+phase2b/data/readouts_smoke/
+phase2b/data/_*.log
+phase2/data/_*.log

@@ -1,0 +1,554 @@
+{
+  "stage": "Phase 2b / Stage J0-b ablation effect",
+  "condition_free": true,
+  "note": "no conditions varied, no judge, no counting; the Set F readout here uses the INSTRUCT lens and is the circular estimator (correction b) -- feasibility evidence only, never a landing criterion",
+  "construction": "u_gain target, Tikhonov lambda=0.1, band 17-26, scale=1.0",
+  "landing": {
+    "lambda": 0.1,
+    "target": "u_gain",
+    "per_layer": {
+      "17": {
+        "cos": 0.8201183080673218,
+        "norm_Jv": 0.8559946417808533
+      },
+      "18": {
+        "cos": 0.8673270344734192,
+        "norm_Jv": 0.8215309977531433
+      },
+      "19": {
+        "cos": 0.9072135090827942,
+        "norm_Jv": 0.8413279056549072
+      },
+      "20": {
+        "cos": 0.9290051460266113,
+        "norm_Jv": 0.9067032337188721
+      },
+      "21": {
+        "cos": 0.9410959482192993,
+        "norm_Jv": 1.0013160705566406
+      },
+      "22": {
+        "cos": 0.9482056498527527,
+        "norm_Jv": 1.0705840587615967
+      },
+      "23": {
+        "cos": 0.9507169127464294,
+        "norm_Jv": 1.111542820930481
+      },
+      "24": {
+        "cos": 0.9518186450004578,
+        "norm_Jv": 1.100049376487732
+      },
+      "25": {
+        "cos": 0.9557904005050659,
+        "norm_Jv": 1.073730707168579
+      },
+      "26": {
+        "cos": 0.9615288972854614,
+        "norm_Jv": 1.0591753721237183
+      }
+    },
+    "band_min_cos": 0.8201183080673218
+  },
+  "decoding": "greedy",
+  "model_digest": "Qwen/Qwen2.5-7B-Instruct@a09a3545",
+  "lens_pt_sha256": "3b3ab44cd67c2ad1f26e9f66eb269db31289b6328585b0459a47e6d3814cba29",
+  "mention_regex": "inventad|estudio|no reconocid|fictici",
+  "summary": {
+    "n_vignettes": 20,
+    "identical_generations": 3,
+    "mean_F_base": 0.1738114410638809,
+    "mean_F_ablated": 0.04706795694306493,
+    "F_reduction_pct": 72.920104306732,
+    "mention_base": 12,
+    "mention_ablated": 10,
+    "malformed_ablated": 0,
+    "mean_set_vocab_share_base": 0.0,
+    "mean_set_vocab_share_ablated": 0.0,
+    "mean_lexical_entropy_base": 4.6176351383481995,
+    "mean_lexical_entropy_ablated": 4.626542962608283
+  },
+  "per_vignette": [
+    {
+      "vignette": "v01",
+      "prompt_tokens": 338,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 8,
+      "F_base": 0.05341943986713886,
+      "F_ablated": 0.0060537058860063555,
+      "mention_base": false,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.706223455327598,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.6739477915080725,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "2406f4b2ff12fe974adb69f8ae48e70a19ffd9392684dde2c0a19da33949fc99",
+      "gen_text_sha256_ablated": "8dedc9c916581b5205c41270bf20c3959dce2481e8b3a03d906c263f3a3c1347"
+    },
+    {
+      "vignette": "v02",
+      "prompt_tokens": 337,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 12,
+      "F_base": 0.10651303380727768,
+      "F_ablated": 0.01752512566745281,
+      "mention_base": true,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.637165319290148,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.575208195861726,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "b48ae96dea32bff3496141c17a3732bc377c495a823fafc6b4f282fd8220b4f5",
+      "gen_text_sha256_ablated": "a90616ccaebdf4b6f1a03dc5e75da6d4f5eb48bf48aa6f27cae370681aab4b38"
+    },
+    {
+      "vignette": "v07",
+      "prompt_tokens": 345,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 12,
+      "F_base": 0.07697471603751183,
+      "F_ablated": 0.005928077921271324,
+      "mention_base": true,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.549341130654971,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.532000190831101,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "9b612d7e04e25df24c25bbca0972eb736d00adf20d775477d223add1829c792b",
+      "gen_text_sha256_ablated": "fc1cd4aa93b1f6d55e7cf7b9ad63da67051d8b10447d16072f616b977094fa25"
+    },
+    {
+      "vignette": "v09",
+      "prompt_tokens": 343,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 71,
+      "F_base": 0.08101444765925407,
+      "F_ablated": 0.011989635974168777,
+      "mention_base": false,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.6072493141709,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.661928858448514,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "0706b6d00cbd247c1dd7c74e9a7724e0264a37dc50b22faafad478f8559c42ba",
+      "gen_text_sha256_ablated": "4fd75d6e232739e95ec60b1234dba12b315ae74d2528b3d43e7d2c616234b486"
+    },
+    {
+      "vignette": "v10",
+      "prompt_tokens": 340,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 12,
+      "F_base": 0.04959955997765064,
+      "F_ablated": 0.0058181531727314,
+      "mention_base": true,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.542755766194582,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.602227429744682,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "894171fa0628d57a9531eb5d4f3d4880cc215063febf4108e3eeabe0bcfb7f1e",
+      "gen_text_sha256_ablated": "a79d1a4b843bc77b4679de45d0270434ec48dbfb2c1898506ada1eef48d93424"
+    },
+    {
+      "vignette": "v11",
+      "prompt_tokens": 342,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 106,
+      "F_base": 0.35259500741958616,
+      "F_ablated": 0.09705951735377312,
+      "mention_base": true,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.612256759948097,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.587236638771188,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "588909acb761efec13cfeb320f96efad1f1b20deec6e9a9567d7363decb7e9b5",
+      "gen_text_sha256_ablated": "900e874f52a97e62475a7a9d5bfa0da506765388305a1430d59f9974011aa492"
+    },
+    {
+      "vignette": "v12",
+      "prompt_tokens": 351,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 12,
+      "F_base": 0.05588096864521504,
+      "F_ablated": 0.005975188314914703,
+      "mention_base": true,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.6067336660222615,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.649885976890029,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "a90d7391c948352bafc9169a6727e0820e8e3562b763c4f6451f26727f4b8d3d",
+      "gen_text_sha256_ablated": "a8be94b52210da62b37731c8953342d9b7bd2c7d92772848caa0b5cdc486d2c6"
+    },
+    {
+      "vignette": "v13",
+      "prompt_tokens": 343,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 12,
+      "F_base": 0.06213096678256989,
+      "F_ablated": 0.011522455886006356,
+      "mention_base": true,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.481430060985458,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.550001798987296,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "0cb3a86b22f561d5d9989a4e812804a6948238df37b4acbde3343a381ea565ab",
+      "gen_text_sha256_ablated": "14cf5a56d7bae91aaa88c76b19e77dc03254bbebb7df7c6149efe38abc86626a"
+    },
+    {
+      "vignette": "v14",
+      "prompt_tokens": 342,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 30,
+      "F_base": 0.06625314131379127,
+      "F_ablated": 0.03372330442070961,
+      "mention_base": false,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.7446153925868115,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.661638818081142,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "22085176cb83111d1ce7dbfea06ca3b45b3d589f37df3a79a5d6862b590a3920",
+      "gen_text_sha256_ablated": "633693f170f7992a7338060fda283d1d0f32475f62262cd64718f55702c783d1"
+    },
+    {
+      "vignette": "v15",
+      "prompt_tokens": 339,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 12,
+      "F_base": 0.09510442800819874,
+      "F_ablated": 0.005849560350179672,
+      "mention_base": true,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.561055211883156,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.5540216880926,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "9543f60ae4f027b003cbb924ee36fa91d0919258f4529b83df6c73cfbb752cef",
+      "gen_text_sha256_ablated": "7c23e623563377df367f13ad2193b64b9c6f0d15edcd5aafd50aa4a71db6dd12"
+    },
+    {
+      "vignette": "v31",
+      "prompt_tokens": 340,
+      "gen_tokens": 200,
+      "identical": true,
+      "divergence_at": null,
+      "F_base": 0.10257537737488746,
+      "F_ablated": 0.0328125,
+      "mention_base": false,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.605139012444977,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.605139012444977,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "027805437602e47526254f2ceae619a06d04109a85413e5df3e175cf8353cd9c",
+      "gen_text_sha256_ablated": "027805437602e47526254f2ceae619a06d04109a85413e5df3e175cf8353cd9c"
+    },
+    {
+      "vignette": "v32",
+      "prompt_tokens": 338,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 130,
+      "F_base": 0.07417163997888565,
+      "F_ablated": 0.011137719824910164,
+      "mention_base": false,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.523560247419408,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.537423191030608,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "f8dbc7f023efca76a66f6ce9261d9522b6354b2c27dbf4bd08401e90c60a80d7",
+      "gen_text_sha256_ablated": "e6d3994131b9194644c633c95b38d79e510411a1727ddf784f9a8fd3b65260d0"
+    },
+    {
+      "vignette": "v33",
+      "prompt_tokens": 341,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 46,
+      "F_base": 0.019817838817834853,
+      "F_ablated": 0.0,
+      "mention_base": false,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.698711330666438,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.641280035336219,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "bbdf513b6f5e35cc2f9c5f5d60df3ce2044b786c201053ad02c00d9d1d000a3a",
+      "gen_text_sha256_ablated": "30dbc46f0414ecbfc3c462b9c76840dd806697e12159cccfd4d4908e51aa88d8"
+    },
+    {
+      "vignette": "v34",
+      "prompt_tokens": 338,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 86,
+      "F_base": 0.07980527766048909,
+      "F_ablated": 0.0059948179870843886,
+      "mention_base": false,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.8098714615745735,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.759741693894089,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "51140997e616a34bb2425881c826667fbe941e9e41d1518683ce7f30283bf083",
+      "gen_text_sha256_ablated": "6bc9f1deda1c05ba72a6c6d2bc35fa994df490a7f07f936c561d6c7ae0fd9388"
+    },
+    {
+      "vignette": "v35",
+      "prompt_tokens": 340,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 12,
+      "F_base": 0.08030386380851269,
+      "F_ablated": 0.03260835409164429,
+      "mention_base": true,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.510237759699697,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.6968768299647,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "1bd3ba24404ccc95a8c1d7ed19b86fc958015c8c3c3c310c700295ff09eaaeaf",
+      "gen_text_sha256_ablated": "4ad3c20906e40c1e1a9f0a5b0760fae1fa5b311afcdbaeaf618fbfd022be65da"
+    },
+    {
+      "vignette": "v36",
+      "prompt_tokens": 331,
+      "gen_tokens": 200,
+      "identical": true,
+      "divergence_at": null,
+      "F_base": 0.06146356873214245,
+      "F_ablated": 0.005892745032906532,
+      "mention_base": false,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.6049791807972875,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.6049791807972875,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "bb1ad74a907817c55abb5474e72505057bdd147cac995b232fd855be98136266",
+      "gen_text_sha256_ablated": "bb1ad74a907817c55abb5474e72505057bdd147cac995b232fd855be98136266"
+    },
+    {
+      "vignette": "v37",
+      "prompt_tokens": 337,
+      "gen_tokens": 200,
+      "identical": true,
+      "divergence_at": null,
+      "F_base": 0.5867737114429474,
+      "F_ablated": 0.18922345899045467,
+      "mention_base": true,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.860235774765409,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.860235774765409,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "2af84969a9adbe88fda7c48e8fc1a57f990df91aa08ac78757bcd14910b70919",
+      "gen_text_sha256_ablated": "2af84969a9adbe88fda7c48e8fc1a57f990df91aa08ac78757bcd14910b70919"
+    },
+    {
+      "vignette": "v38",
+      "prompt_tokens": 340,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 12,
+      "F_base": 0.049674151465296745,
+      "F_ablated": 0.011231940612196923,
+      "mention_base": true,
+      "mention_ablated": false,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.533483854694346,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.558542735834184,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "93aba8296fdb757c84b78e12f99fca8e7c2678ec32b79117816387c7193530b7",
+      "gen_text_sha256_ablated": "57b248632c264d58cc5d5e39e29320732fbc3b86c2a8d7ecf2203388f2d63505"
+    },
+    {
+      "vignette": "v39",
+      "prompt_tokens": 337,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 43,
+      "F_base": 0.8436126083135604,
+      "F_ablated": 0.27563991844654084,
+      "mention_base": true,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.584911010540555,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.582986984512152,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "f5552a736002d3c630fa6acc251fba2339744c5106a1a21a0acacf61786ef279",
+      "gen_text_sha256_ablated": "514edd39702ed5032ec8427e25bebf33ec60278ed15a8c2a6b68a029d3ef9e87"
+    },
+    {
+      "vignette": "v40",
+      "prompt_tokens": 341,
+      "gen_tokens": 200,
+      "identical": false,
+      "divergence_at": 92,
+      "F_base": 0.5785450741648674,
+      "F_ablated": 0.17537295892834665,
+      "mention_base": true,
+      "mention_ablated": true,
+      "deg_base": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.57274705729731,
+        "n_tokens": 200
+      },
+      "deg_ablated": {
+        "set_vocab_share": 0.0,
+        "lexical_entropy": 4.6355564263696785,
+        "n_tokens": 200
+      },
+      "malformed_ablated": false,
+      "gen_text_sha256_base": "aa19b2f51921bd6f3271a2a042129c5f791ffc8e50e1f3185d93c6bb23acf077",
+      "gen_text_sha256_ablated": "54ece67ea38c0810703c65383eca1d2282cdedfead2d9daa4bd48e8075062ee1"
+    }
+  ],
+  "elapsed_seconds": 264.9
+}
