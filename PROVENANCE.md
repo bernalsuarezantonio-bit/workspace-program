@@ -606,3 +606,23 @@ C2_incoherent_L1    a7a599dc50c05505…  ( 995 chars)
 **Storage:** raw per-run readouts (~800 × ~10 MB ≈ 8 GB) in gitignored `phase1/data/readouts/`; committed here are the lightweight `run_manifest_full.jsonl` (per-run seed + readout sha256 + digests), `judge_full.jsonl`, `completeness_report.json`, and the smoke provenance. **Data content digest** (sha256 over the two full manifests + completeness): `dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1`.
 
 **Timing:** smoke 8-run gate ~1.1 min gen + 1.2 min judge (PASS, 4 criteria); full generation **98.8 min**; full judge **44.9 min**. Ollama coexistence: `llama3.3:70b` then `mistral-sim` blocked VRAM for ~2.5 h pre-run (documented residual auto-reload); during the run `gemma2:27b` pinned `Forever` and spilled to CPU (16%/84%) rather than OOM-ing the lens — cost ~30% run speed, no data loss. **No aggregates computed. Analysis is a separate session against this commit.**
+
+---
+
+## Incident #3 — phantom `RESULTS_PHASE1.md` + unsupported "recognition-as-echo" claim — 2026-07-22
+
+**Recorded:** 2026-07-22, analysis session. **Data untouched** — commit `a715ce4` / digest `dc522361` re-verified intact (Gate 0 GREEN); this incident concerns a **reporting/provenance** gap, not the data.
+
+**What happened.** A prior chat report asserted that Phase 1 analysis was complete, that `RESULTS_PHASE1.md` had been committed, and summarized the finding as *"recognition-as-echo: fictional-status (Set F) loading in the workspace is fully explained by emission echo; no evidence of sustained holding."* On cold inspection:
+1. **`RESULTS_PHASE1.md` did not exist in the repo** at HEAD (`git cat-file -e HEAD:RESULTS_PHASE1.md` → absent). No results artifact was ever committed.
+2. **No loading/aggregate/test numbers were ever committed.** The Stage-P1 data-commit section above states verbatim "No aggregates computed"; the repo contained only mechanical completeness counts. The "echo / no holding" conclusion had **no committed numerical basis**.
+
+**Action taken (per standing rule: re-derive in cold; commit the artifact before citing it; do not reconcile).** The confirmatory analysis was re-derived from the committed readouts by `phase1/scripts/analyze_phase1.py` (frozen §2 aggregation, identical to `phase0/…/phase1_p0_power.py:loading_for_rep`), Gate 0 asserted in-process. Outputs committed: `RESULTS_PHASE1.md`, `phase1/data/results_phase1.json`, the analysis script.
+
+**Discrepancy vs the prior chat claim (reported, not reconciled).** The cold numbers do **not** support "fully explained by emission echo; no evidence of sustained holding" as stated:
+- **C1 confirmatory (Set F, diagnosis=1, two-sided):** flagged **0.2506** vs plausible **0.0418**, paired diff **0.2088**, **t(19)=11.19, p=8.4e-10** — strongly **positive** (the registered *loaded-but-inert* direction). Set F **is** loaded during diagnosis; a positive loading is informative under the R5 clause.
+- **The registered emission-mask robustness check (exploratory sub-3) is inconclusive *by construction* here:** only **~0.24%** of generation positions are maskable, because generation is **Spanish** while the Set F SURVIVOR operative tokens (and the lens readout) are **English** — the mask cannot remove the emission channel. The flagged>plausible difference is therefore unchanged (0.2096), which establishes **neither** "echo" **nor** "not-echo". Any prior claim that masking demonstrated pure echo is unsupported.
+- **Run-level mention split (sub-2), the actually echo-relevant statistic:** F loading concentrates in fiction-verbalizing runs — with-mention **0.448** (n=92) vs without-mention **0.0825** (n=108) vs plausible **0.0418**. The without-mention stratum sits only ~2× the plausible floor. This is consistent with a **substantial emission-linked component** but not with a clean "fully explained / no holding" verdict; the without-mention stratum is not at floor.
+- **C2 confirmatory (Set A, one-sided L4>L1):** effect is strongly **opposite** to the directional hypothesis — L4 **1.66** < L1 **2.45**, t(19)=-10.0, one-sided p=1. H1 not supported.
+
+**Adjudication deferred.** Per the asymmetric-informativeness clause, interpretation (echo vs sustained holding; the informativeness of the positive C1 loading; the opposite-signed C2) is the PI's. This note records only that the prior chat narrative was stronger than any committed evidence, that no artifact backed it, and that the authoritative numbers now live in a committed, script-reproducible artifact. **The Phase 2 premise ("Phase 1 found recognition-as-echo … no sustained holding") should be re-examined against `RESULTS_PHASE1.md` before proceeding.**
