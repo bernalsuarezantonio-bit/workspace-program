@@ -1,0 +1,47 @@
+{
+  "stage": "Phase 2b J1 completeness",
+  "prereg_tag": "prereg-phase2b-v1",
+  "prereg_commit": "d9f037f",
+  "note": "mechanical integrity only -- no rates, no loadings, no DV computed",
+  "expected": {
+    "arms": 3,
+    "vignettes": 20,
+    "reps": 10,
+    "total": 600
+  },
+  "n_runs": 600,
+  "duplicates": 0,
+  "n_runs_with_problems": 0,
+  "problems": {},
+  "per_arm": {
+    "B0_none": 200,
+    "B1_full": 200,
+    "B3_rand": 200
+  },
+  "landing": {
+    "B0_none": {
+      "runs": 200,
+      "touched_gen_total": 0,
+      "touched_ro_total": 0
+    },
+    "B1_full": {
+      "runs": 200,
+      "touched_gen_total": 39800,
+      "touched_ro_total": 39800
+    },
+    "B3_rand": {
+      "runs": 200,
+      "touched_gen_total": 39800,
+      "touched_ro_total": 39800
+    }
+  },
+  "judge_total": 600,
+  "judge_ok": 600,
+  "judge_errors": 0,
+  "judge_error_trials": [],
+  "missing_judge": [],
+  "n_malformed_flagged": 0,
+  "malformed_trials": [],
+  "manifest_plus_judge_sha256": "aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592",
+  "COMPLETE": true
+}

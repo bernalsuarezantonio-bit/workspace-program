@@ -835,3 +835,36 @@ Gate 0 re-asserted. Real inputs: DV1 diagnosis **200/200 = 1.000** (ICC **not es
 **Correction to an earlier commit:** `abe4e8a` committed a **stale** `phase2b_j0_power.json` from a run whose DV1 ICC was NaN-clamped to 0.99 (ceiling cell) and which predated the 3-arm design. Superseded by the corrected, vectorized run committed here.
 
 **STOP POINT — awaiting PI reading and tag.** No open decisions; §9 holds only execution work. **The delegate does not tag.**
+
+---
+
+## Phase 2b — Stage J1: confirmatory data generation (DATA COMMIT) — 2026-07-22
+
+**Recorded:** 2026-07-22, `[host]` (RTX 5090). This is the **data commit** the Phase 2b analysis runs against. **No analysis here** — no rates, no loadings, no DV computed, no aggregation beyond mechanical integrity. Numbers below are integrity counts only.
+
+**Freeze→data chain:** tag **`prereg-phase2b-v1`** (tag obj `54efcfa0`) → commit **`d9f037f`** → `PREREG_PHASE2B.md`. Tag signed as the PI's own identity `Antonio Bernal <bernalsuarezantonio@gmail.com>` via per-command override, on explicit PI written instruction ("ejecuta en mi nombre, como acto de firma") — the same deliberate one-time waiver of the "delegate does not tag" rule used at `prereg-phase1-v1` and `prereg-phase2-v1`.
+
+**Gate chain, each committed before the step it enabled:** `Projector` verification ALL_PASS (`fb1b849`, 8 checks incl. V6 residual⊥v̂ max 9.7e-06, V7 `B0_none` exact no-op, V8 `B3_rand` non-degenerate) → smoke gate PASS 5/5 (`95cf74f`) → this confirmatory block.
+
+**Instrument:** `phase2b/scripts/run_confirmatory_2b.py` (generation + band-restricted readout), `judge_2b.py` (gemma2:27b, v1 blinded rubric, identical to Phase 1 apart from paths and `cell`→`arm`), `verify_completeness_2b.py`.
+
+| Item | Value |
+|---|---|
+| Arms | 3: `B0_none`, `B1_full`, `B3_rand` |
+| Design | 3 arms × 20 `high` vignettes × 10 reps = **600 runs** (200 per arm, verified) |
+| Cell construction | `DN_flagged × high × L1_forum`, byte-identical to Phase 1 `C1_DN_flagged_L1` |
+| Intervention | `h ← h − (h·d̂_l) d̂_l` per layer 17–26, generation positions `[P, total-1)`; `d̂ = v̂` (u_gain, λ=0.1) / `r̂` (`RAND_SEED 20260722`, fixed per layer) |
+| Model / lens | `Qwen/Qwen2.5-7B-Instruct@a09a3545` (fp16); lens `.pt` sha256 `3b3ab44c…` re-verified == Stage 0.2 pin |
+| Readouts | top-k=10, **layers 17–26 × generation positions only** (prereg §8); ~685 MB total |
+| Generation | `do_sample=True, temperature=0.7, top_p=0.8, top_k=20, repetition_penalty=1.05, max_new_tokens=200`; per-run seed `SEED_BASE=1000000+canonical_index`; execution order shuffled with `master_seed=20260722` |
+| Judge | `gemma2:27b` (temp 0, seed 0, `format=json`), v1 blinded rubric `e67e8e63…`, category aliased to "LA CATEGORÍA", 6 sealed keys |
+
+**Mechanical completeness (`phase2b/data/completeness_report.json`, COMPLETE=true):** **600 runs**, **0 duplicate trial_ids**, **0 runs with problems** (every readout present, sha256 re-verified == manifest, all top-k weights finite, all rows confined to band 17–26 and to the recorded readout window, model/lens digests consistent). **Judge: 600 judged, 0 parse errors.** **Malformed flagged (§7 mechanical, per run): 0.**
+
+**Ablation-landing counts (integrity, not a DV):** `B0_none` **0** positions touched in both the generation and readout passes; `B1_full` **39 800 = 39 800**; `B3_rand` **39 800 = 39 800`. Generate- and readout-pass counts agree exactly in every arm, i.e. what was measured is what the model computed.
+
+**Storage:** raw per-run readouts (685 MB) in gitignored `phase2b/data/readouts/`; committed here are `run_manifest_full.jsonl`, `judge_full.jsonl`, `completeness_report.json`, the smoke provenance, and the `Projector`/feasibility reports. **Data content digest** (sha256 over `run_manifest_full.jsonl ‖ judge_full.jsonl`): **`aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592`**.
+
+**Timing:** smoke 0.5 min gen + 0.9 min judge (PASS 5/5); full generation **58.0 min** (5.80 s/run); full judge **32.0 min**. Total **≈1.5 h**, inside the ≤3 h window and under the 2.05 h projection. GPU window clean throughout — no Ollama contention, nothing pinned by the delegate.
+
+**No aggregates computed. Neither DV was computed.** DV1 (diagnosis rate) and DV2 (ES textual mention, a regex over `generation_text`) are both left entirely to the analysis session, as is the §7 arm-level degradation gate. **Analysis is a SEPARATE session against this commit, Gate 0 first.**
