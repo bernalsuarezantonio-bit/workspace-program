@@ -1,0 +1,42 @@
+{
+  "stage": "Phase 2b J1 smoke adjudication",
+  "prereg_tag": "prereg-phase2b-v1",
+  "n_runs": 6,
+  "duplicates": 0,
+  "problems": {},
+  "judge_ok": 6,
+  "judge_errors": 0,
+  "missing_judge": [],
+  "per_arm": {
+    "B0_none": 2,
+    "B1_full": 2,
+    "B3_rand": 2
+  },
+  "landing": {
+    "B0_none": {
+      "runs": 2,
+      "touched_gen_total": 0,
+      "touched_ro_total": 0
+    },
+    "B1_full": {
+      "runs": 2,
+      "touched_gen_total": 398,
+      "touched_ro_total": 398
+    },
+    "B3_rand": {
+      "runs": 2,
+      "touched_gen_total": 398,
+      "touched_ro_total": 398
+    }
+  },
+  "projected_full_hours": 1.8333333333333333,
+  "budget_hours": 3.0,
+  "criteria": {
+    "C1_all_runs_present_and_intact": true,
+    "C2_expected_smoke_count": true,
+    "C3_judge_parses_all": true,
+    "C4_ablation_landed_per_arm": true,
+    "C5_projected_within_budget": true
+  },
+  "PASS": true
+}
