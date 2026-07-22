@@ -802,3 +802,36 @@ Artifact **`phase2/PILOT_CALIBRATION.md`**; data `phase2/data/pilot_calibration.
 **Preserved and reusable for Phase 2b** (nothing in the instrument failed; the *additive* manipulation failed): `phase2/scripts/intervene.py` (target `u_gain`, Tikhonov solve at λ=0.1, per-layer `k·ρ_l`, norm-matched control, §2 estimator, §7 detector) · the verified injecting hook incl. the **KV-cache generation asymmetry** (windows must be `[P, total-1)`) · `ρ_l` (layer-stable, sd ~1 % of mean, 6.1× growth across the band) · landing geometry (`cos_l` ≥ 0.8201, `‖J v̂‖` ≈ 0.98) · Stage I0's structural findings (degenerate-λ analysis, raw-logit units, 755.1 ceiling, saturation asymmetry).
 
 **Next:** Phase 2b Stage J0 — projection-ablation design; `PREREG_PHASE2B.md` draft + power, PI review and tag.
+
+---
+
+## Phase 2b — Stage J0: feasibility measured pre-freeze + PREREG draft — 2026-07-22
+
+**Artifacts:** `PREREG_PHASE2B.md` (DRAFT, not frozen) · `phase2b/scripts/{ablate,measure_projection,measure_ablation_effect,phase2b_j0_power}.py` · `phase2b/data/{projection_feasibility,ablation_effect,phase2b_j0_power}.json`.
+
+**Method correction applied from the Phase 2 closure:** the manipulation's magnitude was **measured before freezing**, condition-free. In Phase 2 a frozen parameter proved mis-scaled by two orders of magnitude and the pilot only found out after the tag.
+
+**J0-a (1.7 min GPU).** The residual component along `v̂` is **1.16–2.02 % of the norm** across the band (sd ≈ 0.001), so full projection removes only **~0.007–0.02 % of the residual norm**. Recorded as the honest headline — and as the reason norm is the wrong metric.
+
+**J0-b (4.4 min GPU, 20 `high` vignettes, greedy).** Full ablation cuts the Set F readout **0.1738 → 0.0471 (72.9 % reduction)** and changes greedy generation in **17/20** vignettes, with **zero degradation on every measure**: malformed 0/20, lexical entropy 4.618 → 4.627, Set F vocabulary share 0.00000 → 0.00000. A projection can only *remove* a component; it cannot force tokens, which was Phase 2's fatal mode (lesson #6). ES mention 12 → 10 of 20 (one greedy rep each — directional only, no power). **The 72.9 % uses the INSTRUCT lens, i.e. the circular estimator correction (b) warns about; it is feasibility evidence only, never a landing criterion.**
+
+### 3/20 vs 17/20 — clarified at PI review (no discrepancy)
+
+**One statistic, two framings.** `identical_generations = 3` counts vignettes whose ablated greedy token stream is identical to the un-ablated one — **v31, v36, v37**, exactly the three whose recorded `divergence_at` is `null`. **17 = 20 − 3** is its complement. **The correct headline is: ablation changes generation in 17 of 20 vignettes.** The first J0-b run was an ad-hoc heredoc; per the standing rule it was rewritten as the committed `phase2b/scripts/measure_ablation_effect.py` and **re-run, reproducing the original exactly** (3/20 identical, 72.9 %, entropy 4.618 → 4.627, mention 12 → 10). Every J0-b number therefore comes from committed code. Answer recorded in `PREREG_PHASE2B.md` §0.
+
+### PI decisions (2026-07-22)
+
+1. **`B2_half` REMOVED; `B3_rand` REINSTATED** as a specificity control — a random unit direction per layer (`RAND_SEED = 20260722`, fixed across all runs), **same rank-1 projection operation**, so it differs from `B1_full` only in *which* direction is removed. It bounds *"any rank-1 ablation at ten layers moves this DV"* — the live confound for an ablation design, and one no degradation gate can address.
+2. **Landing head = untied `model.embed_tokens`** (verified at I0: `tie_word_embeddings = false`, so it is a genuinely different matrix from the `lm_head` rows that built `v̂`) — zero cost, no download. **Base `Qwen2.5-7B` deferred** to §9 as optional post-hoc robustness; not on the critical path.
+
+### Power refitted to 3 arms
+
+Gate 0 re-asserted. Real inputs: DV1 diagnosis **200/200 = 1.000** (ICC **not estimable** at ceiling — MSB = MSW = 0; proxied by DV2's ICC, a binary outcome on the **same cell and same 200 runs**); DV2 mention **92/200 = 0.460, ICC 0.0000** (raw −0.0155, estimable), recomputed per vignette with the registered A1 regex and reproducing the committed count exactly.
+
+**Four registered tests** (2 DVs × {intervention `B1−B0`, specificity `B1−B3`}) → **Bonferroni α = 0.0125**. **Pre-fixed rule → R = 10**: smallest R reaching ≥0.80 at α = 0.0125, ICC = 0.05, γ = 0 on **both** contrasts for both DVs at their smallest registered target effect (DV1 D = 0.10, DV2 D = 0.20). DV1 clears at R = 7 (0.802/0.802); **DV2 binds** — R = 7 gives 0.716/0.688, R = 10 gives **0.829/0.818**. **N = 600 runs ≈ 2.05 h.** Type-I at α = 0.0125: diagnosis 0.0000–0.0014, mention 0.0085–0.0112 — conservative throughout.
+
+**Registered honesty note:** specificity power collapses as the random direction reproduces more of the effect (γ = 0/0.25/0.5 → DV1 0.884/0.470/0.148; DV2 0.818/0.564/0.273), so a non-significant S-test is **weak** evidence of non-specificity and is registered as such rather than read as "generic" after the fact.
+
+**Correction to an earlier commit:** `abe4e8a` committed a **stale** `phase2b_j0_power.json` from a run whose DV1 ICC was NaN-clamped to 0.99 (ceiling cell) and which predated the 3-arm design. Superseded by the corrected, vectorized run committed here.
+
+**STOP POINT — awaiting PI reading and tag.** No open decisions; §9 holds only execution work. **The delegate does not tag.**

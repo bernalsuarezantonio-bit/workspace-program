@@ -29,12 +29,15 @@ Between-vignette sd ≈ 0.001 at every layer. **Full projection removes only ~0.
 | quantity | no ablation | full ablation |
 |---|---|---|
 | Set F readout (teacher-forced on the same sequence) | **0.1738** | **0.0471** — a **72.9 % reduction** |
-| greedy generation identical to un-ablated | — | **3 / 20** (17 diverge) |
+| greedy generation identical to un-ablated | — | **3 / 20** (v31, v36, v37) |
+| greedy generation CHANGED by ablation | — | **17 / 20** (= 20 − 3) |
 | malformed (§7 detector) | 0 | **0 / 20** |
 | lexical entropy (nats) | 4.618 | **4.627** |
 | Set F vocabulary share of output | 0.00000 | **0.00000** |
 
 **This is a viable manipulation, and it is the mirror image of Phase 2's failure.** The ablation removes ~73 % of the F readout, changes generation in 17 of 20 vignettes, and produces **zero degradation on every measure** — entropy unchanged to three digits, no vocabulary flooding, no malformed runs. A projection *can only remove* a component; it cannot force tokens into the output, which was Phase 2's fatal mode (lesson #6).
+
+**Note on 3/20 vs 17/20 (raised at review).** These are **one statistic stated two ways**, not two measurements: `identical_generations = 3` counts vignettes whose ablated greedy token stream is identical to the un-ablated one (v31, v36, v37 — exactly the three whose recorded `divergence_at` is `null`); 17 = 20 − 3 is its complement. The correct headline is **the ablation changes generation in 17 of 20 vignettes.** The committed script `phase2b/scripts/measure_ablation_effect.py` **reproduces the original ad-hoc run exactly** — 3/20 identical, 72.9 % readout reduction, entropy 4.618 → 4.627, mention 12 → 10 — so every number in this section comes from committed code.
 
 **Registered caveat:** the 72.9 % figure is measured with the **instruct-lens readout**, which is the circular estimator correction (b) warns about. It is reported here as feasibility evidence, **not** as the landing criterion. The registered landing check is §6.
 
@@ -54,11 +57,13 @@ Three arms, **within-item**: all 20 `high` vignettes in all arms, analysed paire
 |---|---|---|
 | `B0_none` | none | baseline; replicates `C1_DN_flagged_L1` |
 | `B1_full` | `h ← h − (h·v̂_l) v̂_l` | **full ablation** — primary |
-| `B2_half` | `h ← h − 0.5 (h·v̂_l) v̂_l` | **50 % partial** — registered sensitivity |
+| `B3_rand` | `h ← h − (h·r̂_l) r̂_l` | **random-direction projection** — specificity control |
+
+`r̂_l` is a fixed random unit vector in `R^d_model`, drawn **once per layer** from a recorded seed (`RAND_SEED = 20260722`) and identical across every run, vignette and rep — a fixed alternative direction, not per-run noise. `B3_rand` applies the **same rank-1 projection operation**, so it differs from `B1_full` only in *which* direction is removed. **PI decision (2026-07-22): `B2_half` is removed and `B3_rand` reinstated** — with the effect of ablation now the question, specificity is worth more than a graded-dose sensitivity arm.
 
 Applied **per layer, independently, at each of layers 17–26**, at **generation positions** `[P, total-1)` only (never positions 0–15, R4). **Generation:** identical to Phase 1 — `do_sample=True, temperature=0.7, top_p=0.8, top_k=20, repetition_penalty=1.05, max_new_tokens=200`; per-run seed recorded (`SEED_BASE = 1000000 + canonical_index`), execution order shuffled with `master_seed = 20260722`.
 
-**No random-direction control arm is included, and this is deliberate.** In Phase 2 the norm-matched random arm was the guard against a *generic perturbation* confound, which existed because the addition injected large norm. Here full ablation removes ~0.01 % of the norm and J0-b shows zero degradation on every measure, so the generic-perturbation alternative is not live. The degradation gate (§7) is the standing guard, and if it fires the arm is flagged. *A random-direction ablation control is available as a PI option at freeze; the delegate's reading is that it would cost a third of the budget to bound a confound J0-b has already measured at zero.*
+**Why the control is a random *projection* and not a norm-matched addition.** `B3_rand` removes a rank-1 component of the same kind and at the same layers; it therefore bounds the alternative *"any rank-1 ablation at ten layers moves this DV"*, which is the live confound for an ablation design. It is not aimed at generic-perturbation degradation — J0-b measures that at zero — but at **direction specificity**, which no degradation gate can establish.
 
 ## 3. Dependent variables — two, registered separately
 
@@ -70,44 +75,87 @@ Using A1's own split as a DV is the point: A1 showed F loading survives *without
 
 ## 4. Power and R
 
-*(filled from `phase2b/scripts/phase2b_j0_power.py` → `phase2b/data/phase2b_j0_power.json`; no GPU, no new data; Gate 0 on the Phase 1 digest `dc522361…` re-asserted in-process)*
+Script `phase2b/scripts/phase2b_j0_power.py` → `phase2b/data/phase2b_j0_power.json`. **NO GPU, no new data**; Gate 0 on the Phase 1 digest `dc522361…` re-asserted in-process. 8 000 sims/cell, 1 000 sign-flips, seed 20260722.
 
-**PLACEHOLDER — see §4 tables below.**
+**Real inputs — both DVs anchored on committed Phase 1 rates, not on assumptions:**
+
+| DV | baseline | between-vignette ICC |
+|---|---|---|
+| DV1 diagnosis | 200/200 = **1.000** | **not estimable** at ceiling (MSB = MSW = 0) |
+| DV2 mention | 92/200 = **0.460** | **0.0000** (raw −0.0155), **estimable** |
+
+**ICC for DV1 uses DV2's as a proxy** — a binary outcome on the *same cell and the same 200 runs*, a tighter proxy than Phase 2 could use (it had to borrow a different cell). As in Phase 2, an exact 1.000 is not a usable simulation parameter, so DV1 power is reported at conservative baselines; the tables below use **p₀ = 0.99**. Power is reported at **ICC ∈ {0, 0.05, 0.15}** because the estimate is 0 with only 20 clusters of ~10 draws and cannot rule out modest clustering.
+
+**Four registered tests** (two DVs × two contrasts, §5) → **Bonferroni α = 0.05/4 = 0.0125**. All tables at α = 0.0125, γ = 0 (a fully specific effect); `intervention / specificity` power.
+
+**DV1 diagnosis** (p₀ = 0.99; `D` = drop in P(diagnosis)):
+
+| ICC | R | D=0.05 | D=0.10 | D=0.15 | D=0.20 |
+|---|---|---|---|---|---|
+| 0.00 | 7 | 0.315 / 0.320 | 0.877 / 0.879 | 0.990 / 0.992 | 1.000 / 1.000 |
+| 0.00 | **10** | 0.532 / 0.528 | **0.964 / 0.976** | 0.999 / 1.000 | 1.000 / 1.000 |
+| 0.05 | 7 | 0.269 / 0.262 | 0.802 / 0.802 | 0.970 / 0.975 | 0.998 / 0.998 |
+| 0.05 | **10** | 0.384 / 0.413 | **0.880 / 0.884** | 0.993 / 0.992 | 1.000 / 1.000 |
+| 0.15 | **10** | 0.247 / 0.232 | **0.737 / 0.714** | 0.934 / 0.929 | 0.987 / 0.988 |
+
+**DV2 mention** (p₀ = 0.460):
+
+| ICC | R | D=0.10 | D=0.15 | D=0.20 | D=0.30 |
+|---|---|---|---|---|---|
+| 0.00 | 7 | 0.224 / 0.234 | 0.520 / 0.511 | 0.825 / 0.828 | 0.998 / 0.998 |
+| 0.00 | **10** | 0.317 / 0.327 | 0.718 / 0.720 | **0.942 / 0.936** | 1.000 / 1.000 |
+| 0.05 | 7 | 0.175 / 0.185 | 0.405 / 0.422 | 0.716 / 0.688 | 0.983 / 0.986 |
+| 0.05 | **10** | 0.240 / 0.237 | 0.527 / 0.520 | **0.829 / 0.818** | 0.998 / 0.998 |
+| 0.15 | **10** | 0.147 / 0.143 | 0.335 / 0.331 | **0.599 / 0.577** | 0.962 / 0.959 |
+
+**Type-I under a true null** (all arms at p₀), α = 0.0125: diagnosis **0.0000–0.0014**, mention **0.0085–0.0112** — at or below nominal everywhere. The near-ceiling discrete DV makes the permutation test conservative, never anti-conservative; recorded as a property of the test.
+
+**Pre-fixed rule → R = 10.** *Rule as written: the smallest R in the grid reaching ≥0.80 power at α = 0.0125, ICC = 0.05, γ = 0, on **both** contrasts, for both DVs at their smallest registered target effect — DV1 D = 0.10 and DV2 D = 0.20.* DV1 already clears at R = 7 (0.802/0.802); **DV2 is binding** — R = 7 gives 0.716/0.688, R = 10 gives **0.829/0.818**. R = 10 satisfies the rule; R = 12 buys only 0.865/0.854 on the binding cell for 24 % more GPU.
+
+**N = 3 arms × 20 vignettes × 10 reps = 600 runs.** GPU ≈ 600 × 12.3 s ≈ **2.05 h** (Phase 1 measured rates: 7.41 s generation + 3.37 s judge + ~1.5 s readout), inside the ≤3 h window with headroom for one contention event. Readouts stay restricted to layers 17–26 × generation positions.
+
+**Registered honesty note on the specificity contrast.** Its power collapses as the random direction reproduces more of the effect: at R = 10, ICC = 0.05, DV1 D = 0.10 the specificity power is **0.884 / 0.470 / 0.148** at γ = 0 / 0.25 / 0.5, and DV2 D = 0.20 gives **0.818 / 0.564 / 0.273**. **A non-significant specificity test is therefore weak evidence of non-specificity** unless the intervention effect is large, and it is registered here as such rather than being read as "the effect is generic" after the fact.
 
 ## 5. Hypotheses, estimators, α structure
 
-**Two registered tests, Bonferroni-split from 0.05 → α = 0.025 each.** Both compare `B1_full` against `B0_none`, paired by vignette (n = 20), one-sided.
+**Four registered tests** — two DVs × two contrasts — **Bonferroni-split from 0.05 → α = 0.0125 each.** All paired by vignette (n = 20), all one-sided.
 
-- **T1 (DV1, diagnosis):** H1 = ablation **reduces** the diagnosis rate. One-sided because the Phase 1 baseline is at ceiling and the rate cannot rise.
-- **T2 (DV2, mention):** H1 = ablation **reduces** the ES mention rate.
+| test | DV | contrast | H1 |
+|---|---|---|---|
+| **T1** | diagnosis | `B1_full − B0_none` | ablation **reduces** the diagnosis rate |
+| **T2** | mention | `B1_full − B0_none` | ablation **reduces** the ES mention rate |
+| **S1** | diagnosis | `B1_full − B3_rand` | the reduction is **specific to the F direction** |
+| **S2** | mention | `B1_full − B3_rand` | the reduction is **specific to the F direction** |
 
-**Estimator (both):** per-vignette rate difference `d_v = p_v(B1) − p_v(B0)`; **primary = one-sided sign-flip permutation** over the 20 differences (4 000 flips, seed recorded); **secondary, reported not adjudicating = paired one-sided t** (df = 19, crit −2.093). Permutation is primary for the same reason as in Phase 2: near a ceiling the per-vignette differences are zero-inflated and non-normal, and sign-flip is valid under symmetry and conservative here (§4 type-I).
+T1/T2 are one-sided because Phase 1's baseline sits at ceiling on DV1 and because the registered question is whether *removing* the representation *removes* the channel; a rise in either DV would be reported as an unregistered observation, not tested.
 
-**Registered joint reading — fixed here so it cannot be selected afterwards:**
+**Estimator (all four):** per-vignette rate difference; **primary = one-sided sign-flip permutation** over the 20 differences (4 000 flips, seed recorded); **secondary, reported not adjudicating = paired one-sided t** (df = 19, crit −2.093). Permutation is primary because near a ceiling the per-vignette differences are zero-inflated and non-normal; §4 shows it is conservative here.
+
+**Registered joint reading — fixed here so it cannot be selected afterwards.** The T-row gives the effect, the S-row licenses attributing it to the F direction.
 
 | T1 (diagnosis) | T2 (mention) | registered reading |
 |---|---|---|
-| not sig. | not sig. | **Epiphenomenal sustainment.** The F representation can be removed without either channel moving — it is carried but does no work in this task. |
-| not sig. | **sig.** | **Dissociated verbal channel.** The representation drives whether the model *says* the category is invented, but not whether it diagnoses — the Phase 1 decoupling localized to the verbal channel. |
+| not sig. | not sig. | **Epiphenomenal sustainment.** The F direction can be removed without either channel moving — it is carried but does no work in this task. |
+| not sig. | **sig.** | **Dissociated verbal channel.** The direction drives whether the model *says* the category is invented, but not whether it diagnoses — the Phase 1 decoupling localized to the verbal channel. |
 | **sig.** | **sig.** | **Common upstream dependence.** Both channels draw on the F direction; the Phase 1 decoupling is not a decoupling at the representational source. |
-| **sig.** | not sig. | Behaviour depends on the direction while verbalization does not — reported, adjudication deferred; the §7 gate is the first thing to check. |
+| **sig.** | not sig. | Behaviour depends on the direction while verbalization does not — reported, adjudication deferred; the §7 gate is checked first. |
 
-**Both outcomes are registered as informative**, per the PI. A null on both is *not* filed as "no result": it is the epiphenomenal reading, reported with the achieved ablation depth (§6) attached, since a null after removing 73 % of the readout is a much stronger claim than a null after removing 5 %.
+**Specificity qualifier, applied to every cell above.** A significant T is reported as **F-direction-specific** only if its matching S is also significant; if T is significant and S is not, the finding is reported as *"the ablation moves this channel, but specificity to the F direction is not established at this power"* — with §4's γ table attached, since S's power collapses when a random direction reproduces part of the effect.
 
-**`B2_half` — registered sensitivity, reported not tested.** Per-arm rates on both DVs, plus a monotonicity check (`B0 ≥ B2 ≥ B1` or its reverse). No α is spent. Its registered role: if a significant T1/T2 effect at full ablation is **not** accompanied by an intermediate `B2_half`, that is evidence of a threshold rather than a graded dependence, and is reported as such.
+**Both outcomes are registered as informative**, per the PI. A null on T1 and T2 is **not** filed as "no result": it is the epiphenomenal reading, reported with the **achieved ablation depth** (§6) attached — a null after removing most of the readout is a far stronger claim than a null after removing little.
 
 **Asymmetric-informativeness clause (from the seal, R5), inherited:** *the J-lens captures the workspace incompletely; null loadings are non-conclusive, only positive loadings inform.* It governs the §6 readout, not the behavioural DVs, whose nulls are interpreted per the table above.
 
-## 6. Landing verification — on the base model (correction (b), binding)
+## 6. Landing verification — on the untied input-embedding head (correction (b), binding)
 
-**The primary landing check is the semi-independent base-model readout**, per the PI's registered correction: verifying an intervention with an estimator computed from the same unembedding the intervention targets is circular and cannot separate "the representation moved" from "these tokens were forced".
+**The landing check must not be computed from the same unembedding the intervention targets.** `v̂` is built from `lm_head.weight` rows and `model.norm.weight`, so an `lm_head`-based readout cannot separate "the representation moved" from "these coordinates were edited". **PI decision (2026-07-22): the primary landing head is `model.embed_tokens`.**
 
-1. **PRIMARY — base-model readout.** Set F loading recomputed on the same captured residuals using the **base `Qwen/Qwen2.5-7B`** unembedding + final norm as the readout head. Shares the residual, not the readout head. **Prerequisite, flagged: this model is not in `phase0/data/hf_cache` and must be fetched (~15 GB) and pinned by revision before J1.** Reported per arm as the achieved ablation depth.
-2. **Immediately-available alternative, if the PI declines the download.** This checkpoint has `tie_word_embeddings = false`, so `model.embed_tokens.weight` is a genuinely different matrix from `lm_head.weight` (from which `u_gain` was built). An input-embedding readout is therefore semi-independent in the required sense, at zero cost. Weaker than a separate model; recorded as the fallback, **PI chooses at freeze.**
-3. **Mechanical descriptive only — instruct-lens readout.** The §2 estimator, reported per arm **explicitly labelled circular**, never used as the landing criterion. J0-b's 72.9 % belongs to this category.
-4. **Natural benchmark.** `B0_none` must reproduce the Phase 1 `C1_DN_flagged_L1` numbers — diagnosis ≈ 1.000 and mention ≈ 0.46. A failure here invalidates the run, not the hypothesis.
+1. **PRIMARY — untied input-embedding readout.** This checkpoint has `tie_word_embeddings = false` (verified at Stage I0), so `model.embed_tokens.weight` is a **genuinely different matrix** from `lm_head.weight` — it shares the residual but not the readout head, at **zero additional cost and no download**. Set F loading recomputed per arm on the captured residuals with this head; reported per arm as the **achieved ablation depth**, which every §5 null is reported against.
+2. **Mechanical descriptive only — instruct-lens readout.** The §2 estimator, reported per arm **explicitly labelled circular**, never a landing criterion. J0-b's 72.9 % belongs to this category.
+3. **Natural benchmark.** `B0_none` must reproduce the Phase 1 `C1_DN_flagged_L1` numbers — diagnosis ≈ 1.000 and mention ≈ 0.460. A failure here invalidates the run, not the hypothesis.
+4. **`B3_rand` landing profile.** The same readout applied to the random arm, reported: it quantifies how much F readout a same-rank ablation in an arbitrary direction removes, and is the readout-side companion to the S-tests.
 
-**Registered caveat, binding on the write-up:** `cos_l` ≥ 0.8201 < 1 means `v̂` is an approximation of the F readout direction, so the ablation necessarily removes some off-target component and leaves some on-target component. The binding layer is **L17**, the shallow edge of the band.
+**Registered caveat, binding on the write-up:** `cos_l` ≥ 0.8201 < 1 means `v̂` approximates the F readout direction, so the ablation necessarily removes some off-target component and leaves some on-target component. The binding layer is **L17**, the shallow edge of the band.
 
 ## 7. Degradation gate — extended per lesson #6
 
@@ -125,17 +173,18 @@ Phase 2's §7 detector (zero tokens / non-UTF-8 / ≤10-token n-gram >50 %) **pa
 - **Exclusions** (inherited): judge parse failures excluded from DV1 and counted; any run failing digest re-verification discarded and re-run; all exclusions logged, N reported exactly per arm.
 - **No optional stopping.** All runs are generated before any rate is computed. **No aggregates during generation** — analysis is a separate session against the data commit.
 - **Storage:** readouts restricted to layers 17–26 × generation positions. Committed: run manifest (per-run seed, sha256, digests, achieved ablation depth), judge output, mention flags, degradation report, completeness report, and a data content digest.
-- **Order of operations (gates, in order):** PI tag → base-model pin fetched + verified (or fallback chosen) → injecting/projecting hook verification re-run for the `Projector` → smoke gate → confirmatory → separate analysis session.
+- **Order of operations (gates, in order):** PI tag → `Projector` verification ALL_PASS (covering both `B1_full` and `B3_rand`) → smoke gate → confirmatory 600 → separate analysis session. **No model download is on the critical path** (§6.1 uses a matrix already in the checkpoint).
 
 ## 9. Open at prereg / not fixed here
 
-- **§6 landing head** — base `Qwen2.5-7B` download (~15 GB) vs the untied input-embedding fallback. **PI.**
-- **Random-direction ablation control** — omitted with reasons (§2); **PI may reinstate.**
-- Final **R** (§4 gives the rule and the grid).
-- The `Projector` hook's own verification run (mechanics are shared with the verified `Injector`, but the projection path is new code and gets its own ALL_PASS gate before the smoke gate).
-- Any exploratory reporting: per-layer ablation profiles, per-language breakdown, F loading in the ablated arms, the relationship between per-run mention and per-run diagnosis.
+- **Base-model robustness readout (optional).** Repeating §6's landing check with the **base `Qwen/Qwen2.5-7B`** unembedding would be a fully independent head. **PI decision: not now — no ~15 GB download.** Registered here as optional post-hoc robustness; if it is ever run it is reported as robustness, never as the registered landing criterion, which is §6.1.
+- Final **R** confirmation (§4's rule gives **R = 10**; grid and budget tabulated).
+- The `Projector`'s own verification run — mechanics are shared with the `Injector` verified ALL_PASS at `5453270`, but the projection path is new code and gets its own ALL_PASS gate before the smoke gate. The `B3_rand` arm is covered by the same gate.
+- Any exploratory reporting: per-layer ablation profiles, per-language breakdown, the per-run relationship between mention and diagnosis (the run-level 2×2 that the two DVs make available for the first time).
 - The analysis itself — a separate later session against the data commit.
+
+**Resolved (PI, 2026-07-22):** `B2_half` removed, **`B3_rand` reinstated** as the specificity control (§2) · landing head = **untied `embed_tokens`**, base model deferred (§6) · power and budget refitted to **3 arms**, rule → **R = 10, 600 runs, ≈2.05 h** (§4) · the 3/20 vs 17/20 question answered in §0 and the ad-hoc measurement re-run from committed code.
 
 ---
 
-*Generated at Stage J0. On freeze the PI resolves §9, edits as needed, then commits and runs `git tag -a prereg-phase2b-v1 -m "phase 2b preregistration freeze"` + push. **The delegate does not tag.***
+*Generated at Stage J0. On freeze the PI edits as needed, then commits and runs `git tag -a prereg-phase2b-v1 -m "phase 2b preregistration freeze"` + push. **The delegate does not tag.***

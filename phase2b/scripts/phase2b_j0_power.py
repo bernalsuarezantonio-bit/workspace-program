@@ -1,19 +1,29 @@
 #!/usr/bin/env python3
 # Copyright 2026.
-"""Phase 2b / Stage J0 power analysis — projection ablation, two registered DVs.
+"""Phase 2b / Stage J0 power analysis — projection ablation, 3 arms, 2 DVs.
 
 NO GPU. NO new data. Both DVs are anchored on REAL Phase 1 rates from the
-committed data commit a715ce4:
+committed data commit a715ce4 (Gate 0 re-asserted in-process):
 
-  DV1 diagnosis rate      200/200 = 1.000 in C1_DN_flagged_L1 (ceiling)
+  DV1 diagnosis rate      200/200 = 1.000 in C1_DN_flagged_L1 (at ceiling)
   DV2 ES textual mention  92/200 = 0.460, recomputed per vignette from the
                           committed readouts with the REGISTERED regex
                           (inventad|estudio|no reconocid|fictici) -- the same
-                          estimator as RESULTS_PHASE1 App. A1's split, whose
-                          92/108 counts this reproduces exactly.
+                          estimator that produced RESULTS_PHASE1 App. A1's
+                          split, whose 92/108 counts this reproduces exactly.
 
-DV2's between-vignette ICC is estimated from those real per-vignette counts, so
-unlike Phase 2's power analysis it does not have to fall back on a proxy cell.
+Arms (PI, 2026-07-22): B0_none / B1_full / B3_rand. B2_half is REMOVED; the
+random-direction projection B3_rand is the specificity control.
+
+Two contrasts per DV, both paired by vignette and one-sided:
+  intervention  B1 - B0   "does removing this direction change the channel?"
+  specificity   B1 - B3   "is the change specific to the F direction?"
+=> 4 registered tests, Bonferroni 0.05/4 = 0.0125. Power is also reported at
+0.025 so the PI can weigh a 2-test structure at freeze.
+
+The specificity contrast needs an assumption about how much of the effect a
+random direction reproduces: gamma in {0, 0.25, 0.5}, i.e. p(B3) = p0 - gamma*D.
+gamma = 0 is a fully specific effect. Labelled as an assumption, not an estimate.
 
 Run as a file:  .venv/Scripts/python.exe phase2b/scripts/phase2b_j0_power.py
 """
@@ -42,10 +52,13 @@ CELL = "C1_DN_flagged_L1"
 MENTION_RX = re.compile(r"inventad|estudio|no reconocid|fictici", re.I)   # registered
 
 N_VIGNETTES = 20
-N_SIMS = 20000
+N_SIMS = 8000
+N_PERM = 1000
 SEED = 20260722
-ALPHA = 0.025                    # Bonferroni /2 over the two registered DVs
 T_CRIT_ONESIDED_DF19 = -2.093
+ALPHAS = (0.0125, 0.025)          # 4-test and 2-test Bonferroni structures
+N_ARMS = 3
+SEC_PER_RUN = 12.3                # Phase 1 measured: 7.41 gen + 3.37 judge + ~1.5 readout
 
 
 def gate0() -> dict:
@@ -87,48 +100,36 @@ def icc_anova(by_v: dict[str, list[int]]) -> dict:
     n0 = (N - (ns ** 2).sum() / N) / (k - 1)
     denom = msb + (n0 - 1) * msw
     rho = float("nan") if denom == 0 else (msb - msw) / denom
-    est = 0.0 if rho != rho else float(max(0.0, min(0.99, rho)))
-    return {"k_vignettes": k, "n_total": int(N), "rate": grand, "n0": n0,
-            "estimable": denom != 0,
-            "icc_raw": rho, "icc": est,
+    return {"k_vignettes": k, "n_total": int(N), "rate": float(grand), "n0": float(n0),
+            "estimable": bool(denom != 0),
+            "icc_raw": (None if rho != rho else float(rho)),
+            "icc": (0.0 if rho != rho else float(max(0.0, min(0.99, rho)))),
             "per_vignette_rates": {kk: float(np.mean(v)) for kk, v in by_v.items()}}
 
 
-def beta_ab(p, icc):
-    s = (1.0 - icc) / icc
-    return p * s, (1.0 - p) * s
-
-
-def draw(rng, p, icc, reps):
+def draw(rng, p, icc, reps, n_sims):
+    """[n_sims, N_VIGNETTES] arm rates, vignette-clustered."""
     if icc <= 1e-9 or p <= 0.0 or p >= 1.0:
-        pv = np.full(N_VIGNETTES, p)
+        pv = np.full((n_sims, N_VIGNETTES), p)
     else:
-        a, b = beta_ab(p, icc)
-        pv = rng.beta(a, b, size=N_VIGNETTES)
+        s = (1.0 - icc) / icc
+        pv = rng.beta(p * s, (1.0 - p) * s, size=(n_sims, N_VIGNETTES))
     return rng.binomial(reps, pv) / reps
 
 
-def signflip_p(diffs, rng, n_perm=2000):
-    obs = diffs.mean()
-    signs = rng.choice([-1.0, 1.0], size=(n_perm, diffs.size))
-    null = (signs * diffs).mean(axis=1)
-    return float(((null <= obs).sum() + 1) / (n_perm + 1))
-
-
-def power(p0, p1, icc, reps, rng, n_sims=N_SIMS):
-    """Paired B1_full - B0_none, one-sided (H1: ablation reduces the rate)."""
-    hit_perm = hit_t = 0
-    for _ in range(n_sims):
-        d = draw(rng, p1, icc, reps) - draw(rng, p0, icc, reps)
-        if signflip_p(d, rng) <= ALPHA:
-            hit_perm += 1
-        sd = d.std(ddof=1)
-        if sd > 0:
-            if d.mean() / (sd / np.sqrt(N_VIGNETTES)) < T_CRIT_ONESIDED_DF19:
-                hit_t += 1
-        elif d.mean() < 0:
-            hit_t += 1
-    return {"power_permutation": hit_perm / n_sims, "power_paired_t": hit_t / n_sims}
+def power_from_diffs(diffs, rng, alphas):
+    """Vectorized one-sided sign-flip permutation + paired t over [n_sims, 20]."""
+    obs = diffs.mean(axis=1)                                   # [n_sims]
+    signs = rng.choice(np.array([-1.0, 1.0]), size=(N_PERM, N_VIGNETTES))
+    null = (signs @ diffs.T) / N_VIGNETTES                     # [N_PERM, n_sims]
+    p_perm = ((null <= obs).sum(axis=0) + 1) / (N_PERM + 1)
+    sd = diffs.std(axis=1, ddof=1)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        t = np.where(sd > 0, obs / (sd / np.sqrt(N_VIGNETTES)), np.where(obs < 0, -np.inf, 0.0))
+    out = {"power_paired_t": float((t < T_CRIT_ONESIDED_DF19).mean())}
+    for a in alphas:
+        out[f"power_permutation_a{a}"] = float((p_perm <= a).mean())
+    return out
 
 
 def main() -> int:
@@ -141,57 +142,89 @@ def main() -> int:
     mn = icc_anova(mention_by_vignette())
     dx = icc_anova(diagnosis_by_vignette())
     # DV1 sits at exactly 1.000, so MSB = MSW = 0 and its ICC is NOT ESTIMABLE.
-    # Proxy: the ICC of the ES-mention outcome, which is a binary outcome on the
-    # SAME cell and the SAME 200 runs -- a tighter proxy than Phase 2 could use.
-    dx["icc_proxy_source"] = "DV2 mention ICC (same cell, same runs)"
-    dx["icc"] = mn["icc"]
-    print(f"DV2 mention   : rate {mn['rate']:.4f}  icc {mn['icc']:.4f} "
-          f"(raw {mn['icc_raw']:+.4f}, estimable={mn['estimable']})")
-    print(f"DV1 diagnosis : rate {dx['rate']:.4f}  icc NOT ESTIMABLE at ceiling "
-          f"-> proxy {dx['icc']:.4f} from DV2 (same cell/runs)")
+    # Proxy: the ICC of the ES-mention outcome -- a binary outcome on the SAME
+    # cell and the SAME 200 runs, a tighter proxy than Phase 2 could use.
+    dx["icc_proxy_source"] = "DV2 mention ICC (same cell, same 200 runs)"
+    dx["icc_used"] = mn["icc"]
     assert abs(mn["rate"] - 0.46) < 1e-9, "mention rate must reproduce App. A1's 92/200"
+    print(f"DV2 mention   rate {mn['rate']:.4f}  icc {mn['icc']:.4f} "
+          f"(raw {mn['icc_raw']:+.4f}, estimable={mn['estimable']})")
+    print(f"DV1 diagnosis rate {dx['rate']:.4f}  icc NOT ESTIMABLE at ceiling "
+          f"-> proxy {dx['icc_used']:.4f}")
 
     reps_grid = [5, 7, 10, 12]
+    iccs = [0.0, 0.05, 0.15]
+    gammas = [0.0, 0.25, 0.5]        # fraction of the effect a random direction reproduces
     grid = []
 
-    # DV1 -- from ceiling. Exactly as in Phase 2: 1.0 is not a usable simulation
-    # parameter, so three conservative baselines are reported.
+    def run_cell(dv, p0, D, icc, R, gamma):
+        pB0 = draw(rng, p0, icc, R, N_SIMS)
+        pB1 = draw(rng, max(0.0, p0 - D), icc, R, N_SIMS)
+        pB3 = draw(rng, max(0.0, p0 - gamma * D), icc, R, N_SIMS)
+        inter = power_from_diffs(pB1 - pB0, rng, ALPHAS)
+        spec = power_from_diffs(pB1 - pB3, rng, ALPHAS)
+        row = {"dv": dv, "p0": p0, "drop": D, "icc": icc, "reps": R, "gamma": gamma,
+               "n_per_arm": R * N_VIGNETTES, "n_total_runs": N_ARMS * R * N_VIGNETTES,
+               "intervention": inter, "specificity": spec}
+        grid.append(row)
+        return row
+
+    print("\n--- DV1 diagnosis (from ceiling) ---")
     for p0 in (0.9975, 0.99, 0.97):
         for D in (0.05, 0.10, 0.15, 0.20):
-            for R in reps_grid:
-                for icc_s in (dx["icc"], 0.05, 0.15):
-                    res = power(p0, max(0.0, p0 - D), icc_s, R, rng)
-                    grid.append({"dv": "diagnosis", "p0": p0, "drop": D, "reps": R,
-                                 "icc": icc_s, **res})
-                    print(f"  [dx] icc={icc_s:.3f} p0={p0:.4f} D={D:.2f} R={R:2d} "
-                          f"perm={res['power_permutation']:.3f}")
+            for icc in iccs:
+                for R in reps_grid:
+                    for gm in gammas:
+                        r = run_cell("diagnosis", p0, D, icc, R, gm)
+                        if icc == 0.05 and gm == 0.0 and p0 == 0.99:
+                            print(f"  p0={p0} D={D:.2f} icc={icc} R={R:2d} "
+                                  f"inter={r['intervention']['power_permutation_a0.0125']:.3f} "
+                                  f"spec={r['specificity']['power_permutation_a0.0125']:.3f}")
 
-    # DV2 -- from the real 0.460 baseline, at the real ICC and at inflated ICC.
-    for icc_s in (mn["icc"], 0.05, 0.15):
-        for D in (0.10, 0.15, 0.20, 0.30):
+    print("\n--- DV2 mention (real baseline 0.460) ---")
+    for D in (0.10, 0.15, 0.20, 0.30):
+        for icc in iccs:
             for R in reps_grid:
-                res = power(mn["rate"], max(0.0, mn["rate"] - D), icc_s, R, rng)
-                grid.append({"dv": "mention", "p0": mn["rate"], "drop": D, "reps": R,
-                             "icc": icc_s, **res})
-                print(f"  [mn] icc={icc_s:.3f} D={D:.2f} R={R:2d} "
-                      f"perm={res['power_permutation']:.3f}")
+                for gm in gammas:
+                    r = run_cell("mention", mn["rate"], D, icc, R, gm)
+                    if icc == 0.05 and gm == 0.0:
+                        print(f"  D={D:.2f} icc={icc} R={R:2d} "
+                              f"inter={r['intervention']['power_permutation_a0.0125']:.3f} "
+                              f"spec={r['specificity']['power_permutation_a0.0125']:.3f}")
 
-    # Type-I under a true null for both DVs.
+    # Type-I: no true effect anywhere (all arms at p0).
     t1 = []
-    for name, p0, icc in (("diagnosis", 0.99, dx["icc"]), ("mention", mn["rate"], mn["icc"])):
+    for name, p0, icc in (("diagnosis", 0.99, dx["icc_used"]), ("mention", mn["rate"], mn["icc"])):
         for R in reps_grid:
-            res = power(p0, p0, icc, R, rng, n_sims=8000)
-            t1.append({"dv": name, "p0": p0, "reps": R, "icc": icc, **res})
-            print(f"[type-I] {name:9s} R={R:2d} perm={res['power_permutation']:.4f} "
-                  f"t={res['power_paired_t']:.4f}")
+            a = draw(rng, p0, icc, R, N_SIMS)
+            b = draw(rng, p0, icc, R, N_SIMS)
+            res = power_from_diffs(a - b, rng, ALPHAS)
+            t1.append({"dv": name, "p0": p0, "icc": icc, "reps": R, **res})
+            print(f"[type-I] {name:9s} R={R:2d} "
+                  f"a0.0125={res['power_permutation_a0.0125']:.4f} "
+                  f"a0.025={res['power_permutation_a0.025']:.4f}")
+
+    budget = {str(R): {"n_total_runs": N_ARMS * R * N_VIGNETTES,
+                       "est_hours": N_ARMS * R * N_VIGNETTES * SEC_PER_RUN / 3600.0}
+              for R in reps_grid}
+    print("\nbudget (3 arms x 20 vignettes x R, at 12.3 s/run):")
+    for R in reps_grid:
+        print(f"  R={R:2d}  {budget[str(R)]['n_total_runs']:4d} runs  "
+              f"{budget[str(R)]['est_hours']:.2f} h")
 
     out = {"gate0": g0, "source_data_commit": "a715ce4", "cell": CELL,
+           "arms": ["B0_none", "B1_full", "B3_rand"],
+           "contrasts": {"intervention": "B1_full - B0_none",
+                         "specificity": "B1_full - B3_rand"},
            "dv1_diagnosis": dx, "dv2_mention": mn,
            "mention_regex": MENTION_RX.pattern,
-           "estimator": "paired by vignette, B1_full - B0_none, one-sided; "
-                        "primary = sign-flip permutation, secondary = paired t (df=19)",
-           "alpha_per_dv": ALPHA, "n_vignettes": N_VIGNETTES,
-           "n_sims": N_SIMS, "seed": SEED,
+           "estimator": "paired by vignette, one-sided; primary = sign-flip permutation, "
+                        "secondary = paired t (df=19)",
+           "alphas": list(ALPHAS), "gammas_assumed": gammas,
+           "gamma_meaning": "fraction of the intervention effect that a random-direction "
+                            "projection reproduces; an ASSUMPTION, not an estimate",
+           "n_vignettes": N_VIGNETTES, "n_sims": N_SIMS, "n_perm": N_PERM, "seed": SEED,
+           "sec_per_run": SEC_PER_RUN, "budget": budget,
            "grid": grid, "type_i": t1}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, indent=2), encoding="utf-8")
