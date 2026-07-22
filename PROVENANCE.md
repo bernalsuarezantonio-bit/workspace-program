@@ -778,3 +778,27 @@ Artifact **`phase2/PILOT_CALIBRATION.md`**; data `phase2/data/pilot_calibration.
 **STOP POINT — awaiting PI.** Options recorded in `PILOT_CALIBRATION.md` §6, none taken: (a) re-scale + re-anchor inside the cliff as a dated pre-data amendment, with the malformed detector extended to catch vocabulary flooding; (b) move the manipulation check to the semi-independent base-model readout so it is not measured on the forced logits; (c) change the intervention (clamp/project, or single-layer); (d) report Phase 2 as an instrument-negative result — additive intensity has no regime here in which the F representation is driven above baseline without the output degrading. Each changes prereg-frozen text, so each is the PI's.
 
 **GPU:** window clean throughout, no Ollama contention, nothing pinned by the delegate; VRAM released at exit.
+
+---
+
+## Phase 2 — CLOSED, instrument-negative (PI adjudication) — 2026-07-22
+
+**PI adjudication of the Stage I1 block.** Option **(a) re-scale + re-anchor REJECTED** — usable dynamic range <1 decade, manipulation-check estimator circular with the intervention, and the only candidate rung already inside the degradation confound; its best case converges on the same closure at extra cost. Option **(d) ACCEPTED as the close of the registered Phase 2.** **No amendment was made; the preregistration is closed exactly as tagged** (`prereg-phase2-v1` / `f0586319` → `eb176a9`).
+
+**Artifact:** `phase2/CLOSURE.md`.
+
+**Outcome.** On Qwen2.5-7B-Instruct with a Tikhonov-inverted J-lens direction for the sealed Set F, **additive intensity has no regime in which the F representation is driven materially above its natural level without the output degrading.** A finding about the **method**, not about either registered hypothesis — both Phase 2 hypotheses remain **untested**. Phase 1 stands unchanged and unqualified by this.
+
+**The registered gate operated as designed, mechanically:** `k_max`=0.05 (rungs 0.1–1.6 are 100 % malformed) and the rung first reaching 50× is also 0.05 ⇒ k₁=k₂=k₃ ⇒ **T1 undefined, not merely underpowered**. ~2.5 h GPU / 700 confirmatory runs not spent. **No confirmatory data was ever generated; the 20 `high` vignettes were never run under any arm and remain unjudged.**
+
+### Lessons registered for future attempts
+
+- **Lesson #5 (carried forward, from `RESULTS_PHASE1.md` App. A2) — EN-operative / ES-emission mismatch.** Operative lists are English, generation is Spanish, so any instrument that masks/matches/drives *emission* misfires (the registered positional mask was inert at ~0.24 % of positions). Rule: verify the mask or driver actually bites and report the affected fraction before relying on it.
+- **Lesson #6 (NEW, from this pilot) — malformedness detectors are blind to vocabulary flooding.** The §7 detector returned **0 % malformed at k=0.05** on manifestly degraded text (*"experimentada o experimentando experimentación"*). Repetition detectors catch collapse, not fluent semantically-vacuous output saturated with the driven set's vocabulary — exactly what a set-directed addition produces. Rule: any degradation gate on a set-directed intervention must include a **set-vocabulary share** term and a **lexical-entropy** term; a repetition-only gate passes precisely the runs that most need excluding.
+- **Correction (b) (registered, PI) — the manipulation check must not read the driven logits.** Verifying with an estimator computed from the same unembedding the intervention targets is circular: it cannot separate "the representation moved" from "these tokens were forced". Rule: the primary landing check runs on the **semi-independent base-model readout** (same residual, different readout head); the instruct-lens readout is descriptive only, never the landing criterion.
+
+*(Lesson numbering is the PI's project ledger — distinct from the upstream `jacobian-lens` issue numbering in `phase0/reports/stage01_recon.md`.)*
+
+**Preserved and reusable for Phase 2b** (nothing in the instrument failed; the *additive* manipulation failed): `phase2/scripts/intervene.py` (target `u_gain`, Tikhonov solve at λ=0.1, per-layer `k·ρ_l`, norm-matched control, §2 estimator, §7 detector) · the verified injecting hook incl. the **KV-cache generation asymmetry** (windows must be `[P, total-1)`) · `ρ_l` (layer-stable, sd ~1 % of mean, 6.1× growth across the band) · landing geometry (`cos_l` ≥ 0.8201, `‖J v̂‖` ≈ 0.98) · Stage I0's structural findings (degenerate-λ analysis, raw-logit units, 755.1 ceiling, saturation asymmetry).
+
+**Next:** Phase 2b Stage J0 — projection-ablation design; `PREREG_PHASE2B.md` draft + power, PI review and tag.
