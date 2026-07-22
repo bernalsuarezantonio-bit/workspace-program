@@ -714,3 +714,28 @@ Correct target for the registered readout is `u_gain = unit(g ⊙ Σ_t W_U[t])`,
 **`PREREG_PHASE2.md` updated to DRAFT v2:** §0 rewritten from slot-table to results-table; §3.1/§3.2 filled with both branches costed; §3.3 marked specified-not-measured with the VRAM blocker; §3.4 carries the reachability check and the PI's `neutral`-pilot decision + content-transfer caveat; §6 carries the saturation asymmetry and the strengthened off-target caveat for the λ=1e-6 branch; §8 lists A-1/A-2 as the only open decisions.
 
 **STOP POINT — awaiting PI.** Decisions: **A-1** (λ=1e-6 as the rule computes vs λ=0.1 by the proposed replacement) and **A-2** (`u_raw` vs `u_gain`). Then: VRAM window → `ρ_l` → freeze + tag. **The delegate does not tag.**
+
+---
+
+## Phase 2 — amendments A-1/A-2 accepted + `ρ_l` measured + prereg v3 — 2026-07-22
+
+**PI decisions (2026-07-22, pre-data).** **A-1 ACCEPTED → λ = 0.1**, with the structural justification recorded as the ground of acceptance: the original rule is unfalsifiable (`cos_l` monotone decreasing in λ ⇒ always the smallest rung, never an interior λ); the replacement uses **only the G1 threshold fixed before any `cos_l` existed**; the motivation is purely instrumental (landing efficiency `‖J v̂‖` 0.984 vs 0.034) with no result datum available to bias it. **A-2 ACCEPTED → `u_gain`**, for coherence with the DV's estimator (`W_U·(g ⊙ x/rms(x))`). Both are dated pre-data amendments in the sense the seal permits. The two I0 findings (analytic reachability ceiling; saturation asymmetry) approved as recorded. **Neither amendment touches sealed set content, band, arms, DV, R, or α structure.**
+
+### `ρ_l` measured — condition-free (GPU 1.5 min)
+
+**VRAM window opened by the PI** (`gemma2:27b` stopped by the PI personally; delegate never evicted it — 31.4→1.9 GB used, verified before load). Script `phase2/scripts/measure_rho.py`, output `phase2/data/rho_layers.json`. Greedy (`do_sample=False`), `max_new_tokens=200`, 20 `high` vignettes in the `A0_base` construction (`DN_flagged × L1_forum`), prompt assembly byte-faithful to `run_confirmatory.py`; all 20 hit the 200-token cap (P 331–351). Lens `.pt` sha `3b3ab44c…` re-verified in-process. **`ρ_l` = mean over vignettes of the mean over GENERATION positions of `‖h_{l,pos}‖₂`**, generation-only, never positions 0–15 (R4), mean not sum (R5).
+
+| layer | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `ρ_l` | 76.09 | 80.91 | 97.29 | 112.15 | 137.52 | 171.18 | 216.27 | 279.57 | 355.33 | 463.97 |
+| sd | 0.74 | 0.73 | 0.53 | 0.80 | 0.82 | 1.13 | 1.54 | 1.90 | 3.01 | 5.88 |
+
+**Mechanical observations, recorded not interpreted:** (i) between-vignette sd is ~1 % of the mean at every layer — `ρ_l` is a property of the layer, not of the item; (ii) `ρ_l` grows **6.1×** across the band, which is precisely why the dose is `k·ρ_l` and not a fixed absolute norm (a single absolute α would be ~6× more aggressive at L17 than at L26, confounding depth with intensity). **Condition-free: no token sets scored, no loadings, no counting, no judge.** Analogous to the Phase 0 nightly technical calibration; creates no condition-bearing data.
+
+### `PREREG_PHASE2.md` → DRAFT v3 — §3 COMPLETE
+
+Frozen instrument values at λ=0.1 / `u_gain`, per layer L17→L26: `cos_l` = 0.820 0.867 0.907 0.929 0.941 0.948 0.951 0.952 0.956 0.962 (**G1 PASS at every layer**, band-minimum 0.820 at L17); `‖J v̂_l‖` = 0.856 0.822 0.841 0.907 1.001 1.071 1.112 1.100 1.074 1.059. **`k` ladder fixed pre-pilot: `k ∈ {0.05, 0.1, 0.2, 0.4, 0.8, 1.6}`** — six geometric rungs (ratio 2), addition = 5 %–160 % of the natural per-layer residual norm; with `ρ_l` this is a determined set of absolute magnitudes (L17 `α ∈ {3.80 … 121.7}`, L26 `α ∈ {23.2 … 742.3}`). Pilot reads off which rungs hit the 2×/10×/50× targets against the natural benchmark **0.0825** (0.165 / 0.825 / 4.125) subject to `k_max` (malformed <10 %).
+
+**No open decisions and no open slots remain.** Execution work still to be committed before the step it gates: the I1 injecting hook (`ActivationRecorder` is record-only), the pilot outcome + `k`, the `A4_rand` per-layer vectors (`RAND_SEED = 20260722`).
+
+**STOP POINT — awaiting PI reading and tag.** Order from here: PI tags → injecting hook committed → calibration pilot + `k` committed → smoke gate (+ R fallback decision) → confirmatory 700 → separate analysis session. **The delegate does not tag.**

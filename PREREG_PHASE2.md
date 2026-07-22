@@ -1,10 +1,12 @@
 # PREREGISTRATION — Phase 2 / Stage I1: causal activation-addition study (DRAFT for PI freeze)
 
-**Status:** DRAFT **v2** (post-I0) produced by delegate. **NOT frozen.** Becomes the preregistration when the PI reviews/edits and personally runs `git tag -a prereg-phase2-v1`. Stage I1 data generation is gated on that tag. *The delegate does not tag* (the Phase 1 waiver was a one-time PI-instructed act of signature and is not carried forward).
+**Status:** DRAFT **v3** — **§3 COMPLETE, no open slots, no open decisions.** **NOT frozen.** Becomes the preregistration when the PI reviews/edits and personally runs `git tag -a prereg-phase2-v1`. Stage I1 data generation is gated on that tag. *The delegate does not tag* (the Phase 1 waiver was a one-time PI-instructed act of signature and is not carried forward).
 
-**✅ RESOLVED — the v1 freeze blocker.** Stage I0 has been re-derived in cold, committed and pushed: **`phase2/I0_RECON.md` @ `52c6a17`** (script `phase2/scripts/i0_recon.py`, machine-readable `phase2/data/i0_recon.json`). No GPU, no conditions, no counting. The prior chat PDF was treated as hypothesis, not source; every I0 number is script-produced from pinned artifacts. §0 below is now a results table rather than a slot table.
+**✅ RESOLVED — the v1 freeze blocker.** Stage I0 was re-derived in cold, committed and pushed: **`phase2/I0_RECON.md` @ `52c6a17`** (script `phase2/scripts/i0_recon.py`, machine-readable `phase2/data/i0_recon.json`). No GPU, no conditions, no counting. The prior chat PDF was treated as hypothesis, not source; every I0 number is script-produced from pinned artifacts.
 
-**⚠️ TWO AMENDMENTS AWAIT THE PI (§0.3).** I0 found the pre-declared §3.2(c) λ rule to be **degenerate** (A-1) and §3.1 to **omit the final-norm gain** (A-2). Both are changes to a *rule*, not fillings of a slot, so the delegate took neither. §3 below is filled **under the rules as written** and shows the amended branch alongside, so the PI can freeze either by editing one line. Both are pre-data — no condition-bearing Phase 2 data exists.
+**✅ RESOLVED — both amendments (PI, 2026-07-22, §0.3).** **A-1 accepted: λ = 0.1.** **A-2 accepted: `u_gain`.** Both are dated pre-data amendments; §3 is filled with the accepted values throughout.
+
+**✅ RESOLVED — `ρ_l` measured** (`phase2/data/rho_layers.json`, §3.3): condition-free greedy pass over the 20 `high` vignettes in the `A0_base` construction, 1.5 min GPU, no token sets scored, no counting.
 
 **Standing rule (PI, 2026-07-22), applied from here on:** every stage report is committed — *a report without a hash does not exist.* This is the discipline **Incident #3** made necessary: *re-derive in cold; commit the artifact before citing it; do not reconcile.*
 
@@ -31,27 +33,43 @@ Threshold fixed by the PI on 2026-07-22 **before any `cos_l` existed**: **≥0.8
 | 1.0 | 0.6568 | 0.6550 | executable-with-flag |
 | 10.0 | 0.4374 | 0.4578 | gate closed |
 
-**The band 17–26 survives intact — no layer dropped, construction not reopened.** The binding layer is **L17** at every λ; `cos_l` rises monotonically with depth. Per-layer values at λ=0.1 (L17→L26, `u_raw`): `0.829 0.879 0.921 0.944 0.958 0.965 0.968 0.969 0.972 0.977`.
+**The band 17–26 survives intact — no layer dropped, construction not reopened.** The binding layer is **L17** at every λ; `cos_l` rises monotonically with depth. Per-layer values at the accepted λ=0.1 / `u_gain` are in **§0.4**. (Both target columns are retained above because the sweep predates the A-2 decision; the accepted branch is `u_gain`.)
 
 ### 0.2 Capability of `jlens`, verified in code — all GREEN
 
 `J_l` exposed as `[3584,3584]` and `transport(h,l) == h @ J_lᵀ` ✓ · readout is `lm_head(final_norm(h @ J_lᵀ))`, **final norm applied** ✓ · a forward hook **replaces** a block's output ✓ · `Qwen2DecoderLayer` returns a **bare Tensor** (transformers 5.14.1) ✓. **Consequence for I1:** `ActivationRecorder` is *record-only*; the intervention needs its own injecting hook, to be written and committed at I1 execution.
 
-### 0.3 Two amendments awaiting the PI
+### 0.3 Two amendments — **BOTH ACCEPTED (PI, 2026-07-22, pre-data)**
+
+Dated amendments in the sense the seal permits: appended, dated, and **pre-data** — no condition-bearing Phase 2 readout exists at acceptance time (the only Phase 2 measurement in existence is the condition-free `ρ_l` pass, §3.3, which scores no token set). Both are **instrument-motivated only**: neither was informed by any Phase 2 result, because none exists.
+
+**A-1 — ACCEPTED: λ = 0.1.** Structural justification, recorded verbatim as the ground of acceptance: (i) the original rule is **unfalsifiable** — `cos_l` is monotone decreasing in λ, so "maximize `min_l cos_l`" returns the ladder's smallest rung for *any* ladder and can never select an interior λ; (ii) the replacement uses **only the G1 threshold the PI had already fixed** (≥0.80), set before any `cos_l` existed, and introduces no new free parameter; (iii) the motivation is **purely instrumental** — landing efficiency `‖J v̂‖` (0.976 vs 0.034, ~29×) — and no result datum was available to bias it.
+
+**A-2 — ACCEPTED: `u_gain`.** Ground: coherence with the DV's estimator. The readout is `W_U·(g ⊙ x/rms(x))`, so `u_gain = unit(g ⊙ Σ_t W_U[t])` is the direction the registered loading estimator actually responds to; matching the estimator outweighs the ~0.01 lower `cos_l`.
+
+**Neither amendment touches sealed set content, the band, the arms, the DV, R, or the α structure.** The two I0 findings recorded as-is and approved by the PI: the analytic reachability ceiling (§3.4) and the saturation asymmetry (§6).
+
+<details><summary>Original statement of the two problems (retained for the record)</summary>
 
 **A-1 — the §3.2(c) λ rule is degenerate.** `cos_l` is monotonically decreasing in λ at every layer, so *"maximize `min_l cos_l`"* **always selects the ladder's smallest rung** and can never select an interior λ. At its pick (λ=1e-6) the solution sits in `J_l`'s near-null space: mean `‖J v̂‖` = **0.0341** vs **0.9758** at λ=0.1 — **~97 % of injected norm lands where the lens cannot see it**, while still perturbing the model. The rule selects for exactly the pathology Tikhonov prevents, and it degrades the `A4_rand` comparison and inflates the off-target load §6 warns about.
 
 > **Proposed replacement (uses only the threshold the PI already fixed):** *select the **largest** λ whose band-minimum `cos_l` still meets G1 (≥0.80); ties → the larger λ.* → **λ = 0.1** under both targets. Alternatives: keep the rule as written and accept λ=1e-6 with the cost documented; or gate on a `‖J v̂‖` floor instead.
 
-**A-2 — §3.1 omits the final-norm gain.** The readout is `W_U·(g ⊙ x/rms(x))`, so the correct target is `u_gain = unit(g ⊙ Σ_t W_U[t])`, not `u_raw`. The gain is far from uniform (min −0.174 / max 10.75 / mean 3.839 / sd 0.678) and `cos(u_raw, u_gain) = 0.9709`. G1 passes either way; `cos_l` is ~0.01 lower under `u_gain`. **Delegate recommendation: adopt `u_gain`** — matching the estimator matters more than a first-decimal cos.
+**A-2 — §3.1 omits the final-norm gain.** The readout is `W_U·(g ⊙ x/rms(x))`, so the correct target is `u_gain = unit(g ⊙ Σ_t W_U[t])`, not `u_raw`. The gain is far from uniform (min −0.174 / max 10.75 / mean 3.839 / sd 0.678) and `cos(u_raw, u_gain) = 0.9709`. G1 passes either way; `cos_l` is ~0.01 lower under `u_gain`.
 
-Neither amendment touches sealed set content, the band, the arms, the DV, R, or the α structure.
+</details>
 
-### 0.4 Remaining un-run item
+### 0.4 Frozen instrument values
 
-`ρ_l` (§3.3) is specified and **not yet measured** — blocked on the GPU window, not on any decision. See §3.3.
+At **λ = 0.1** with target **`u_gain`** (the accepted branch), per layer L17→L26:
 
-> Where this leaves the study: **§§0,1,2,4,5,6,7 are freezable now.** §3 is filled below and freezable as soon as the PI rules on A-1/A-2; `ρ_l` is a mechanical measurement that follows.
+| | L17 | L18 | L19 | L20 | L21 | L22 | L23 | L24 | L25 | L26 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `cos_l` | **0.820** | 0.867 | 0.907 | 0.929 | 0.941 | 0.948 | 0.951 | 0.952 | 0.956 | 0.962 |
+| `‖J v̂_l‖` | 0.856 | 0.822 | 0.841 | 0.907 | 1.001 | 1.071 | 1.112 | 1.100 | 1.074 | 1.059 |
+| `ρ_l` | 76.09 | 80.91 | 97.29 | 112.15 | 137.52 | 171.18 | 216.27 | 279.57 | 355.33 | 463.97 |
+
+**G1: PASS at every layer** (band-minimum 0.820 at L17 ≥ 0.80). Nothing left open.
 
 ---
 
@@ -95,12 +113,11 @@ Five arms, **within-item**: all 20 `high` vignettes appear in all five arms, ana
 
 The lens maps a residual at layer `l` into the final-layer basis by `transport(h,l) = h @ J̄_lᵀ` (`vendor/jacobian-lens/jlens/lens.py:135`), and the readout is the unembedding of that transported vector. The Set F target is therefore built **in the final-layer basis**:
 
-I0 verified in code that the readout applies the final RMSNorm before the LM head: `logits = W_U · (g ⊙ x/rms(x))`, with `g = model.norm.weight`. Two candidate targets follow; **the PI selects one at freeze (amendment A-2, §0.3):**
+I0 verified in code that the readout applies the final RMSNorm before the LM head: `logits = W_U · (g ⊙ x/rms(x))`, with `g = model.norm.weight`. **FIXED (A-2 accepted, §0.3):**
 
-    u_raw  = unit( Σ_{t ∈ F_survivors} W_U[t] )                 ← as drafted in v1
-    u_gain = unit( g ⊙ Σ_{t ∈ F_survivors} W_U[t] )             ← delegate recommendation
+    u_F  =  u_gain  =  unit( g ⊙ Σ_{t ∈ F_survivors} W_U[t] )
 
-Either way the sum is over the **11 sealed Set F SURVIVOR tokens**, unweighted (each operative token counts once, matching the §2 loading estimator, which sums operative-token weights unweighted). `W_U` is read from the same checkpoint whose digest is re-verified per run; I0 confirms this model does **not** tie embeddings (`lm_head.weight`, `[152064, 3584]`). The 11 ids are `57062, 16989, 43582, 35492, 54965, 3920, 59429, 9342, 86703, 22000, 69454` — verified identical to seal A1.
+The sum is over the **11 sealed Set F SURVIVOR tokens**, unweighted (each operative token counts once, matching the §2 loading estimator, which sums operative-token weights unweighted). `W_U` is read from the same checkpoint whose digest is re-verified per run; I0 confirms this model does **not** tie embeddings (`lm_head.weight`, `[152064, 3584]`). The 11 ids are `57062, 16989, 43582, 35492, 54965, 3920, 59429, 9342, 86703, 22000, 69454` — verified identical to seal A1.
 
 ### 3.2 Per-layer additive vector by Tikhonov inverse of the lens
 
@@ -110,14 +127,9 @@ For each layer `l ∈ {17,…,26}` (the Phase 1 primary band, inherited unchange
 
 (a) `J̄_l` is the lens transport matrix at `l`, in fp32 for the solve, from the pinned `.pt` (sha re-verified).
 (b) `v̂_l` is unit-normalized **after** the solve, so all magnitude information lives in `α` (§3.3–3.4) and none in `λ`.
-(c) **`λ` selection — EXECUTED by I0** over the ladder `{1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1, 10}` scaled by the mean eigenvalue of `J̄_lᵀJ̄_l`, one λ shared across the whole band so the arms differ only in intensity. The rule as written ("maximize `min_l cos_l`") returns **λ = 1e-6**; I0 found that rule degenerate and put **amendment A-1** (§0.3) to the PI, whose proposed replacement returns **λ = 0.1**. **The PI fixes one of these at freeze:**
+(c) **`λ` — FIXED at 0.1** (A-1 accepted, §0.3), scaled by the mean eigenvalue of `J̄_lᵀJ̄_l`, **one λ shared across the whole band** so the arms differ only in intensity. Selection rule of record: *the largest λ on the ladder `{1e-6 … 10}` whose band-minimum `cos_l` still meets G1 (≥0.80); ties → the larger λ.* Result: **λ = 0.1**, band-minimum `cos_l` = **0.8201** at L17, mean `‖J v̂‖` = **0.984**.
 
-| branch | λ | `min_l cos_l` (raw / gain) | mean `‖J v̂‖` | note |
-|---|---|---|---|---|
-| rule as written | **1e-6** | 0.9984 / 0.9968 | 0.0341 | near-null-space solution; ~97 % of injected norm invisible to the lens |
-| **A-1 replacement** | **0.1** | 0.8292 / 0.8201 | 0.9758 | ~29× better landing efficiency; G1 still PASS |
-
-(d) The full `(λ, l) → cos_l` and `‖J v̂‖` tables are in `phase2/data/i0_recon.json` @ `52c6a17`. **Gate G1 (§0.1) PASSES on both branches.**
+(d) Per-layer `cos_l` and `‖J v̂_l‖` at the fixed λ are tabulated in **§0.4**; the full `(λ, l)` sweep is in `phase2/data/i0_recon.json` @ `52c6a17`. **Gate G1 PASSES at every layer in the band.**
 
 ### 3.3 `ρ_l` — the per-layer residual scale (condition-free, fully specified)
 
@@ -128,7 +140,16 @@ For each layer `l ∈ {17,…,26}` (the Phase 1 primary band, inherited unchange
 - **`ρ_l` = the mean over vignettes of the mean over GENERATION positions of the L2 norm `‖h_{l,pos}‖₂`** — generation positions only, never positions 0–15 (R4, inherited). Mean, not sum (R5 length-confound rule, inherited).
 - Output: `phase2/data/rho_layers.json` (10 numbers + the per-vignette table + seeds + digests), committed. **No token sets are scored, no loadings computed, no counting** — this is a scale measurement, exactly analogous to the Phase 0 nightly technical calibration.
 
-**Status: SPECIFIED, NOT YET MEASURED — blocked on the GPU window, not on any decision.** I0 confirmed the band survives intact (§0.1) and `ρ_l` does not depend on `λ` or on either amendment, so the measurement is now unblocked *in principle*. At the time of this draft the GPU is unavailable: `gemma2:27b` is pinned `UNTIL Forever` by the host's residual Ollama process, holding **31.4 / 32.6 GB** (84 % on GPU); Qwen2.5-7B fp16 needs ≈15.6 GB. **The delegate did not evict it** (standing rule: coordinate VRAM windows with the PI, never evict the pinned model). The measurement is one invocation of `phase2/scripts/measure_rho.py` (to be written at execution) and takes ~3 min once a window opens; its output `phase2/data/rho_layers.json` is committed before the calibration pilot.
+**MEASURED (2026-07-22).** Script `phase2/scripts/measure_rho.py`; output `phase2/data/rho_layers.json`. Greedy pass over the 20 `high` vignettes in the `A0_base` construction; all 20 ran to the 200-token cap (P ≈ 331–351, G = 200); **1.5 min GPU**. Prompt assembly byte-faithful to `run_confirmatory.py`, so `ρ_l` is measured on exactly the prompts `A0_base` will use. Lens `.pt` sha re-verified in-process.
+
+| layer | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **`ρ_l`** | **76.09** | 80.91 | 97.29 | 112.15 | 137.52 | 171.18 | 216.27 | 279.57 | 355.33 | **463.97** |
+| sd (between vignettes) | 0.74 | 0.73 | 0.53 | 0.80 | 0.82 | 1.13 | 1.54 | 1.90 | 3.01 | 5.88 |
+
+**Two mechanical observations, recorded not interpreted.** (i) Between-vignette variability is ~1 % of the mean at every layer, so `ρ_l` is essentially a property of the layer, not of the item — the per-layer dose is stable across the 20 vignettes. (ii) `ρ_l` grows **6.1×** across the band (76 → 464). This is exactly why the dose is specified as `k·ρ_l` and not as a fixed absolute norm: a single absolute α would be ~6× more aggressive at L17 than at L26, confounding depth with intensity.
+
+**Condition-free, as specified:** no token sets scored, no loadings computed, no counting, no judge — a scale measurement analogous to the Phase 0 nightly technical calibration. It creates no condition-bearing data and does not touch the freeze.
 
 ### 3.4 `α` and the calibration pilot (empirical units)
 
@@ -142,7 +163,8 @@ The addition applied at layer `l`, at every **generation** position (re-added pe
 
 **Calibration pilot — rule written before it is run:**
 - **PI DECISION (2026-07-22): 2 `neutral` vignettes, drawn from OUTSIDE the confirmatory set**, by a recorded seed. **The 20 `high` vignettes stay wholly intact for the confirmatory block** — no study item is touched by calibration. **Registered caveat — content transfer:** `k` is calibrated on `neutral` material and applied to `high` material, so the calibration transfers across a content difference. The transfer is *assumed, not verified*: `ρ_l` (§3.3) is measured on the `high` construction, so the norm-based part of the dose is on-target, but the readout-target part (the 2×/10×/50× rungs) is calibrated off-target. Registered consequence: the **achieved** readout in the confirmatory arms is reported per arm (§6 check 1) against the intended rungs, and any shortfall is reported as a calibration-transfer gap, not silently absorbed.
-- Sweep `k` over a geometric ladder, 5 reps per rung, measuring (i) the Set F readout at added positions and (ii) the **malformed rate** (§7).
+- **Ladder, fixed here (pre-declared, before the pilot runs): `k ∈ {0.05, 0.1, 0.2, 0.4, 0.8, 1.6}`** — six geometric rungs, ratio 2, spanning an addition of **5 % to 160 % of the natural per-layer residual norm**. With `ρ_l` from §3.3 this is a fully determined set of absolute magnitudes, e.g. at L17 `α ∈ {3.80, 7.61, 15.22, 30.43, 60.87, 121.7}` and at L26 `α ∈ {23.2, 46.4, 92.8, 185.6, 371.2, 742.3}`. The ladder is fixed **before** the pilot; the pilot only reads off which rungs hit which targets.
+- 5 reps per rung, measuring (i) the Set F readout at added positions, against the **natural benchmark 0.0825** and the 2×/10×/50× targets (0.165 / 0.825 / 4.125), and (ii) the **malformed rate** (§7).
 - **`k_max` rule (pre-declared): the largest rung with malformed rate < 10 %.** `k₃` = min(the rung hitting the 50× target, `k_max`). `k₂`, `k₁` = the rungs nearest the 10× and 2× targets, subject to `k₁ < k₂ < k₃`.
 - If `k₃` is capped by `k_max` below the 10× target, the design **collapses to fewer than three distinct doses** — pre-declared response: report it, run the doses that exist, and record the trend test on the reduced score set (which remains valid; power drops, §4).
 - Pilot outputs, ladder, and the chosen `k` are committed **before** any confirmatory run.
@@ -235,7 +257,7 @@ Three checks that the addition arrived. **All three are verification of the mani
 2. **Base-model readout (semi-independent).** The same loading recomputed with the **base** `Qwen2.5-7B` (non-instruct) unembedding as the readout head, on the same captured residuals. Semi-independent: it shares the residual but not the readout head, so it detects a v̂ that satisfies the instruct lens' inverse without carrying the concept.
 3. **Natural benchmark.** The `A0_base` arm must reproduce the Phase 1 `C1_DN_flagged_L1` numbers — diagnosis rate ≈ 1.000 and Set F loading in the Phase 1 range. **Registered as a replication check on the whole pipeline**; a failure here invalidates the run, not the hypothesis.
 
-**Registered caveat, binding on the write-up:** `cos_l < 1` (§0.1) means the injected direction is an *approximation* of the F readout direction and necessarily carries off-target components. The magnitude of that off-target load is bounded only by the `A4_rand` control, not by check 1. Under the λ=1e-6 branch (§0.3 A-1) this caveat is **much stronger**: mean `‖J v̂‖` = 0.0341 means ~97 % of the injected norm is invisible to check 1 by construction, so check 1 would verify almost nothing about what the model actually received.
+**Registered caveat, binding on the write-up:** `cos_l < 1` (§0.4) means the injected direction is an *approximation* of the F readout direction and necessarily carries off-target components. At the fixed λ=0.1 the band-minimum is 0.820 (L17), so the off-target fraction is **largest at the shallow edge of the band**; the magnitude of that off-target load is bounded only by the `A4_rand` control, not by check 1.
 
 **Registered saturation asymmetry (I0, `52c6a17`).** The lens readout is **scale-invariant in `J_l h`** (the final norm divides the magnitude out), so raising α moves the readout only by *rotating* `J_l h` toward `u_F` — which **saturates**. The causal effect on the model does **not** saturate: magnitude enters the real forward pass directly. Consequence, registered in advance: at high α the readout verification is expected to flatten while behaviour may still be moving. **A flat check-1 curve at the top dose is therefore not evidence that the dose stopped increasing**, and must not be written up as such.
 
@@ -253,16 +275,18 @@ Three checks that the addition arrived. **All three are verification of the mani
 
 ## 8. Open at prereg / not fixed here
 
-- **Amendment A-1** (§0.3) — λ = 1e-6 (rule as written) vs λ = 0.1 (proposed replacement). **PI.**
-- **Amendment A-2** (§0.3) — `u_raw` vs `u_gain` for the target direction. **PI.**
-- **`ρ_l`** (§3.3) — specified, un-measured, blocked on a GPU window; needs VRAM coordination with the PI, not a decision.
-- The exact geometric ladder for `k` (set by the pilot script at execution, committed before the pilot runs).
-- The I1 injecting hook (§0.2) — to be written and committed at execution; `ActivationRecorder` cannot be reused.
-- Any exploratory reporting: all-layer profiles, per-position addition profiles, per-language Set F breakdown, the `A4_rand` arm's own readout profile.
-- The analysis itself — a separate later session against the data commit.
+**No open decisions and no open slots remain.** What is left is execution work, each item committed before the step it gates:
 
-**Resolved since v1 (PI, 2026-07-22):** G1 threshold fixed at ≥0.80 / 0.65–0.80 flagged / <0.65 closed, *before any `cos_l` existed* (§0.1) · pilot on 2 `neutral` vignettes outside the confirmatory set, content-transfer caveat registered (§3.4) · R = 7 confirmed with the smoke-gate R→5 fallback and the I/O mitigations (§4) · the three additions approved — T1×T2 joint-reading table, sign-flip permutation as primary, drop-vs-degradation rubric (§5) · Stage I0 re-derived, committed and pushed at `52c6a17` (§0).
+- The **I1 injecting hook** (§0.2) — to be written and committed at execution; `ActivationRecorder` is record-only and cannot be reused.
+- The **calibration pilot's outcome** — which rungs of the fixed ladder (§3.4) hit the 2×/10×/50× targets, and `k_max`. Committed before any confirmatory run.
+- The **`A4_rand` vectors** — drawn once per layer from `RAND_SEED = 20260722` at execution and recorded.
+- Any **exploratory** reporting: all-layer profiles, per-position addition profiles, per-language Set F breakdown, the `A4_rand` arm's own readout profile.
+- The **analysis** itself — a separate later session against the data commit; no aggregates during generation.
+
+**Resolved (PI, 2026-07-22):** Stage I0 re-derived, committed, pushed at `52c6a17` · G1 threshold ≥0.80 / 0.65–0.80 flagged / <0.65 closed, fixed *before any `cos_l` existed* (§0.1) · **A-1 accepted → λ = 0.1** and **A-2 accepted → `u_gain`** (§0.3), both dated pre-data · reachability ceiling and saturation asymmetry approved as recorded (§3.4, §6) · `ρ_l` measured (§3.3) · pilot on 2 `neutral` vignettes outside the confirmatory set, content-transfer caveat registered (§3.4) · R = 7 with the smoke-gate R→5 fallback and the I/O mitigations (§4) · the three design additions approved — T1×T2 joint-reading table, sign-flip permutation as primary, drop-vs-degradation rubric (§5) · standing rule: *a report without a hash does not exist.*
+
+**Order of operations from here:** PI reads + tags → I1 injecting hook committed → calibration pilot + `k` committed → smoke gate (+ R fallback decision) → confirmatory 700 → separate analysis session.
 
 ---
 
-*Generated at Stage I1 (draft v2, post-I0). On freeze the PI rules on A-1 and A-2, edits as needed, then commits and runs `git tag -a prereg-phase2-v1 -m "phase 2 preregistration freeze"` + push. **The delegate does not tag.***
+*Generated at Stage I1 (draft v3, post-I0, post-amendments, post-`ρ_l`). §3 is complete. On freeze the PI edits as needed, then commits and runs `git tag -a prereg-phase2-v1 -m "phase 2 preregistration freeze"` + push. **The delegate does not tag.***
