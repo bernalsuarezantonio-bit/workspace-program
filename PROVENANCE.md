@@ -680,3 +680,37 @@ The ICC is estimated from k=20 clusters of n₀≈10 binary draws and cannot sep
 The `ρ_l` pass was authorized as optional-now. It was **deferred**: it is condition-free and cheap (~3 min), but it is only meaningful once §3.2's `λ` and the surviving layer band exist, and any I0-driven change to the band would waste it. No VRAM was requested; no Ollama coexistence event.
 
 **STOP POINT — awaiting PI.** The draft is not frozen and the delegate does not tag. The PI's decisions are: (a) whether to direct that Stage I0 be run and committed, (b) the **G1** threshold on `min_l cos_l`, (c) pilot vignettes from inside vs outside the study 20, (d) R=7 confirm or override.
+
+---
+
+## Phase 2 — Stage I0 recon (NO GPU) + prereg v2 — 2026-07-22
+
+**Recorded:** 2026-07-22, delegate session. **Cold re-derivation. NO GPU. No generation, no conditions, no counting.** Phase 1 data commit `a715ce4` / digest `dc522361…` untouched. Artifact **`phase2/I0_RECON.md` @ `52c6a17`**; script `phase2/scripts/i0_recon.py`; machine-readable `phase2/data/i0_recon.json`.
+
+**PI decisions carried in (2026-07-22):** (a) I0 re-derived and committed, prior chat PDF is **hypothesis, not source**; (b) **G1 fixed before any `cos_l` existed** — ≥0.80 pass / 0.65–0.80 executable-with-flag / <0.65 gate closed; (c) pilot on 2 `neutral` vignettes **outside** the confirmatory set, content-transfer caveat registered, the 20 `high` untouched; (d) R=7 confirmed + smoke-gate R→5 fallback + I/O mitigations. The three design additions approved.
+
+**Standing rule adopted (PI):** *every stage report is committed — a report without a hash does not exist.*
+
+**Pins re-verified in-process:** lens `.pt` sha256 `3b3ab44c…` == Stage 0.2 pin ✓ · `Qwen/Qwen2.5-7B-Instruct@a09a3545`, `lm_head.weight` untied `[152064,3584]` ✓ · 11 Set F SURVIVORS == seal A1 ✓ · band 17–26 ⊂ `source_layers`, `d_model` 3584 ✓ · torch 2.11.0+cu128 / transformers 5.14.1.
+
+**Capability of `jlens` verified IN CODE (all GREEN):** `J_l` is `[3584,3584]` and `transport(h,l) == h @ J_lᵀ` · the readout is `lm_head(final_norm(h @ J_lᵀ))` — **the final norm IS applied** · a `register_forward_hook` returning a value **replaces** the block output · `Qwen2DecoderLayer.forward` returns a **bare Tensor**. **Consequence:** `ActivationRecorder` is record-only, so I1 must write its own injecting hook.
+
+**Gate G1: PASS, wide margin.** `min_l cos_l` ≥ 0.80 for every λ ≤ 0.1 under both candidate targets (λ=1e-6 → 0.9984/0.9968; λ=0.1 → 0.8292/0.8201; λ=1 → 0.657/0.655 = flagged band; λ=10 → closed). **Band 17–26 intact, no layer dropped, construction not reopened.** Binding layer is L17 at every λ. `cond(J_l)` 5.1e4–1.55e6; effective rank at 99 % energy 3079–3437 of 3584.
+
+### FINDING 1 (material) — the pre-declared λ rule is degenerate
+
+`cos_l` is **monotone decreasing in λ** at every layer, so §3.2(c)'s *"maximize `min_l cos_l`"* **always returns the ladder's smallest rung** and can never select an interior λ — the rule is unfalsifiable by construction and makes the Tikhonov term vacuous. At its pick (λ=1e-6) the solution sits in `J_l`'s near-null space: mean `‖J v̂‖` **0.0341** vs **0.9758** at λ=0.1, i.e. **~97 % of injected norm lands where the lens cannot see it** while still perturbing the model — the exact pathology Tikhonov prevents. It also degrades the `A4_rand` comparison and inflates the off-target load. **The delegate executed the rule as written and did NOT substitute its own** (choosing λ after seeing the table would invert the preregistration) → **Amendment A-1** to the PI, proposing *"largest λ whose band-minimum still meets G1 (≥0.80)"* → λ=0.1, which reuses only the threshold the PI had already fixed.
+
+### FINDING 2 — readout units and the reachability ceiling
+
+The dumped `"weight"` is a **raw logit** (`logits.topk(10)`, no softmax; this is why Phase 1's Set A 2.45 exceeds 1). Since `final_norm` fixes `‖x/rms(x)‖=√d`, the per-position summed F logit is hard-bounded at **755.1 ≈ 9153× natural**, so the §3.4 **50× target (4.125) is NOT analytically blocked** — recorded as a necessary-not-sufficient condition so a pilot shortfall is read as an empirical limit, not a late-discovered impossibility. **Saturation asymmetry registered:** the readout is scale-invariant in `J_l h` and saturates in α, while the causal effect does not — a flat check-1 curve at top dose must not be written up as the dose having stopped increasing.
+
+### FINDING 3 — §3.1 omitted the final-norm gain
+
+Correct target for the registered readout is `u_gain = unit(g ⊙ Σ_t W_U[t])`, not `u_raw`. Gain is far from uniform (min −0.174 / max 10.75 / mean 3.839 / sd 0.678); `cos(u_raw,u_gain)=0.9709`. Both carried through the whole analysis; G1 passes either way → **Amendment A-2**, delegate recommends `u_gain`.
+
+**`ρ_l` NOT measured — GPU blocked, no eviction.** `gemma2:27b` pinned `UNTIL Forever` by the host residual process, holding **31.4 / 32.6 GB** (16%/84% CPU/GPU); Qwen2.5-7B fp16 needs ≈15.6 GB. Standing rule honoured: coordinate VRAM windows with the PI, **never evict the pinned model**. `ρ_l` depends on neither λ nor either amendment, so it is blocked on a window, not on a decision; ~3 min once one opens.
+
+**`PREREG_PHASE2.md` updated to DRAFT v2:** §0 rewritten from slot-table to results-table; §3.1/§3.2 filled with both branches costed; §3.3 marked specified-not-measured with the VRAM blocker; §3.4 carries the reachability check and the PI's `neutral`-pilot decision + content-transfer caveat; §6 carries the saturation asymmetry and the strengthened off-target caveat for the λ=1e-6 branch; §8 lists A-1/A-2 as the only open decisions.
+
+**STOP POINT — awaiting PI.** Decisions: **A-1** (λ=1e-6 as the rule computes vs λ=0.1 by the proposed replacement) and **A-2** (`u_raw` vs `u_gain`). Then: VRAM window → `ρ_l` → freeze + tag. **The delegate does not tag.**
