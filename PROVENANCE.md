@@ -739,3 +739,42 @@ Frozen instrument values at λ=0.1 / `u_gain`, per layer L17→L26: `cos_l` = 0.
 **No open decisions and no open slots remain.** Execution work still to be committed before the step it gates: the I1 injecting hook (`ActivationRecorder` is record-only), the pilot outcome + `k`, the `A4_rand` per-layer vectors (`RAND_SEED = 20260722`).
 
 **STOP POINT — awaiting PI reading and tag.** Order from here: PI tags → injecting hook committed → calibration pilot + `k` committed → smoke gate (+ R fallback decision) → confirmatory 700 → separate analysis session. **The delegate does not tag.**
+
+---
+
+## Phase 2 — freeze signed; Stage I1 hook verified; **calibration pilot BLOCKS the confirmatory** — 2026-07-22
+
+**Freeze (act of signature, PI-instructed).** Annotated tag **`prereg-phase2-v1`** (tag obj `f0586319`) → commit **`eb176a9`**, pushed. **Signed as the PI's own identity** `Antonio Bernal <bernalsuarezantonio@gmail.com>` via per-command `git -c user.name/email` override (this machine's global identity is `[redacted] <[redacted]>`). This is the delegate executing the freeze on explicit PI written instruction ("ejecuta en mi nombre, como acto de firma") — the same deliberate waiver of the standing "delegate does not tag" rule used at `prereg-phase1-v1`.
+
+### Injecting hook + mechanical verification — ALL_PASS (`5453270`)
+
+`phase2/scripts/intervene.py` (shared instrument) + `verify_injection.py` + `phase2/data/verify_injection.json`. Needed because jlens's `ActivationRecorder` is record-only (I0 finding C3); the injector is registered **before** the recorder so recorded residuals are post-addition. On one `neutral` vignette, condition-free: **V1** prompt positions bit-identical ✓ · **V2** L17 injected == base + δ₁₇ (max abs err 0.0099, ‖δ‖=30.4) ✓ · **V3** deeper layers shift by more than their own δ (perturbation propagates) ✓ · **V4** recorder sees post-addition values ✓ · **V5** `generate` and `full` modes inject at the same 39 positions ✓ · **V6** readout monotone in k ✓.
+
+**Generation asymmetry found and handled:** with a KV cache the last generated token is never fed back as input, so its residual is never computed and cannot receive the addition. Injection and readout windows are both `[P, total-1)` so what is measured is exactly what the model computed. The first verification run caught this as a 40-vs-39 mismatch.
+
+### Calibration pilot — **the frozen dose ladder is not executable**
+
+Artifact **`phase2/PILOT_CALIBRATION.md`**; data `phase2/data/pilot_calibration.json` + `pilot_sample_texts.json`. 98 runs, 8.4 min GPU, **no judge run, no confirmatory data generated**. Held-out `neutral` vignettes **v48, v43** (`PILOT_SEED=20260722`), outside the confirmatory set; the 20 `high` vignettes untouched.
+
+**§3.4 rule applied mechanically → `rule_satisfiable = False`, `three_distinct_doses = False`.**
+
+| k | mean Set F loading | × natural | malformed |
+|---|---|---|---|
+| α=0 ref | 0.1595 | 1.9× | 0 % |
+| 0.05 | 27.372 | 331.8× | 0 % |
+| 0.1 | 98.163 | 1189.9× | **100 %** |
+| 0.2–1.6 | 165.2–298.3 | 2003–3616× | **100 %** |
+
+`k_max` = 0.05 and the rung first reaching 50× is also 0.05 ⇒ **k₁=k₂=k₃=0.05, one dose, not three** ⇒ **primary test T1 (dose-response slope) is undefined.** §3.4 anticipated a collapse to *fewer than three* doses, not to one.
+
+**Registered targets are off the ladder entirely.** 2×/10×/50× = 0.165/0.825/4.125, but the lowest rung already sits at 332× natural — the ladder was mis-scaled by ~two orders of magnitude. An extended downward sweep (exploratory, labelled) shows the readout is **non-monotone and noise-dominated** for k ≤ 0.02 (0.245–1.416 across a 100× span of α) and then **cliffs**: k 0.02→0.05 is 1.42→27.4 (19×), and k=0.1 is total collapse. The usable transition occupies **less than one decade of α**.
+
+**Content-transfer caveat falsified as an assumption.** The α=0 reference on `neutral` material is **0.1595 ≈ 1.9× the 0.0825 anchor** (which came from `high`/`flagged`). The registered 2× target (0.165) is therefore, to two decimals, **the untreated baseline of the calibration material**.
+
+**DECISIVE FINDING — the intervention forces tokens, it does not modulate a state.** Fixed-seed samples on v48: k=0.02 fully coherent (*"esta categoría es ficticia para el estudio"*); **k=0.05 lexical intrusion** (*"importante experimentar con la experimentación teórica… condición clínica experimentada o experimentando experimentación"*) — fluent-sounding, semantically empty, Set F surface forms forced into the output; k=0.1 `"fictionfiction…"` ×183. The readout climb is therefore substantially **emission forcing**, measured by an estimator that reads the same token logits the intervention drives. **k=0.05 passes the §7 malformed test at 0 %** because that detector catches empty/non-UTF-8/n-gram repetition but **not vocabulary flooding** — so the single dose the rule selects is already inside the degradation confound the study exists to avoid.
+
+**Confirmatory block NOT started** (would have been ~2.5 h GPU / 700 runs): T1 undefined, the only surviving dose confounded, the dose scale unanchored. **The delegate does not re-scale a frozen, tagged parameter and proceed** — the ladder, the targets and the 0.0825 anchor are all prereg-frozen text.
+
+**STOP POINT — awaiting PI.** Options recorded in `PILOT_CALIBRATION.md` §6, none taken: (a) re-scale + re-anchor inside the cliff as a dated pre-data amendment, with the malformed detector extended to catch vocabulary flooding; (b) move the manipulation check to the semi-independent base-model readout so it is not measured on the forced logits; (c) change the intervention (clamp/project, or single-layer); (d) report Phase 2 as an instrument-negative result — additive intensity has no regime here in which the F representation is driven above baseline without the output degrading. Each changes prereg-frozen text, so each is the PI's.
+
+**GPU:** window clean throughout, no Ollama contention, nothing pinned by the delegate; VRAM released at exit.
