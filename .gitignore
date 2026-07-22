@@ -46,3 +46,10 @@ phase1/materials/
 # run/judge manifests + completeness_report under phase1/data/ ARE tracked (data commit).
 phase1/data/readouts/
 phase1/data/readouts_smoke/
+
+# Phase 2 raw readouts: per-run J-lens dumps restricted to layers 17-26 x generation
+# positions (PREREG_PHASE2 s4/s7). Manifests, judge, completeness, rho_layers.json,
+# the lambda/cos table and the calibration ladder ARE tracked.
+phase2/data/readouts/
+phase2/data/readouts_smoke/
+phase2/data/pilot_readouts/

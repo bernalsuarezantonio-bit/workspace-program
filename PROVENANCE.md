@@ -626,3 +626,57 @@ C2_incoherent_L1    a7a599dc50c05505…  ( 995 chars)
 - **C2 confirmatory (Set A, one-sided L4>L1):** effect is strongly **opposite** to the directional hypothesis — L4 **1.66** < L1 **2.45**, t(19)=-10.0, one-sided p=1. H1 not supported.
 
 **Adjudication deferred.** Per the asymmetric-informativeness clause, interpretation (echo vs sustained holding; the informativeness of the positive C1 loading; the opposite-signed C2) is the PI's. This note records only that the prior chat narrative was stronger than any committed evidence, that no artifact backed it, and that the authoritative numbers now live in a committed, script-reproducible artifact. **The Phase 2 premise ("Phase 1 found recognition-as-echo … no sustained holding") should be re-examined against `RESULTS_PHASE1.md` before proceeding.**
+
+---
+
+## Phase 2 — Stage I1: prereg draft + power analysis (NO GPU) — 2026-07-22
+
+**Recorded:** 2026-07-22, delegate session, HEAD at draft time `f39df1f` (== `origin/main`, clean tree). **No GPU used. No new experimental data.** Nothing here is condition-bearing; the Phase 1 data commit `a715ce4` / digest `dc522361…` is untouched (re-asserted in-process as Gate 0 by the power script).
+
+**Deliverables:** `PREREG_PHASE2.md` (DRAFT, not frozen), `phase2/scripts/phase2_i1_power.py`, `phase2/data/phase2_i1_power.json`.
+
+### ⛔ BLOCKER — Stage I0 does not exist in the repository
+
+The session brief stated the I0 reconnaissance was "done and committed". Mechanical check at `f39df1f`:
+
+| check | result |
+|---|---|
+| commit whose message mentions I0 / phase 2 recon | **none** (`git log --all --oneline`, 22 commits, all Phase 0/1) |
+| `phase2/` directory before this commit | **absent** |
+| any path matching `*I0*` (tracked or untracked, excl. `.venv`/`vendor`) | **none** |
+| `git grep -i "stage I0"` over tracked `*.md` | **no hit** |
+| local vs `origin/main` | identical — nothing unpushed, nothing unfetched |
+
+Per the standing rule from **Incident #3** (*re-derive in cold; commit the artifact before citing it; do not reconcile*), the draft **cites no I0 result and invents no I0 number**. The three I0-dependent quantities — the Tikhonov `λ`, the per-layer round-trip fidelity `cos_l`, and the conditioning of the target construction — appear in `PREREG_PHASE2.md` §0 as **named open slots with pre-declared selection rules**, plus a pre-freeze gate **G1** whose threshold is reserved to the PI (choosing it after seeing `cos_l` would invert the preregistration). §§1,2,4,5,6,7 are freezable as written; §3 is complete as a *specification* and incomplete as an *instrument* until I0 exists.
+
+`ρ_l` and the intensity multipliers `k₁,k₂,k₃` were found **not** to be I0-dependent and are fully specified in the draft (§3.3 condition-free fresh forward pass; §3.4 calibration-pilot rule written before the pilot runs).
+
+### Premise redrafted from committed numbers only
+
+`PREREG_PHASE2.md` §1 retires the earlier chat premise ("recognition-as-echo … no sustained holding", which Incident #3 recorded as unbacked) and restates the premise from `RESULTS_PHASE1.md` @ `f39df1f`: natural sustainment of fictional status **exists** (A1 without-mention 0.0825 vs plausible floor 0.0418, diff 0.0385, t(19)=6.371, **p=4.117e-06**; A2 survives the Spanish-surface mask, diff 0.0815, t(19)=8.672, **p=4.956e-08**) and **does not alter behaviour** (200/200 diagnosis). Phase 2 asks whether that decoupling is a property of the architecture or of the *intensity*.
+
+### Power analysis (no GPU; reads only committed Phase 1 judge outcomes)
+
+Gate 0 re-asserted in-process (recomputed digest == `dc522361…` ✓). Exactly two real inputs; everything else is a labelled design assumption.
+
+| real input | value | source |
+|---|---|---|
+| baseline diagnosis rate | 200/200 = **1.000** (Jeffreys mean 0.9975) | `C1_DN_flagged_L1` |
+| between-vignette **ICC** of the binary judge outcome | **0.000** (raw moment estimate −0.0035) | `C2_incoherent_L1` (56/199) — the only non-ceiling confirmatory cell; a ceiling cell carries no clustering information |
+
+The ICC is estimated from k=20 clusters of n₀≈10 binary draws and cannot separate "no clustering" from "modest clustering" (per-vignette rates span 0.10–0.60, consistent with binomial noise at n≈10). Power is therefore reported at **ICC ∈ {0, 0.05, 0.15}** and R chosen against the inflated values. Estimators simulated are the registered ones (per-vignette OLS slope on dose score → one-sided sign-flip permutation; paired one-sided t as secondary), 20 000 sims, seed 20260722, α=0.025 (Bonferroni /2).
+
+**Pre-fixed rule → R = 7** (5 arms × 20 vignettes × 7 reps = **700 runs**): power ≥0.93 for a 10-point drop from ceiling at ICC=0.05 (0.83 at the pessimistic 0.15); R=5 gives 0.84/0.74. **Type-I under a true null: 0.000–0.021 across the grid** — the near-ceiling discrete DV makes the permutation test conservative, never anti-conservative (recorded as a property of the test). GPU budget at the Phase 1 measured rates (7.41 s/run gen, 3.37 s/run judge) ≈ **2.65 h**, fitting ≤3 h only in a clean window; two pre-declared mitigations are registered — readout dumps restricted to layers 17–26 × generation positions (~10× less I/O than Phase 1), and an **R→5 fallback triggered by the smoke gate's measured rate, not by results**.
+
+### Registered design decisions worth flagging to the PI
+
+1. **Central inferential threat named and instrumented.** A diagnosis drop under strong addition is confounded with generic degradation. The norm-matched random arm (`A4_rand`) is the direct control (registered test T2), and the v1 judge rubric's existing keys give a *reported-not-tested* discriminator: drop + rising `epistemic_flag` at flat malformed rate reads as fiction-holding; drop + rising malformed rate at flat `epistemic_flag` reads as degradation. No α is spent on it.
+2. **Joint reading of T1×T2 fixed in advance** (draft §5 table) so it cannot be selected after the fact.
+3. **Degraded arms are flagged, not dropped and not silently kept** (>15 % malformed ⇒ point reported and carried with the flag).
+4. **Landing verification is registered as verification of the manipulation, never as evidence of natural representation** (draft §6), with the `cos_l < 1` off-target caveat made binding on the write-up.
+
+### GPU deliberately not used
+
+The `ρ_l` pass was authorized as optional-now. It was **deferred**: it is condition-free and cheap (~3 min), but it is only meaningful once §3.2's `λ` and the surviving layer band exist, and any I0-driven change to the band would waste it. No VRAM was requested; no Ollama coexistence event.
+
+**STOP POINT — awaiting PI.** The draft is not frozen and the delegate does not tag. The PI's decisions are: (a) whether to direct that Stage I0 be run and committed, (b) the **G1** threshold on `min_l cos_l`, (c) pilot vignettes from inside vs outside the study 20, (d) R=7 confirm or override.

@@ -1,0 +1,1101 @@
+{
+  "gate0": {
+    "data_digest_recomputed": "dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1",
+    "data_digest_expected": "dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1",
+    "match": true
+  },
+  "icc_sensitivity": [
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 5,
+      "power_trend_primary": 0.457375,
+      "power_pairwise_topdose": 0.455375
+    },
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 7,
+      "power_trend_primary": 0.649875,
+      "power_pairwise_topdose": 0.61675
+    },
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 10,
+      "power_trend_primary": 0.805875,
+      "power_pairwise_topdose": 0.783375
+    },
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 5,
+      "power_trend_primary": 0.888375,
+      "power_pairwise_topdose": 0.87375
+    },
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 7,
+      "power_trend_primary": 0.972,
+      "power_pairwise_topdose": 0.96275
+    },
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 10,
+      "power_trend_primary": 0.99625,
+      "power_pairwise_topdose": 0.994375
+    },
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 5,
+      "power_trend_primary": 0.990625,
+      "power_pairwise_topdose": 0.98875
+    },
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 7,
+      "power_trend_primary": 0.99925,
+      "power_pairwise_topdose": 0.99875
+    },
+    {
+      "icc": 0.0,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 10,
+      "power_trend_primary": 0.999875,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 5,
+      "power_trend_primary": 0.392125,
+      "power_pairwise_topdose": 0.381125
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 7,
+      "power_trend_primary": 0.543625,
+      "power_pairwise_topdose": 0.5115
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 10,
+      "power_trend_primary": 0.671625,
+      "power_pairwise_topdose": 0.637125
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 5,
+      "power_trend_primary": 0.83525,
+      "power_pairwise_topdose": 0.816125
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 7,
+      "power_trend_primary": 0.93075,
+      "power_pairwise_topdose": 0.917
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 10,
+      "power_trend_primary": 0.97525,
+      "power_pairwise_topdose": 0.968625
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 5,
+      "power_trend_primary": 0.97625,
+      "power_pairwise_topdose": 0.9725
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 7,
+      "power_trend_primary": 0.994625,
+      "power_pairwise_topdose": 0.9915
+    },
+    {
+      "icc": 0.05,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 10,
+      "power_trend_primary": 0.99925,
+      "power_pairwise_topdose": 0.99875
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 5,
+      "power_trend_primary": 0.2965,
+      "power_pairwise_topdose": 0.2795
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 7,
+      "power_trend_primary": 0.413,
+      "power_pairwise_topdose": 0.35925
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "reps": 10,
+      "power_trend_primary": 0.48875,
+      "power_pairwise_topdose": 0.433875
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 5,
+      "power_trend_primary": 0.74125,
+      "power_pairwise_topdose": 0.71525
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 7,
+      "power_trend_primary": 0.826125,
+      "power_pairwise_topdose": 0.792
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "reps": 10,
+      "power_trend_primary": 0.8795,
+      "power_pairwise_topdose": 0.854375
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 5,
+      "power_trend_primary": 0.932,
+      "power_pairwise_topdose": 0.922625
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 7,
+      "power_trend_primary": 0.966125,
+      "power_pairwise_topdose": 0.9545
+    },
+    {
+      "icc": 0.15,
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "reps": 10,
+      "power_trend_primary": 0.98025,
+      "power_pairwise_topdose": 0.973
+    }
+  ],
+  "source": {
+    "judge": "phase1\\data\\judge_full.jsonl",
+    "data_commit": "a715ce4"
+  },
+  "base_cell": {
+    "cell": "C1_DN_flagged_L1",
+    "n": 200,
+    "k_diagnosis": 200,
+    "rate": 1.0,
+    "jeffreys_posterior_mean": 0.9975124378109452
+  },
+  "icc_estimate": {
+    "cell": "C2_incoherent_L1",
+    "k_vignettes": 20,
+    "n_total": 199,
+    "rate": 0.2814070351758794,
+    "MSB": 0.1969055805342502,
+    "MSW": 0.20391061452513962,
+    "n0": 9.949748743718594,
+    "icc_raw": -0.003464658076029527,
+    "icc": 0.0,
+    "per_vignette_rates": {
+      "v32": 0.3,
+      "v37": 0.4,
+      "v10": 0.3,
+      "v36": 0.2,
+      "v07": 0.5,
+      "v12": 0.4,
+      "v09": 0.3,
+      "v13": 0.3,
+      "v14": 0.3,
+      "v01": 0.6,
+      "v15": 0.1,
+      "v11": 0.3,
+      "v35": 0.1,
+      "v39": 0.1,
+      "v34": 0.2,
+      "v02": 0.1,
+      "v31": 0.3333333333333333,
+      "v40": 0.4,
+      "v38": 0.3,
+      "v33": 0.1
+    }
+  },
+  "assumptions": {
+    "baselines_simulated": [
+      0.9975,
+      0.99,
+      0.97
+    ],
+    "dose_ramp_fractions": [
+      0.25,
+      0.55,
+      1.0
+    ],
+    "alpha_per_test": 0.025,
+    "n_vignettes": 20,
+    "n_sims": 20000,
+    "seed": 20260722,
+    "primary_estimator": "per-vignette OLS slope on dose score; one-sided sign-flip permutation over 20 vignette slopes",
+    "secondary_estimator": "paired one-sided t, top dose vs baseline, df=19"
+  },
+  "grid": [
+    {
+      "p0": 0.9975,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9850000000000001,
+        0.9700000000000001,
+        0.9475
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.5354,
+      "power_pairwise_topdose": 0.5685
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9850000000000001,
+        0.9700000000000001,
+        0.9475
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.7669,
+      "power_pairwise_topdose": 0.7542
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9850000000000001,
+        0.9700000000000001,
+        0.9475
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 0.91925,
+      "power_pairwise_topdose": 0.9103
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.9725,
+        0.9425,
+        0.8975000000000001
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.9456,
+      "power_pairwise_topdose": 0.94295
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.9725,
+        0.9425,
+        0.8975000000000001
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.99305,
+      "power_pairwise_topdose": 0.9904
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.9725,
+        0.9425,
+        0.8975000000000001
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 0.9993,
+      "power_pairwise_topdose": 0.9993
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9600000000000001,
+        0.915,
+        0.8475
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.99745,
+      "power_pairwise_topdose": 0.9971
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9600000000000001,
+        0.915,
+        0.8475
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.99995,
+      "power_pairwise_topdose": 0.9998
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9600000000000001,
+        0.915,
+        0.8475
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.9475,
+        0.8875000000000001,
+        0.7975000000000001
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.9998,
+      "power_pairwise_topdose": 0.99975
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.9475,
+        0.8875000000000001,
+        0.7975000000000001
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.9475,
+        0.8875000000000001,
+        0.7975000000000001
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.9225000000000001,
+        0.8325,
+        0.6975
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.9225000000000001,
+        0.8325,
+        0.6975
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.9225000000000001,
+        0.8325,
+        0.6975
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.8725,
+        0.7225,
+        0.49750000000000005
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.8725,
+        0.7225,
+        0.49750000000000005
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.9975,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.8725,
+        0.7225,
+        0.49750000000000005
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9775,
+        0.9625,
+        0.94
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.4528,
+      "power_pairwise_topdose": 0.4472
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9775,
+        0.9625,
+        0.94
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.63825,
+      "power_pairwise_topdose": 0.61185
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9775,
+        0.9625,
+        0.94
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 0.80195,
+      "power_pairwise_topdose": 0.78275
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.965,
+        0.9349999999999999,
+        0.89
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.89165,
+      "power_pairwise_topdose": 0.8786
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.965,
+        0.9349999999999999,
+        0.89
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.97005,
+      "power_pairwise_topdose": 0.9617
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.965,
+        0.9349999999999999,
+        0.89
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 0.99575,
+      "power_pairwise_topdose": 0.99405
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9525,
+        0.9075,
+        0.84
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.9888,
+      "power_pairwise_topdose": 0.9861
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9525,
+        0.9075,
+        0.84
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.9988,
+      "power_pairwise_topdose": 0.99865
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9525,
+        0.9075,
+        0.84
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 0.99995,
+      "power_pairwise_topdose": 0.9999
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.94,
+        0.88,
+        0.79
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.9995,
+      "power_pairwise_topdose": 0.99935
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.94,
+        0.88,
+        0.79
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 0.99995
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.94,
+        0.88,
+        0.79
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.915,
+        0.825,
+        0.69
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.915,
+        0.825,
+        0.69
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.915,
+        0.825,
+        0.69
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.865,
+        0.715,
+        0.49
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.865,
+        0.715,
+        0.49
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.99,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.865,
+        0.715,
+        0.49
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9575,
+        0.9425,
+        0.9199999999999999
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.3149,
+      "power_pairwise_topdose": 0.3053
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9575,
+        0.9425,
+        0.9199999999999999
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.43695,
+      "power_pairwise_topdose": 0.4253
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.05,
+      "p_doses": [
+        0.9575,
+        0.9425,
+        0.9199999999999999
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 0.58575,
+      "power_pairwise_topdose": 0.56645
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.945,
+        0.9149999999999999,
+        0.87
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.7569,
+      "power_pairwise_topdose": 0.73985
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.945,
+        0.9149999999999999,
+        0.87
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.8885,
+      "power_pairwise_topdose": 0.8708
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.1,
+      "p_doses": [
+        0.945,
+        0.9149999999999999,
+        0.87
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 0.96735,
+      "power_pairwise_topdose": 0.95675
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9325,
+        0.8875,
+        0.82
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.95025,
+      "power_pairwise_topdose": 0.94185
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9325,
+        0.8875,
+        0.82
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.99245,
+      "power_pairwise_topdose": 0.98865
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.15,
+      "p_doses": [
+        0.9325,
+        0.8875,
+        0.82
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 0.9995,
+      "power_pairwise_topdose": 0.99915
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.9199999999999999,
+        0.86,
+        0.77
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.99375,
+      "power_pairwise_topdose": 0.9917
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.9199999999999999,
+        0.86,
+        0.77
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 0.99945,
+      "power_pairwise_topdose": 0.9993
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.2,
+      "p_doses": [
+        0.9199999999999999,
+        0.86,
+        0.77
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.895,
+        0.8049999999999999,
+        0.6699999999999999
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 0.9999,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.895,
+        0.8049999999999999,
+        0.6699999999999999
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.3,
+      "p_doses": [
+        0.895,
+        0.8049999999999999,
+        0.6699999999999999
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.845,
+        0.695,
+        0.47
+      ],
+      "reps": 5,
+      "n_per_arm": 100,
+      "n_total_runs": 500,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.845,
+        0.695,
+        0.47
+      ],
+      "reps": 7,
+      "n_per_arm": 140,
+      "n_total_runs": 700,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    },
+    {
+      "p0": 0.97,
+      "top_drop": 0.5,
+      "p_doses": [
+        0.845,
+        0.695,
+        0.47
+      ],
+      "reps": 10,
+      "n_per_arm": 200,
+      "n_total_runs": 1000,
+      "power_trend_primary": 1.0,
+      "power_pairwise_topdose": 1.0
+    }
+  ],
+  "type_i": [
+    {
+      "p0": 0.9975,
+      "reps": 5,
+      "power_trend_primary": 0.0,
+      "power_pairwise_topdose": 0.0
+    },
+    {
+      "p0": 0.9975,
+      "reps": 7,
+      "power_trend_primary": 0.0,
+      "power_pairwise_topdose": 0.00025
+    },
+    {
+      "p0": 0.9975,
+      "reps": 10,
+      "power_trend_primary": 0.00025,
+      "power_pairwise_topdose": 0.000875
+    },
+    {
+      "p0": 0.99,
+      "reps": 5,
+      "power_trend_primary": 0.002625,
+      "power_pairwise_topdose": 0.005125
+    },
+    {
+      "p0": 0.99,
+      "reps": 7,
+      "power_trend_primary": 0.004875,
+      "power_pairwise_topdose": 0.010125
+    },
+    {
+      "p0": 0.99,
+      "reps": 10,
+      "power_trend_primary": 0.00925,
+      "power_pairwise_topdose": 0.016375
+    },
+    {
+      "p0": 0.97,
+      "reps": 5,
+      "power_trend_primary": 0.01575,
+      "power_pairwise_topdose": 0.01875
+    },
+    {
+      "p0": 0.97,
+      "reps": 7,
+      "power_trend_primary": 0.021,
+      "power_pairwise_topdose": 0.02325
+    },
+    {
+      "p0": 0.97,
+      "reps": 10,
+      "power_trend_primary": 0.0195,
+      "power_pairwise_topdose": 0.02175
+    }
+  ]
+}
