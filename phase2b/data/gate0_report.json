@@ -1,0 +1,46 @@
+{
+  "G1_n_runs": 600,
+  "G1_per_arm": {
+    "B0_none": 200,
+    "B1_full": 200,
+    "B3_rand": 200
+  },
+  "G1_duplicates": 0,
+  "G1_pass": true,
+  "G2_judge_total": 600,
+  "G2_judge_errors": 0,
+  "G2_missing": [],
+  "G2_pass": true,
+  "G3_malformed": 0,
+  "G3_pass": true,
+  "G4_digest": "aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592",
+  "G4_expected": "aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592",
+  "G4_pass": true,
+  "G5_runs_with_bad_touch": 0,
+  "G5_examples": [],
+  "G5_totals": {
+    "B0_none": {
+      "gen": 0,
+      "ro": 0
+    },
+    "B1_full": {
+      "gen": 39800,
+      "ro": 39800
+    },
+    "B3_rand": {
+      "gen": 39800,
+      "ro": 39800
+    }
+  },
+  "G5_pass": true,
+  "G6_model_digests": [
+    "Qwen/Qwen2.5-7B-Instruct@a09a3545"
+  ],
+  "G6_lens_shas": [
+    "3b3ab44cd67c2ad1f26e9f66eb269db31289b6328585b0459a47e6d3814cba29"
+  ],
+  "G6_pass": true,
+  "G7_prereg_sha_at_tag": "f17ac3656177db8a35586201addfc6c3d29d470d66897f397ebb4ab97a3dd8c5",
+  "G7_note": "verified out-of-band: git cat-file blob d9f037f:PREREG_PHASE2B.md | sha256sum",
+  "GATE0_PASS": true
+}

@@ -1,0 +1,462 @@
+{
+  "gate0": {
+    "data_commit": "827681f",
+    "digest": "aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592",
+    "match": true
+  },
+  "prereg_tag": "prereg-phase2b-v1",
+  "prereg_commit": "d9f037f",
+  "alpha_per_test": 0.0125,
+  "n_perm": 4000,
+  "perm_seed": 20260722,
+  "mention_regex": "inventad|estudio|no reconocid|fictici",
+  "arm_overall": {
+    "B0_none": {
+      "dv1_diagnosis": 1.0,
+      "dv2_mention": 0.475,
+      "n": 200
+    },
+    "B1_full": {
+      "dv1_diagnosis": 1.0,
+      "dv2_mention": 0.285,
+      "n": 200
+    },
+    "B3_rand": {
+      "dv1_diagnosis": 1.0,
+      "dv2_mention": 0.475,
+      "n": 200
+    }
+  },
+  "per_vignette_rates": {
+    "dv1_diagnosis": {
+      "B0_none": {
+        "v01": 1.0,
+        "v02": 1.0,
+        "v07": 1.0,
+        "v09": 1.0,
+        "v10": 1.0,
+        "v11": 1.0,
+        "v12": 1.0,
+        "v13": 1.0,
+        "v14": 1.0,
+        "v15": 1.0,
+        "v31": 1.0,
+        "v32": 1.0,
+        "v33": 1.0,
+        "v34": 1.0,
+        "v35": 1.0,
+        "v36": 1.0,
+        "v37": 1.0,
+        "v38": 1.0,
+        "v39": 1.0,
+        "v40": 1.0
+      },
+      "B1_full": {
+        "v01": 1.0,
+        "v02": 1.0,
+        "v07": 1.0,
+        "v09": 1.0,
+        "v10": 1.0,
+        "v11": 1.0,
+        "v12": 1.0,
+        "v13": 1.0,
+        "v14": 1.0,
+        "v15": 1.0,
+        "v31": 1.0,
+        "v32": 1.0,
+        "v33": 1.0,
+        "v34": 1.0,
+        "v35": 1.0,
+        "v36": 1.0,
+        "v37": 1.0,
+        "v38": 1.0,
+        "v39": 1.0,
+        "v40": 1.0
+      },
+      "B3_rand": {
+        "v01": 1.0,
+        "v02": 1.0,
+        "v07": 1.0,
+        "v09": 1.0,
+        "v10": 1.0,
+        "v11": 1.0,
+        "v12": 1.0,
+        "v13": 1.0,
+        "v14": 1.0,
+        "v15": 1.0,
+        "v31": 1.0,
+        "v32": 1.0,
+        "v33": 1.0,
+        "v34": 1.0,
+        "v35": 1.0,
+        "v36": 1.0,
+        "v37": 1.0,
+        "v38": 1.0,
+        "v39": 1.0,
+        "v40": 1.0
+      }
+    },
+    "dv2_mention": {
+      "B0_none": {
+        "v01": 0.7,
+        "v02": 0.6,
+        "v07": 0.4,
+        "v09": 0.4,
+        "v10": 0.5,
+        "v11": 0.3,
+        "v12": 0.3,
+        "v13": 0.4,
+        "v14": 0.3,
+        "v15": 0.8,
+        "v31": 0.4,
+        "v32": 0.7,
+        "v33": 0.5,
+        "v34": 0.6,
+        "v35": 0.3,
+        "v36": 0.5,
+        "v37": 0.3,
+        "v38": 0.4,
+        "v39": 0.6,
+        "v40": 0.5
+      },
+      "B1_full": {
+        "v01": 0.1,
+        "v02": 0.4,
+        "v07": 0.3,
+        "v09": 0.4,
+        "v10": 0.0,
+        "v11": 0.2,
+        "v12": 0.2,
+        "v13": 0.4,
+        "v14": 0.3,
+        "v15": 0.5,
+        "v31": 0.0,
+        "v32": 0.2,
+        "v33": 0.2,
+        "v34": 0.3,
+        "v35": 0.4,
+        "v36": 0.2,
+        "v37": 0.5,
+        "v38": 0.4,
+        "v39": 0.3,
+        "v40": 0.4
+      },
+      "B3_rand": {
+        "v01": 0.7,
+        "v02": 0.9,
+        "v07": 0.5,
+        "v09": 0.7,
+        "v10": 0.5,
+        "v11": 0.5,
+        "v12": 0.2,
+        "v13": 0.6,
+        "v14": 0.3,
+        "v15": 0.6,
+        "v31": 0.5,
+        "v32": 0.4,
+        "v33": 0.4,
+        "v34": 0.3,
+        "v35": 0.1,
+        "v36": 0.3,
+        "v37": 0.5,
+        "v38": 0.4,
+        "v39": 0.7,
+        "v40": 0.4
+      }
+    }
+  },
+  "confirmatory": [
+    {
+      "test": "T1",
+      "dv": "diagnosis",
+      "contrast": "B1_full - B0_none",
+      "n_vignettes": 20,
+      "estimate_mean_diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "p_permutation_one_sided": 1.0,
+      "alpha": 0.0125,
+      "verdict": "not significant",
+      "secondary_paired_t": {
+        "t": Infinity,
+        "df": 19,
+        "sd_diff": 0.0,
+        "se": 0.0,
+        "significant_one_sided": false
+      },
+      "per_vignette_diffs": {
+        "v01": 0.0,
+        "v02": 0.0,
+        "v07": 0.0,
+        "v09": 0.0,
+        "v10": 0.0,
+        "v11": 0.0,
+        "v12": 0.0,
+        "v13": 0.0,
+        "v14": 0.0,
+        "v15": 0.0,
+        "v31": 0.0,
+        "v32": 0.0,
+        "v33": 0.0,
+        "v34": 0.0,
+        "v35": 0.0,
+        "v36": 0.0,
+        "v37": 0.0,
+        "v38": 0.0,
+        "v39": 0.0,
+        "v40": 0.0
+      }
+    },
+    {
+      "test": "T2",
+      "dv": "mention",
+      "contrast": "B1_full - B0_none",
+      "n_vignettes": 20,
+      "estimate_mean_diff": -0.19,
+      "ci95": [
+        -0.29060618666233623,
+        -0.08939381333766376
+      ],
+      "p_permutation_one_sided": 0.0007498125468632841,
+      "alpha": 0.0125,
+      "verdict": "SIGNIFICANT",
+      "secondary_paired_t": {
+        "t": -3.952739023244134,
+        "df": 19,
+        "sd_diff": 0.21496633763403394,
+        "se": 0.04806793438238712,
+        "significant_one_sided": true
+      },
+      "per_vignette_diffs": {
+        "v01": -0.6,
+        "v02": -0.19999999999999996,
+        "v07": -0.10000000000000003,
+        "v09": 0.0,
+        "v10": -0.5,
+        "v11": -0.09999999999999998,
+        "v12": -0.09999999999999998,
+        "v13": 0.0,
+        "v14": 0.0,
+        "v15": -0.30000000000000004,
+        "v31": -0.4,
+        "v32": -0.49999999999999994,
+        "v33": -0.3,
+        "v34": -0.3,
+        "v35": 0.10000000000000003,
+        "v36": -0.3,
+        "v37": 0.2,
+        "v38": 0.0,
+        "v39": -0.3,
+        "v40": -0.09999999999999998
+      }
+    },
+    {
+      "test": "S1",
+      "dv": "diagnosis",
+      "contrast": "B1_full - B3_rand",
+      "n_vignettes": 20,
+      "estimate_mean_diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "p_permutation_one_sided": 1.0,
+      "alpha": 0.0125,
+      "verdict": "not significant",
+      "secondary_paired_t": {
+        "t": Infinity,
+        "df": 19,
+        "sd_diff": 0.0,
+        "se": 0.0,
+        "significant_one_sided": false
+      },
+      "per_vignette_diffs": {
+        "v01": 0.0,
+        "v02": 0.0,
+        "v07": 0.0,
+        "v09": 0.0,
+        "v10": 0.0,
+        "v11": 0.0,
+        "v12": 0.0,
+        "v13": 0.0,
+        "v14": 0.0,
+        "v15": 0.0,
+        "v31": 0.0,
+        "v32": 0.0,
+        "v33": 0.0,
+        "v34": 0.0,
+        "v35": 0.0,
+        "v36": 0.0,
+        "v37": 0.0,
+        "v38": 0.0,
+        "v39": 0.0,
+        "v40": 0.0
+      }
+    },
+    {
+      "test": "S2",
+      "dv": "mention",
+      "contrast": "B1_full - B3_rand",
+      "n_vignettes": 20,
+      "estimate_mean_diff": -0.19,
+      "ci95": [
+        -0.29726121217309687,
+        -0.08273878782690312
+      ],
+      "p_permutation_one_sided": 0.0012496875781054736,
+      "alpha": 0.0125,
+      "verdict": "SIGNIFICANT",
+      "secondary_paired_t": {
+        "t": -3.707491197826898,
+        "df": 19,
+        "sd_diff": 0.22918620331397285,
+        "se": 0.05124759301151308,
+        "significant_one_sided": true
+      },
+      "per_vignette_diffs": {
+        "v01": -0.6,
+        "v02": -0.5,
+        "v07": -0.2,
+        "v09": -0.29999999999999993,
+        "v10": -0.5,
+        "v11": -0.3,
+        "v12": 0.0,
+        "v13": -0.19999999999999996,
+        "v14": 0.0,
+        "v15": -0.09999999999999998,
+        "v31": -0.5,
+        "v32": -0.2,
+        "v33": -0.2,
+        "v34": 0.0,
+        "v35": 0.30000000000000004,
+        "v36": -0.09999999999999998,
+        "v37": 0.0,
+        "v38": 0.0,
+        "v39": -0.39999999999999997,
+        "v40": 0.0
+      }
+    }
+  ],
+  "joint_table_cell": {
+    "T1_significant": false,
+    "T2_significant": true,
+    "registered_reading": "Dissociated verbal channel"
+  },
+  "exploratory": {
+    "heterogeneity": {
+      "dv1": {
+        "B0_none": {
+          "min": 1.0,
+          "max": 1.0,
+          "sd": 0.0
+        },
+        "B1_full": {
+          "min": 1.0,
+          "max": 1.0,
+          "sd": 0.0
+        },
+        "B3_rand": {
+          "min": 1.0,
+          "max": 1.0,
+          "sd": 0.0
+        }
+      },
+      "dv2": {
+        "B0_none": {
+          "min": 0.3,
+          "max": 0.8,
+          "sd": 0.15174424466672098
+        },
+        "B1_full": {
+          "min": 0.0,
+          "max": 0.5,
+          "sd": 0.1460893742308382
+        },
+        "B3_rand": {
+          "min": 0.1,
+          "max": 0.9,
+          "sd": 0.19159991209755153
+        }
+      }
+    },
+    "divergence_J0b": {
+      "source": "phase2b/data/ablation_effect.json (Stage J0-b, greedy, seed-matched)",
+      "note": "the confirmatory arms are NOT seed-matched (run_seed = SEED_BASE + canonical_index, which differs by arm), so a token-level divergence point is undefined there; pairing in the confirmatory design is at the vignette level, which is what the s5 estimator uses",
+      "n": 20,
+      "never_diverging": [
+        "v31",
+        "v36",
+        "v37"
+      ],
+      "median": 12.0,
+      "min": 8,
+      "max": 130,
+      "quartiles": [
+        12.0,
+        12.0,
+        71.0
+      ],
+      "per_vignette": {
+        "v01": 8,
+        "v02": 12,
+        "v07": 12,
+        "v09": 71,
+        "v10": 12,
+        "v11": 106,
+        "v12": 12,
+        "v13": 12,
+        "v14": 30,
+        "v15": 12,
+        "v31": null,
+        "v32": 130,
+        "v33": 46,
+        "v34": 86,
+        "v35": 12,
+        "v36": null,
+        "v37": null,
+        "v38": 12,
+        "v39": 43,
+        "v40": 92
+      }
+    },
+    "never_diverging_focus": {
+      "v31": {
+        "dv1_B0": 1.0,
+        "dv1_B1": 1.0,
+        "dv2_B0": 0.4,
+        "dv2_B1": 0.0
+      },
+      "v36": {
+        "dv1_B0": 1.0,
+        "dv1_B1": 1.0,
+        "dv2_B0": 0.5,
+        "dv2_B1": 0.2
+      },
+      "v37": {
+        "dv1_B0": 1.0,
+        "dv1_B1": 1.0,
+        "dv2_B0": 0.3,
+        "dv2_B1": 0.5
+      }
+    },
+    "f_loading_instruct_lens_circular": {
+      "B0_none": {
+        "mean": 0.22222230075376884,
+        "sd": 0.2587587725613408,
+        "n": 200
+      },
+      "B1_full": {
+        "mean": 0.054170833919598,
+        "sd": 0.08794377435048455,
+        "n": 200
+      },
+      "B3_rand": {
+        "mean": 0.23348315653266333,
+        "sd": 0.2677905207537415,
+        "n": 200
+      }
+    }
+  }
+}
