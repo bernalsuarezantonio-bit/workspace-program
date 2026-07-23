@@ -202,4 +202,4 @@ Opening lines, verbatim (first ~200 characters; newlines shown as ` / `):
 
 **Self-reference note.** A file cannot contain the hash of the commit that introduces it — the hash is a function of the content, so the reference is a fixed point that does not exist. This report's content was therefore committed first, and this line stamped by the immediately following commit, which is the honest and verifiable form:
 
-**Report content first committed at:** `PENDING_C1`
+**Report content first committed at:** `1440eae8ea7d1b1e583edd1d4691f72aada0d658`
