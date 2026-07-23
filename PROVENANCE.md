@@ -868,3 +868,30 @@ Gate 0 re-asserted. Real inputs: DV1 diagnosis **200/200 = 1.000** (ICC **not es
 **Timing:** smoke 0.5 min gen + 0.9 min judge (PASS 5/5); full generation **58.0 min** (5.80 s/run); full judge **32.0 min**. Total **≈1.5 h**, inside the ≤3 h window and under the 2.05 h projection. GPU window clean throughout — no Ollama contention, nothing pinned by the delegate.
 
 **No aggregates computed. Neither DV was computed.** DV1 (diagnosis rate) and DV2 (ES textual mention, a regex over `generation_text`) are both left entirely to the analysis session, as is the §7 arm-level degradation gate. **Analysis is a SEPARATE session against this commit, Gate 0 first.**
+
+---
+
+## Phase 2b — Stage J1 addendum: cold re-verification + orphan `gemma2:27b` process during the run — 2026-07-23
+
+**Cold re-verification of the data commit `827681f`** (run in a fresh session, no state carried): `verify_completeness_2b.py --full` re-derives **N = 600, 0 duplicate trial_ids, 0 runs with problems, 200 runs per arm, judge 600/600 with 0 parse errors, 0 malformed flagged**, and the data content digest recomputes independently to **`aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592`** — identical to the recorded value. **COMPLETE = true.** No re-commit of data was needed: `827681f` was already committed and pushed before the previous session ended (working tree clean, local == `origin/main`); this addendum adds only the note below.
+
+### Orphan `gemma2:27b` coexisted with the confirmatory run — evidence, not reconstruction
+
+The PI reported that `gemma2:27b` auto-reloaded via `llama-server` and coexisted with the lens process during the run. **The delegate did not log VRAM during generation** (the transient run logs were removed at the data commit), so rather than record an approximate timestamp from memory, the claim was checked against the Ollama server log, which is independent evidence with its own timestamps.
+
+**Source:** `%LOCALAPPDATA%\Ollama\server-1.log` (rotated, 374 MB, covers the run window).
+
+| time (local, +01:00) | event |
+|---|---|
+| **2026-07-22 12:35:18.168** | `sched.go` selects `llama-server` for blob `sha256-d7e4b00a…`; `msg="requested context size too large for model" num_ctx=16384 n_ctx_train=8192` |
+| 2026-07-22 12:35:18.175 | `gpu memory id=0 library=CUDA available="29.8 GiB" free="30.3 GiB"` — GPU essentially empty; the lens process had not started |
+| **2026-07-22 12:35:26.953 / .972** | `llama-server started` — **two starts 19 ms apart** |
+| 2026-07-22 12:35:26.971 | `sched.go:739 msg="loaded runner"` |
+
+**Blob identification:** `sha256-d7e4b00a7d7a8d03d4eed9b0f3f61a427e9f0fc5dea6aeb414e41dee23dc8ecc` resolves via `.ollama/models/manifests/registry.ollama.ai/library/gemma2/27b` → **`gemma2:27b`**, confirmed.
+
+**Why this is the orphan and not our own judge.** (i) The load happened at **12:35:26**, whereas the confirmatory **generation** began at **12:38:12** (earliest readout mtime) and the **judge** did not start until **≈13:36** (`run_manifest_full.jsonl` mtime 13:36:03, `judge_full.jsonl` 14:08:29). (ii) It requested **`num_ctx=16384`**, which `judge_2b.py` never sets — our judge runs at the Ollama default (`ollama ps` reported CONTEXT 8192 for the judge phase). (iii) The paired start 19 ms apart is the signature of the residual re-spawn documented since Stage 0.2. **Nothing was evicted by the delegate**, per the standing rule.
+
+**Run window and impact.** Generation **12:38:12 → 13:36:03** (58.0 min) with `gemma2:27b` resident throughout; judge **13:36 → 14:08** (32.0 min). Measured **5.80 s/run** in the confirmatory block versus **5.49 s/run** in the smoke gate, which ran before the reload — a **~6 % slowdown**, consistent with coexistence. **No OOM, no data loss, no exclusions:** 600/600 complete, 0 problems, 0 malformed, 0 judge errors. The coexistence is recorded as a process fact; it did not touch the data.
+
+**Standing GPU rule reaffirmed:** the host pins every loaded Ollama model and a residual process re-spawns runners on its own — coordinate VRAM windows with the PI, never evict.
