@@ -5,7 +5,7 @@
     "workspace-program": "C:\\Users\\EDITOR\\Desktop\\workspace-program",
     "reification-gradient": "C:\\Users\\EDITOR\\Desktop\\reification-gradient (read-only)"
   },
-  "n_entries": 85,
+  "n_entries": 95,
   "entries": [
     {
       "study": "S1",
@@ -469,6 +469,96 @@
       "commit": "fd3ff52",
       "repo": "reification-gradient",
       "note": "raw 84.2%"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.dn_flagged_high_L1.any_rate",
+      "value": 0.6583,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "79/120 = 65.8%; SUPERSEDES the uncommitted 66.7% chat claim (off by one response)"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.dn_flagged_high_L1.n",
+      "value": 120,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "20 high vignettes x 3 reps x 2 families"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.dn_flagged_high_L1.diagnosis1",
+      "value": 120,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "all 120 judged diagnosis=1"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.pattern.inventad",
+      "value": 55,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "0.4583 of 120"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.pattern.ficticio",
+      "value": 8,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "0.0667 of 120"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.pattern.no_reconocid",
+      "value": 44,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "0.3667 of 120"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.pattern.para_un_estudio",
+      "value": 41,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "0.3417 of 120"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.pattern.no_corresponde",
+      "value": 24,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "0.2 of 120"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.pattern.hipotetic",
+      "value": 9,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "0.075 of 120"
+    },
+    {
+      "study": "S1",
+      "id": "s1.mention.pattern.no_existe",
+      "value": 2,
+      "source_file": "paper/mentions_behavioral.json",
+      "commit": "f991c55",
+      "repo": "workspace-program",
+      "note": "0.0167 of 120"
     },
     {
       "study": "S1",

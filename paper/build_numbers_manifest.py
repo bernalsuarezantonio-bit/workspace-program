@@ -123,7 +123,25 @@ def main() -> int:
         add("S1", f"s1.judge_alpha.{var}.judge_corater", a,
             "phase4/validation/AGREEMENT_RESULTS.md", "fd3ff52", R, f"raw {raw}")
 
-    # recognition probe (the only 66.7% in the corpus: anchor_dpdr, mistral, 20/30)
+    # mention analysis, DN_flagged x high x L1 (re-derived at W1; never committed before).
+    # Corrects the prior chat claim of 66.7%: the actual any-mention rate is 79/120.
+    men = wp_json("paper/mentions_behavioral.json")["summary"]
+    mc = wp_commit("paper/mentions_behavioral.json")
+    add("S1", "s1.mention.dn_flagged_high_L1.any_rate", men["any_mention_rate"],
+        "paper/mentions_behavioral.json", mc, "workspace-program",
+        f"{men['any_mention_count']}/{men['n_responses']} = {men['any_mention_rate_pct']}%; "
+        "SUPERSEDES the uncommitted 66.7% chat claim (off by one response)")
+    add("S1", "s1.mention.dn_flagged_high_L1.n", men["n_responses"],
+        "paper/mentions_behavioral.json", mc, "workspace-program",
+        "20 high vignettes x 3 reps x 2 families")
+    add("S1", "s1.mention.dn_flagged_high_L1.diagnosis1", men["n_diagnosis_1"],
+        "paper/mentions_behavioral.json", mc, "workspace-program", "all 120 judged diagnosis=1")
+    for lab, c in men["per_pattern_counts"].items():
+        add("S1", f"s1.mention.pattern.{lab.replace('*','').replace(' ','_')}", c,
+            "paper/mentions_behavioral.json", mc, "workspace-program",
+            f"{men['per_pattern_rate'][lab]} of 120")
+
+    # recognition probe (anchor_dpdr, mistral, 20/30 = 0.6667)
     add("S1", "s1.recognition.anchor_dpdr.mistral", round(20 / 30, 4),
         "phase2/recognition_probe/tabla_resumen.md", "5382d9b", R,
         "20/30 = 0.6667 (66.7%); the DPDR real-anchor recognized by mistral-small3.1:24b")
