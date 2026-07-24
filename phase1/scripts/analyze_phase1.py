@@ -1,6 +1,6 @@
 # Copyright 2026 — Phase 1 delegate. Analysis (separate session, post-data).
 """COLD re-derivation of the Phase 1 confirmatory analysis, run against the
-committed data (commit a715ce4, data_digest dc522361, N=800). Gate 0 is
+committed data (commit 8046a12, data_digest dc522361, N=800). Gate 0 is
 re-asserted in-process before any loading is computed. Implements the
 preregistered §2 aggregation EXACTLY as the frozen power-analysis reference
 (phase0/scripts/phase1_p0_power.py:loading_for_rep): band 17-26, generation
@@ -40,7 +40,7 @@ TCRIT_2SIDED = 2.433                  # t_{0.9875,19}
 TCRIT_1SIDED = 2.093                  # t_{0.975,19}
 
 CELLS = ["C1_DN_flagged_L1", "C1_DN_plausible_L1", "C2_incoherent_L4", "C2_incoherent_L1"]
-DATA_COMMIT = "a715ce4"
+DATA_COMMIT = "8046a12"
 DATA_DIGEST = "dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1"
 PREREG_SHA = "bedbcc78f9dc261ffd789dc55097bbd9c997c4db9d3e63077489623ae05f55d5"
 LENS_SHA = "3b3ab44cd67c2ad1f26e9f66eb269db31289b6328585b0459a47e6d3814cba29"
@@ -397,7 +397,7 @@ def write_report(R):
     L.append(f"**Data commit** `{g['data_commit']}` · **data_digest** `{g['data_digest_recomputed']}` "
              f"({'MATCH' if g['data_digest_match'] else 'MISMATCH'} vs recorded) · "
              f"**N** {g['n_runs']} / {g['n_duplicate_ids']} dup.\n")
-    L.append(f"**Seal chain** tag `prereg-phase1-v1` → `109166a` → `PREREG_PHASE1.md` sha256 `{g['prereg_sha256']}`. "
+    L.append(f"**Seal chain** tag `prereg-phase1-v1` → `4fe4d8d` → `PREREG_PHASE1.md` sha256 `{g['prereg_sha256']}`. "
              f"Lens `.pt` `{g['lens_pt_sha256']}` · model `{g['model_digest']}`.\n")
     L.append("Analysis is a cold re-derivation from the committed readouts by "
              "`phase1/scripts/analyze_phase1.py`, implementing the frozen §2 aggregation "

@@ -3,7 +3,7 @@
 """Phase 2b / Stage J0 power analysis — projection ablation, 3 arms, 2 DVs.
 
 NO GPU. NO new data. Both DVs are anchored on REAL Phase 1 rates from the
-committed data commit a715ce4 (Gate 0 re-asserted in-process):
+committed data commit 8046a12 (Gate 0 re-asserted in-process):
 
   DV1 diagnosis rate      200/200 = 1.000 in C1_DN_flagged_L1 (at ceiling)
   DV2 ES textual mention  92/200 = 0.460, recomputed per vignette from the
@@ -212,7 +212,7 @@ def main() -> int:
         print(f"  R={R:2d}  {budget[str(R)]['n_total_runs']:4d} runs  "
               f"{budget[str(R)]['est_hours']:.2f} h")
 
-    out = {"gate0": g0, "source_data_commit": "a715ce4", "cell": CELL,
+    out = {"gate0": g0, "source_data_commit": "8046a12", "cell": CELL,
            "arms": ["B0_none", "B1_full", "B3_rand"],
            "contrasts": {"intervention": "B1_full - B0_none",
                          "specificity": "B1_full - B3_rand"},

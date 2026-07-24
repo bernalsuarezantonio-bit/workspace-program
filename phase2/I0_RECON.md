@@ -1,8 +1,8 @@
 # Stage I0 — reconnaissance for the Phase 2 activation-addition instrument
 
-**Recorded:** 2026-07-22, `[host]`, delegate session. **Cold re-derivation.** **NO GPU** (CPU linear algebra only), **no generation, no conditions, no token-set scoring of any run.** Nothing here is condition-bearing; the Phase 1 data commit `a715ce4` / digest `dc522361…` is untouched.
+**Recorded:** 2026-07-22, `[host]`, delegate session. **Cold re-derivation.** **NO GPU** (CPU linear algebra only), **no generation, no conditions, no token-set scoring of any run.** Nothing here is condition-bearing; the Phase 1 data commit `8046a12` / digest `dc522361…` is untouched.
 
-**Script** `phase2/scripts/i0_recon.py` · **machine-readable** `phase2/data/i0_recon.json` · run against `PREREG_PHASE2.md` (DRAFT) at `231fb84`.
+**Script** `phase2/scripts/i0_recon.py` · **machine-readable** `phase2/data/i0_recon.json` · run against `PREREG_PHASE2.md` (DRAFT) at `9809ea7`.
 
 **Standing rule applied (PI, 2026-07-22): every stage report is committed — a report without a hash does not exist.** The prior chat PDF is **hypothesis, not source**; nothing in it is cited here. Every number below is produced by the script above from pinned artifacts.
 

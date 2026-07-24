@@ -3,7 +3,7 @@
 """Phase 2 / Stage I1 power analysis — activation-addition dose-response on P(diagnosis).
 
 NO GPU. NO new data. Reads only the committed Phase 1 judge outcomes (data commit
-`a715ce4`) to estimate the *clustering* of the binary DV by vignette, then runs a
+`8046a12`) to estimate the *clustering* of the binary DV by vignette, then runs a
 Monte-Carlo power study for the I1 five-arm design under the registered estimators.
 
 Two things are estimated from real data, nothing else:
@@ -231,7 +231,7 @@ def main() -> int:
     out = {
         "gate0": g0,
         "icc_sensitivity": sens,
-        "source": {"judge": str(JUDGE.relative_to(ROOT)), "data_commit": "a715ce4"},
+        "source": {"judge": str(JUDGE.relative_to(ROOT)), "data_commit": "8046a12"},
         "base_cell": {"cell": BASE_CELL, "n": base_n, "k_diagnosis": base_k,
                       "rate": base_k / base_n,
                       "jeffreys_posterior_mean": (base_k + 0.5) / (base_n + 1)},

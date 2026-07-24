@@ -48,16 +48,16 @@
 | `s1.judge_alpha.treatment_recommended.judge_corater` | 0.35 — raw 73.8% | `phase4/validation/AGREEMENT_RESULTS.md` | `fd3ff52` |
 | `s1.judge_alpha.differential_offered.judge_corater` | 0.717 — raw 99.4% | `phase4/validation/AGREEMENT_RESULTS.md` | `fd3ff52` |
 | `s1.judge_alpha.epistemic_flag.judge_corater` | 0.547 — raw 84.2% | `phase4/validation/AGREEMENT_RESULTS.md` | `fd3ff52` |
-| `s1.mention.dn_flagged_high_L1.any_rate` | 0.6583 — 79/120 = 65.8%; SUPERSEDES the uncommitted 66.7% chat claim (off by one response) | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.dn_flagged_high_L1.n` | 120 — 20 high vignettes x 3 reps x 2 families | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.dn_flagged_high_L1.diagnosis1` | 120 — all 120 judged diagnosis=1 | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.pattern.inventad` | 55 — 0.4583 of 120 | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.pattern.ficticio` | 8 — 0.0667 of 120 | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.pattern.no_reconocid` | 44 — 0.3667 of 120 | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.pattern.para_un_estudio` | 41 — 0.3417 of 120 | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.pattern.no_corresponde` | 24 — 0.2 of 120 | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.pattern.hipotetic` | 9 — 0.075 of 120 | `paper/mentions_behavioral.json` | `f991c55` |
-| `s1.mention.pattern.no_existe` | 2 — 0.0167 of 120 | `paper/mentions_behavioral.json` | `f991c55` |
+| `s1.mention.dn_flagged_high_L1.any_rate` | 0.6583 — 79/120 = 65.8%; SUPERSEDES the uncommitted 66.7% chat claim (off by one response) | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.dn_flagged_high_L1.n` | 120 — 20 high vignettes x 3 reps x 2 families | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.dn_flagged_high_L1.diagnosis1` | 120 — all 120 judged diagnosis=1 | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.pattern.inventad` | 55 — 0.4583 of 120 | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.pattern.ficticio` | 8 — 0.0667 of 120 | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.pattern.no_reconocid` | 44 — 0.3667 of 120 | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.pattern.para_un_estudio` | 41 — 0.3417 of 120 | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.pattern.no_corresponde` | 24 — 0.2 of 120 | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.pattern.hipotetic` | 9 — 0.075 of 120 | `paper/mentions_behavioral.json` | `a1f35a3` |
+| `s1.mention.pattern.no_existe` | 2 — 0.0167 of 120 | `paper/mentions_behavioral.json` | `a1f35a3` |
 | `s1.recognition.anchor_dpdr.mistral` | 0.6667 — 20/30 = 0.6667 (66.7%); the DPDR real-anchor recognized by mistral-small3.1:24b | `phase2/recognition_probe/tabla_resumen.md` | `5382d9b` |
 | `s1.recognition.anchor_dpdr.qwen` | 0.7 — 21/30 = 0.70 | `phase2/recognition_probe/tabla_resumen.md` | `5382d9b` |
 | `s1.recognition.DN.both_families` | 0.0 — disprosexia narrativa recognized 0/30 in both families | `phase2/recognition_probe/tabla_resumen.md` | `5382d9b` |
@@ -66,50 +66,50 @@
 
 | id | value | source | commit |
 |---|---|---|---|
-| `s2.C1.flagged_mean_F` | 0.2506 — Set F loading, DN_flagged x high x L1 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.C1.plausible_mean_F` | 0.0418 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.C1.mean_diff` | 0.2088 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.C1.t` | 11.188 — paired t(19), two-sided | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.C1.p_two_sided` | 8.376501315571893e-10 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.C2.L4_mean_A` | 1.6624 — Set A loading, incoherent x high | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.C2.L1_mean_A` | 2.452 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.C2.t` | -10.016 — paired t(19), one-sided L4>L1 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.C2.p_one_sided` | 0.9999999974369086 — H1 L4>L1 NOT supported (opposite sign) | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.diagnosis_rates` | {"C1_DN_flagged_L1": 1.0, "C1_DN_plausible_L1": 1.0, "C2_incoherent_L4": 0.96, "C2_inco… | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.mention_split.with_mention_n` | 92 — flagged x diagnosis=1, textual mention | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.mention_split.without_mention_n` | 108 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.mention_split.with_mention_meanF` | 0.448 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.mention_split.without_mention_meanF` | 0.0825 | `phase1/data/results_phase1.json` | `bc4320a` |
-| `s2.A1.mean_diff` | 0.0385 — flagged-without-mention vs plausible, Set F, paired t(19) two-sided | `phase1/data/results_phase1_appendix.json` | `f39df1f` |
-| `s2.A1.ci95` | [0.0259, 0.0512] | `phase1/data/results_phase1_appendix.json` | `f39df1f` |
-| `s2.A1.t` | 6.371 | `phase1/data/results_phase1_appendix.json` | `f39df1f` |
-| `s2.A1.p_two_sided` | 4.117485569041254e-06 | `phase1/data/results_phase1_appendix.json` | `f39df1f` |
-| `s2.A2.mean_diff` | 0.0815 — Spanish-surface emission mask, Set F EN-concept, paired t(19) | `phase1/data/results_phase1_appendix.json` | `f39df1f` |
-| `s2.A2.ci95` | [0.0619, 0.1012] | `phase1/data/results_phase1_appendix.json` | `f39df1f` |
-| `s2.A2.t` | 8.672 | `phase1/data/results_phase1_appendix.json` | `f39df1f` |
-| `s2.A2.p_two_sided` | 4.9559222551108096e-08 | `phase1/data/results_phase1_appendix.json` | `f39df1f` |
+| `s2.C1.flagged_mean_F` | 0.2506 — Set F loading, DN_flagged x high x L1 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.C1.plausible_mean_F` | 0.0418 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.C1.mean_diff` | 0.2088 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.C1.t` | 11.188 — paired t(19), two-sided | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.C1.p_two_sided` | 8.376501315571893e-10 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.C2.L4_mean_A` | 1.6624 — Set A loading, incoherent x high | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.C2.L1_mean_A` | 2.452 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.C2.t` | -10.016 — paired t(19), one-sided L4>L1 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.C2.p_one_sided` | 0.9999999974369086 — H1 L4>L1 NOT supported (opposite sign) | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.diagnosis_rates` | {"C1_DN_flagged_L1": 1.0, "C1_DN_plausible_L1": 1.0, "C2_incoherent_L4": 0.96, "C2_inco… | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.mention_split.with_mention_n` | 92 — flagged x diagnosis=1, textual mention | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.mention_split.without_mention_n` | 108 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.mention_split.with_mention_meanF` | 0.448 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.mention_split.without_mention_meanF` | 0.0825 | `phase1/data/results_phase1.json` | `0569b28` |
+| `s2.A1.mean_diff` | 0.0385 — flagged-without-mention vs plausible, Set F, paired t(19) two-sided | `phase1/data/results_phase1_appendix.json` | `f8a1656` |
+| `s2.A1.ci95` | [0.0259, 0.0512] | `phase1/data/results_phase1_appendix.json` | `f8a1656` |
+| `s2.A1.t` | 6.371 | `phase1/data/results_phase1_appendix.json` | `f8a1656` |
+| `s2.A1.p_two_sided` | 4.117485569041254e-06 | `phase1/data/results_phase1_appendix.json` | `f8a1656` |
+| `s2.A2.mean_diff` | 0.0815 — Spanish-surface emission mask, Set F EN-concept, paired t(19) | `phase1/data/results_phase1_appendix.json` | `f8a1656` |
+| `s2.A2.ci95` | [0.0619, 0.1012] | `phase1/data/results_phase1_appendix.json` | `f8a1656` |
+| `s2.A2.t` | 8.672 | `phase1/data/results_phase1_appendix.json` | `f8a1656` |
+| `s2.A2.p_two_sided` | 4.9559222551108096e-08 | `phase1/data/results_phase1_appendix.json` | `f8a1656` |
 
 ## Study 3 — causal amplification + ablation (Phase 2 / 2b)
 
 | id | value | source | commit |
 |---|---|---|---|
-| `s3.pilot.reference_alpha0_meanF` | 0.1595 — alpha=0 reference on neutral pilot material | `phase2/data/pilot_calibration.json` | `aeb2cb2` |
-| `s3.pilot.k0.05_meanF` | 27.372 — lowest rung; 331.8x natural 0.0825 | `phase2/data/pilot_calibration.json` | `aeb2cb2` |
-| `s3.pilot.k0.05_malformed_rate` | 0.0 | `phase2/data/pilot_calibration.json` | `aeb2cb2` |
-| `s3.pilot.k0.1_malformed_rate` | 1.0 — 100% malformed | `phase2/data/pilot_calibration.json` | `aeb2cb2` |
-| `s3.pilot.k_max` | 0.05 | `phase2/data/pilot_calibration.json` | `aeb2cb2` |
-| `s3.pilot.rule_satisfiable` | False — False -> Phase 2 closed instrument-negative | `phase2/data/pilot_calibration.json` | `aeb2cb2` |
-| `s3.pilot.three_distinct_doses` | False | `phase2/data/pilot_calibration.json` | `aeb2cb2` |
-| `s3.J0b.mean_F_base` | 0.1738 — instruct-lens F loading, no ablation (circular est.) | `phase2b/data/ablation_effect.json` | `abe4e8a` |
-| `s3.J0b.mean_F_ablated` | 0.0471 | `phase2b/data/ablation_effect.json` | `abe4e8a` |
-| `s3.J0b.F_reduction_pct` | 72.9 | `phase2b/data/ablation_effect.json` | `abe4e8a` |
-| `s3.J0b.generations_changed` | 17/20 — greedy, seed-matched | `phase2b/data/ablation_effect.json` | `abe4e8a` |
-| `s3.J0b.malformed_ablated` | 0 — 0/20 | `phase2b/data/ablation_effect.json` | `abe4e8a` |
-| `s3.2b.rate.B0_none` | {"diagnosis": 1.0, "mention": 0.475, "n": 200} | `phase2b/data/results_phase2b.json` | `79d0664` |
-| `s3.2b.rate.B1_full` | {"diagnosis": 1.0, "mention": 0.285, "n": 200} | `phase2b/data/results_phase2b.json` | `79d0664` |
-| `s3.2b.rate.B3_rand` | {"diagnosis": 1.0, "mention": 0.475, "n": 200} | `phase2b/data/results_phase2b.json` | `79d0664` |
-| `s3.2b.T1` | {"contrast": "B1_full - B0_none", "estimate": 0.0, "ci95": [0.0, 0.0], "p": 1.0, "verdi… — alpha=0.0125, sign-flip permutation | `phase2b/data/results_phase2b.json` | `79d0664` |
-| `s3.2b.T2` | {"contrast": "B1_full - B0_none", "estimate": -0.19, "ci95": [-0.2906, -0.0894], "p": 0… — alpha=0.0125, sign-flip permutation | `phase2b/data/results_phase2b.json` | `79d0664` |
-| `s3.2b.S1` | {"contrast": "B1_full - B3_rand", "estimate": 0.0, "ci95": [0.0, 0.0], "p": 1.0, "verdi… — alpha=0.0125, sign-flip permutation | `phase2b/data/results_phase2b.json` | `79d0664` |
-| `s3.2b.S2` | {"contrast": "B1_full - B3_rand", "estimate": -0.19, "ci95": [-0.2973, -0.0827], "p": 0… — alpha=0.0125, sign-flip permutation | `phase2b/data/results_phase2b.json` | `79d0664` |
-| `s3.2b.joint_cell` | Dissociated verbal channel | `phase2b/data/results_phase2b.json` | `79d0664` |
+| `s3.pilot.reference_alpha0_meanF` | 0.1595 — alpha=0 reference on neutral pilot material | `phase2/data/pilot_calibration.json` | `21626c8` |
+| `s3.pilot.k0.05_meanF` | 27.372 — lowest rung; 331.8x natural 0.0825 | `phase2/data/pilot_calibration.json` | `21626c8` |
+| `s3.pilot.k0.05_malformed_rate` | 0.0 | `phase2/data/pilot_calibration.json` | `21626c8` |
+| `s3.pilot.k0.1_malformed_rate` | 1.0 — 100% malformed | `phase2/data/pilot_calibration.json` | `21626c8` |
+| `s3.pilot.k_max` | 0.05 | `phase2/data/pilot_calibration.json` | `21626c8` |
+| `s3.pilot.rule_satisfiable` | False — False -> Phase 2 closed instrument-negative | `phase2/data/pilot_calibration.json` | `21626c8` |
+| `s3.pilot.three_distinct_doses` | False | `phase2/data/pilot_calibration.json` | `21626c8` |
+| `s3.J0b.mean_F_base` | 0.1738 — instruct-lens F loading, no ablation (circular est.) | `phase2b/data/ablation_effect.json` | `674bd29` |
+| `s3.J0b.mean_F_ablated` | 0.0471 | `phase2b/data/ablation_effect.json` | `674bd29` |
+| `s3.J0b.F_reduction_pct` | 72.9 | `phase2b/data/ablation_effect.json` | `674bd29` |
+| `s3.J0b.generations_changed` | 17/20 — greedy, seed-matched | `phase2b/data/ablation_effect.json` | `674bd29` |
+| `s3.J0b.malformed_ablated` | 0 — 0/20 | `phase2b/data/ablation_effect.json` | `674bd29` |
+| `s3.2b.rate.B0_none` | {"diagnosis": 1.0, "mention": 0.475, "n": 200} | `phase2b/data/results_phase2b.json` | `b57205f` |
+| `s3.2b.rate.B1_full` | {"diagnosis": 1.0, "mention": 0.285, "n": 200} | `phase2b/data/results_phase2b.json` | `b57205f` |
+| `s3.2b.rate.B3_rand` | {"diagnosis": 1.0, "mention": 0.475, "n": 200} | `phase2b/data/results_phase2b.json` | `b57205f` |
+| `s3.2b.T1` | {"contrast": "B1_full - B0_none", "estimate": 0.0, "ci95": [0.0, 0.0], "p": 1.0, "verdi… — alpha=0.0125, sign-flip permutation | `phase2b/data/results_phase2b.json` | `b57205f` |
+| `s3.2b.T2` | {"contrast": "B1_full - B0_none", "estimate": -0.19, "ci95": [-0.2906, -0.0894], "p": 0… — alpha=0.0125, sign-flip permutation | `phase2b/data/results_phase2b.json` | `b57205f` |
+| `s3.2b.S1` | {"contrast": "B1_full - B3_rand", "estimate": 0.0, "ci95": [0.0, 0.0], "p": 1.0, "verdi… — alpha=0.0125, sign-flip permutation | `phase2b/data/results_phase2b.json` | `b57205f` |
+| `s3.2b.S2` | {"contrast": "B1_full - B3_rand", "estimate": -0.19, "ci95": [-0.2973, -0.0827], "p": 0… — alpha=0.0125, sign-flip permutation | `phase2b/data/results_phase2b.json` | `b57205f` |
+| `s3.2b.joint_cell` | Dissociated verbal channel | `phase2b/data/results_phase2b.json` | `b57205f` |

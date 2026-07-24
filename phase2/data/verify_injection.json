@@ -1,7 +1,7 @@
 {
   "stage": "Phase 2 / I1 injecting-hook verification",
   "prereg_tag": "prereg-phase2-v1",
-  "prereg_commit": "eb176a9",
+  "prereg_commit": "72bf075",
   "condition_free": true,
   "note": "one neutral vignette; no arm data, no judging, no counting",
   "vignette": "v03",

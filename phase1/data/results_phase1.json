@@ -1,6 +1,6 @@
 {
   "gate0": {
-    "data_commit": "a715ce4",
+    "data_commit": "8046a12",
     "data_digest_recomputed": "dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1",
     "data_digest_expected": "dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1",
     "data_digest_match": true,

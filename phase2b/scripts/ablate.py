@@ -25,7 +25,7 @@ import torch
 class Projector:
     """Removes the v_hat component from the residual at GENERATION positions.
 
-    Same mechanics and same windows as Phase 2's Injector (verified at 5453270):
+    Same mechanics and same windows as Phase 2's Injector (verified at 6c67151):
     mode='generate' skips each layer's first forward call (the prompt pass);
     mode='full' ablates positions [prompt_len, end) with end = total-1.
     Registered BEFORE ActivationRecorder so recorded residuals are post-ablation.

@@ -140,7 +140,7 @@ def main() -> int:
                   flush=True)
 
     out = {"stage": "Phase 2b landing check (PREREG s6.1)",
-           "data_commit": "827681f", "prereg_tag": "prereg-phase2b-v1",
+           "data_commit": "317ddb9", "prereg_tag": "prereg-phase2b-v1",
            "head_primary": "model.embed_tokens.weight (untied)",
            "head_descriptive_circular": "lm_head.weight (instruct lens)",
            "cos_lm_head_vs_embed_tokens": cos_heads,

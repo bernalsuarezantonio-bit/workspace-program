@@ -162,7 +162,7 @@ def main() -> int:
                 + (D / "judge_full.jsonl").read_bytes())
     rep = {
         "stage": "Phase 2b J1 completeness", "prereg_tag": "prereg-phase2b-v1",
-        "prereg_commit": "d9f037f",
+        "prereg_commit": "aa77d66",
         "note": "mechanical integrity only -- no rates, no loadings, no DV computed",
         "expected": EXPECT_FULL, "n_runs": len(man), "duplicates": dups,
         "n_runs_with_problems": len(problems), "problems": problems,

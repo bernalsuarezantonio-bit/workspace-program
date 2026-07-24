@@ -1,8 +1,8 @@
 # Phase 2 — CLOSURE: instrument-negative outcome under the preregistration as written
 
-**Recorded:** 2026-07-22. **PI adjudication of the Stage I1 block** (`phase2/PILOT_CALIBRATION.md` @ `aeb2cb2`). This closes the preregistered Phase 2. **No amendment was made; the preregistration is closed exactly as tagged.**
+**Recorded:** 2026-07-22. **PI adjudication of the Stage I1 block** (`phase2/PILOT_CALIBRATION.md` @ `21626c8`). This closes the preregistered Phase 2. **No amendment was made; the preregistration is closed exactly as tagged.**
 
-**Freeze of record:** tag `prereg-phase2-v1` (tag obj `f0586319`) → commit `eb176a9` → `PREREG_PHASE2.md`. **Data generated under it:** the condition-free `ρ_l` pass, the injecting-hook verification, and the calibration pilot on held-out `neutral` material. **No confirmatory data was ever generated.** The 20 confirmatory `high` vignettes were never run under any arm and remain unjudged.
+**Freeze of record:** tag `prereg-phase2-v1` (tag obj `b58d0c71`) → commit `72bf075` → `PREREG_PHASE2.md`. **Data generated under it:** the condition-free `ρ_l` pass, the injecting-hook verification, and the calibration pilot on held-out `neutral` material. **No confirmatory data was ever generated.** The 20 confirmatory `high` vignettes were never run under any arm and remain unjudged.
 
 ---
 
@@ -62,7 +62,7 @@ Re-scaling into the cliff and re-anchoring was considered and **rejected**: the 
 Nothing in the instrument itself failed; the failure is in the *additive* manipulation. The following are verified, committed, and carry forward unchanged to Phase 2b:
 
 - **`phase2/scripts/intervene.py`** — target construction (`u_gain`), the Tikhonov solve at λ = 0.1, per-layer `k·ρ_l` dosing, the norm-matched control, the §2 F-loading estimator, the §7 detector.
-- **The injecting hook**, verified ALL_PASS (`5453270`) — including the **KV-cache generation asymmetry** (the last generated token's residual is never computed, so injection and readout windows must both be `[P, total-1)`).
+- **The injecting hook**, verified ALL_PASS (`6c67151`) — including the **KV-cache generation asymmetry** (the last generated token's residual is never computed, so injection and readout windows must both be `[P, total-1)`).
 - **`ρ_l`** (`rho_layers.json`) — condition-free, layer-stable (sd ~1 % of mean), 6.1× growth across the band.
 - **Landing geometry** — `cos_l` ≥ 0.8201 across the band at λ = 0.1, `‖J v̂‖` ≈ 0.98.
 - **Stage I0's structural findings** — the degenerate-λ-rule analysis, the raw-logit readout units, the 755.1 reachability ceiling, and the saturation asymmetry.

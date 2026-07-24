@@ -180,7 +180,7 @@ def main() -> int:
           and checks["V4_recorder_sees_post_addition"] and checks["V5_pass"])
 
     out = {"stage": "Phase 2 / I1 injecting-hook verification",
-           "prereg_tag": "prereg-phase2-v1", "prereg_commit": "eb176a9",
+           "prereg_tag": "prereg-phase2-v1", "prereg_commit": "72bf075",
            "condition_free": True,
            "note": "one neutral vignette; no arm data, no judging, no counting",
            "vignette": vid, "prompt_tokens": P, "total_positions": total,

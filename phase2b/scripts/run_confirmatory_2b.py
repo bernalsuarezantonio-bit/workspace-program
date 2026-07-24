@@ -2,8 +2,8 @@
 # Copyright 2026.
 """Phase 2b / Stage J1 — confirmatory projection-ablation runs (generation + readout).
 
-PREREG_PHASE2B @ tag `prereg-phase2b-v1` (commit d9f037f). Gated on the Projector
-verification ALL_PASS (fb1b849).
+PREREG_PHASE2B @ tag `prereg-phase2b-v1` (commit aa77d66). Gated on the Projector
+verification ALL_PASS (8bf3c3d).
 
 3 arms x 20 `high` vignettes x 10 reps = 600 runs.
   B0_none   no intervention

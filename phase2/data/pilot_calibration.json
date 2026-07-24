@@ -1,7 +1,7 @@
 {
   "stage": "Phase 2 / Stage I1 calibration pilot",
   "prereg_tag": "prereg-phase2-v1",
-  "prereg_commit": "eb176a9",
+  "prereg_commit": "72bf075",
   "held_out_vignettes": [
     "v48",
     "v43"

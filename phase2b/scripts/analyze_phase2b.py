@@ -2,7 +2,7 @@
 # Copyright 2026.
 """Phase 2b analysis — the four registered tests + the fenced exploratory block.
 
-Executes PREREG_PHASE2B s5 exactly, against data commit 827681f (Gate 0 asserted
+Executes PREREG_PHASE2B s5 exactly, against data commit 317ddb9 (Gate 0 asserted
 in-process). Emits NO interpretation: numbers, verdicts, and the cell of the
 pre-fixed joint table. Interpretation is the PI's.
 
@@ -53,7 +53,7 @@ def gate0() -> dict:
     got = h.hexdigest()
     if got != DIGEST:
         sys.exit(f"GATE 0 FAIL: digest {got}")
-    return {"data_commit": "827681f", "digest": got, "match": True}
+    return {"data_commit": "317ddb9", "digest": got, "match": True}
 
 
 # ---------------------------------------------------------------- estimators
@@ -180,7 +180,7 @@ def main() -> int:
     f_lens = {a: {"mean": float(np.mean(fl[a])), "sd": float(np.std(fl[a], ddof=1)),
                   "n": len(fl[a])} for a in ARMS}
 
-    out = {"gate0": g0, "prereg_tag": "prereg-phase2b-v1", "prereg_commit": "d9f037f",
+    out = {"gate0": g0, "prereg_tag": "prereg-phase2b-v1", "prereg_commit": "aa77d66",
            "alpha_per_test": ALPHA, "n_perm": N_PERM, "perm_seed": PERM_SEED,
            "mention_regex": MENTION_RX.pattern,
            "arm_overall": overall,

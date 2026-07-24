@@ -41,6 +41,6 @@
   ],
   "G6_pass": true,
   "G7_prereg_sha_at_tag": "f17ac3656177db8a35586201addfc6c3d29d470d66897f397ebb4ab97a3dd8c5",
-  "G7_note": "verified out-of-band: git cat-file blob d9f037f:PREREG_PHASE2B.md | sha256sum",
+  "G7_note": "verified out-of-band: git cat-file blob aa77d66:PREREG_PHASE2B.md | sha256sum",
   "GATE0_PASS": true
 }

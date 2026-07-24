@@ -475,7 +475,7 @@
       "id": "s1.mention.dn_flagged_high_L1.any_rate",
       "value": 0.6583,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "79/120 = 65.8%; SUPERSEDES the uncommitted 66.7% chat claim (off by one response)"
     },
@@ -484,7 +484,7 @@
       "id": "s1.mention.dn_flagged_high_L1.n",
       "value": 120,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "20 high vignettes x 3 reps x 2 families"
     },
@@ -493,7 +493,7 @@
       "id": "s1.mention.dn_flagged_high_L1.diagnosis1",
       "value": 120,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "all 120 judged diagnosis=1"
     },
@@ -502,7 +502,7 @@
       "id": "s1.mention.pattern.inventad",
       "value": 55,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "0.4583 of 120"
     },
@@ -511,7 +511,7 @@
       "id": "s1.mention.pattern.ficticio",
       "value": 8,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "0.0667 of 120"
     },
@@ -520,7 +520,7 @@
       "id": "s1.mention.pattern.no_reconocid",
       "value": 44,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "0.3667 of 120"
     },
@@ -529,7 +529,7 @@
       "id": "s1.mention.pattern.para_un_estudio",
       "value": 41,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "0.3417 of 120"
     },
@@ -538,7 +538,7 @@
       "id": "s1.mention.pattern.no_corresponde",
       "value": 24,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "0.2 of 120"
     },
@@ -547,7 +547,7 @@
       "id": "s1.mention.pattern.hipotetic",
       "value": 9,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "0.075 of 120"
     },
@@ -556,7 +556,7 @@
       "id": "s1.mention.pattern.no_existe",
       "value": 2,
       "source_file": "paper/mentions_behavioral.json",
-      "commit": "f991c55",
+      "commit": "a1f35a3",
       "repo": "workspace-program",
       "note": "0.0167 of 120"
     },
@@ -592,7 +592,7 @@
       "id": "s2.C1.flagged_mean_F",
       "value": 0.2506,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": "Set F loading, DN_flagged x high x L1"
     },
@@ -601,7 +601,7 @@
       "id": "s2.C1.plausible_mean_F",
       "value": 0.0418,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": ""
     },
@@ -610,7 +610,7 @@
       "id": "s2.C1.mean_diff",
       "value": 0.2088,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": ""
     },
@@ -619,7 +619,7 @@
       "id": "s2.C1.t",
       "value": 11.188,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": "paired t(19), two-sided"
     },
@@ -628,7 +628,7 @@
       "id": "s2.C1.p_two_sided",
       "value": 8.376501315571893e-10,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": ""
     },
@@ -637,7 +637,7 @@
       "id": "s2.C2.L4_mean_A",
       "value": 1.6624,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": "Set A loading, incoherent x high"
     },
@@ -646,7 +646,7 @@
       "id": "s2.C2.L1_mean_A",
       "value": 2.452,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": ""
     },
@@ -655,7 +655,7 @@
       "id": "s2.C2.t",
       "value": -10.016,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": "paired t(19), one-sided L4>L1"
     },
@@ -664,7 +664,7 @@
       "id": "s2.C2.p_one_sided",
       "value": 0.9999999974369086,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": "H1 L4>L1 NOT supported (opposite sign)"
     },
@@ -678,7 +678,7 @@
         "C2_incoherent_L1": 0.2814
       },
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": ""
     },
@@ -687,7 +687,7 @@
       "id": "s2.mention_split.with_mention_n",
       "value": 92,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": "flagged x diagnosis=1, textual mention"
     },
@@ -696,7 +696,7 @@
       "id": "s2.mention_split.without_mention_n",
       "value": 108,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": ""
     },
@@ -705,7 +705,7 @@
       "id": "s2.mention_split.with_mention_meanF",
       "value": 0.448,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": ""
     },
@@ -714,7 +714,7 @@
       "id": "s2.mention_split.without_mention_meanF",
       "value": 0.0825,
       "source_file": "phase1/data/results_phase1.json",
-      "commit": "bc4320a",
+      "commit": "0569b28",
       "repo": "workspace-program",
       "note": ""
     },
@@ -723,7 +723,7 @@
       "id": "s2.A1.mean_diff",
       "value": 0.0385,
       "source_file": "phase1/data/results_phase1_appendix.json",
-      "commit": "f39df1f",
+      "commit": "f8a1656",
       "repo": "workspace-program",
       "note": "flagged-without-mention vs plausible, Set F, paired t(19) two-sided"
     },
@@ -735,7 +735,7 @@
         0.0512
       ],
       "source_file": "phase1/data/results_phase1_appendix.json",
-      "commit": "f39df1f",
+      "commit": "f8a1656",
       "repo": "workspace-program",
       "note": ""
     },
@@ -744,7 +744,7 @@
       "id": "s2.A1.t",
       "value": 6.371,
       "source_file": "phase1/data/results_phase1_appendix.json",
-      "commit": "f39df1f",
+      "commit": "f8a1656",
       "repo": "workspace-program",
       "note": ""
     },
@@ -753,7 +753,7 @@
       "id": "s2.A1.p_two_sided",
       "value": 4.117485569041254e-06,
       "source_file": "phase1/data/results_phase1_appendix.json",
-      "commit": "f39df1f",
+      "commit": "f8a1656",
       "repo": "workspace-program",
       "note": ""
     },
@@ -762,7 +762,7 @@
       "id": "s2.A2.mean_diff",
       "value": 0.0815,
       "source_file": "phase1/data/results_phase1_appendix.json",
-      "commit": "f39df1f",
+      "commit": "f8a1656",
       "repo": "workspace-program",
       "note": "Spanish-surface emission mask, Set F EN-concept, paired t(19)"
     },
@@ -774,7 +774,7 @@
         0.1012
       ],
       "source_file": "phase1/data/results_phase1_appendix.json",
-      "commit": "f39df1f",
+      "commit": "f8a1656",
       "repo": "workspace-program",
       "note": ""
     },
@@ -783,7 +783,7 @@
       "id": "s2.A2.t",
       "value": 8.672,
       "source_file": "phase1/data/results_phase1_appendix.json",
-      "commit": "f39df1f",
+      "commit": "f8a1656",
       "repo": "workspace-program",
       "note": ""
     },
@@ -792,7 +792,7 @@
       "id": "s2.A2.p_two_sided",
       "value": 4.9559222551108096e-08,
       "source_file": "phase1/data/results_phase1_appendix.json",
-      "commit": "f39df1f",
+      "commit": "f8a1656",
       "repo": "workspace-program",
       "note": ""
     },
@@ -801,7 +801,7 @@
       "id": "s3.pilot.reference_alpha0_meanF",
       "value": 0.1595,
       "source_file": "phase2/data/pilot_calibration.json",
-      "commit": "aeb2cb2",
+      "commit": "21626c8",
       "repo": "workspace-program",
       "note": "alpha=0 reference on neutral pilot material"
     },
@@ -810,7 +810,7 @@
       "id": "s3.pilot.k0.05_meanF",
       "value": 27.372,
       "source_file": "phase2/data/pilot_calibration.json",
-      "commit": "aeb2cb2",
+      "commit": "21626c8",
       "repo": "workspace-program",
       "note": "lowest rung; 331.8x natural 0.0825"
     },
@@ -819,7 +819,7 @@
       "id": "s3.pilot.k0.05_malformed_rate",
       "value": 0.0,
       "source_file": "phase2/data/pilot_calibration.json",
-      "commit": "aeb2cb2",
+      "commit": "21626c8",
       "repo": "workspace-program",
       "note": ""
     },
@@ -828,7 +828,7 @@
       "id": "s3.pilot.k0.1_malformed_rate",
       "value": 1.0,
       "source_file": "phase2/data/pilot_calibration.json",
-      "commit": "aeb2cb2",
+      "commit": "21626c8",
       "repo": "workspace-program",
       "note": "100% malformed"
     },
@@ -837,7 +837,7 @@
       "id": "s3.pilot.k_max",
       "value": 0.05,
       "source_file": "phase2/data/pilot_calibration.json",
-      "commit": "aeb2cb2",
+      "commit": "21626c8",
       "repo": "workspace-program",
       "note": ""
     },
@@ -846,7 +846,7 @@
       "id": "s3.pilot.rule_satisfiable",
       "value": false,
       "source_file": "phase2/data/pilot_calibration.json",
-      "commit": "aeb2cb2",
+      "commit": "21626c8",
       "repo": "workspace-program",
       "note": "False -> Phase 2 closed instrument-negative"
     },
@@ -855,7 +855,7 @@
       "id": "s3.pilot.three_distinct_doses",
       "value": false,
       "source_file": "phase2/data/pilot_calibration.json",
-      "commit": "aeb2cb2",
+      "commit": "21626c8",
       "repo": "workspace-program",
       "note": ""
     },
@@ -864,7 +864,7 @@
       "id": "s3.J0b.mean_F_base",
       "value": 0.1738,
       "source_file": "phase2b/data/ablation_effect.json",
-      "commit": "abe4e8a",
+      "commit": "674bd29",
       "repo": "workspace-program",
       "note": "instruct-lens F loading, no ablation (circular est.)"
     },
@@ -873,7 +873,7 @@
       "id": "s3.J0b.mean_F_ablated",
       "value": 0.0471,
       "source_file": "phase2b/data/ablation_effect.json",
-      "commit": "abe4e8a",
+      "commit": "674bd29",
       "repo": "workspace-program",
       "note": ""
     },
@@ -882,7 +882,7 @@
       "id": "s3.J0b.F_reduction_pct",
       "value": 72.9,
       "source_file": "phase2b/data/ablation_effect.json",
-      "commit": "abe4e8a",
+      "commit": "674bd29",
       "repo": "workspace-program",
       "note": ""
     },
@@ -891,7 +891,7 @@
       "id": "s3.J0b.generations_changed",
       "value": "17/20",
       "source_file": "phase2b/data/ablation_effect.json",
-      "commit": "abe4e8a",
+      "commit": "674bd29",
       "repo": "workspace-program",
       "note": "greedy, seed-matched"
     },
@@ -900,7 +900,7 @@
       "id": "s3.J0b.malformed_ablated",
       "value": 0,
       "source_file": "phase2b/data/ablation_effect.json",
-      "commit": "abe4e8a",
+      "commit": "674bd29",
       "repo": "workspace-program",
       "note": "0/20"
     },
@@ -913,7 +913,7 @@
         "n": 200
       },
       "source_file": "phase2b/data/results_phase2b.json",
-      "commit": "79d0664",
+      "commit": "b57205f",
       "repo": "workspace-program",
       "note": ""
     },
@@ -926,7 +926,7 @@
         "n": 200
       },
       "source_file": "phase2b/data/results_phase2b.json",
-      "commit": "79d0664",
+      "commit": "b57205f",
       "repo": "workspace-program",
       "note": ""
     },
@@ -939,7 +939,7 @@
         "n": 200
       },
       "source_file": "phase2b/data/results_phase2b.json",
-      "commit": "79d0664",
+      "commit": "b57205f",
       "repo": "workspace-program",
       "note": ""
     },
@@ -957,7 +957,7 @@
         "verdict": "not significant"
       },
       "source_file": "phase2b/data/results_phase2b.json",
-      "commit": "79d0664",
+      "commit": "b57205f",
       "repo": "workspace-program",
       "note": "alpha=0.0125, sign-flip permutation"
     },
@@ -975,7 +975,7 @@
         "verdict": "SIGNIFICANT"
       },
       "source_file": "phase2b/data/results_phase2b.json",
-      "commit": "79d0664",
+      "commit": "b57205f",
       "repo": "workspace-program",
       "note": "alpha=0.0125, sign-flip permutation"
     },
@@ -993,7 +993,7 @@
         "verdict": "not significant"
       },
       "source_file": "phase2b/data/results_phase2b.json",
-      "commit": "79d0664",
+      "commit": "b57205f",
       "repo": "workspace-program",
       "note": "alpha=0.0125, sign-flip permutation"
     },
@@ -1011,7 +1011,7 @@
         "verdict": "SIGNIFICANT"
       },
       "source_file": "phase2b/data/results_phase2b.json",
-      "commit": "79d0664",
+      "commit": "b57205f",
       "repo": "workspace-program",
       "note": "alpha=0.0125, sign-flip permutation"
     },
@@ -1020,7 +1020,7 @@
       "id": "s3.2b.joint_cell",
       "value": "Dissociated verbal channel",
       "source_file": "phase2b/data/results_phase2b.json",
-      "commit": "79d0664",
+      "commit": "b57205f",
       "repo": "workspace-program",
       "note": ""
     }

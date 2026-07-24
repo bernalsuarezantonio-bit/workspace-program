@@ -1,10 +1,10 @@
 # Copyright 2026 — Phase 1 delegate. Analysis appendix (post-data, cold).
 """Two numbers-only analyses appended (dated) to RESULTS_PHASE1.md, against the
-same committed data (commit a715ce4 / data_digest dc522361). Nothing else in the
+same committed data (commit 8046a12 / data_digest dc522361). Nothing else in the
 artifact is altered — this script only APPENDS a delimited dated appendix and
 writes phase1/data/results_phase1_appendix.json.
 
-(A1) REGISTERED decisive-cell test (spec 2b69fb4 / POSTHOC sub-2 decisive cell):
+(A1) REGISTERED decisive-cell test (spec b62accd / POSTHOC sub-2 decisive cell):
      flagged-WITHOUT-mention (registered regex) vs plausible, Set F loading,
      SAME estimator as C1 (paired-by-vignette, two-sided). Estimate, CI95, p.
 
@@ -36,7 +36,7 @@ REPO = Path(__file__).resolve().parents[2]
 DATA = REPO / "phase1" / "data"
 BAND = list(range(17, 27))
 BANDSET = set(BAND)
-DATA_COMMIT = "a715ce4"
+DATA_COMMIT = "8046a12"
 DATA_DIGEST = "dc522361096bae30377ecf05d37142cfcb3f52fbb6349c77825bea455f0fb8f1"
 APPENDIX_MARK = "## Appendix A —"
 
@@ -291,7 +291,7 @@ def append_report(a1, a2, dig):
              f"`{DATA_COMMIT}` (digest `{dig[:16]}…`, Gate 0 re-asserted). Nothing above this line is "
              f"altered. Numbers only.*\n")
 
-    L.append("\n### A1 — REGISTERED decisive cell (spec `2b69fb4`, POSTHOC sub-2): "
+    L.append("\n### A1 — REGISTERED decisive cell (spec `b62accd`, POSTHOC sub-2): "
              "flagged-WITHOUT-mention vs plausible, Set F\n")
     L.append(f"Same estimator as C1 (paired-by-vignette, two-sided). Strata by the registered regex "
              f"`inventad|estudio|no reconocid|fictici`.\n")

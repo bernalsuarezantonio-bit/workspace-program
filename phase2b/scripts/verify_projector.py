@@ -2,7 +2,7 @@
 # Copyright 2026.
 """Phase 2b / Stage J1 — mechanical verification of the Projector.
 
-Registered gate (PREREG_PHASE2B s8/s9, tag prereg-phase2b-v1 -> d9f037f): the
+Registered gate (PREREG_PHASE2B s8/s9, tag prereg-phase2b-v1 -> aa77d66): the
 projection path is new code and gets its own ALL_PASS before the smoke gate.
 Covers BOTH ablation arms.
 
@@ -184,7 +184,7 @@ def main() -> int:
                                  "V7_B0_noop_bit_identical", "V8_rand_is_nondegenerate"))
 
     out = {"stage": "Phase 2b / J1 Projector verification",
-           "prereg_tag": "prereg-phase2b-v1", "prereg_commit": "d9f037f",
+           "prereg_tag": "prereg-phase2b-v1", "prereg_commit": "aa77d66",
            "condition_free": True,
            "note": "one neutral vignette; no arm data, no judging, no counting",
            "vignette": vid, "prompt_tokens": P, "total_positions": total,

@@ -242,7 +242,7 @@ def main() -> int:
 
     out = {
         "stage": "Phase 2 / Stage I1 calibration pilot",
-        "prereg_tag": "prereg-phase2-v1", "prereg_commit": "eb176a9",
+        "prereg_tag": "prereg-phase2-v1", "prereg_commit": "72bf075",
         "held_out_vignettes": [v for v, _ in picked],
         "pilot_seed": PILOT_SEED, "reps_per_rung": REPS,
         "generation": resolved, "lens_pt_sha256": pt_sha,

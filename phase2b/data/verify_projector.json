@@ -1,7 +1,7 @@
 {
   "stage": "Phase 2b / J1 Projector verification",
   "prereg_tag": "prereg-phase2b-v1",
-  "prereg_commit": "d9f037f",
+  "prereg_commit": "aa77d66",
   "condition_free": true,
   "note": "one neutral vignette; no arm data, no judging, no counting",
   "vignette": "v03",

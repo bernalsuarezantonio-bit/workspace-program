@@ -1,11 +1,11 @@
 {
   "gate0": {
-    "data_commit": "827681f",
+    "data_commit": "317ddb9",
     "digest": "aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592",
     "match": true
   },
   "prereg_tag": "prereg-phase2b-v1",
-  "prereg_commit": "d9f037f",
+  "prereg_commit": "aa77d66",
   "alpha_per_test": 0.0125,
   "n_perm": 4000,
   "perm_seed": 20260722,

@@ -2,7 +2,7 @@
 # Copyright 2026.
 """Phase 2 / Stage I1 — the activation-addition instrument (shared module).
 
-Implements PREREG_PHASE2 @ tag `prereg-phase2-v1` (commit eb176a9), frozen values:
+Implements PREREG_PHASE2 @ tag `prereg-phase2-v1` (commit 72bf075), frozen values:
 
   target      u_F = u_gain = unit( g * sum_{t in F_survivors} W_U[t] )     (s3.1, A-2)
   direction   v_hat_l = unit( (J_l^T J_l + lam*mean_eig*I)^-1 J_l^T u_F ), lam = 0.1  (s3.2, A-1)

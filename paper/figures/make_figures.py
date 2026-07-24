@@ -12,11 +12,11 @@ entities in a fixed order (colour follows the condition, never its rank).
          (behavioral, read-only) -> fig1_data.csv.
   Fig 2  C1 anatomy: Set F loading for plausible / flagged-without-mention /
          flagged-masked / flagged-total, with the registered paired-contrast
-         CIs (C1, A1, A2). From results_phase1.json (bc4320a) +
-         results_phase1_appendix.json (f39df1f) -> fig2_data.csv.
+         CIs (C1, A1, A2). From results_phase1.json (0569b28) +
+         results_phase1_appendix.json (f8a1656) -> fig2_data.csv.
   Fig 3  Phase 2b: three arms x two DVs; DV1 diagnosis flat at 1.000, DV2
          mention 0.475 -> 0.285 (B1) with B3 at 0.475. Wilson CI on n=200.
-         From results_phase2b.json (79d0664) -> fig3_data.csv.
+         From results_phase2b.json (b57205f) -> fig3_data.csv.
 
 Each figure -> .pdf + .png + _data.csv in paper/figures/.
 Run:  .venv/Scripts/python.exe paper/figures/make_figures.py <scratch_beh_dir>
@@ -170,10 +170,10 @@ def fig2():
     ]
     write_csv(HERE / "fig2_data.csv",
               ["bar", "mean_F_loading", "source"],
-              [["plausible_floor", plaus, "results_phase1.json@bc4320a"],
-               ["flagged_without_mention", without, "results_phase1_appendix.json@f39df1f"],
-               ["flagged_masked_ES", masked, "results_phase1_appendix.json@f39df1f"],
-               ["flagged_total", total, "results_phase1.json@bc4320a"]])
+              [["plausible_floor", plaus, "results_phase1.json@0569b28"],
+               ["flagged_without_mention", without, "results_phase1_appendix.json@f8a1656"],
+               ["flagged_masked_ES", masked, "results_phase1_appendix.json@f8a1656"],
+               ["flagged_total", total, "results_phase1.json@0569b28"]])
     with (HERE / "fig2_contrasts.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["contrast", "vs_bar_index", "diff", "ci95_lo", "ci95_hi", "p_two_sided"])

@@ -92,7 +92,7 @@ def main() -> int:
 
     checks["G7_prereg_sha_at_tag"] = PREREG_SHA_AT_TAG
     checks["G7_note"] = ("verified out-of-band: git cat-file blob "
-                         "d9f037f:PREREG_PHASE2B.md | sha256sum")
+                         "aa77d66:PREREG_PHASE2B.md | sha256sum")
 
     ok = all(checks[k] for k in checks if k.endswith("_pass"))
     checks["GATE0_PASS"] = bool(ok)

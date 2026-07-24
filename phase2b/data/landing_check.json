@@ -1,6 +1,6 @@
 {
   "stage": "Phase 2b landing check (PREREG s6.1)",
-  "data_commit": "827681f",
+  "data_commit": "317ddb9",
   "prereg_tag": "prereg-phase2b-v1",
   "head_primary": "model.embed_tokens.weight (untied)",
   "head_descriptive_circular": "lm_head.weight (instruct lens)",

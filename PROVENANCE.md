@@ -587,9 +587,9 @@ C2_incoherent_L1    a7a599dc50c05505…  ( 995 chars)
 
 **Recorded:** 2026-07-21, `[host]` (RTX 5090). This is the **data commit** the Phase 1 analysis runs against. **No analysis here** — no loadings, no aggregation, no counting beyond mechanical completeness. Numbers below are integrity counts only.
 
-**Freeze→data chain:** tag `prereg-phase1-v1` → commit `109166a` → `PREREG_PHASE1.md` sha256 `bedbcc78f9dc261ffd789dc55097bbd9c997c4db9d3e63077489623ae05f55d5`. Harness at `d508662`. Materials byte-exact from `phase1/materials_canonical/` (canonical fidelity GREEN).
+**Freeze→data chain:** tag `prereg-phase1-v1` → commit `4fe4d8d` → `PREREG_PHASE1.md` sha256 `bedbcc78f9dc261ffd789dc55097bbd9c997c4db9d3e63077489623ae05f55d5`. Harness at `ce09196`. Materials byte-exact from `phase1/materials_canonical/` (canonical fidelity GREEN).
 
-**Instrument (harness `d508662`):** `phase1/scripts/run_confirmatory.py` (generation + readout dump), `judge_diagnosis.py` (gemma2:27b v1 blinded rubric), `verify_completeness.py`. Prompt assembly byte-faithful to reification-gradient `src/run_experiment.py @ ee23c07` (`wrap()`/`build_prompt()`), signed Spanish instruction.
+**Instrument (harness `ce09196`):** `phase1/scripts/run_confirmatory.py` (generation + readout dump), `judge_diagnosis.py` (gemma2:27b v1 blinded rubric), `verify_completeness.py`. Prompt assembly byte-faithful to reification-gradient `src/run_experiment.py @ ee23c07` (`wrap()`/`build_prompt()`), signed Spanish instruction.
 
 | Item | Value |
 |---|---|
@@ -611,7 +611,7 @@ C2_incoherent_L1    a7a599dc50c05505…  ( 995 chars)
 
 ## Incident #3 — phantom `RESULTS_PHASE1.md` + unsupported "recognition-as-echo" claim — 2026-07-22
 
-**Recorded:** 2026-07-22, analysis session. **Data untouched** — commit `a715ce4` / digest `dc522361` re-verified intact (Gate 0 GREEN); this incident concerns a **reporting/provenance** gap, not the data.
+**Recorded:** 2026-07-22, analysis session. **Data untouched** — commit `8046a12` / digest `dc522361` re-verified intact (Gate 0 GREEN); this incident concerns a **reporting/provenance** gap, not the data.
 
 **What happened.** A prior chat report asserted that Phase 1 analysis was complete, that `RESULTS_PHASE1.md` had been committed, and summarized the finding as *"recognition-as-echo: fictional-status (Set F) loading in the workspace is fully explained by emission echo; no evidence of sustained holding."* On cold inspection:
 1. **`RESULTS_PHASE1.md` did not exist in the repo** at HEAD (`git cat-file -e HEAD:RESULTS_PHASE1.md` → absent). No results artifact was ever committed.
@@ -631,13 +631,13 @@ C2_incoherent_L1    a7a599dc50c05505…  ( 995 chars)
 
 ## Phase 2 — Stage I1: prereg draft + power analysis (NO GPU) — 2026-07-22
 
-**Recorded:** 2026-07-22, delegate session, HEAD at draft time `f39df1f` (== `origin/main`, clean tree). **No GPU used. No new experimental data.** Nothing here is condition-bearing; the Phase 1 data commit `a715ce4` / digest `dc522361…` is untouched (re-asserted in-process as Gate 0 by the power script).
+**Recorded:** 2026-07-22, delegate session, HEAD at draft time `f8a1656` (== `origin/main`, clean tree). **No GPU used. No new experimental data.** Nothing here is condition-bearing; the Phase 1 data commit `8046a12` / digest `dc522361…` is untouched (re-asserted in-process as Gate 0 by the power script).
 
 **Deliverables:** `PREREG_PHASE2.md` (DRAFT, not frozen), `phase2/scripts/phase2_i1_power.py`, `phase2/data/phase2_i1_power.json`.
 
 ### ⛔ BLOCKER — Stage I0 does not exist in the repository
 
-The session brief stated the I0 reconnaissance was "done and committed". Mechanical check at `f39df1f`:
+The session brief stated the I0 reconnaissance was "done and committed". Mechanical check at `f8a1656`:
 
 | check | result |
 |---|---|
@@ -653,7 +653,7 @@ Per the standing rule from **Incident #3** (*re-derive in cold; commit the artif
 
 ### Premise redrafted from committed numbers only
 
-`PREREG_PHASE2.md` §1 retires the earlier chat premise ("recognition-as-echo … no sustained holding", which Incident #3 recorded as unbacked) and restates the premise from `RESULTS_PHASE1.md` @ `f39df1f`: natural sustainment of fictional status **exists** (A1 without-mention 0.0825 vs plausible floor 0.0418, diff 0.0385, t(19)=6.371, **p=4.117e-06**; A2 survives the Spanish-surface mask, diff 0.0815, t(19)=8.672, **p=4.956e-08**) and **does not alter behaviour** (200/200 diagnosis). Phase 2 asks whether that decoupling is a property of the architecture or of the *intensity*.
+`PREREG_PHASE2.md` §1 retires the earlier chat premise ("recognition-as-echo … no sustained holding", which Incident #3 recorded as unbacked) and restates the premise from `RESULTS_PHASE1.md` @ `f8a1656`: natural sustainment of fictional status **exists** (A1 without-mention 0.0825 vs plausible floor 0.0418, diff 0.0385, t(19)=6.371, **p=4.117e-06**; A2 survives the Spanish-surface mask, diff 0.0815, t(19)=8.672, **p=4.956e-08**) and **does not alter behaviour** (200/200 diagnosis). Phase 2 asks whether that decoupling is a property of the architecture or of the *intensity*.
 
 ### Power analysis (no GPU; reads only committed Phase 1 judge outcomes)
 
@@ -685,7 +685,7 @@ The `ρ_l` pass was authorized as optional-now. It was **deferred**: it is condi
 
 ## Phase 2 — Stage I0 recon (NO GPU) + prereg v2 — 2026-07-22
 
-**Recorded:** 2026-07-22, delegate session. **Cold re-derivation. NO GPU. No generation, no conditions, no counting.** Phase 1 data commit `a715ce4` / digest `dc522361…` untouched. Artifact **`phase2/I0_RECON.md` @ `52c6a17`**; script `phase2/scripts/i0_recon.py`; machine-readable `phase2/data/i0_recon.json`.
+**Recorded:** 2026-07-22, delegate session. **Cold re-derivation. NO GPU. No generation, no conditions, no counting.** Phase 1 data commit `8046a12` / digest `dc522361…` untouched. Artifact **`phase2/I0_RECON.md` @ `bbdcb1a`**; script `phase2/scripts/i0_recon.py`; machine-readable `phase2/data/i0_recon.json`.
 
 **PI decisions carried in (2026-07-22):** (a) I0 re-derived and committed, prior chat PDF is **hypothesis, not source**; (b) **G1 fixed before any `cos_l` existed** — ≥0.80 pass / 0.65–0.80 executable-with-flag / <0.65 gate closed; (c) pilot on 2 `neutral` vignettes **outside** the confirmatory set, content-transfer caveat registered, the 20 `high` untouched; (d) R=7 confirmed + smoke-gate R→5 fallback + I/O mitigations. The three design additions approved.
 
@@ -744,9 +744,9 @@ Frozen instrument values at λ=0.1 / `u_gain`, per layer L17→L26: `cos_l` = 0.
 
 ## Phase 2 — freeze signed; Stage I1 hook verified; **calibration pilot BLOCKS the confirmatory** — 2026-07-22
 
-**Freeze (act of signature, PI-instructed).** Annotated tag **`prereg-phase2-v1`** (tag obj `f0586319`) → commit **`eb176a9`**, pushed. **Signed as the PI's own identity** `Antonio Bernal <bernalsuarezantonio@gmail.com>` via per-command `git -c user.name/email` override (this machine's global identity is `[redacted] <[redacted]>`). This is the delegate executing the freeze on explicit PI written instruction ("ejecuta en mi nombre, como acto de firma") — the same deliberate waiver of the standing "delegate does not tag" rule used at `prereg-phase1-v1`.
+**Freeze (act of signature, PI-instructed).** Annotated tag **`prereg-phase2-v1`** (tag obj `b58d0c71`) → commit **`72bf075`**, pushed. **Signed as the PI's own identity** `Antonio Bernal <bernalsuarezantonio@gmail.com>` via per-command `git -c user.name/email` override (this machine's global identity is `[redacted] <[redacted]>`). This is the delegate executing the freeze on explicit PI written instruction ("ejecuta en mi nombre, como acto de firma") — the same deliberate waiver of the standing "delegate does not tag" rule used at `prereg-phase1-v1`.
 
-### Injecting hook + mechanical verification — ALL_PASS (`5453270`)
+### Injecting hook + mechanical verification — ALL_PASS (`6c67151`)
 
 `phase2/scripts/intervene.py` (shared instrument) + `verify_injection.py` + `phase2/data/verify_injection.json`. Needed because jlens's `ActivationRecorder` is record-only (I0 finding C3); the injector is registered **before** the recorder so recorded residuals are post-addition. On one `neutral` vignette, condition-free: **V1** prompt positions bit-identical ✓ · **V2** L17 injected == base + δ₁₇ (max abs err 0.0099, ‖δ‖=30.4) ✓ · **V3** deeper layers shift by more than their own δ (perturbation propagates) ✓ · **V4** recorder sees post-addition values ✓ · **V5** `generate` and `full` modes inject at the same 39 positions ✓ · **V6** readout monotone in k ✓.
 
@@ -783,7 +783,7 @@ Artifact **`phase2/PILOT_CALIBRATION.md`**; data `phase2/data/pilot_calibration.
 
 ## Phase 2 — CLOSED, instrument-negative (PI adjudication) — 2026-07-22
 
-**PI adjudication of the Stage I1 block.** Option **(a) re-scale + re-anchor REJECTED** — usable dynamic range <1 decade, manipulation-check estimator circular with the intervention, and the only candidate rung already inside the degradation confound; its best case converges on the same closure at extra cost. Option **(d) ACCEPTED as the close of the registered Phase 2.** **No amendment was made; the preregistration is closed exactly as tagged** (`prereg-phase2-v1` / `f0586319` → `eb176a9`).
+**PI adjudication of the Stage I1 block.** Option **(a) re-scale + re-anchor REJECTED** — usable dynamic range <1 decade, manipulation-check estimator circular with the intervention, and the only candidate rung already inside the degradation confound; its best case converges on the same closure at extra cost. Option **(d) ACCEPTED as the close of the registered Phase 2.** **No amendment was made; the preregistration is closed exactly as tagged** (`prereg-phase2-v1` / `b58d0c71` → `72bf075`).
 
 **Artifact:** `phase2/CLOSURE.md`.
 
@@ -832,7 +832,7 @@ Gate 0 re-asserted. Real inputs: DV1 diagnosis **200/200 = 1.000** (ICC **not es
 
 **Registered honesty note:** specificity power collapses as the random direction reproduces more of the effect (γ = 0/0.25/0.5 → DV1 0.884/0.470/0.148; DV2 0.818/0.564/0.273), so a non-significant S-test is **weak** evidence of non-specificity and is registered as such rather than read as "generic" after the fact.
 
-**Correction to an earlier commit:** `abe4e8a` committed a **stale** `phase2b_j0_power.json` from a run whose DV1 ICC was NaN-clamped to 0.99 (ceiling cell) and which predated the 3-arm design. Superseded by the corrected, vectorized run committed here.
+**Correction to an earlier commit:** `674bd29` committed a **stale** `phase2b_j0_power.json` from a run whose DV1 ICC was NaN-clamped to 0.99 (ceiling cell) and which predated the 3-arm design. Superseded by the corrected, vectorized run committed here.
 
 **STOP POINT — awaiting PI reading and tag.** No open decisions; §9 holds only execution work. **The delegate does not tag.**
 
@@ -842,9 +842,9 @@ Gate 0 re-asserted. Real inputs: DV1 diagnosis **200/200 = 1.000** (ICC **not es
 
 **Recorded:** 2026-07-22, `[host]` (RTX 5090). This is the **data commit** the Phase 2b analysis runs against. **No analysis here** — no rates, no loadings, no DV computed, no aggregation beyond mechanical integrity. Numbers below are integrity counts only.
 
-**Freeze→data chain:** tag **`prereg-phase2b-v1`** (tag obj `54efcfa0`) → commit **`d9f037f`** → `PREREG_PHASE2B.md`. Tag signed as the PI's own identity `Antonio Bernal <bernalsuarezantonio@gmail.com>` via per-command override, on explicit PI written instruction ("ejecuta en mi nombre, como acto de firma") — the same deliberate one-time waiver of the "delegate does not tag" rule used at `prereg-phase1-v1` and `prereg-phase2-v1`.
+**Freeze→data chain:** tag **`prereg-phase2b-v1`** (tag obj `7ac0093b`) → commit **`aa77d66`** → `PREREG_PHASE2B.md`. Tag signed as the PI's own identity `Antonio Bernal <bernalsuarezantonio@gmail.com>` via per-command override, on explicit PI written instruction ("ejecuta en mi nombre, como acto de firma") — the same deliberate one-time waiver of the "delegate does not tag" rule used at `prereg-phase1-v1` and `prereg-phase2-v1`.
 
-**Gate chain, each committed before the step it enabled:** `Projector` verification ALL_PASS (`fb1b849`, 8 checks incl. V6 residual⊥v̂ max 9.7e-06, V7 `B0_none` exact no-op, V8 `B3_rand` non-degenerate) → smoke gate PASS 5/5 (`95cf74f`) → this confirmatory block.
+**Gate chain, each committed before the step it enabled:** `Projector` verification ALL_PASS (`8bf3c3d`, 8 checks incl. V6 residual⊥v̂ max 9.7e-06, V7 `B0_none` exact no-op, V8 `B3_rand` non-degenerate) → smoke gate PASS 5/5 (`29bafc0`) → this confirmatory block.
 
 **Instrument:** `phase2b/scripts/run_confirmatory_2b.py` (generation + band-restricted readout), `judge_2b.py` (gemma2:27b, v1 blinded rubric, identical to Phase 1 apart from paths and `cell`→`arm`), `verify_completeness_2b.py`.
 
@@ -873,7 +873,7 @@ Gate 0 re-asserted. Real inputs: DV1 diagnosis **200/200 = 1.000** (ICC **not es
 
 ## Phase 2b — Stage J1 addendum: cold re-verification + orphan `gemma2:27b` process during the run — 2026-07-23
 
-**Cold re-verification of the data commit `827681f`** (run in a fresh session, no state carried): `verify_completeness_2b.py --full` re-derives **N = 600, 0 duplicate trial_ids, 0 runs with problems, 200 runs per arm, judge 600/600 with 0 parse errors, 0 malformed flagged**, and the data content digest recomputes independently to **`aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592`** — identical to the recorded value. **COMPLETE = true.** No re-commit of data was needed: `827681f` was already committed and pushed before the previous session ended (working tree clean, local == `origin/main`); this addendum adds only the note below.
+**Cold re-verification of the data commit `317ddb9`** (run in a fresh session, no state carried): `verify_completeness_2b.py --full` re-derives **N = 600, 0 duplicate trial_ids, 0 runs with problems, 200 runs per arm, judge 600/600 with 0 parse errors, 0 malformed flagged**, and the data content digest recomputes independently to **`aa56df8d5c6cfa7acef1792721f3b156f00ad6568d2f73953139538f049b0592`** — identical to the recorded value. **COMPLETE = true.** No re-commit of data was needed: `317ddb9` was already committed and pushed before the previous session ended (working tree clean, local == `origin/main`); this addendum adds only the note below.
 
 ### Orphan `gemma2:27b` coexisted with the confirmatory run — evidence, not reconstruction
 
@@ -895,3 +895,13 @@ The PI reported that `gemma2:27b` auto-reloaded via `llama-server` and coexisted
 **Run window and impact.** Generation **12:38:12 → 13:36:03** (58.0 min) with `gemma2:27b` resident throughout; judge **13:36 → 14:08** (32.0 min). Measured **5.80 s/run** in the confirmatory block versus **5.49 s/run** in the smoke gate, which ran before the reload — a **~6 % slowdown**, consistent with coexistence. **No OOM, no data loss, no exclusions:** 600/600 complete, 0 problems, 0 malformed, 0 judge errors. The coexistence is recorded as a process fact; it did not touch the data.
 
 **Standing GPU rule reaffirmed:** the host pins every loaded Ollama model and a residual process re-spawns runners on its own — coordinate VRAM windows with the PI, never evict.
+
+---
+
+## Pre-publication history rewrite — 2026-07-24
+
+History rewritten before publication to correct commit authorship metadata (machine's global git identity) and redact personal identifiers; contents, dates, messages and data digests preserved; verification re-run post-rewrite.
+
+Sealed instrument document excluded from pre-publication redaction to preserve seal-chain integrity; it contains a machine hostname, retained deliberately.
+
+Old-to-new commit/tag correspondence: see `paper/HISTORY_REWRITE_MAP.md`.
