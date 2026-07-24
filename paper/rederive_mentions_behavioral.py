@@ -97,10 +97,15 @@ def main() -> int:
     n_diag1 = sum(1 for x in rows if x["diagnosis"] == 1)
     rate_any = any_mention / n
 
-    # 10 verbatims: diagnosis==1 AND any_mention, deterministic by sorted id
+    # verbatims: diagnosis==1 AND any_mention, deterministic by sorted id.
+    # Family-alphabetical id order puts all mistral before any qwen, so the top-10
+    # were entirely mistral; the qwen block is the first 5 eligible qwen responses
+    # by the same (vignette, rep) order.
     elig = sorted([x for x in rows if x["diagnosis"] == 1 and x["any_mention"]],
                   key=lambda x: x["id"])
     verbatims = elig[:10]
+    elig_qwen = [x for x in elig if x["model"].split("/")[-1].startswith("qwen")]
+    verbatims_qwen = elig_qwen[:5]
 
     summary = {
         "cell": "DN_flagged x high x L1_forum (behavioral, reification-gradient)",
@@ -118,22 +123,32 @@ def main() -> int:
         "any_mention_rate": round(rate_any, 4),
         "any_mention_rate_pct": round(100 * rate_any, 1),
         "n_eligible_verbatims_diag1_and_mention": len(elig),
+        "n_eligible_qwen": len(elig_qwen),
         "verbatim_ids": [v["id"] for v in verbatims],
+        "verbatim_ids_qwen": [v["id"] for v in verbatims_qwen],
     }
     OUT_JSON.write_text(json.dumps(
-        {"summary": summary, "per_response": rows, "verbatims": verbatims},
+        {"summary": summary, "per_response": rows,
+         "verbatims": verbatims, "verbatims_qwen": verbatims_qwen},
         indent=2, ensure_ascii=False), encoding="utf-8")
 
     # verbatims markdown (full text, for human verification + paper appendix)
+    def block(v):
+        return [f"## {v['id']}", "",
+                f"**diagnosis** = {v['diagnosis']} · **patterns** = {', '.join(v['patterns_hit'])}",
+                "", "> " + v["response"].replace("\n", "\n> "), "", "---", ""]
+
     md = ["# Mention verbatims — DN_flagged x high x L1 (diagnosis=1 AND fiction mention)", "",
-          f"Deterministic selection: the first 10 eligible responses by sorted id "
-          f"(`model|vignette|rep`). Eligible = judged diagnosis=1 AND at least one "
-          f"fiction-mention pattern. {len(elig)} eligible; 10 shown.", "",
-          f"Source: text `responses.jsonl @ 770fa9c`, diagnosis `scored_full.jsonl @ c4a5ce8`.", ""]
+          f"Deterministic selection by sorted id (`model|vignette|rep`). Eligible = judged "
+          f"diagnosis=1 AND at least one fiction-mention pattern. {len(elig)} eligible "
+          f"({len(elig_qwen)} of them qwen).", "",
+          f"Source: text `responses.jsonl @ 770fa9c`, diagnosis `scored_full.jsonl @ c4a5ce8`.", "",
+          "# Section A — first 10 by sorted id (all mistral-small3.1:24b)", ""]
     for v in verbatims:
-        md += [f"## {v['id']}", "",
-               f"**diagnosis** = {v['diagnosis']} · **patterns** = {', '.join(v['patterns_hit'])}", "",
-               "> " + v["response"].replace("\n", "\n> "), "", "---", ""]
+        md += block(v)
+    md += ["# Section B — first 5 qwen2.5:32b by sorted id", ""]
+    for v in verbatims_qwen:
+        md += block(v)
     OUT_MD.write_text("\n".join(md), encoding="utf-8")
 
     print(f"n={n}  diagnosis=1: {n_diag1}")
@@ -141,7 +156,9 @@ def main() -> int:
     for lab in PATTERNS:
         print(f"  {lab:18s} {per_pattern[lab]:3d}  ({per_pattern[lab]/n:.3f})")
     print(f"ANY mention: {any_mention}/{n} = {rate_any:.4f} ({100*rate_any:.1f}%)")
-    print(f"eligible verbatims (diag=1 & mention): {len(elig)}; showing 10")
+    print(f"eligible verbatims (diag=1 & mention): {len(elig)} ({len(elig_qwen)} qwen); "
+          f"showing 10 mistral + 5 qwen")
+    print("qwen ids:", [v["id"] for v in verbatims_qwen])
     print("wrote", OUT_JSON.name, "+", OUT_MD.name)
     return 0
 
