@@ -1,0 +1,938 @@
+{
+  "title": "Program numbers manifest — single source of truth for the manuscript",
+  "registered_rule": "This manifest is the ONLY source of numbers for the paper. Any figure in the text not present here is, by definition, an error.",
+  "repos": {
+    "workspace-program": "C:\\Users\\EDITOR\\Desktop\\workspace-program",
+    "reification-gradient": "C:\\Users\\EDITOR\\Desktop\\reification-gradient (read-only)"
+  },
+  "n_entries": 85,
+  "entries": [
+    {
+      "study": "S1",
+      "id": "s1.n_analytic",
+      "value": 7169,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": "7200 scored - 31 malformed"
+    },
+    {
+      "study": "S1",
+      "id": "s1.n_excluded_malformed",
+      "value": 31,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.alpha",
+      "value": 0.0125,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": "Bonferroni 0.05/4"
+    },
+    {
+      "study": "S1",
+      "id": "s1.H1.coef",
+      "value": -0.0391,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": "level_c (DN_plausible slope, log-odds per level step)"
+    },
+    {
+      "study": "S1",
+      "id": "s1.H1.OR",
+      "value": 0.962,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H1.OR_CI95",
+      "value": [
+        0.93,
+        0.995
+      ],
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H1.z",
+      "value": -2.257,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H1.p_one_sided",
+      "value": 0.988,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H1.significant",
+      "value": false,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H2.coef",
+      "value": 0.4514,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": "incoherent:level_c  (= incoherent slope - DN slope)"
+    },
+    {
+      "study": "S1",
+      "id": "s1.H2.OR",
+      "value": 1.571,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H2.OR_CI95",
+      "value": [
+        1.467,
+        1.681
+      ],
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H2.z",
+      "value": 12.964,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H2.p_one_sided",
+      "value": 1.0,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H2.significant",
+      "value": false,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H3.coef",
+      "value": 0.081,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": "real_anchor:level_c (= anchor slope - DN slope)"
+    },
+    {
+      "study": "S1",
+      "id": "s1.H3.OR",
+      "value": 1.084,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H3.OR_CI95",
+      "value": [
+        1.024,
+        1.148
+      ],
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H3.z",
+      "value": 2.793,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H3.p_one_sided",
+      "value": 0.9974,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H3.significant",
+      "value": false,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H4.coef",
+      "value": -0.157,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": "DN_flagged main effect at the middle level (level centered)"
+    },
+    {
+      "study": "S1",
+      "id": "s1.H4.OR",
+      "value": 0.855,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H4.OR_CI95",
+      "value": [
+        0.793,
+        0.922
+      ],
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H4.z",
+      "value": -4.075,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H4.p_one_sided",
+      "value": 0.0,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H4.significant",
+      "value": true,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H1.jonckheere_z",
+      "value": -1.18,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.H1.jonckheere_p",
+      "value": 0.881,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.pdiagnosis_by_condition_level",
+      "value": {
+        "DN_plausible|L1_forum": {
+          "p_obs": 0.4903,
+          "n": 359
+        },
+        "DN_plausible|L2_coach_blog": {
+          "p_obs": 0.6222,
+          "n": 360
+        },
+        "DN_plausible|L3_wiki": {
+          "p_obs": 0.4944,
+          "n": 360
+        },
+        "DN_plausible|L4_preprint": {
+          "p_obs": 0.5389,
+          "n": 360
+        },
+        "DN_plausible|L5_pseudodsm": {
+          "p_obs": 0.4833,
+          "n": 360
+        },
+        "real_anchor|L1_forum": {
+          "p_obs": 0.3239,
+          "n": 352
+        },
+        "real_anchor|L2_coach_blog": {
+          "p_obs": 0.3051,
+          "n": 354
+        },
+        "real_anchor|L3_wiki": {
+          "p_obs": 0.2507,
+          "n": 359
+        },
+        "real_anchor|L4_preprint": {
+          "p_obs": 0.3743,
+          "n": 358
+        },
+        "real_anchor|L5_pseudodsm": {
+          "p_obs": 0.3343,
+          "n": 359
+        },
+        "incoherent|L1_forum": {
+          "p_obs": 0.0724,
+          "n": 359
+        },
+        "incoherent|L2_coach_blog": {
+          "p_obs": 0.4318,
+          "n": 359
+        },
+        "incoherent|L3_wiki": {
+          "p_obs": 0.234,
+          "n": 359
+        },
+        "incoherent|L4_preprint": {
+          "p_obs": 0.5949,
+          "n": 353
+        },
+        "incoherent|L5_pseudodsm": {
+          "p_obs": 0.4413,
+          "n": 358
+        },
+        "DN_flagged|L1_forum": {
+          "p_obs": 0.4722,
+          "n": 360
+        },
+        "DN_flagged|L2_coach_blog": {
+          "p_obs": 0.5556,
+          "n": 360
+        },
+        "DN_flagged|L3_wiki": {
+          "p_obs": 0.4556,
+          "n": 360
+        },
+        "DN_flagged|L4_preprint": {
+          "p_obs": 0.5111,
+          "n": 360
+        },
+        "DN_flagged|L5_pseudodsm": {
+          "p_obs": 0.4389,
+          "n": 360
+        }
+      },
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": "observed P(diagnosis), pooled over both models; 20 cond x level cells"
+    },
+    {
+      "study": "S1",
+      "id": "s1.robustness_fraction_preserving",
+      "value": 0.0,
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": "fraction of families preserving DN_flagged<incoherent<DN_plausible<real_anchor"
+    },
+    {
+      "study": "S1",
+      "id": "s1.robustness_means.mistral-small3.1:24b",
+      "value": {
+        "DN_flagged": 0.5544444444444444,
+        "incoherent": 0.49048152295632697,
+        "DN_plausible": 0.6066666666666667,
+        "real_anchor": 0.4511784511784512
+      },
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.robustness_means.qwen2.5:32b",
+      "value": {
+        "DN_flagged": 0.41888888888888887,
+        "incoherent": 0.21787709497206703,
+        "DN_plausible": 0.44493882091212456,
+        "real_anchor": 0.1840628507295174
+      },
+      "source_file": "phase6/confirmatory_results.json",
+      "commit": "64166cd",
+      "repo": "reification-gradient",
+      "note": ""
+    },
+    {
+      "study": "S1",
+      "id": "s1.judge_alpha.diagnosis.human_judge",
+      "value": 0.83,
+      "source_file": "phase4/validation/AGREEMENT_RESULTS.md",
+      "commit": "fd3ff52",
+      "repo": "reification-gradient",
+      "note": "CI95 [0.604,1.000], raw 93.8%"
+    },
+    {
+      "study": "S1",
+      "id": "s1.judge_alpha.diagnosis.judge_corater",
+      "value": 0.958,
+      "source_file": "phase4/validation/AGREEMENT_RESULTS.md",
+      "commit": "fd3ff52",
+      "repo": "reification-gradient",
+      "note": "raw 98.0%"
+    },
+    {
+      "study": "S1",
+      "id": "s1.judge_alpha.criteria_invented.judge_corater",
+      "value": -0.076,
+      "source_file": "phase4/validation/AGREEMENT_RESULTS.md",
+      "commit": "fd3ff52",
+      "repo": "reification-gradient",
+      "note": "raw 31.8%"
+    },
+    {
+      "study": "S1",
+      "id": "s1.judge_alpha.confidence.judge_corater",
+      "value": -0.188,
+      "source_file": "phase4/validation/AGREEMENT_RESULTS.md",
+      "commit": "fd3ff52",
+      "repo": "reification-gradient",
+      "note": "raw 50.8%"
+    },
+    {
+      "study": "S1",
+      "id": "s1.judge_alpha.treatment_recommended.judge_corater",
+      "value": 0.35,
+      "source_file": "phase4/validation/AGREEMENT_RESULTS.md",
+      "commit": "fd3ff52",
+      "repo": "reification-gradient",
+      "note": "raw 73.8%"
+    },
+    {
+      "study": "S1",
+      "id": "s1.judge_alpha.differential_offered.judge_corater",
+      "value": 0.717,
+      "source_file": "phase4/validation/AGREEMENT_RESULTS.md",
+      "commit": "fd3ff52",
+      "repo": "reification-gradient",
+      "note": "raw 99.4%"
+    },
+    {
+      "study": "S1",
+      "id": "s1.judge_alpha.epistemic_flag.judge_corater",
+      "value": 0.547,
+      "source_file": "phase4/validation/AGREEMENT_RESULTS.md",
+      "commit": "fd3ff52",
+      "repo": "reification-gradient",
+      "note": "raw 84.2%"
+    },
+    {
+      "study": "S1",
+      "id": "s1.recognition.anchor_dpdr.mistral",
+      "value": 0.6667,
+      "source_file": "phase2/recognition_probe/tabla_resumen.md",
+      "commit": "5382d9b",
+      "repo": "reification-gradient",
+      "note": "20/30 = 0.6667 (66.7%); the DPDR real-anchor recognized by mistral-small3.1:24b"
+    },
+    {
+      "study": "S1",
+      "id": "s1.recognition.anchor_dpdr.qwen",
+      "value": 0.7,
+      "source_file": "phase2/recognition_probe/tabla_resumen.md",
+      "commit": "5382d9b",
+      "repo": "reification-gradient",
+      "note": "21/30 = 0.70"
+    },
+    {
+      "study": "S1",
+      "id": "s1.recognition.DN.both_families",
+      "value": 0.0,
+      "source_file": "phase2/recognition_probe/tabla_resumen.md",
+      "commit": "5382d9b",
+      "repo": "reification-gradient",
+      "note": "disprosexia narrativa recognized 0/30 in both families"
+    },
+    {
+      "study": "S2",
+      "id": "s2.C1.flagged_mean_F",
+      "value": 0.2506,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": "Set F loading, DN_flagged x high x L1"
+    },
+    {
+      "study": "S2",
+      "id": "s2.C1.plausible_mean_F",
+      "value": 0.0418,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.C1.mean_diff",
+      "value": 0.2088,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.C1.t",
+      "value": 11.188,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": "paired t(19), two-sided"
+    },
+    {
+      "study": "S2",
+      "id": "s2.C1.p_two_sided",
+      "value": 8.376501315571893e-10,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.C2.L4_mean_A",
+      "value": 1.6624,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": "Set A loading, incoherent x high"
+    },
+    {
+      "study": "S2",
+      "id": "s2.C2.L1_mean_A",
+      "value": 2.452,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.C2.t",
+      "value": -10.016,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": "paired t(19), one-sided L4>L1"
+    },
+    {
+      "study": "S2",
+      "id": "s2.C2.p_one_sided",
+      "value": 0.9999999974369086,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": "H1 L4>L1 NOT supported (opposite sign)"
+    },
+    {
+      "study": "S2",
+      "id": "s2.diagnosis_rates",
+      "value": {
+        "C1_DN_flagged_L1": 1.0,
+        "C1_DN_plausible_L1": 1.0,
+        "C2_incoherent_L4": 0.96,
+        "C2_incoherent_L1": 0.2814
+      },
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.mention_split.with_mention_n",
+      "value": 92,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": "flagged x diagnosis=1, textual mention"
+    },
+    {
+      "study": "S2",
+      "id": "s2.mention_split.without_mention_n",
+      "value": 108,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.mention_split.with_mention_meanF",
+      "value": 0.448,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.mention_split.without_mention_meanF",
+      "value": 0.0825,
+      "source_file": "phase1/data/results_phase1.json",
+      "commit": "bc4320a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.A1.mean_diff",
+      "value": 0.0385,
+      "source_file": "phase1/data/results_phase1_appendix.json",
+      "commit": "f39df1f",
+      "repo": "workspace-program",
+      "note": "flagged-without-mention vs plausible, Set F, paired t(19) two-sided"
+    },
+    {
+      "study": "S2",
+      "id": "s2.A1.ci95",
+      "value": [
+        0.0259,
+        0.0512
+      ],
+      "source_file": "phase1/data/results_phase1_appendix.json",
+      "commit": "f39df1f",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.A1.t",
+      "value": 6.371,
+      "source_file": "phase1/data/results_phase1_appendix.json",
+      "commit": "f39df1f",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.A1.p_two_sided",
+      "value": 4.117485569041254e-06,
+      "source_file": "phase1/data/results_phase1_appendix.json",
+      "commit": "f39df1f",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.A2.mean_diff",
+      "value": 0.0815,
+      "source_file": "phase1/data/results_phase1_appendix.json",
+      "commit": "f39df1f",
+      "repo": "workspace-program",
+      "note": "Spanish-surface emission mask, Set F EN-concept, paired t(19)"
+    },
+    {
+      "study": "S2",
+      "id": "s2.A2.ci95",
+      "value": [
+        0.0619,
+        0.1012
+      ],
+      "source_file": "phase1/data/results_phase1_appendix.json",
+      "commit": "f39df1f",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.A2.t",
+      "value": 8.672,
+      "source_file": "phase1/data/results_phase1_appendix.json",
+      "commit": "f39df1f",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S2",
+      "id": "s2.A2.p_two_sided",
+      "value": 4.9559222551108096e-08,
+      "source_file": "phase1/data/results_phase1_appendix.json",
+      "commit": "f39df1f",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.pilot.reference_alpha0_meanF",
+      "value": 0.1595,
+      "source_file": "phase2/data/pilot_calibration.json",
+      "commit": "aeb2cb2",
+      "repo": "workspace-program",
+      "note": "alpha=0 reference on neutral pilot material"
+    },
+    {
+      "study": "S3",
+      "id": "s3.pilot.k0.05_meanF",
+      "value": 27.372,
+      "source_file": "phase2/data/pilot_calibration.json",
+      "commit": "aeb2cb2",
+      "repo": "workspace-program",
+      "note": "lowest rung; 331.8x natural 0.0825"
+    },
+    {
+      "study": "S3",
+      "id": "s3.pilot.k0.05_malformed_rate",
+      "value": 0.0,
+      "source_file": "phase2/data/pilot_calibration.json",
+      "commit": "aeb2cb2",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.pilot.k0.1_malformed_rate",
+      "value": 1.0,
+      "source_file": "phase2/data/pilot_calibration.json",
+      "commit": "aeb2cb2",
+      "repo": "workspace-program",
+      "note": "100% malformed"
+    },
+    {
+      "study": "S3",
+      "id": "s3.pilot.k_max",
+      "value": 0.05,
+      "source_file": "phase2/data/pilot_calibration.json",
+      "commit": "aeb2cb2",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.pilot.rule_satisfiable",
+      "value": false,
+      "source_file": "phase2/data/pilot_calibration.json",
+      "commit": "aeb2cb2",
+      "repo": "workspace-program",
+      "note": "False -> Phase 2 closed instrument-negative"
+    },
+    {
+      "study": "S3",
+      "id": "s3.pilot.three_distinct_doses",
+      "value": false,
+      "source_file": "phase2/data/pilot_calibration.json",
+      "commit": "aeb2cb2",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.J0b.mean_F_base",
+      "value": 0.1738,
+      "source_file": "phase2b/data/ablation_effect.json",
+      "commit": "abe4e8a",
+      "repo": "workspace-program",
+      "note": "instruct-lens F loading, no ablation (circular est.)"
+    },
+    {
+      "study": "S3",
+      "id": "s3.J0b.mean_F_ablated",
+      "value": 0.0471,
+      "source_file": "phase2b/data/ablation_effect.json",
+      "commit": "abe4e8a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.J0b.F_reduction_pct",
+      "value": 72.9,
+      "source_file": "phase2b/data/ablation_effect.json",
+      "commit": "abe4e8a",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.J0b.generations_changed",
+      "value": "17/20",
+      "source_file": "phase2b/data/ablation_effect.json",
+      "commit": "abe4e8a",
+      "repo": "workspace-program",
+      "note": "greedy, seed-matched"
+    },
+    {
+      "study": "S3",
+      "id": "s3.J0b.malformed_ablated",
+      "value": 0,
+      "source_file": "phase2b/data/ablation_effect.json",
+      "commit": "abe4e8a",
+      "repo": "workspace-program",
+      "note": "0/20"
+    },
+    {
+      "study": "S3",
+      "id": "s3.2b.rate.B0_none",
+      "value": {
+        "diagnosis": 1.0,
+        "mention": 0.475,
+        "n": 200
+      },
+      "source_file": "phase2b/data/results_phase2b.json",
+      "commit": "79d0664",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.2b.rate.B1_full",
+      "value": {
+        "diagnosis": 1.0,
+        "mention": 0.285,
+        "n": 200
+      },
+      "source_file": "phase2b/data/results_phase2b.json",
+      "commit": "79d0664",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.2b.rate.B3_rand",
+      "value": {
+        "diagnosis": 1.0,
+        "mention": 0.475,
+        "n": 200
+      },
+      "source_file": "phase2b/data/results_phase2b.json",
+      "commit": "79d0664",
+      "repo": "workspace-program",
+      "note": ""
+    },
+    {
+      "study": "S3",
+      "id": "s3.2b.T1",
+      "value": {
+        "contrast": "B1_full - B0_none",
+        "estimate": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "p": 1.0,
+        "verdict": "not significant"
+      },
+      "source_file": "phase2b/data/results_phase2b.json",
+      "commit": "79d0664",
+      "repo": "workspace-program",
+      "note": "alpha=0.0125, sign-flip permutation"
+    },
+    {
+      "study": "S3",
+      "id": "s3.2b.T2",
+      "value": {
+        "contrast": "B1_full - B0_none",
+        "estimate": -0.19,
+        "ci95": [
+          -0.2906,
+          -0.0894
+        ],
+        "p": 0.0007,
+        "verdict": "SIGNIFICANT"
+      },
+      "source_file": "phase2b/data/results_phase2b.json",
+      "commit": "79d0664",
+      "repo": "workspace-program",
+      "note": "alpha=0.0125, sign-flip permutation"
+    },
+    {
+      "study": "S3",
+      "id": "s3.2b.S1",
+      "value": {
+        "contrast": "B1_full - B3_rand",
+        "estimate": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "p": 1.0,
+        "verdict": "not significant"
+      },
+      "source_file": "phase2b/data/results_phase2b.json",
+      "commit": "79d0664",
+      "repo": "workspace-program",
+      "note": "alpha=0.0125, sign-flip permutation"
+    },
+    {
+      "study": "S3",
+      "id": "s3.2b.S2",
+      "value": {
+        "contrast": "B1_full - B3_rand",
+        "estimate": -0.19,
+        "ci95": [
+          -0.2973,
+          -0.0827
+        ],
+        "p": 0.0012,
+        "verdict": "SIGNIFICANT"
+      },
+      "source_file": "phase2b/data/results_phase2b.json",
+      "commit": "79d0664",
+      "repo": "workspace-program",
+      "note": "alpha=0.0125, sign-flip permutation"
+    },
+    {
+      "study": "S3",
+      "id": "s3.2b.joint_cell",
+      "value": "Dissociated verbal channel",
+      "source_file": "phase2b/data/results_phase2b.json",
+      "commit": "79d0664",
+      "repo": "workspace-program",
+      "note": ""
+    }
+  ]
+}
