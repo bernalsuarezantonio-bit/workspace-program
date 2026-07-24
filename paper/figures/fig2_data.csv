@@ -1,0 +1,5 @@
+bar,mean_F_loading,source
+plausible_floor,0.041795983,results_phase1.json@bc4320a
+flagged_without_mention,0.08250130092592593,results_phase1_appendix.json@f39df1f
+flagged_masked_ES,0.12355524212060892,results_phase1_appendix.json@f39df1f
+flagged_total,0.25062228825,results_phase1.json@bc4320a
