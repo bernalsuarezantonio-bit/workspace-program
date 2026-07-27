@@ -1,63 +1,25 @@
 cff-version: 1.2.0
-message: >-
-  If you use this repository (code, materials, preregistrations, or data), please
-  cite it. If you refer to the study itself, please cite the preprint under
-  `preferred-citation`.
-title: >-
-  workspace-program: representational and causal studies for "Held but not heeded"
+message: "If you use this repository, please cite it."
+title: 'workspace-program: representational and causal studies for "Held but not heeded"'
 abstract: >-
-  Representational (Study 2) and causal (Study 3) arms of a three-study
-  preregistered program on whether a language model's verbal acknowledgment that a
-  diagnostic category is invented is causally connected to its diagnostic behavior.
-  Using a pre-fitted verbalizable-workspace (Jacobian) lens on Qwen2.5-7B-Instruct,
-  the fictional-status representation is shown to be genuinely held during
-  diagnostic generation yet behaviorally inert: projection-ablating it cuts written
-  acknowledgments by ~40% while diagnosis remains at 100%. Includes the manuscript,
-  three tagged preregistrations, run data, analysis artifacts, and a chain-of-custody
-  provenance log. The behavioral arm (Study 1) lives in the sibling repository
-  reification-gradient.
+  Representational (Study 2) and causal (Study 3) arms of a three-study preregistered
+  program on whether a language model's verbal acknowledgment that a diagnostic category
+  is invented is causally connected to its diagnostic behavior. Using a pre-fitted
+  verbalizable-workspace lens on Qwen2.5-7B-Instruct, the fictional-status representation
+  is shown to be held during diagnostic generation yet behaviorally inert. Includes the
+  manuscript, three tagged preregistrations, run data, and a provenance log. The
+  behavioral arm (Study 1) is in the sibling repository reification-gradient.
 type: software
 authors:
   - given-names: Antonio
     family-names: Bernal Suárez
     email: bernalsuarezantonio@gmail.com
-repository-code: 'https://github.com/bernalsuarezantonio-bit/workspace-program'
-license:
-  - MIT
-  - CC-BY-4.0
-license-url: 'https://github.com/bernalsuarezantonio-bit/workspace-program/blob/main/LICENSE'
+repository-code: "https://github.com/bernalsuarezantonio-bit/workspace-program"
+license: CC-BY-4.0
+version: "1.0.0"
+date-released: "2026-07-24"
 keywords:
   - large language models
   - interpretability
-  - global workspace
   - activation ablation
-  - faithfulness
   - reification
-  - diagnostic categories
-references:
-  - type: software
-    title: 'reification-gradient: behavioral study (Study 1)'
-    authors:
-      - given-names: Antonio
-        family-names: Bernal Suárez
-    repository-code: 'https://github.com/bernalsuarezantonio-bit/reification-gradient'
-    notes: Sibling repository holding the Study 1 (behavioral) materials and data.
-# --- Preprint ---
-# No preprint is posted yet. The manuscript (paper/preprint_held_but_not_heeded_v2.md)
-# states repositories and DOIs will be added at submission. When it posts, fill in
-# `doi`, `url`, and `year` below. Do NOT ship a fabricated DOI.
-preferred-citation:
-  type: article
-  title: >-
-    Held but not heeded: causal dissociation of verbal acknowledgment and
-    diagnostic behavior in a language model
-  authors:
-    - given-names: Antonio
-      family-names: Bernal Suárez
-      email: bernalsuarezantonio@gmail.com
-  year: 2026
-  notes: >-
-    Preprint draft (v2), in preparation. Replace this note with the DOI and URL once
-    the preprint is posted.
-  # doi: 10.XXXXX/XXXXXX      # TODO: add on preprint posting
-  # url: https://...          # TODO: add on preprint posting
