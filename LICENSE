@@ -31,7 +31,7 @@ content or generated data rather than executable code:
 Rule of thumb for a mixed directory: `.py` → MIT, everything else → CC-BY-4.0.
 
 Under **CC-BY-4.0**, reuse requires attribution: cite the work (see
-[`CITATION.cff`](CITATION.cff)) and indicate whether you made changes.
+the "How to cite" note in [`README.md`](README.md)) and indicate whether you made changes.
 
 ## Third-party and cross-repository material (not licensed here)
 
@@ -83,5 +83,5 @@ under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**
 - Full legal code: [`LICENSE-CC-BY-4.0.txt`](LICENSE-CC-BY-4.0.txt)
 - Canonical deed: <https://creativecommons.org/licenses/by/4.0/>
 
-To attribute, cite the work per [`CITATION.cff`](CITATION.cff), link this license,
+To attribute, cite the work per the "How to cite" note in [`README.md`](README.md), link this license,
 and state if changes were made.

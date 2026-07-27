@@ -199,5 +199,14 @@ claims.
 ## Licensing & citation
 
 Dual-licensed: **MIT** for code, **CC-BY-4.0** for materials, data, preregistrations, and the
-manuscript — see [`LICENSE`](LICENSE) for the exact scope of each. To cite, see
-[`CITATION.cff`](CITATION.cff).
+manuscript — see [`LICENSE`](LICENSE) for the exact scope of each.
+
+**How to cite.** Until the preprint is posted with a DOI, this README is the canonical citation source.
+Cite the study and this repository as:
+
+> Bernal Suárez, A. (2026). *Held but not heeded: causal dissociation of verbal acknowledgment and
+> diagnostic behavior in a language model* [preprint, in preparation]. Code, data, and preregistrations:
+> https://github.com/bernalsuarezantonio-bit/workspace-program
+
+The machine-readable `CITATION.cff` is temporarily disabled (kept as `CITATION.cff.disabled`) and will
+be re-enabled with the real DOI once the preprint is published.
