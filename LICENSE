@@ -1,0 +1,87 @@
+# Licensing — workspace-program (J-lens representational & causal studies)
+
+This repository is **dual-licensed**. Two licenses apply, depending on whether a
+file is *software* or *authored content / data*.
+
+| Scope | License | Full text |
+|---|---|---|
+| **Software** — source code | **MIT** | below, in this file |
+| **Materials, data, preregistrations & manuscript** | **CC-BY-4.0** | [`LICENSE-CC-BY-4.0.txt`](LICENSE-CC-BY-4.0.txt) |
+
+## What each license covers
+
+**MIT (software).** Every `.py` file in the repository: the analysis, run, and
+verification scripts under `phase0/scripts/`, `phase1/scripts/`, `phase2/scripts/`,
+`phase2b/scripts/`, and `paper/` (e.g. `build_numbers_manifest.py`,
+`cold_verify_behavioral.py`, `make_figures.py`).
+
+**CC-BY-4.0 (materials, data & documentation).** Everything that is authored
+content or generated data rather than executable code:
+
+- **Manuscript & paper artifacts:** `paper/preprint_held_but_not_heeded_v2.md`,
+  `paper/references*.md`, `paper/NUMBERS.{md,json}`, `paper/figures/*` (PDF/PNG/CSV),
+  and the verification/mentions notes under `paper/`.
+- **Preregistrations & provenance:** `PREREG_PHASE1.md`, `PREREG_PHASE2.md`,
+  `PREREG_PHASE2B.md`, `PROVENANCE.md`, `phase1_token_sets_SEALED.md`, and the
+  phase reports (`RESULTS_PHASE1.md`, `phase2/*.md`, `phase2b/*.md`, `phase0/reports/*`).
+- **Materials & datasets:** `phase1/materials_canonical/**` and all generated data
+  and logs (`*.json`, `*.jsonl`, `*.csv`, `*.log`) across `phase0/`, `phase1/`,
+  `phase2/`, `phase2b/`.
+
+Rule of thumb for a mixed directory: `.py` → MIT, everything else → CC-BY-4.0.
+
+Under **CC-BY-4.0**, reuse requires attribution: cite the work (see
+[`CITATION.cff`](CITATION.cff)) and indicate whether you made changes.
+
+## Third-party and cross-repository material (not licensed here)
+
+- **`jacobian-lens`** (the pre-fitted verbalizable-workspace lens and its library)
+  is vendored under `vendor/` — **gitignored, not distributed in this repository** —
+  and is governed by its own upstream **Apache-2.0** license
+  (`github.com/anthropics/jacobian-lens`, commit `581d398…`; see `PROVENANCE.md`).
+- **`phase1/materials_canonical/**`** are copied byte-for-byte from the sibling
+  **reification-gradient** repository (Study 1 materials, same author, also CC-BY-4.0
+  there). They are pinned `-text` in `.gitattributes` so their sealed sha256 stay
+  byte-identical across platforms; do not renormalize them.
+
+> **Research-ethics note (not a license term).** The fabricated category "narrative
+> dysprosexia" and all synthetic disorder content exist for controlled in-silico
+> measurement only. These licenses permit reuse of the files; they do **not** endorse
+> presenting any fabricated category as a real clinical entity.
+
+---
+
+## MIT License (software)
+
+Copyright (c) 2026 Antonio Bernal Suárez
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## CC-BY-4.0 (materials, data & documentation)
+
+Materials, data, preregistrations, and the manuscript as scoped above are licensed
+under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
+
+- Full legal code: [`LICENSE-CC-BY-4.0.txt`](LICENSE-CC-BY-4.0.txt)
+- Canonical deed: <https://creativecommons.org/licenses/by/4.0/>
+
+To attribute, cite the work per [`CITATION.cff`](CITATION.cff), link this license,
+and state if changes were made.
