@@ -2,6 +2,14 @@
 
 Pre-publication history rewrite (2026-07-24): commit authorship remapped to the author, personal identifiers redacted (the sealed instrument document excluded to preserve its seal chain). Dates, messages, file contents (except redacted identifiers) and all data digests preserved. This table maps every pre-rewrite commit and annotated-tag object to its post-rewrite equivalent, for anyone comparing against the original public history.
 
+## How to use this table (preregistrations deliberately cite pre-rewrite hashes)
+
+The **sealed, frozen-at-tag documents** — `PREREG_PHASE1.md`, `PREREG_PHASE2.md`, `PREREG_PHASE2B.md`, and `phase1_token_sets_SEALED.md` — **deliberately retain the commit and tag hashes that were current at their freeze time.** This is correct, not an error: a sealed document that was externally timestamped must not be edited after its freeze, and the hashes it cites are part of what was sealed. Rewriting them post-freeze would break the seal chain those documents exist to protect. So a pre-rewrite hash inside a preregistration is a *feature of the record*, not a stale reference to fix.
+
+**This table is the translation table** for those hashes: to resolve any hash a sealed document cites against the current (post-rewrite) history, find it in the `old` column below and read its equivalent in the `new` column.
+
+By contrast, the **live (non-sealed) publication artifacts** — the manuscript `paper/preprint_held_but_not_heeded_v2.md`, `paper/NUMBERS.{md,json}`, and `paper/references*.md` — are kept updated to resolvable post-rewrite hashes; they were swept and contain **no** retired hash. (Hashes in those files that fail `git cat-file -e` but are absent from this table are cross-repository references to `reification-gradient` or upstream model/lens revisions, not errors.)
+
 ## Commits (47)
 
 | old | new |

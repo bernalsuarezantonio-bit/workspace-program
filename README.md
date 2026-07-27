@@ -148,23 +148,30 @@ git ls-files phase1/materials_canonical/
 grep -nE 'sha256|digest|isfinite|581d398|16a01f3' PROVENANCE.md | head
 ```
 
-**6 — History-rewrite integrity.** A pre-publication rewrite (2026-07-24) remapped commit authorship
-and redacted personal identifiers; **dates, messages, file contents, prereg blobs and all data digests
-were preserved**. Old↔new hashes are in `paper/HISTORY_REWRITE_MAP.md`; every retired short hash should
-appear **only** in that map. Sweep with the map's "old" column (it is the source of truth, so it is not
-inlined elsewhere):
+**6 — History-rewrite integrity (translation table).** A pre-publication rewrite (2026-07-24) remapped
+commit authorship and redacted personal identifiers; **dates, messages, file contents, preregistration
+blobs, and all data digests were preserved**. The old↔new correspondence is the translation table
+**[`paper/HISTORY_REWRITE_MAP.md`](paper/HISTORY_REWRITE_MAP.md)**.
+
+The **sealed preregistrations deliberately keep the commit/tag hashes that were current at their freeze**
+— editing a sealed, externally-timestamped document would break its seal, so those pre-rewrite hashes
+are *correct, not errors*. To resolve any hash a sealed document cites against today's history, look it
+up in the map's "old" column to find its "new" equivalent.
+
+Only the **live (non-sealed) publication artifacts** — the manuscript, `NUMBERS.{md,json}`, and
+`references*.md` — are kept citing post-rewrite, resolvable hashes. This sweep expects **zero** retired
+hashes in them:
 
 ```bash
-# Any retired hash (old != new) still cited in prose outside the map is a stale
-# reference the rewrite missed. Self-mapped hashes (old == new) are excluded — they
-# were unchanged by the rewrite and remain valid.
-awk -F'`' '/^\| `[0-9a-f]{7}` \| `[0-9a-f]{7}` \|$/ && $2 != $4 {print $2, $4}' \
-  paper/HISTORY_REWRITE_MAP.md \
-  | while read old new; do
-      hits=$(git grep -In "$old" -- . ':!paper/HISTORY_REWRITE_MAP.md');
-      [ -n "$hits" ] && echo "STALE $old (now $new):" && echo "$hits";
-    done ; echo "(done — any STALE line is a retired hash still cited in prose, to reconcile)"
+olds=$(awk -F'`' '/^\| `[0-9a-f]{7}` \| `[0-9a-f]{7}` \|$/ && $2 != $4 {print $2}' \
+  paper/HISTORY_REWRITE_MAP.md | paste -sd'|' -)
+grep -nHE "\b($olds)\b" paper/preprint_held_but_not_heeded_v2.md paper/NUMBERS.md \
+  paper/NUMBERS.json paper/references.md paper/references_candidates.md \
+  || echo "clean: no retired hash in the live publication artifacts"
 ```
+(Any hit is a retired hash in a live artifact — update it to the "new" value via the map. Hashes that
+fail `git cat-file -e` but are *not* in the map are cross-repository references to `reification-gradient`
+or upstream revisions, not errors.)
 
 **7 — Every number traces to an artifact.** `paper/NUMBERS.md` is the single source of truth; figures
 were produced by committed scripts reading only committed CSVs; Study 1's numbers were cold-verified
