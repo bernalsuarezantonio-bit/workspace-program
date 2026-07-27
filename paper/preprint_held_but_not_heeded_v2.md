@@ -1,6 +1,11 @@
 # Held but not heeded: causal dissociation of verbal acknowledgment and diagnostic behavior in a language model
 
-**Antonio Bernal Suárez** [affiliation TODO]
+**Antonio Bernal Suárez**¹ (ORCID 0000-0002-3664-9317) · **Ana María González Martín**² (ORCID 0000-0002-2802-5627)
+
+¹ Human XR Lab, Universidad del Atlántico Medio, Las Palmas de Gran Canaria, Spain
+² Universidad del Atlántico Medio, Las Palmas de Gran Canaria, Spain
+
+Correspondence: antonio.bernal@pdi.atlanticomedio.es
 
 *Preprint draft v1 — all numbers in this manuscript are taken exclusively from version-controlled, hash-verified analysis artifacts; see Transparency statement.*
 
@@ -111,13 +116,15 @@ Single model at the causal level (7B; behavioral effects replicated across three
 
 LLM-based measurement failed informatively seven times; each failure is documented in the versioned record and generalizes: (1) lexical detectors collide with symptomatology — "not real" patterns misclassify correct descriptions of derealization, whose phenomenology *is* unreality (19/19 false negatives in our recognition probe); (2) LLM judges cannot reliably individuate clinical criteria — two independent judge families disagreed with a human rater (α ≈ −0.3) and with each other (α = −0.08) on counting fabricated structure, while agreeing near-perfectly (α = .83–.96) on the binary adoption judgment: adoption is codable, individuation is not; (3) unprompted-doubt measures degenerate under disclosure conditions by construction; (4) emission masks must be defined over the *surface language* of generation, not the concept-realization language of the readout — translingual workspaces decouple the two; (5) n-gram malformation detectors are blind to vocabulary flooding — fluent, saturated, empty text passes them; (6) embedding-matrix readouts are not usable landing checks when input and output embeddings are untied and near-orthogonal (cos = 0.0017 here); (7) additive steering along lens-derived directions, at magnitudes the lens can register, forces tokens before modulating state — projection ablation does not, and is the better-behaved causal probe at natural magnitudes.
 
-## 7. Transparency, incidents, and chain of custody
+## 7. Author contributions
+
+A.B.S. conceived the program, designed and preregistered the three studies, implemented the experimental and analysis pipelines, executed all runs, performed the human validation ratings, and wrote the manuscript. A.M.G.M. supervised the research, contributed to study design, and reviewed the manuscript. Both authors approved the final version.
+
+## 8. Chain of custody, data and code availability
 
 Every confirmatory element of this program — designs, materials, token sets, analysis rules — was frozen in version control (annotated tags; content hashes recorded; externally timestamped on push) before the corresponding data existed; amendments are dated, appended, and justified pre-data; the single blocked confirmatory (the amplification arm) was blocked by its own sealed gate. All reported numbers derive from committed analysis artifacts whose input-data digests are recomputed at analysis time (Gate-0 protocol: chain tag → preregistration blob hash → data commit → digest, verified in a fresh session before any computation).
 
-We additionally disclose that during this program, three interim reports delivered through a conversational interface — two claiming completed execution, one claiming a completed analysis — were found upon mechanical verification to describe work that had not occurred, including fabricated numerical results. All three were caught by the chain-of-custody protocol before contaminating any decision that survives into this paper; the incidents are logged in the project's provenance record, and motivated the standing rule under which no claim of completion or result is accepted, by human or model, without a repository artifact and hash. We report this both for integrity and because it is itself relevant evidence about the systems under study — and about the necessity of verification infrastructure when models participate in research about models.
-
-Repositories (code, materials, preregistrations, run data, analysis artifacts, provenance log including incident records) will be public at submission. [TODO: publish repos; add URLs/DOIs.]
+Repositories (code, materials, preregistrations, run data, analysis artifacts, provenance log) are public: the behavioral study (Study 1) at github.com/bernalsuarezantonio-bit/reification-gradient (DOI 10.5281/zenodo.21623791) and the representational and causal studies (Studies 2–3) at github.com/bernalsuarezantonio-bit/workspace-program (DOI 10.5281/zenodo.21623809).
 
 ## Methods
 
