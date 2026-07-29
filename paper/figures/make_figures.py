@@ -47,7 +47,7 @@ COND_COLOR = {
     "incoherent":   "#009E73",   # bluish green
     "real_anchor":  "#D55E00",   # vermillion
 }
-COND_LABEL = {"DN_plausible": "DN plausible", "DN_flagged": "DN flagged",
+COND_LABEL = {"DN_plausible": "ND plausible", "DN_flagged": "ND flagged",
               "incoherent": "incoherent", "real_anchor": "real anchor"}
 LEVELS = ["L1_forum", "L2_coach_blog", "L3_wiki", "L4_preprint", "L5_pseudodsm"]
 LEVEL_SHORT = ["L1", "L2", "L3", "L4", "L5"]
@@ -133,8 +133,6 @@ def fig1(beh: Path):
         ax.spines[["top", "right"]].set_visible(False)
     axes[0].set_ylabel("P(diagnosis)  [Wilson 95% CI]")
     axes[-1].legend(frameon=False, fontsize=8, loc="upper left", ncol=1)
-    fig.suptitle("Figure 1 — P(diagnosis) by condition × legitimacy level, stratified by vignette target",
-                 fontsize=11, y=1.02, x=0.02, ha="left", color=INK)
     for ext in ("pdf", "png"):
         fig.savefig(HERE / f"fig1_pdiagnosis.{ext}")
     plt.close(fig)
@@ -202,9 +200,6 @@ def fig2():
         ax.text((0 + bar_idx) / 2, y + total * 0.005,
                 f"{lab}: Δ={diff:.3f} [{lo:.3f}, {hi:.3f}], p={p:.1e}",
                 ha="center", va="bottom", fontsize=7.2, color=INK)
-    ax.set_title("Figure 2 — C1 anatomy: Set F loading during diagnosis\n"
-                 "(bars = means; brackets = registered paired contrasts vs plausible floor)",
-                 fontsize=10.5, loc="left", color=INK)
     for ext in ("pdf", "png"):
         fig.savefig(HERE / f"fig2_c1_anatomy.{ext}")
     plt.close(fig)
@@ -252,8 +247,6 @@ def fig3():
                      xy=(1, dat[("B1_full", "mention")][2] + 0.01), xytext=(1.35, 0.66),
                      fontsize=7.6, color=INK, ha="left",
                      arrowprops=dict(arrowstyle="->", color=MUTED, lw=0.9))
-    fig.suptitle("Figure 3 — Phase 2b projection ablation: behaviour (DV1) intact, verbal channel (DV2) reduced",
-                 fontsize=10.5, y=1.02, x=0.02, ha="left", color=INK)
     for ext in ("pdf", "png"):
         fig.savefig(HERE / f"fig3_2b_ablation.{ext}")
     plt.close(fig)
