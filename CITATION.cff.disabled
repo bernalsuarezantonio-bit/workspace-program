@@ -14,6 +14,12 @@ authors:
   - given-names: Antonio
     family-names: Bernal Suárez
     email: bernalsuarezantonio@gmail.com
+    orcid: "https://orcid.org/0000-0002-3664-9317"
+    affiliation: "Human XR Lab, Universidad del Atlántico Medio, Las Palmas de Gran Canaria, Spain"
+  - given-names: Ana María
+    family-names: González Martín
+    orcid: "https://orcid.org/0000-0002-2802-5627"
+    affiliation: "Universidad del Atlántico Medio, Las Palmas de Gran Canaria, Spain"
 repository-code: "https://github.com/bernalsuarezantonio-bit/workspace-program"
 license: CC-BY-4.0
 version: "1.0.0"
