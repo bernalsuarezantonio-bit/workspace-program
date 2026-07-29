@@ -30,3 +30,15 @@ keywords:
   - interpretability
   - activation ablation
   - reification
+preferred-citation:
+  type: article
+  title: "Held but not heeded: causal dissociation of verbal acknowledgment and diagnostic behavior in a language model"
+  authors:
+    - given-names: Antonio
+      family-names: Bernal Suárez
+      orcid: "https://orcid.org/0000-0002-3664-9317"
+    - given-names: Ana María
+      family-names: González Martín
+      orcid: "https://orcid.org/0000-0002-2802-5627"
+  year: 2026
+  doi: "10.5281/zenodo.21677024"

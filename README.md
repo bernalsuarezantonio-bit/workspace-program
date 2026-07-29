@@ -202,10 +202,8 @@ Dual-licensed: **MIT** for code, **CC-BY-4.0** for materials, data, preregistrat
 manuscript — see [`LICENSE`](LICENSE) for the exact scope of each.
 
 **How to cite.** A machine-readable [`CITATION.cff`](CITATION.cff) is provided (repository archived on
-Zenodo, DOI [10.5281/zenodo.21623809](https://doi.org/10.5281/zenodo.21623809)). Until the preprint
-article has its own DOI, cite the study and this repository as:
+Zenodo, DOI [10.5281/zenodo.21623809](https://doi.org/10.5281/zenodo.21623809)). Cite the preprint:
 
 > Bernal Suárez, A., & González Martín, A. M. (2026). *Held but not heeded: causal dissociation of
-> verbal acknowledgment and diagnostic behavior in a language model* [preprint, in preparation]. Code,
-> data, and preregistrations: https://github.com/bernalsuarezantonio-bit/workspace-program
-> (Zenodo: 10.5281/zenodo.21623809)
+> verbal acknowledgment and diagnostic behavior in a language model*. Zenodo.
+> https://doi.org/10.5281/zenodo.21677024
