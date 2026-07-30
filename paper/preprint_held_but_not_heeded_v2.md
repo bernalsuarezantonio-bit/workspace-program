@@ -43,7 +43,7 @@ Against expectation, the preregistered authority hypotheses failed: the dose–r
 
 Stratified exploration (labeled as such) resolved the pattern. Diagnosis was governed almost categorically by vignette–gloss fit: fit-compatible vignettes were diagnosed with the fabricated category at 1.000 across all legitimacy levels, unrelated vignettes at ≈ 0.05, with all variance living in the ambiguous stratum (Fig. 1). The apparent H2 inversion reflected the one place authority mattered: the semantically empty control, undiagnosable by fit, showed a genuine legitimacy gradient (fit-compatible stratum: 0.16 at L1 → 0.92 at L4). Post-hoc characterization of the wrappers indicated that the operative variable was not institutional format but speech act: wrappers that advocated applying the label drove uptake; wrappers containing epistemic hedges suppressed it — including our own maximal-authority pseudo-manual entry, whose realistic "for further study" line acted as a brake. Authority, for these models, is advocacy minus disclaimer, not letterhead.
 
-![P(diagnosis) by source-legitimacy level and category condition (Study 1); observed proportions with 95% Wilson confidence intervals.](figures/fig1_pdiagnosis.png)
+![P(diagnosis) by source-legitimacy level (L1–L5) and category condition (ND plausible, ND flagged, incoherent control, real anchor), stratified by vignette–gloss fit (high / neutral / low), Study 1. Each point is the observed proportion of responses diagnosing the category in one condition × level cell within a fit stratum; *n* = 116–120 responses per point (20 vignettes × 3 repetitions × 2 open-weights model families, out of *n* = 7,169 analytic responses after excluding 31 of 7,200 for malformed judge output). Error bars, 95% Wilson confidence intervals on the proportion. Confirmatory hypotheses H1–H4 were tested on the full sample by mixed-effects logistic regression at Bonferroni-corrected α = 0.0125 (main text §2.2).](figures/fig1_pdiagnosis.png)
 
 The disclosure condition produced the finding that motivates the rest of the paper. In fit-compatible vignettes, models told explicitly that the category was invented diagnosed it in 600/600 runs across all legitimacy levels — the entire (significant but small) H4 effect lived in the ambiguous stratum. Two-thirds of those responses (65.8%, 79/120, by pattern match over the flagged/fit/L1 cell, re-derived from committed run data; e.g., "inventada", "para un estudio") acknowledged the fictional status in writing while diagnosing, with high confidence and management recommendations; the acknowledgment apparatus was fully deployed and fully idle: one response opened by noting that the category "is invented for a study and is not officially recognized in DSM-5 or ICD-10" (qwen, v02·rep1) and diagnosed it regardless; another authored a section headed "Criteria for Narrative Dysprosexia (hypothetical)" (mistral, v07·rep0) — formal diagnostic criteria composed for a category the model itself, in the same heading, labels hypothetical; a third *inferred* the fiction unprompted from the category's unrecognized status ("…which suggests a category invented for a study", mistral, v09·rep1) and proceeded to diagnose. (Quotes translated from the Spanish originals; cell identifiers and full texts in the committed verbatim appendix, human-verified.) Ontological status, in short, was represented in the text and absent from the decision. Whether it was represented anywhere else is Study 2's question.
 
@@ -63,7 +63,7 @@ Behaviorally, the 7B replicated Study 1 inside the representational dataset: dia
 
 C1 was large and unambiguous: Set-F loading 0.2506 in flagged vs 0.0418 in plausible (paired by vignette, t(19) = 11.19, p = 8.4e-10), adjudicated loaded-but-inert by the sealed rule. Its anatomy was then established by a pre-registered exploratory analysis (specified and committed before the real data existed) plus one clearly-labeled post-hoc analysis motivated by an instrument discovery: the sealed emission mask (defined over English operative tokens) proved inert by construction, because the model emits Spanish surface forms ("inventada") while the workspace loads the concept in English-token realizations — the lens's translingual character operating inside our own measurement. The decisive registered cell nonetheless resolved the question at run level: flagged runs that never mention the fiction still load Set F at twice the plausible baseline (paired diff 0.0385, CI95 [0.0259, 0.0512], p = 4.1e-6); and a Spanish-surface-form mask (post-hoc, labeled) that does bite (2.3% of positions) removes half the loading — the emission-adjacent component — while the remainder survives at three times baseline (masked diff 0.0815, CI95 [0.0619, 0.1012], p = 5.0e-8). The fictional status is genuinely held during diagnostic generation: partially amplified when named, present without naming, robust outside emission spans — and behaviorally inert, with diagnosis at ceiling throughout (Fig. 2). Absolute magnitudes are small (Set F ≈ 0.08–0.25 against Set A ≈ 2): a weak, robust trace, not a dominant occupant.
 
-![Set-F (fictional-status) loading during diagnostic generation, ND-flagged vs plausible, with the self-echo anatomy (Study 2).](figures/fig2_c1_anatomy.png)
+![Set-F (fictional-status) loading during diagnostic generation, Study 2. Bars, mean Set-F loading (raw-logit units) over *n* = 20 fit-compatible vignettes for the plausible floor and three flagged strata (without-mention, Spanish-surface-masked, total); dotted line, plausible floor. Brackets, three preregistered paired contrasts against the plausible floor, each a two-sided paired *t*-test (d.f. = 19); Δ is the mean paired difference and 95% confidence intervals are the paired-*t* intervals (mean difference ± *t* × s.e., d.f. = 19). A1 (flagged-without-mention): Δ = 0.0385, 95% CI [0.026, 0.051], *t*(19) = 6.37, *P* = 4.1 × 10⁻⁶. A2 (Spanish-surface-masked): Δ = 0.0815, 95% CI [0.062, 0.101], *t*(19) = 8.67, *P* = 5.0 × 10⁻⁸. C1 (flagged-total): Δ = 0.209, *t*(19) = 11.19, *P* = 8.4 × 10⁻¹⁰.](figures/fig2_c1_anatomy.png)
 
 C2 was not supported and ran strongly opposite: advocacy raised diagnosis behavior while *lowering* clinical-framing load in the workspace (t ≈ −10) — models under advocacy adopt more while deploying less of the deliberative clinical apparatus that accompanies (mostly rejecting) evaluation at L1. We report the reversal as exploratory-interpretable only.
 
@@ -88,7 +88,7 @@ Results (all from the committed analysis artifact):
 
 Diagnosis was 1.000 in all three arms (Fig. 3) — every one of 600 runs, every arm × vignette cell at 10/10. Acknowledgment fell from 0.475 (baseline) to 0.285 under F-ablation, and was untouched by random ablation (0.475). The pre-fixed joint-reading table adjudicates the pattern as its registered cell: **dissociated verbal channel**. The held representation of fictional status is causally connected to *saying* "this is invented" — removing it silences 40% of acknowledgments, direction-specifically — and causally disconnected from *deciding*, whose rate it cannot dent by a single run.
 
-![Diagnosis and acknowledgment rates across the three ablation arms (none / F-ablation / random-direction); diagnosis at ceiling, acknowledgment reduced only by F-ablation (Study 3).](figures/fig3_2b_ablation.png)
+![Projection ablation dissociates diagnosis from acknowledgment, Study 3. Judge-scored diagnosis (DV1) and Spanish-surface acknowledgment (DV2) rates across three arms — B0 (no intervention), B1 (F-direction ablation), B3 (norm-matched random-direction ablation); *n* = 200 per arm (20 vignettes × 10 repetitions). Error bars, 95% Wilson confidence intervals on the arm proportion. Primary test, sign-flip permutation on the 20 per-vignette differences (one-sided, 4,000 sign flips, Bonferroni-corrected α = 0.0125); 95% confidence intervals are paired-*t* intervals (d.f. = 19). Diagnosis: B1−B0 Δ = 0.000, *P* = 1.00 (T1); B1−B3 Δ = 0.000, *P* = 1.00 (S1). Acknowledgment: B1−B0 Δ = −0.19, 95% CI [−0.29, −0.09], *P* = 7.5 × 10⁻⁴ (T2); B1−B3 Δ = −0.19, 95% CI [−0.30, −0.08], *P* = 1.2 × 10⁻³ (S2).](figures/fig3_2b_ablation.png)
 
 Two qualifications are part of the result. First, acknowledgments did not fall to zero: the disclosure text sits in the prompt, and copy-like pathways can produce acknowledgment without the internal representation — the ablated residue plausibly reflects them. Second, the registered independent landing check failed (the embedding-matrix readout floored in all arms; cos(lm_head, embed_tokens) = 0.0017 — instrument lesson §6), leaving quantitative ablation depth to the circular lens estimator (−75.4% under F-ablation; +5.0% under random). The specificity contrast, however, provides non-circular behavioral corroboration that the ablation landed where aimed: an off-target cut would not have separated the arms.
 
@@ -130,7 +130,15 @@ A.B.S. conceived the program, designed and preregistered the three studies, impl
 
 Every confirmatory element of this program — designs, materials, token sets, analysis rules — was frozen in version control (annotated tags; content hashes recorded; externally timestamped on push) before the corresponding data existed; amendments are dated, appended, and justified pre-data; the single blocked confirmatory (the amplification arm) was blocked by its own sealed gate. All reported numbers derive from committed analysis artifacts whose input-data digests are recomputed at analysis time (Gate-0 protocol: chain tag → preregistration blob hash → data commit → digest, verified in a fresh session before any computation).
 
-Repositories (code, materials, preregistrations, run data, analysis artifacts, provenance log) are public: the behavioral study (Study 1) at github.com/bernalsuarezantonio-bit/reification-gradient (DOI 10.5281/zenodo.21623791) and the representational and causal studies (Studies 2–3) at github.com/bernalsuarezantonio-bit/workspace-program (DOI 10.5281/zenodo.21623809).
+Repositories (code, materials, preregistrations, run data, analysis artifacts, provenance log) are public: the behavioral study (Study 1) at github.com/bernalsuarezantonio-bit/reification-gradient (DOI 10.5281/zenodo.21623791) [25] and the representational and causal studies (Studies 2–3) at github.com/bernalsuarezantonio-bit/workspace-program (DOI 10.5281/zenodo.21623809) [26].
+
+## Acknowledgements
+
+The authors thank the team of the Human XR Lab (Universidad del Atlántico Medio) for their support.
+
+## Funding
+
+The authors received no specific funding for this work.
 
 ## Methods
 
@@ -173,26 +181,53 @@ All confirmatory tests, α allocations, estimators, exclusion rules, and deviati
 *Consecutive numbering by order of first appearance. Each entry verified against a primary source (URL in `paper/references.md`); nothing from memory. #16 cite the pinned HF revision, not the unconfirmed qwen-n1000 label.*
 
 [1] Vasconcelos, H., Jörke, M., Grunde-McLaughlin, M., Gerstenberg, T., Bernstein, M. S., Krishna, R. (2023). Explanations Can Reduce Overreliance on AI Systems During Decision-Making. Proc. ACM HCI (CSCW); arXiv:2212.06823.
+
 [2] Turpin, M., Michael, J., Perez, E., Bowman, S. R. (2023). Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting. arXiv:2305.04388.
+
 [3] Lanham, T., et al. (2023). Measuring Faithfulness in Chain-of-Thought Reasoning. arXiv:2307.13702.
+
 [4] Radhakrishnan, A., et al. (2023). Question Decomposition Improves the Faithfulness of Model-Generated Reasoning. arXiv:2307.11768.
+
 [5] Gurnee, W., Sofroniew, N., Pearce, A., Piotrowski, M., Kauvar, I., Chen, R., Soligo, A., Bogdan, P., Ong, E., Wang, R., Thompson, T. B., Abrahams, D., Kantamneni, S., Ameisen, E., Batson, J., Lindsey, J. (2026). Verbalizable Representations Form a Global Workspace in Language Models. Transformer Circuits Thread; arXiv:2607.15495.
+
 [6] Turner, A. M., Thiergart, L., Leech, G., Udell, D., Mini, U., MacDiarmid, M. (2023). Activation Addition: Steering Language Models Without Optimization. arXiv:2308.10248.
+
 [7] Zou, A., Phan, L., Chen, S., Campbell, J., Guo, P., Ren, R., et al. (2023). Representation Engineering: A Top-Down Approach to AI Transparency. arXiv:2310.01405.
+
 [8] Li, K., Patel, O., et al. (2023). Inference-Time Intervention: Eliciting Truthful Answers from a Language Model. arXiv:2306.03341.
+
 [9] Kumaran, D., Daw, N., Osindero, S., Veličković, P., Patraucean, V. (2026). Causal Evidence that Language Models use Confidence to Drive Behavior. arXiv:2603.22161.
+
 [10] Arditi, A., Obeso, O., Syed, A., Paleka, D., Rimsky, N., Gurnee, W., Nanda, N. (2024). Refusal in Language Models Is Mediated by a Single Direction. arXiv:2406.11717.
+
 [11] Hacking, I. (1995). The looping effects of human kinds. In Sperber, Premack & Premack (Eds.), Causal Cognition: A Multidisciplinary Debate. Oxford: Clarendon Press, pp. 351-383.
+
 [12] Hacking, I. (2007). Kinds of People: Moving Targets. British Academy Lecture. Proceedings of the British Academy 151, 285-318. DOI 10.5871/bacad/9780197264249.003.0010.
+
 [13] Hacking, I. (1999). The Social Construction of What? Cambridge, MA: Harvard University Press. ISBN 9780674004122.
+
 [14] Card, D., Henderson, P., Khandelwal, U., Jia, R., Mahowald, K., Jurafsky, D. (2020). With Little Power Comes Great Responsibility. EMNLP 2020; arXiv:2010.06595.
+
 [15] Zheng, L., et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. NeurIPS 2023 D&B; arXiv:2306.05685.
+
 [16] Neuronpedia (2026). jacobian-lens: pre-fitted Jacobian lens for qwen2.5-7b-it. HuggingFace neuronpedia/jacobian-lens (pinned revision 16a01f3 per project provenance). *(Release label qwen-n1000 not confirmed; cite the pinned HF revision.)*
+
 [17] Kadavath, S., Conerly, T., Askell, A., et al. (2022). Language Models (Mostly) Know What They Know. arXiv:2207.05221.
+
 [18] Binder, F. J., Chua, J., Korbak, T., Sleight, H., Hughes, J., Long, R., Perez, E., Turpin, M., Evans, O. (2024). Looking Inward: Language Models Can Learn About Themselves by Introspection. arXiv:2410.13787.
+
 [19] Ji-An, L., Xiong, H.-D., Wilson, R. C., Mattar, M. G., Benna, M. K. (2025). Language Models Are Capable of Metacognitive Monitoring and Control of Their Internal Activations. arXiv:2505.13763.
+
 [20] Ji, Z., Lee, N., Frieske, R., et al. (2023). Survey of Hallucination in Natural Language Generation. ACM Computing Surveys 55(12); arXiv:2202.03629.
+
 [21] Moore, J., Grabb, D., Agnew, W., Klyman, K., Chancellor, S., Ong, D. C., Haber, N. (2025). Expressing stigma and inappropriate responses prevents LLMs from safely replacing mental health providers. ACM FAccT 2025, pp. 599-627. DOI 10.1145/3715275.3732039 (also arXiv:2504.18412).
+
 [22] Sharma, M., Tong, M., Korbak, T., et al. (2023). Towards Understanding Sycophancy in Language Models. arXiv:2310.13548.
+
 [23] Röttger, P., Kirk, H. R., Vidgen, B., Attanasio, G., Bianchi, F., Hovy, D. (2023). XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours in Large Language Models. arXiv:2308.01263.
+
 [24] Frances, A. (2013). Saving Normal: An Insider's Revolt Against Out-of-Control Psychiatric Diagnosis, DSM-5, Big Pharma, and the Medicalization of Ordinary Life. New York: William Morrow. ISBN 9780062229250.
+
+[25] Bernal Suárez, A. & González Martín, A. M. (2026). Reification Gradient: Study 1 (behavioral) of "Held but not heeded". Zenodo https://doi.org/10.5281/zenodo.21623791.
+
+[26] Bernal Suárez, A. & González Martín, A. M. (2026). workspace-program: representational and causal studies for "Held but not heeded". Zenodo https://doi.org/10.5281/zenodo.21623809.

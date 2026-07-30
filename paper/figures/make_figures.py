@@ -157,9 +157,9 @@ def fig2():
             ("flagged\ntotal", total, "#E69F00")]
     # registered paired contrasts vs plausible: (label, diff, ci_lo, ci_hi, p)
     contrasts = [
-        ("A1", 1, without - plaus, a1["paired_test"]["ci95"][0], a1["paired_test"]["ci95"][1],
+        ("A1", 1, a1["paired_test"]["mean_diff"], a1["paired_test"]["ci95"][0], a1["paired_test"]["ci95"][1],
          a1["paired_test"]["p_two_sided"]),
-        ("A2", 2, masked - a2["plausible_masked_meanF"], a2["paired_test"]["ci95"][0],
+        ("A2", 2, a2["paired_test"]["mean_diff"], a2["paired_test"]["ci95"][0],
          a2["paired_test"]["ci95"][1], a2["paired_test"]["p_two_sided"]),
         ("C1", 3, r1["C1"]["test_result"]["mean_diff"],
          r1["C1"]["test_result"]["mean_diff"] - 1.96 * r1["C1"]["test_result"]["se"],
